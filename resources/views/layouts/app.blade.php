@@ -9,8 +9,8 @@
         <title>{{ $title ?? 'Accueil' }} — Alliance | Ministère Tothy Mbengela</title>
         <meta name="description" content="{{ $metaDescription ?? 'Alliance — Le ministère de la Pasteure Tothy Mbengela. Prédications, enseignements, livres et ressources spirituelles.' }}">
 
-        <link rel="shortcut icon" href="{{ asset('assets/images/logo-alliance.png') }}" type="image/png">
-        <link rel="icon" href="{{ asset('assets/images/logo-alliance.png') }}" type="image/png">
+        <link rel="shortcut icon" href="{{ asset('assets/logo/logo-alliance.png') }}" type="image/png">
+        <link rel="icon" href="{{ asset('assets/logo/logo-alliance.png') }}" type="image/png">
 
         <!-- Stylesheets -->
         <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -22,6 +22,15 @@
 
         <!-- Alliance overrides -->
         <style>
+            /* Logo PNG transparent : aucun fond noir derrière l’image */
+            .main-header .logo img,
+            .sticky-header .logo img,
+            .mobile-menu .nav-logo img,
+            .main-footer .logo img {
+                background: transparent !important;
+                background-color: transparent !important;
+            }
+
             /* Logo dans le header principal */
             .main-header .logo img {
                 max-height: 60px;
@@ -44,6 +53,44 @@
             .main-footer .logo img {
                 max-height: 60px;
                 width: auto;
+            }
+
+            /* Preloader : fond clair + logo réel (ne dépend pas seul du ::after du thème) */
+            .preloader.alliance-preloader {
+                background-color: #f8f6f2 !important;
+            }
+            .preloader.alliance-preloader::after,
+            .preloader.alliance-preloader::before {
+                display: none !important;
+                content: none !important;
+                background-image: none !important;
+            }
+            .alliance-preloader-inner {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -52%);
+                width: min(88vw, 340px);
+                text-align: center;
+                background: transparent;
+            }
+            .alliance-preloader-inner img {
+                display: block;
+                width: 100%;
+                max-height: 110px;
+                height: auto;
+                object-fit: contain;
+                margin: 0 auto;
+                background: transparent !important;
+            }
+            .alliance-preloader-label {
+                display: block;
+                margin-top: 1.1rem;
+                color: #a67c2a;
+                font-weight: 700;
+                font-size: 11px;
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
             }
 
             /* Livres : images carrées 1:1 (550x550) */
@@ -790,7 +837,12 @@
     </head>
     <body>
         <div class="page-wrapper">
-            <div class="preloader"></div>
+            <div class="preloader alliance-preloader" role="status" aria-live="polite" aria-busy="true" aria-label="Chargement">
+                <div class="alliance-preloader-inner">
+                    <img src="{{ asset('assets/logo/logo-alliance.png') }}" alt="Alliance" width="320" height="120" decoding="async" fetchpriority="high">
+                    <span class="alliance-preloader-label">Chargement…</span>
+                </div>
+            </div>
 
             @include('layouts.navigation')
 

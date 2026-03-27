@@ -4,7 +4,7 @@
         <div class="logo-box">
             <div class="logo">
                 <a href="{{ route('home') }}">
-                    <img src="{{ asset('assets/logo/Logo Alliance Ok.PNG') }}" alt="Alliance — Ministère Tothy Mbengela" title="Alliance">
+                    <img src="{{ asset('assets/logo/logo-alliance.png') }}" alt="Alliance — Ministère Tothy Mbengela" title="Alliance">
                 </a>
             </div>
             <button class="ui-btn ui-btn search-btn">
@@ -84,7 +84,7 @@
             <div class="upper-box">
                 <div class="nav-logo">
                     <a href="{{ route('home') }}">
-                        <img src="{{ asset('assets/logo/Logo Alliance Ok.PNG') }}" alt="Alliance" title="Alliance">
+                        <img src="{{ asset('assets/logo/logo-alliance.png') }}" alt="Alliance" title="Alliance">
                     </a>
                 </div>
                 <div class="close-btn"><i class="icon fa fa-times"></i></div>
@@ -141,7 +141,7 @@
             <div class="inner-container">
                 <div class="logo">
                     <a href="{{ route('home') }}" title="Alliance">
-                        <img src="{{ asset('assets/logo/Logo Alliance Ok.PNG') }}" alt="Alliance" title="Alliance">
+                        <img src="{{ asset('assets/logo/logo-alliance.png') }}" alt="Alliance" title="Alliance">
                     </a>
                 </div>
 

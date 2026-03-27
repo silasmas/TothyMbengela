@@ -33,7 +33,7 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->authGuard('admin')
             ->authPasswordBroker('admins')
-            ->brandLogo(asset('assets/logo/Logo Alliance Ok.PNG'))
+            ->brandLogo(asset('assets/logo/logo-alliance.png'))
             ->brandLogoHeight('3.5rem')
             ->profile(page: EditAdminProfile::class, isSimple: false)
             ->colors([
