@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Testimonial;
 use Illuminate\View\View;
 
 class BookController extends Controller
@@ -23,6 +24,20 @@ class BookController extends Controller
             ->where('is_active', true)
             ->firstOrFail();
 
-        return view('pages.books.show', compact('book'));
+        $relatedBooks = Book::query()
+            ->where('is_active', true)
+            ->where('id', '!=', $book->id)
+            ->orderBy('title')
+            ->limit(4)
+            ->get();
+
+        $bookReviews = Testimonial::query()
+            ->where('is_active', true)
+            ->orderBy('sort_order')
+            ->orderByDesc('id')
+            ->limit(12)
+            ->get();
+
+        return view('pages.books.show', compact('book', 'relatedBooks', 'bookReviews'));
     }
 }

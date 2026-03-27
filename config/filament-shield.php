@@ -27,7 +27,7 @@ return [
             'pages' => true,
             'widgets' => true,
             'resources' => true,
-            'custom_permissions' => false,
+            'custom_permissions' => true,
         ],
     ],
 
@@ -71,7 +71,8 @@ return [
     'super_admin' => [
         'enabled' => true,
         'name' => 'super_admin',
-        'define_via_gate' => false,
+        // true = Gate::before : le rôle super_admin bypass toutes les policies (accès complet au panel).
+        'define_via_gate' => true,
         'intercept_gate' => 'before',
     ],
 

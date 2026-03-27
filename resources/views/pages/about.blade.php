@@ -64,11 +64,11 @@
     </section>
 
     <!-- Video Section — image centrée, sans étirement (contain) -->
-    <section class="video-section alliance-about-video-section">
+    <section class="video-section">
         <div class="auto-container">
             <div class="video-box">
-                <div class="bg alliance-about-video-bg-outer">
-                    <div class="bg bg-image alliance-about-video-bg-inner" style="background-image: url({{ asset('assets/images/about-ministry/about-video-cover.jpg') }})"></div>
+                <div class="bg">
+                    <div class="bg bg-image" style="background-image: url({{ asset('assets/images/video.jpeg') }})"></div>
                     <div class="overlay"></div>
                 </div>
                 <div class="content">

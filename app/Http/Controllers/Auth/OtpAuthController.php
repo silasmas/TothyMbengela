@@ -72,10 +72,13 @@ class OtpAuthController extends Controller
         Cache::forget(self::CACHE_PREFIX.$email);
 
         if ($request->wantsJson()) {
+            $redirect = $this->safeRedirectTarget($request->input('return'));
+
             return response()->json([
                 'success' => true,
                 'message' => 'Connexion réussie.',
                 'user' => ['id' => $user->id, 'name' => $user->name, 'email' => $user->email],
+                'redirect' => $redirect ?? url(route('dashboard', absolute: false)),
             ]);
         }
 
@@ -108,11 +111,25 @@ class OtpAuthController extends Controller
     public function verifyRegisterCode(Request $request): JsonResponse|RedirectResponse
     {
         $validated = $request->validate([
-            'email' => ['required', 'email', 'max:255', 'unique:users,email'],
+            'email' => ['required', 'email', 'max:255'],
             'code' => ['required', 'string', 'size:6'],
         ]);
 
         $email = strtolower($validated['email']);
+
+        if (User::query()->where('email', $email)->exists()) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Un compte existe déjà avec cet e-mail. Utilisez l’onglet Connexion ou la boutique (connexion).',
+                ], 422);
+            }
+
+            throw ValidationException::withMessages([
+                'email' => 'Un compte existe déjà. Connectez-vous avec ce même e-mail.',
+            ]);
+        }
+
         $payload = Cache::get(self::CACHE_PREFIX.$email);
 
         if (! $payload || ($payload['intent'] ?? '') !== 'register') {
@@ -150,14 +167,48 @@ class OtpAuthController extends Controller
         $request->session()->regenerate();
 
         if ($request->wantsJson()) {
+            $redirect = $this->safeRedirectTarget($request->input('return'));
+
             return response()->json([
                 'success' => true,
                 'message' => 'Compte créé et connexion réussie.',
                 'user' => ['id' => $user->id, 'name' => $user->name, 'email' => $user->email],
+                'redirect' => $redirect ?? url(route('dashboard', absolute: false)),
             ]);
         }
 
         return redirect()->intended(route('dashboard', absolute: false));
+    }
+
+    /**
+     * @return string|null URL absolue interne autorisée, ou null
+     */
+    private function safeRedirectTarget(mixed $value): ?string
+    {
+        if (! is_string($value) || $value === '') {
+            return null;
+        }
+
+        if (str_contains($value, "\0")) {
+            return null;
+        }
+
+        if (! str_starts_with($value, '/') || str_starts_with($value, '//')) {
+            return null;
+        }
+
+        $parts = parse_url($value);
+        $path = $parts['path'] ?? '';
+
+        if ($path === '' || ! str_starts_with($path, '/') || str_contains($path, '..')) {
+            return null;
+        }
+
+        $fragment = isset($parts['fragment']) && $parts['fragment'] !== ''
+            ? '#'.$parts['fragment']
+            : '';
+
+        return url($path).$fragment;
     }
 
     private function dispatchCode(string $email, string $intent, ?string $name): void

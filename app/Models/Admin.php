@@ -19,6 +19,9 @@ class Admin extends Authenticatable implements FilamentUser
     /** @use HasFactory<AdminFactory> */
     use HasFactory, HasRoles, Notifiable;
 
+    /** @var string Guard Spatie Permission (doit correspondre au guard Filament « admin »). */
+    protected $guard_name = 'admin';
+
     protected function casts(): array
     {
         return [

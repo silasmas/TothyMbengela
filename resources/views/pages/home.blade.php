@@ -75,8 +75,8 @@
                 <div class="image-column col-lg-5 col-xl-6">
                     <div class="inner-column wow fadeInLeft">
                         <span class="icon-dots bounce-y"></span>
-                        <figure class="image-1 overlay-anim wow fadeInUp"><img src="{{ asset('assets/images/resource/about-1.jpg') }}" alt="Ministère Alliance"></figure>
-                        <figure class="image-2 overlay-anim wow fadeInRight"><img src="{{ asset('assets/images/resource/about-2.jpg') }}" alt="Équipe Alliance"></figure>
+                        <figure class="image-1 overlay-anim wow fadeInUp"><img src="{{ asset('assets/images/Im6.jpg.jpeg') }}" alt="Ministère Alliance"></figure>
+                        <figure class="image-2 overlay-anim wow fadeInRight"><img src="{{ asset('assets/images/Im4.jpg.jpeg') }}" alt="Pasteure Tothy Mbengela"></figure>
                     </div>
                 </div>
             </div>
@@ -89,7 +89,7 @@
         <div class="auto-container">
             <div class="video-box">
                 <div class="bg">
-                    <div class="bg bg-image" style="background-image: url({{ asset('assets/images/background/2.jpg') }})"></div>
+                    <div class="bg bg-image" style="background-image: url({{ asset('assets/images/video.jpeg') }})"></div>
                     <div class="overlay"></div>
                 </div>
                 <div class="content">
@@ -262,7 +262,7 @@
                                             </a>
                                         </figure>
                                         @if($content->published_at)
-                                        <span class="date">{{ $content->published_at->format('d') }}<br>{{ strtoupper($content->published_at->translatedFormat('M')) }}</span>
+                                        <span class="date">{{ $content->published_at->locale('fr')->format('d') }}<br>{{ mb_strtoupper($content->published_at->locale('fr')->isoFormat('MMM')) }}</span>
                                         @endif
                                     </div>
                                     <div class="lower-content">

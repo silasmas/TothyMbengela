@@ -3,7 +3,9 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ContentCommentController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\ContentLikeController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DonationPaymentController;
 use App\Http\Controllers\HomeController;
@@ -24,6 +26,15 @@ Route::get('/recherche', [SearchController::class, 'index'])->name('search');
 
 Route::get('/contenus', [ContentController::class, 'index'])->name('contents.index');
 Route::get('/contenus/{slug}', [ContentController::class, 'show'])->name('contents.show');
+Route::post('/contenus/{slug}/commentaires', [ContentCommentController::class, 'store'])
+    ->middleware('auth')
+    ->name('contents.comments.store');
+Route::post('/contenus/{slug}/commentaires/{comment}/like', [ContentCommentController::class, 'toggleLike'])
+    ->middleware('auth')
+    ->name('contents.comments.like');
+Route::post('/contenus/{slug}/like', [ContentLikeController::class, 'toggle'])
+    ->middleware('auth')
+    ->name('contents.like');
 
 // Séries
 Route::get('/series', [SeriesController::class, 'index'])->name('series.index');

@@ -74,9 +74,13 @@
             if (!email || !code || code.length !== 6) return;
             var btn = this;
             btn.disabled = true;
-            postJson(verifyUrl, { email: email, code: code }).then(function(pair) {
+            var returnPath = new URLSearchParams(window.location.search).get('return');
+            if (returnPath && (!returnPath.startsWith('/') || returnPath.startsWith('//'))) {
+                returnPath = null;
+            }
+            postJson(verifyUrl, { email: email, code: code, return: returnPath || null }).then(function(pair) {
                 if (pair.r.ok && pair.d.success) {
-                    window.location.href = @json(url(route('dashboard')));
+                    window.location.href = pair.d.redirect || @json(url(route('dashboard')));
                 } else {
                     alert(pair.d.message || (pair.d.errors && Object.values(pair.d.errors).flat().join(' ')) || 'Code invalide.');
                 }

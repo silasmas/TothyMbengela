@@ -3,9 +3,9 @@
     <div class="rev_slider_wrapper fullwidthbanner-container" id="rev_slider_one_wrapper" data-source="gallery">
         <div class="rev_slider fullwidthabanner" id="rev_slider_one" data-version="5.4.1">
             <ul>
-                <!-- Slide 1 -->
+                <!-- Slide 1 (1re image fournie) -->
                 <li data-index="rs-1" data-transition="zoomout">
-                    <img src="{{ asset('assets/images/main-slider/1.jpg') }}" alt="" class="rev-slidebg">
+                    <img src="{{ asset('assets/images/Ima1.jpg.jpeg') }}" alt="" class="rev-slidebg">
 
                     <div class="tp-caption"
                         data-paddingbottom="[10,0,0,0]"
@@ -65,9 +65,9 @@
                     </div>
                 </li>
 
-                <!-- Slide 2 -->
+                <!-- Slide 2 (2e image fournie) -->
                 <li data-index="rs-2" data-transition="zoomout">
-                    <img src="{{ asset('assets/images/main-slider/1.jpg') }}" alt="" class="rev-slidebg">
+                    <img src="{{ asset('assets/images/s1.jpeg') }}" alt="" class="rev-slidebg">
 
                     <div class="tp-caption"
                         data-paddingbottom="[10,0,0,0]"

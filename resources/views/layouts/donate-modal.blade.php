@@ -107,10 +107,9 @@
                     {{-- ONGLET PARTENAIRE --}}
                     <div class="tab-pane fade" id="pane-partner" role="tabpanel">
                         @guest
-                            <div class="text-center py-4">
-                                <p class="mb-3">Connectez-vous pour souscrire un engagement partenaire avec paiement en ligne.</p>
-                                <a href="{{ route('login') }}" class="theme-btn btn-style-one me-2"><span class="btn-title">Connexion</span></a>
-                                <a href="{{ route('register') }}" class="theme-btn btn-style-two"><span class="btn-title">Créer un compte</span></a>
+                            <div class="text-center py-4 px-2">
+                                <p class="mb-3">Pour souscrire un engagement partenaire avec paiement en ligne, connectez-vous ou créez un compte <strong>par code e-mail</strong> (comme pour la commande).</p>
+                                <button type="button" class="theme-btn btn-style-one" onclick="(function(){ if (typeof bootstrap === 'undefined') return; var dm = bootstrap.Modal.getInstance(document.getElementById('donatePartnerModal')); if (dm) dm.hide(); setTimeout(function(){ var el = document.getElementById('allianceOtpAuthModal'); if (el) bootstrap.Modal.getOrCreateInstance(el).show(); }, 400); })();"><span class="btn-title">Connexion / créer un compte</span></button>
                             </div>
                         @else
                         <div id="partner-step1">

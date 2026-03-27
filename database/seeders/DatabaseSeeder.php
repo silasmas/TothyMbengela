@@ -28,6 +28,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@example.com',
         ]);
 
+        $this->call(ShieldPermissionsSeeder::class);
+        $this->call(AdminSuperAdminSeeder::class);
+
         $this->call(MinistryYoutubeSeeder::class);
+        $this->call(BookSeeder::class);
     }
 }

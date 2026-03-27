@@ -1,6 +1,6 @@
 
 <!-- Start main-content -->
-<section class="page-title" style="background-image: url({{ asset('assets/images/page-title-banner-default.png') }});">
+<section class="page-title" style="background-image: url({{ asset('assets/images/banner.jpeg') }});">
     <div class="auto-container">
         <div class="title-outer">
             <h1 class="title">

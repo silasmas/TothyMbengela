@@ -880,6 +880,8 @@
         @include('layouts.cart-offcanvas')
         @include('layouts.donate-modal')
 
+        @stack('modals')
+
         @if(session('newsletter_success'))
         <div class="modal fade alliance-newsletter-ok-modal" id="allianceNewsletterOkModal" tabindex="-1" aria-labelledby="allianceNewsletterOkModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -935,6 +937,8 @@
 
         @include('layouts.scripts')
         @include('layouts.checkout-modal')
+        @include('partials.alliance-otp-auth-modal')
+        @include('partials.alliance-content-likes-wiring')
         @if(session('newsletter_success'))
         <script>
             document.addEventListener('DOMContentLoaded', function () {

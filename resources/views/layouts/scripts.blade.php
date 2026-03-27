@@ -27,6 +27,7 @@
 <script src="{{ asset('assets/js/swiper.min.js') }}"></script>
 <script src="{{ asset('assets/js/owl.js') }}"></script>
 <script src="{{ asset('assets/js/mixitup.js') }}"></script>
+<script src="{{ asset('assets/js/bxslider.js') }}"></script>
 <script src="{{ asset('assets/js/script.js') }}"></script>
 
 <!-- Panier (localStorage), toasts, formulaires AJAX -->
@@ -200,8 +201,15 @@
             if (!raw) return;
             try {
                 var item = JSON.parse(raw);
-                window.allianceCart.add(item.id, item.title, item.price, 1, item.currency, item.cover_url);
-                window.allianceSiteToast('« ' + item.title + ' » ajouté au panier.', 'success');
+                var qtyInput = document.getElementById('alliance-book-qty');
+                var qty = 1;
+                if (qtyInput) {
+                    qty = parseInt(qtyInput.value, 10);
+                    if (isNaN(qty) || qty < 1) qty = 1;
+                    if (qty > 999) qty = 999;
+                }
+                window.allianceCart.add(item.id, item.title, item.price, qty, item.currency, item.cover_url);
+                window.allianceSiteToast('« ' + item.title + ' » (' + qty + ') ajouté au panier.', 'success');
             } catch (err) { console.error(err); }
         });
 
