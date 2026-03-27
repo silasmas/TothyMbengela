@@ -1,0 +1,141 @@
+$flaticon_mizox-font: "flaticon_mizox";
+
+@font-face {
+    font-family: $flaticon_mizox-font;
+    src: url("./flaticon_mizox.ttf?c47119d88ce65e58a1528f9c090f5d88") format("truetype"),
+url("./flaticon_mizox.woff?c47119d88ce65e58a1528f9c090f5d88") format("woff"),
+url("./flaticon_mizox.woff2?c47119d88ce65e58a1528f9c090f5d88") format("woff2"),
+url("./flaticon_mizox.eot?c47119d88ce65e58a1528f9c090f5d88#iefix") format("embedded-opentype"),
+url("./flaticon_mizox.svg?c47119d88ce65e58a1528f9c090f5d88#flaticon_mizox") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon_mizox !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$flaticon_mizox-map: (
+    "development": "\f101",
+    "increment": "\f102",
+    "success": "\f103",
+    "marketing": "\f104",
+    "social-media": "\f105",
+    "webpage": "\f106",
+    "growth": "\f107",
+    "online-shopping": "\f108",
+    "planning": "\f109",
+    "app-development": "\f10a",
+    "checking": "\f10b",
+    "recommend": "\f10c",
+    "design": "\f10d",
+    "vector": "\f10e",
+    "megaphone": "\f10f",
+    "growth-graph": "\f110",
+    "developing": "\f111",
+    "light-bulb": "\f112",
+    "startup": "\f113",
+    "customer-review": "\f114",
+    "consulting": "\f115",
+    "consultation": "\f116",
+    "team-leader": "\f117",
+    "knight": "\f118",
+    "social-media-1": "\f119",
+    "checklist": "\f11a",
+    "computer-graphic": "\f11b",
+    "creative": "\f11c",
+    "lamp": "\f11d",
+);
+
+.flaticon-development:before {
+    content: map-get($flaticon_mizox-map, "development");
+}
+.flaticon-increment:before {
+    content: map-get($flaticon_mizox-map, "increment");
+}
+.flaticon-success:before {
+    content: map-get($flaticon_mizox-map, "success");
+}
+.flaticon-marketing:before {
+    content: map-get($flaticon_mizox-map, "marketing");
+}
+.flaticon-social-media:before {
+    content: map-get($flaticon_mizox-map, "social-media");
+}
+.flaticon-webpage:before {
+    content: map-get($flaticon_mizox-map, "webpage");
+}
+.flaticon-growth:before {
+    content: map-get($flaticon_mizox-map, "growth");
+}
+.flaticon-online-shopping:before {
+    content: map-get($flaticon_mizox-map, "online-shopping");
+}
+.flaticon-planning:before {
+    content: map-get($flaticon_mizox-map, "planning");
+}
+.flaticon-app-development:before {
+    content: map-get($flaticon_mizox-map, "app-development");
+}
+.flaticon-checking:before {
+    content: map-get($flaticon_mizox-map, "checking");
+}
+.flaticon-recommend:before {
+    content: map-get($flaticon_mizox-map, "recommend");
+}
+.flaticon-design:before {
+    content: map-get($flaticon_mizox-map, "design");
+}
+.flaticon-vector:before {
+    content: map-get($flaticon_mizox-map, "vector");
+}
+.flaticon-megaphone:before {
+    content: map-get($flaticon_mizox-map, "megaphone");
+}
+.flaticon-growth-graph:before {
+    content: map-get($flaticon_mizox-map, "growth-graph");
+}
+.flaticon-developing:before {
+    content: map-get($flaticon_mizox-map, "developing");
+}
+.flaticon-light-bulb:before {
+    content: map-get($flaticon_mizox-map, "light-bulb");
+}
+.flaticon-startup:before {
+    content: map-get($flaticon_mizox-map, "startup");
+}
+.flaticon-customer-review:before {
+    content: map-get($flaticon_mizox-map, "customer-review");
+}
+.flaticon-consulting:before {
+    content: map-get($flaticon_mizox-map, "consulting");
+}
+.flaticon-consultation:before {
+    content: map-get($flaticon_mizox-map, "consultation");
+}
+.flaticon-team-leader:before {
+    content: map-get($flaticon_mizox-map, "team-leader");
+}
+.flaticon-knight:before {
+    content: map-get($flaticon_mizox-map, "knight");
+}
+.flaticon-social-media-1:before {
+    content: map-get($flaticon_mizox-map, "social-media-1");
+}
+.flaticon-checklist:before {
+    content: map-get($flaticon_mizox-map, "checklist");
+}
+.flaticon-computer-graphic:before {
+    content: map-get($flaticon_mizox-map, "computer-graphic");
+}
+.flaticon-creative:before {
+    content: map-get($flaticon_mizox-map, "creative");
+}
+.flaticon-lamp:before {
+    content: map-get($flaticon_mizox-map, "lamp");
+}

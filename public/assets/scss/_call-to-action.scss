@@ -1,0 +1,125 @@
+/*** 
+
+====================================================================
+		Call To Action
+====================================================================
+
+***/
+
+.call-to-action{
+    position: relative;
+    z-index: 2;
+    padding: 100px 0 50px;
+    border-bottom: 2px solid #555555;   
+    @include for-md{
+        padding: 70px 0 20px;
+    }
+    .outer-box{
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        @include for-md {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+
+    .title-box{
+        position: relative;
+        margin-bottom: 50px;
+        @include for-md{
+            margin-bottom: 20px;
+        }
+    }
+
+    .title{
+        position: relative;
+        z-index: 2;
+        font-size: 40px;
+        color: #fff;
+        font-weight: 500;
+        line-height: 1.2em;
+        margin-bottom: 0px;
+        @include for-lg{
+            font-size: 42px;
+        }
+    }
+
+    .btn-box{
+        position: relative;
+        text-align: right;
+        margin-bottom: 50px;
+        z-index: 2;
+    }
+}
+
+/*** 
+
+====================================================================
+		Call To Action Two
+====================================================================
+
+***/
+
+.call-to-action-two{
+    position: relative;
+    z-index: 2;
+    .outer-box{
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 70px 60px 20px;
+        @include for-md{
+            flex-direction: column;
+            padding: 70px 20px 20px;
+        }
+        .bg{
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    }
+
+    .title-box{
+        position: relative;
+        margin-bottom: 50px;
+        @include for-md{
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    }
+
+    .title{
+        position: relative;
+        z-index: 2;
+        font-size: 40px;
+        color: #fff;
+        font-weight: 500;
+        line-height: 1.2em;
+        margin-bottom: 0px;
+        @include for-lg{
+            font-size: 42px;
+        }
+    }
+
+    .btn-box{
+        position: relative;
+        text-align: right;
+        margin-bottom: 50px;
+        z-index: 2;
+        @include for-sm{
+            text-align: left;
+            .theme-btn {
+                display: inline-block;
+                white-space: nowrap;
+                min-width: auto !important;
+                padding: 10px 30px;
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+

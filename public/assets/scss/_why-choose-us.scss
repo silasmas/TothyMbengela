@@ -1,0 +1,261 @@
+/*** 
+
+====================================================================
+		Why Choose Us
+====================================================================
+
+***/
+
+.why-choose-us{
+    position: relative;
+    padding: 120px 0 0;
+
+    .content-column {
+        position: relative;
+        z-index: 1;
+        .inner-column {
+            position: relative;
+            margin-left: -10px;
+            padding-top: 20px;
+            padding-bottom: 50px;
+            @include for-md{
+                margin-left: 0;
+                padding-top: 0;
+            }
+            @include for-md{
+                padding-bottom: 10px;
+            }
+        }
+
+        .list-style-three{
+            margin-bottom: 30px
+        }
+
+        .skills {
+            .skill-title {
+                @include text-font;
+                text-transform: unset;
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+    .image-column {
+        position: relative;
+        @include for-md{
+            order: 2;
+            margin-bottom: 120px;
+        }
+        .inner-column {
+            position: relative;
+            margin-left: -375px;
+            padding-right: 100px;
+            @include for-lg{
+                padding-right: 20px;
+                margin-left: -300px;
+            }
+            @include for-md{
+                padding: 0;
+                margin: 0;
+            }
+        }
+    
+        .image-box {
+            position: relative;
+        }
+    
+        .image{
+            position: relative;
+            display: block;
+            background-color: var(--bg-theme-color1);
+            margin-bottom: 0;
+            &::before{
+                @include overlay;
+                background-color: rgba(8,10,11, .60);
+                background-image: url(../images/icons/shape-2.png);
+                background-size: cover;
+                content: "";
+            }
+            img {
+                width: 100%;
+            }
+        }
+    }
+}
+
+/*** 
+
+====================================================================
+    Why Choose Us Two
+====================================================================
+
+***/
+
+.why-choose-us-two{
+    position: relative;
+    padding: 120px 0 70px;
+    &:before{
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 50%;
+        background-image: url(../images/icons/icon-dots-3.png);
+        background-position: center right;
+        content: "";
+    }
+    .content-column {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 50px;
+        .inner-column {
+            position: relative;
+            padding-right: 70px;
+            @include for-lg{
+                padding-right: 0;
+            }
+        }
+
+        .sec-title{
+            margin-bottom: 40px;
+        }
+
+        .feature-box{
+            position: relative;
+            padding-left: 100px;
+            padding-top: 5px;
+            min-height: 70px;
+            margin-bottom: 30px;
+            &:hover{
+                .icon{
+                    color: var(--theme-color1);
+                    &:after{
+                        background-color: #ebebeb;
+                    }
+                }
+            }
+            .icon{
+                position: absolute;
+                left: 0;
+                top: 0;
+                font-size: 64px;
+                line-height: 1em;
+                color: var(--theme-color2);
+                transition: all 300ms ease;
+                &:after{
+                    position: absolute;
+                    left: 25px;
+                    top: 15px;
+                    height: 54px;
+                    width: 54px;
+                    background-color: var(--bg-theme-color1);
+                    border-radius: 50%;
+                    z-index: -2;
+                    transition: all 300ms ease;
+                    content: "";
+                }
+            }
+        }
+
+        .theme-btn{
+            margin-top: 20px;
+        }
+    }
+
+    .image-column {
+        position: relative;
+        margin-bottom: 50px;
+        @include for-lg{
+            display: none;
+        }
+        .image-box{
+            position: relative;
+            margin-left: -24px;
+        }    
+        .image{
+            position: relative;
+            display: block;
+            background-color: var(--bg-theme-color1);
+            margin-bottom: 0;
+            img {
+                width: 100%;
+            }
+        }
+    }
+
+    .info-column{
+        @include for-lg{
+            width: 100%;
+        }
+        .inner-column{
+            position: relative;
+            padding-left: 36px;
+            @include for-lg{
+                padding-left: 0;
+            }
+        }
+
+        .info{
+            position: relative;
+            padding-bottom: 30px;
+            border-bottom: 5px solid var(--bg-theme-color2);
+            margin-bottom: 40px;
+            &:last-child{
+                padding-bottom: 0;
+                margin-bottom: 0;
+                border-bottom: 0;
+            }
+            .title{
+                position: relative;
+                top: -5px;
+                margin-bottom: 5px;
+                @include for-md{
+                    br{
+                        display: none;
+                    }
+                }
+            }
+        }
+        .info-box{
+            position: relative;
+            padding: 30px 50px;
+            background-color: var(--bg-theme-color2);
+            margin-left: -60px;
+            margin-right: 70px;
+            margin-top: 30px;
+            @include for-lg{
+                margin-left: 0;
+                margin-right: 0;
+            }
+            @include for-md{
+                padding: 20px 30px;
+            }
+            &:before{
+                position: absolute;
+                left: -35px;
+                bottom: 0;
+                border-right: 35px solid var(--border-theme-color2);
+                border-top: 45px solid transparent;
+                content: "";
+                @include for-lg{
+                    display: none;
+                }
+            }
+            .icon{
+                display: block;
+                font-size: 28px;
+                color: #fff;
+                margin-bottom: 8px;
+            }
+            .title{
+                margin-bottom: 0;
+                color: #fff;
+                @include for-md{
+                    br{
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

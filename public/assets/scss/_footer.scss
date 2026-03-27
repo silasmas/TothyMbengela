@@ -1,0 +1,226 @@
+/***
+
+==================================================================
+	Main Footer
+==================================================================
+
+***/
+
+.main-footer {
+	position: relative;
+	background-color: var(--bg-theme-color1);
+	overflow: hidden;
+	background-image: url(../images/icons/footer-bg.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	.upper-box{
+		position: relative;
+		padding: 50px 0 20px;
+		border-bottom: 1px solid rgba(255, 255, 255, .10);
+		.contact-info{
+			position: relative;
+			margin-bottom: 30px;
+			&.logo-box {
+				order: 1;
+				@include for-md {
+					order: 0 !important;
+				}
+			}
+			@include for-md{
+				text-align:  center !important;
+			}
+			&:last-child{
+				text-align: right;
+				order: 2;
+			}
+			.inner-box{
+				position: relative;
+				display: inline-block;
+				text-align: left;
+				@include for-md {
+					text-align: center !important;
+				}
+			}
+			.title{
+				font-size: 14px;
+				color: #7f7f7f;
+				line-height: 24px;
+				text-transform: uppercase;
+				letter-spacing: .1em;
+				margin-bottom: 0;
+			}
+			.text{
+				font-size: 22px;
+				color: #ffffff;
+				line-height: 30px;
+				font-weight: 400;
+				margin-bottom: 0;
+				a{
+					color: inherit;
+					font-weight: inherit;
+					&:hover{
+						color: var(--bg-theme-color2);
+					}
+				}
+			}
+		}
+	}
+	
+	.widgets-section {
+		position: relative;
+		padding: 80px 0 30px;
+	}
+
+	.footer-column {
+		position: relative;
+		margin-bottom: 50px;
+	}
+
+	.footer-widget {
+		position: relative;
+		@include for-sm{
+			text-align: center;
+		}
+	}
+
+	.widget-title {
+		position: relative;
+		display: inline-block;
+		font-weight: 600;
+		color: #ffffff;
+		line-height: 1.2em;
+		margin-bottom: 15px;
+	}
+	
+	.text {
+		margin-bottom: 20px;
+	}
+	.about-widget{
+		@include for-md{
+			margin-bottom: 50px;
+		}
+	}
+
+	.contacts-widget{
+		.social-icon-two{
+			@include for-sm{
+				justify-content: center;
+			}
+		}
+	}
+}
+
+
+/*=== User LInks ===*/
+.user-links {
+	position: relative;
+	li {
+		position: relative;
+		font-size: 16px;
+		line-height: 30px;
+		color: #7f7f7f;
+		font-weight: 400;
+		margin-bottom: 0px;
+		&:last-child {
+			margin-bottom: 0;
+		}
+		a {
+			position: relative;
+			display: inline-block;
+			color: inherit;
+			transition: all 300ms ease;
+			&:hover {
+				color: #FFFFFF;
+			}
+			&:before {
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				width: 0;
+				height: 1px;
+				background-color: var(--bg-theme-color2);
+				content: "";
+				transition: all 300ms ease;
+			}
+			&:hover:before {
+				width: 100%;
+			}
+		}
+	}
+}
+
+
+
+/* Subscribe Form */
+.subscribe-form {
+	position: relative;
+	.form-group {
+		position: relative;
+		margin-bottom: 0;
+		input[type=text],
+		input[type=email] {
+			position: relative;
+			display: block;
+			height: 64px;
+			width: 100%;
+			font-size: 14px;
+			line-height: 24px;
+			color: #717070;
+			padding: 20px 30px;
+			padding-right: 60px;
+			background: #fff;
+			transition: all 300ms ease;
+			&::placeholder {
+				color: #717070;
+			}
+		}
+		.theme-btn {
+			position: absolute;
+			right: 10px;
+			top: 50%;
+			margin-top: -22px;
+			height: 44px;
+			width: 44px;
+			line-height: 44px;
+			font-size: 14px;
+			border-radius: 5%;
+			color: #ffffff;
+			display: block;
+			background: var(--bg-theme-color2);
+			&:hover{
+				color: #FFFFFF;
+			}
+		}
+	}
+}
+
+
+/*=== Footer Bottom ===*/
+.footer-bottom {
+	position: relative;
+	background-color: #111111;
+	.inner-container {
+		position: relative;
+		padding: 30px 15px;
+		text-align: center;
+	}
+
+	.copyright-text {
+		position: relative;
+		font-size: 16px;
+		line-height: 30px;
+		color: #7f7f7f;
+		font-weight: 500;
+		p{
+			margin-bottom: 0;
+		}
+		a {
+			color: inherit;
+
+			&:hover {
+				color: #ffffff;
+			}
+		}
+	}
+}
+

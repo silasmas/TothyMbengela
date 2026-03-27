@@ -1,0 +1,178 @@
+/**
+ * Espacement autour du bandeau + sections don / contact / partenaire (layout type contact-section).
+ */
+
+.alliance-engagement-page-wrap {
+    padding-bottom: 5rem;
+}
+
+.alliance-engagement-intro {
+    padding-top: 3.5rem;
+    padding-bottom: 2.5rem;
+}
+
+@media (min-width: 992px) {
+    .alliance-engagement-intro {
+        padding-top: 4.5rem;
+        padding-bottom: 3rem;
+    }
+}
+
+/* Fond décoratif derrière le contenu, jamais par-dessus */
+.alliance-engagement-contact.contact-section > .bg {
+    z-index: 0;
+    pointer-events: none;
+}
+
+.alliance-engagement-contact.contact-section > .auto-container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Les filets décoratifs du thème sur .contact-form débordent et passent AU-DESSUS de la colonne image : on les retire ici */
+.alliance-engagement-contact .contact-form::before,
+.alliance-engagement-contact .contact-form::after {
+    display: none !important;
+}
+
+/* Section formulaire : aération par rapport au footer */
+.alliance-engagement-contact.contact-section {
+    padding-top: 2rem;
+    padding-bottom: 6rem;
+}
+
+@media (min-width: 992px) {
+    .alliance-engagement-contact.contact-section {
+        padding-top: 2.5rem;
+        padding-bottom: 7rem;
+    }
+}
+
+/*
+ * Le thème masque .contact-section .bg-image sous 1439px (style.css).
+ * Portrait : z-index 0 pour rester derrière la carte formulaire (pas par-dessus).
+ */
+.alliance-engagement-contact.contact-section .bg-image {
+    display: block !important;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@media only screen and (max-width: 1439px) {
+    /* Contenu d’abord, portrait en dessous (ordre DOM : bg-image est avant .auto-container) */
+    .alliance-engagement-contact.contact-section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .alliance-engagement-contact.contact-section > .auto-container {
+        order: 1;
+    }
+
+    .alliance-engagement-contact.contact-section > .bg-image {
+        order: 2;
+        position: relative !important;
+        right: auto !important;
+        bottom: auto !important;
+        max-width: 100%;
+        margin: 2.5rem auto 0;
+        text-align: center;
+        padding: 0 15px;
+    }
+
+    .alliance-engagement-contact.contact-section > .bg-image img {
+        display: inline-block;
+        max-width: min(100%, 380px);
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+        vertical-align: bottom;
+    }
+}
+
+/* Image latérale + grille formulaire */
+.alliance-engagement-contact .form-column .inner-column {
+    margin-left: 0;
+    padding-right: 0;
+}
+
+/* Colonne image : au même plan que le formulaire, au-dessus du fond (PNG transparent = vraie colonne, pas du « fond ») */
+.alliance-engagement-visual-col {
+    align-self: flex-start;
+    position: relative;
+    z-index: 2;
+}
+
+.alliance-engagement-contact .form-column {
+    position: relative;
+    z-index: 2;
+}
+
+.alliance-engagement-contact .title-column {
+    position: relative;
+    z-index: 2;
+}
+
+.alliance-engagement-visual {
+    position: sticky;
+    top: 100px;
+    padding-top: 0;
+}
+
+.alliance-engagement-visual img {
+    display: block;
+    width: 100%;
+    max-width: min(100%, 420px);
+    height: auto;
+    margin-left: auto;
+    margin-right: 0;
+    object-fit: contain;
+    object-position: top center;
+    /* Portrait fourni (souvent déjà N&B) : pas de filtre pour garder transparence / lueur */
+    filter: none;
+    opacity: 1;
+}
+
+/* Le thème met les labels du .contact-form en blanc (prévu pour fond sombre) : correction lisibilité */
+.alliance-engagement-contact .contact-form .form-group label {
+    color: #333 !important;
+    letter-spacing: 0.02em;
+}
+
+.alliance-engagement-contact .contact-form .form-group label .text-muted {
+    color: #6c757d !important;
+    font-weight: 400;
+}
+
+.alliance-engagement-contact .contact-form .title {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 700;
+    text-transform: none;
+}
+
+/* Bouton principal type maquette (orange / or du site) */
+.alliance-engagement-contact .contact-form .theme-btn.btn-style-one .btn-title {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 700;
+}
+
+/* Page profil : cartes formulaire */
+.alliance-profile-page .contact-form .form-group label {
+    color: #333 !important;
+}
+
+.alliance-profile-page .contact-form input:not([type="submit"]),
+.alliance-profile-page .contact-form select {
+    background-color: #f6f6f6;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    min-height: 52px;
+    padding: 12px 24px;
+}
+
+.alliance-profile-page .contact-form .theme-btn.btn-style-one .btn-title {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 700;
+}

@@ -1,0 +1,175 @@
+<!-- Main Header -->
+<header class="main-header header-style-one">
+    <div class="main-box">
+        <div class="logo-box">
+            <div class="logo">
+                <a href="{{ route('home') }}">
+                    <img src="{{ asset('assets/logo/Logo Alliance Ok.PNG') }}" alt="Alliance — Ministère Tothy Mbengela" title="Alliance">
+                </a>
+            </div>
+            <button class="ui-btn ui-btn search-btn">
+                <span class="icon lnr lnr-icon-search"></span>
+            </button>
+        </div>
+
+        <div class="nav-outer">
+            <nav class="nav main-menu">
+                <ul class="navigation">
+                    <li class="{{ request()->is('/') ? 'current' : '' }}">
+                        <a href="{{ route('home') }}">Accueil</a>
+                    </li>
+                    <li class="{{ request()->is('a-propos') ? 'current' : '' }}">
+                        <a href="{{ route('about') }}">À propos</a>
+                    </li>
+                    <li class="dropdown {{ request()->is('contenus*') || request()->is('series*') ? 'current' : '' }}">
+                        <a href="{{ route('contents.index') }}">Contenus</a>
+                        <ul>
+                            <li><a href="{{ route('contents.index') }}">Toutes les publications</a></li>
+                            <li><a href="{{ route('contents.index', ['type' => 'video']) }}">Vidéos</a></li>
+                            <li><a href="{{ route('contents.index', ['type' => 'audio']) }}">Audio</a></li>
+                            <li><a href="{{ route('contents.index', ['type' => 'podcast']) }}">Podcasts</a></li>
+                            <li><a href="{{ route('contents.index', ['type' => 'article']) }}">Articles</a></li>
+                            <li><a href="{{ route('series.index') }}">Séries</a></li>
+                        </ul>
+                    </li>
+                    <li class="{{ request()->is('boutique*') ? 'current' : '' }}">
+                        <a href="{{ route('books.index') }}">Boutique</a>
+                    </li>
+                    <li class="dropdown {{ request()->is('don') || request()->is('partenaire') ? 'current' : '' }}">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#donatePartnerModal">Soutenir</a>
+                        <ul>
+                            <li><a href="#" data-bs-toggle="modal" data-bs-target="#donatePartnerModal">Faire un don</a></li>
+                            <li><a href="#" class="js-donate-modal-partner">Devenir partenaire</a></li>
+                            <li><a href="{{ route('donate.create') }}">Page don (détails)</a></li>
+                            <li><a href="{{ route('partner.create') }}">Page partenaire</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown {{ request()->is('contact') || request()->is('rendez-vous') ? 'current' : '' }}">
+                        <a href="{{ route('contact.create') }}">Contact</a>
+                        <ul>
+                            <li><a href="{{ route('contact.create') }}">Nous écrire</a></li>
+                            <li><a href="{{ route('appointment.create') }}">Prendre rendez-vous</a></li>
+                        </ul>
+                    </li>
+                    @guest
+                        <li class="{{ request()->is('login') || request()->is('register') ? 'current' : '' }}">
+                            <a href="{{ route('login') }}">Connexion</a>
+                        </li>
+                    @endguest
+                </ul>
+            </nav>
+        </div>
+
+        <div class="outer-box alliance-header-outer-actions">
+            <div class="header-cart-wrap">
+                <a href="#" class="ui-btn cart-btn" title="Panier" data-bs-toggle="modal" data-bs-target="#allianceCartModal">
+                    <span class="icon fa fa-shopping-cart"></span>
+                    <span class="cart-count-badge" aria-live="polite">0</span>
+                </a>
+            </div>
+            @include('layouts.nav-account-toolbar', ['accountToolbarOnDark' => false])
+            <a href="#" class="info-btn" data-bs-toggle="modal" data-bs-target="#donatePartnerModal" title="Faire un don">
+                <i class="icon fa fa-heart"></i>
+                <strong class="text">Faire un don</strong>
+            </a>
+            <div class="mobile-nav-toggler"><span class="icon lnr-icon-bars"></span></div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="menu-backdrop"></div>
+
+        <nav class="menu-box">
+            <div class="upper-box">
+                <div class="nav-logo">
+                    <a href="{{ route('home') }}">
+                        <img src="{{ asset('assets/logo/Logo Alliance Ok.PNG') }}" alt="Alliance" title="Alliance">
+                    </a>
+                </div>
+                <div class="close-btn"><i class="icon fa fa-times"></i></div>
+            </div>
+
+            <ul class="navigation clearfix">
+                <!--  Menu injecté automatiquement par le JS du template -->
+            </ul>
+
+            <ul class="contact-list-one">
+                <li>
+                    <div class="contact-info-box">
+                        <span class="icon lnr-icon-envelope1"></span>
+                        <span class="title">E-mail</span>
+                        <a href="mailto:contact@alliance-ministere.com">contact@alliance-ministere.com</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="contact-info-box">
+                        <span class="icon lnr-icon-clock"></span>
+                        <span class="title">Horaires</span>
+                        Lun – Sam : 8h00 – 18h00
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="social-links">
+                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Header Search -->
+    <div class="search-popup">
+        <span class="search-back-drop"></span>
+        <button class="close-search"><span class="fa fa-times"></span></button>
+
+        <div class="search-inner" data-search-suggest-url="{{ route('search.suggest') }}">
+            <form method="GET" action="{{ route('search') }}" id="header-search-form">
+                <div class="form-group">
+                    <input type="search" name="q" id="header-search-q" value="" autocomplete="off" placeholder="Rechercher des contenus, séries, livres…" required>
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
+            <div id="search-live-results" class="search-live-results d-none" role="listbox" aria-label="Suggestions"></div>
+        </div>
+    </div>
+
+    <!-- Sticky Header -->
+    <div class="sticky-header">
+        <div class="auto-container">
+            <div class="inner-container">
+                <div class="logo">
+                    <a href="{{ route('home') }}" title="Alliance">
+                        <img src="{{ asset('assets/logo/Logo Alliance Ok.PNG') }}" alt="Alliance" title="Alliance">
+                    </a>
+                </div>
+
+                <div class="nav-outer">
+                    <nav class="main-menu">
+                        <div class="navbar-collapse show collapse clearfix">
+                            <ul class="navigation clearfix">
+                                <!-- Menu injecté automatiquement par le JS du template -->
+                            </ul>
+                        </div>
+                    </nav>
+
+                    <div class="mobile-nav-toggler"><span class="icon lnr-icon-bars"></span></div>
+                </div>
+
+                <div class="sticky-header-actions d-flex align-items-center">
+                    <div class="header-cart-wrap">
+                        <a href="#" class="ui-btn cart-btn" title="Panier" data-bs-toggle="modal" data-bs-target="#allianceCartModal">
+                            <span class="icon fa fa-shopping-cart"></span>
+                            <span class="cart-count-badge" aria-live="polite">0</span>
+                        </a>
+                    </div>
+                    @include('layouts.nav-account-toolbar', ['accountToolbarOnDark' => true])
+                    <a href="#" class="theme-btn btn-style-one btn-sm py-2 px-3" data-bs-toggle="modal" data-bs-target="#donatePartnerModal" style="white-space:nowrap;">
+                        <span class="btn-title"><i class="fa fa-heart"></i> Don</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

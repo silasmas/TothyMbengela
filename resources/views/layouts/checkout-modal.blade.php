@@ -1,0 +1,644 @@
+{{-- Tunnel commande livres : connexion / inscription par code e-mail, puis paiement sécurisé --}}
+<div class="modal fade" id="allianceCheckoutModal" tabindex="-1" aria-labelledby="allianceCheckoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+        <div class="modal-content" style="border-radius:12px;">
+            <div class="modal-header border-bottom">
+                <h5 class="modal-title" id="allianceCheckoutModalLabel"><i class="fa fa-lock me-2" style="color:#C8922A;"></i> Finaliser la commande</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <div class="modal-body">
+                <div id="checkout-step-auth" class="checkout-step">
+                    <p class="text-muted small mb-3">Connectez-vous ou créez un compte avec un <strong>code reçu par e-mail</strong> (sans mot de passe).</p>
+                    <ul class="nav nav-pills nav-fill mb-3 gap-2" id="checkoutAuthTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active rounded-pill" id="chk-tab-login" data-bs-toggle="pill" data-bs-target="#chk-pane-login" type="button" role="tab">Connexion</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-pill" id="chk-tab-reg" data-bs-toggle="pill" data-bs-target="#chk-pane-reg" type="button" role="tab">Créer un compte</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="chk-pane-login" role="tabpanel">
+                            <div id="chk-login-1">
+                                <label class="form-label small fw-bold">E-mail</label>
+                                <input type="email" class="form-control mb-2" id="chk-login-email" autocomplete="username">
+                                <button type="button" class="btn w-100 text-white fw-bold" style="background:#C8922A;" id="chk-login-send">Recevoir le code</button>
+                            </div>
+                            <div id="chk-login-2" class="d-none">
+                                <p class="small text-muted">Code envoyé à <span id="chk-login-email-show"></span></p>
+                                <label class="form-label small fw-bold">Code à 6 chiffres</label>
+                                <input type="text" class="form-control mb-2 tracking-wider" id="chk-login-code" maxlength="6" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code">
+                                <button type="button" class="btn btn-dark w-100" id="chk-login-verify">Valider</button>
+                                <button type="button" class="btn btn-link btn-sm w-100 mt-1" id="chk-login-back">Changer d’e-mail</button>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="chk-pane-reg" role="tabpanel">
+                            <div id="chk-reg-1">
+                                <label class="form-label small fw-bold">Nom complet</label>
+                                <input type="text" class="form-control mb-2" id="chk-reg-name" autocomplete="name">
+                                <label class="form-label small fw-bold">E-mail</label>
+                                <input type="email" class="form-control mb-2" id="chk-reg-email" autocomplete="username">
+                                <button type="button" class="btn w-100 text-white fw-bold" style="background:#C8922A;" id="chk-reg-send">Recevoir le code</button>
+                            </div>
+                            <div id="chk-reg-2" class="d-none">
+                                <p class="small text-muted">Code envoyé à <span id="chk-reg-email-show"></span></p>
+                                <label class="form-label small fw-bold">Code à 6 chiffres</label>
+                                <input type="text" class="form-control mb-2" id="chk-reg-code" maxlength="6" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code">
+                                <button type="button" class="btn btn-dark w-100" id="chk-reg-verify">Créer le compte et continuer</button>
+                                <button type="button" class="btn btn-link btn-sm w-100 mt-1" id="chk-reg-back">Modifier</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="checkout-step-summary" class="checkout-step d-none">
+                    <h6 class="fw-bold mb-2">Récapitulatif</h6>
+                    <ul class="list-unstyled small mb-3" id="checkout-summary-lines"></ul>
+                    <div id="checkout-shipping-block" class="d-none border rounded p-3 mb-3 small bg-light">
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="chk-shipping-enabled" autocomplete="off">
+                            <label class="form-check-label fw-bold" for="chk-shipping-enabled">Ajouter la livraison</label>
+                        </div>
+                        <div id="checkout-shipping-fields" class="d-none">
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <label class="form-label small mb-0" for="chk-shipping-country">Pays</label>
+                                    <select class="form-select form-select-sm" id="chk-shipping-country" autocomplete="country">
+                                        <option value="">— Choisir —</option>
+                                        <option value="CD">République démocratique du Congo</option>
+                                        <option value="CG">Congo (Brazzaville)</option>
+                                        <option value="FR">France</option>
+                                        <option value="BE">Belgique</option>
+                                        <option value="CA">Canada</option>
+                                        <option value="US">États-Unis</option>
+                                        <option value="GB">Royaume-Uni</option>
+                                        <option value="DE">Allemagne</option>
+                                        <option value="ZA">Afrique du Sud</option>
+                                        <option value="RW">Rwanda</option>
+                                        <option value="UG">Ouganda</option>
+                                        <option value="KE">Kenya</option>
+                                        <option value="TZ">Tanzanie</option>
+                                        <option value="ZM">Zambie</option>
+                                        <option value="AO">Angola</option>
+                                        <option value="CM">Cameroun</option>
+                                        <option value="SN">Sénégal</option>
+                                        <option value="CI">Côte d’Ivoire</option>
+                                        <option value="NG">Nigeria</option>
+                                        <option value="NL">Pays-Bas</option>
+                                        <option value="CH">Suisse</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small mb-0" for="chk-shipping-city">Ville</label>
+                                    <input type="text" class="form-control form-control-sm" id="chk-shipping-city" placeholder="Ex. Lubumbashi" maxlength="120" autocomplete="address-level2">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label small mb-0" for="chk-shipping-address">Adresse complète</label>
+                                    <textarea class="form-control form-control-sm" id="chk-shipping-address" rows="3" maxlength="2000" placeholder="Commune, quartier, avenue, numéro, point de repère…" autocomplete="street-address"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label small mb-0" for="chk-shipping-phone">Téléphone de contact (livraison)</label>
+                                    <input type="tel" class="form-control form-control-sm" id="chk-shipping-phone" placeholder="Ex. +243…" maxlength="40" autocomplete="tel">
+                                </div>
+                            </div>
+                            <p class="text-muted small mt-2 mb-0">Tarif national pour le pays configuré sur le site (ex. RDC), tarif international pour les autres pays.</p>
+                        </div>
+                    </div>
+                    <p class="mb-1 small text-muted">Sous-total articles : <strong id="checkout-summary-subtotal">0,00</strong> <span class="checkout-summary-cur">USD</span></p>
+                    <p class="mb-1 small d-none" id="checkout-summary-shipping-line">Livraison : <strong id="checkout-summary-shipping-amount">0,00</strong> <span class="checkout-summary-cur">USD</span></p>
+                    <p class="mb-3">Total : <strong id="checkout-summary-total">0,00 USD</strong></p>
+                    <button type="button" class="btn w-100 text-white fw-bold mb-2 alliance-checkout-gold-btn" style="background:#C8922A;" id="chk-confirm-order">Confirmer et payer</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm w-100" id="chk-back-auth">← Retour</button>
+                </div>
+
+                <div id="checkout-step-pay" class="checkout-step d-none">
+                    <p class="mb-2">Référence : <strong id="chk-pay-ref"></strong></p>
+                    <p class="mb-3">Montant : <strong id="chk-pay-total"></strong></p>
+                    <form id="chk-pay-form" class="row g-2">
+                        @csrf
+                        <input type="hidden" id="chk-pay-reference" name="reference">
+                        <div class="col-12">
+                            <label class="form-label small fw-bold">Moyen de paiement</label>
+                            <select class="form-select" id="chk-pay-channel" name="channel" required>
+                                <option value="">Choisir…</option>
+                                <option value="mobile_money">Mobile Money</option>
+                                <option value="card">Carte bancaire</option>
+                            </select>
+                        </div>
+                        <div class="col-12 d-none" id="chk-pay-phone-wrap">
+                            <label class="form-label small fw-bold">Téléphone</label>
+                            <input type="text" class="form-control" name="phone" id="chk-pay-phone" placeholder="243…">
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-dark w-100" id="chk-pay-submit">Payer</button>
+                        </div>
+                    </form>
+                    <div id="checkout-no-online-pay" class="d-none alert alert-info small mt-2">
+                        Le paiement en ligne n’est pas activé. Votre commande peut être enregistrée — contactez le ministère pour le règlement.
+                    </div>
+                    <button type="button" class="btn btn-outline-secondary btn-sm w-100 mt-2 d-none" id="chk-order-offline">Enregistrer la commande (sans paiement en ligne)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function(){
+    var csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+    var routes = window.allianceRoutes || {};
+    var flexOn = window.allianceFlexPayEnabled === true;
+
+    function postJson(url, body) {
+        return fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': csrf,
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+            body: JSON.stringify(body),
+            credentials: 'same-origin',
+        }).then(function(r) { return r.json().then(function(d) { return { r: r, d: d }; }).catch(function() { return { r: r, d: {} }; }); });
+    }
+
+    function showStep(name) {
+        document.querySelectorAll('.checkout-step').forEach(function(el) { el.classList.add('d-none'); });
+        var map = { auth: 'checkout-step-auth', summary: 'checkout-step-summary', pay: 'checkout-step-pay' };
+        var id = map[name];
+        if (id) document.getElementById(id)?.classList.remove('d-none');
+    }
+
+    function cartPayload() {
+        try {
+            return JSON.parse(localStorage.getItem('alliance_cart') || '[]');
+        } catch (e) { return []; }
+    }
+
+    function escapeHtmlCheckout(s) {
+        var d = document.createElement('div');
+        d.textContent = s == null ? '' : String(s);
+        return d.innerHTML;
+    }
+
+    function fmtMoneyCheckout(n, cur) {
+        return Number(n).toFixed(2).replace('.', ',') + ' ' + (cur || 'USD');
+    }
+
+    function setShippingFieldsRequired(on) {
+        var sel = document.getElementById('chk-shipping-country');
+        var city = document.getElementById('chk-shipping-city');
+        var addr = document.getElementById('chk-shipping-address');
+        var ph = document.getElementById('chk-shipping-phone');
+        if (sel) sel.required = !!on;
+        if (city) city.required = !!on;
+        if (addr) addr.required = !!on;
+        if (ph) ph.required = !!on;
+    }
+
+    function syncShippingUi() {
+        var cfg = window.allianceShippingConfig || {};
+        var block = document.getElementById('checkout-shipping-block');
+        var cb = document.getElementById('chk-shipping-enabled');
+        var fields = document.getElementById('checkout-shipping-fields');
+        if (!block) return;
+        if (!cfg.enabled) {
+            block.classList.add('d-none');
+            if (cb) cb.checked = false;
+            if (fields) fields.classList.add('d-none');
+            setShippingFieldsRequired(false);
+            return;
+        }
+        block.classList.remove('d-none');
+        var on = !!(cb && cb.checked);
+        if (fields) fields.classList.toggle('d-none', !on);
+        setShippingFieldsRequired(on);
+    }
+
+    function refreshCheckoutSummary() {
+        var cart = cartPayload();
+        var ul = document.getElementById('checkout-summary-lines');
+        var cur = 'USD';
+        if (!ul) return;
+        ul.innerHTML = '';
+        var subtotal = 0;
+        cart.forEach(function(item) {
+            var line = (item.qty || 1) * (parseFloat(item.price) || 0);
+            subtotal += line;
+            if (item.currency) cur = item.currency;
+            var li = document.createElement('li');
+            li.className = 'mb-2 border-bottom pb-2 d-flex align-items-center gap-2';
+            var thumb = item.cover_url
+                ? '<img src="' + escapeHtmlCheckout(item.cover_url) + '" alt="" width="44" height="58" class="flex-shrink-0 rounded" style="object-fit:cover;">'
+                : '';
+            li.innerHTML = thumb +
+                '<div class="min-w-0 flex-grow-1"><div class="fw-semibold">' + escapeHtmlCheckout(item.title || 'Article') + '</div>' +
+                '<div class="small text-muted">× ' + (item.qty || 1) +
+                (item.price != null ? ' — ' + fmtMoneyCheckout(Number(item.price), item.currency || cur) : '') +
+                '</div></div>';
+            ul.appendChild(li);
+        });
+        var cfg = window.allianceShippingConfig || {};
+        var ship = 0;
+        if (cfg.enabled) {
+            var cb = document.getElementById('chk-shipping-enabled');
+            if (cb && cb.checked) {
+                var code = (document.getElementById('chk-shipping-country') && document.getElementById('chk-shipping-country').value || '').toUpperCase();
+                var domestic = (cfg.domesticCode || 'CD').toUpperCase();
+                if (code && code === domestic) ship = Number(cfg.domestic) || 0;
+                else if (code) ship = Number(cfg.international) || 0;
+            }
+        }
+        var total = subtotal + ship;
+        var subEl = document.getElementById('checkout-summary-subtotal');
+        if (subEl) subEl.textContent = subtotal.toFixed(2).replace('.', ',');
+        document.querySelectorAll('.checkout-summary-cur').forEach(function(el) { el.textContent = cur; });
+        var sl = document.getElementById('checkout-summary-shipping-line');
+        var sa = document.getElementById('checkout-summary-shipping-amount');
+        if (sl && sa) {
+            if (ship > 0) {
+                sl.classList.remove('d-none');
+                sa.textContent = ship.toFixed(2).replace('.', ',');
+            } else {
+                sl.classList.add('d-none');
+            }
+        }
+        var t = document.getElementById('checkout-summary-total');
+        if (t) t.textContent = fmtMoneyCheckout(total, cur);
+    }
+
+    var orderRef = null;
+    var orderTotalStr = '';
+
+    function toast(msg, variant) {
+        if (window.allianceSiteToast) window.allianceSiteToast(msg, variant || 'error');
+    }
+
+    function setBtnLoading(btn, on) {
+        if (window.allianceSetSubmitLoading) window.allianceSetSubmitLoading(btn, !!on);
+        else if (btn) { btn.disabled = !!on; }
+    }
+
+    function afterAuthSuccess() {
+        syncShippingUi();
+        refreshCheckoutSummary();
+        showStep('summary');
+    }
+
+    /**
+     * Efface livraison, identifiants saisis (connexion / inscription) et formulaire de paiement
+     * pour ne pas laisser de données sensibles après un achat réussi (ou ordre hors ligne).
+     */
+    function resetCheckoutSensitiveFields() {
+        var cb = document.getElementById('chk-shipping-enabled');
+        if (cb) cb.checked = false;
+        var sel = document.getElementById('chk-shipping-country');
+        if (sel) sel.value = '';
+        var cityEl = document.getElementById('chk-shipping-city');
+        if (cityEl) cityEl.value = '';
+        var addrEl = document.getElementById('chk-shipping-address');
+        if (addrEl) addrEl.value = '';
+        var shipPh = document.getElementById('chk-shipping-phone');
+        if (shipPh) shipPh.value = '';
+        syncShippingUi();
+        refreshCheckoutSummary();
+
+        var le = document.getElementById('chk-login-email');
+        if (le) le.value = '';
+        var lc = document.getElementById('chk-login-code');
+        if (lc) lc.value = '';
+        document.getElementById('chk-login-1')?.classList.remove('d-none');
+        document.getElementById('chk-login-2')?.classList.add('d-none');
+        var rn = document.getElementById('chk-reg-name');
+        if (rn) rn.value = '';
+        var re = document.getElementById('chk-reg-email');
+        if (re) re.value = '';
+        var rc = document.getElementById('chk-reg-code');
+        if (rc) rc.value = '';
+        document.getElementById('chk-reg-1')?.classList.remove('d-none');
+        document.getElementById('chk-reg-2')?.classList.add('d-none');
+        window._chkLoginEmail = undefined;
+        window._chkRegEmail = undefined;
+
+        var tabLogin = document.getElementById('chk-tab-login');
+        if (tabLogin && typeof bootstrap !== 'undefined' && bootstrap.Tab) {
+            try { bootstrap.Tab.getOrCreateInstance(tabLogin).show(); } catch (err) {}
+        }
+
+        document.getElementById('chk-pay-phone-wrap')?.classList.add('d-none');
+        var pp = document.getElementById('chk-pay-phone');
+        if (pp) {
+            pp.value = '';
+            pp.required = false;
+        }
+        var pch = document.getElementById('chk-pay-channel');
+        if (pch) pch.value = '';
+        document.getElementById('chk-pay-form')?.reset();
+
+        orderRef = null;
+        orderTotalStr = '';
+    }
+
+    window.allianceResetCheckoutModal = resetCheckoutSensitiveFields;
+
+    document.getElementById('chk-login-send')?.addEventListener('click', function() {
+        var email = document.getElementById('chk-login-email')?.value?.trim();
+        if (!email || !routes.loginSend) return;
+        var btn = this;
+        setBtnLoading(btn, true);
+        postJson(routes.loginSend, { email: email }).then(function(pair) {
+            if (pair.r.ok && pair.d.success) {
+                document.getElementById('chk-login-1').classList.add('d-none');
+                document.getElementById('chk-login-2').classList.remove('d-none');
+                document.getElementById('chk-login-email-show').textContent = email;
+                window._chkLoginEmail = email;
+                toast('Code envoyé. Consultez votre boîte mail.', 'success');
+            } else {
+                toast(pair.d.message || 'Impossible d’envoyer le code.', 'error');
+            }
+        }).catch(function() { toast('Erreur réseau.', 'error'); })
+        .finally(function() { setBtnLoading(btn, false); });
+    });
+
+    document.getElementById('chk-login-verify')?.addEventListener('click', function() {
+        var email = window._chkLoginEmail;
+        var code = document.getElementById('chk-login-code')?.value?.trim();
+        if (!email || code?.length !== 6 || !routes.loginVerify) return;
+        var btn = this;
+        setBtnLoading(btn, true);
+        postJson(routes.loginVerify, { email: email, code: code }).then(function(pair) {
+            if (pair.r.ok && pair.d.success) {
+                window.allianceAuthUser = pair.d.user;
+                toast('Connecté.', 'success');
+                afterAuthSuccess();
+            } else {
+                toast(pair.d.message || (pair.d.errors && Object.values(pair.d.errors).flat().join(' ')) || 'Code incorrect.', 'error');
+            }
+        }).catch(function() { toast('Erreur réseau.', 'error'); })
+        .finally(function() { setBtnLoading(btn, false); });
+    });
+
+    document.getElementById('chk-login-back')?.addEventListener('click', function() {
+        document.getElementById('chk-login-2').classList.add('d-none');
+        document.getElementById('chk-login-1').classList.remove('d-none');
+    });
+
+    document.getElementById('chk-reg-send')?.addEventListener('click', function() {
+        var name = document.getElementById('chk-reg-name')?.value?.trim();
+        var email = document.getElementById('chk-reg-email')?.value?.trim();
+        if (!name || !email || !routes.registerSend) return;
+        var btn = this;
+        setBtnLoading(btn, true);
+        postJson(routes.registerSend, { name: name, email: email }).then(function(pair) {
+            if (pair.r.ok && pair.d.success) {
+                document.getElementById('chk-reg-1').classList.add('d-none');
+                document.getElementById('chk-reg-2').classList.remove('d-none');
+                document.getElementById('chk-reg-email-show').textContent = email;
+                window._chkRegEmail = email;
+                toast('Code envoyé. Consultez votre boîte mail.', 'success');
+            } else {
+                toast(pair.d.message || (pair.d.errors && Object.values(pair.d.errors).flat().join(' ')) || 'Erreur.', 'error');
+            }
+        }).catch(function() { toast('Erreur réseau.', 'error'); })
+        .finally(function() { setBtnLoading(btn, false); });
+    });
+
+    document.getElementById('chk-reg-verify')?.addEventListener('click', function() {
+        var email = window._chkRegEmail;
+        var code = document.getElementById('chk-reg-code')?.value?.trim();
+        if (!email || code?.length !== 6 || !routes.registerVerify) return;
+        var btn = this;
+        setBtnLoading(btn, true);
+        postJson(routes.registerVerify, { email: email, code: code }).then(function(pair) {
+            if (pair.r.ok && pair.d.success) {
+                window.allianceAuthUser = pair.d.user;
+                toast('Compte créé.', 'success');
+                afterAuthSuccess();
+            } else {
+                toast(pair.d.message || (pair.d.errors && Object.values(pair.d.errors).flat().join(' ')) || 'Code incorrect.', 'error');
+            }
+        }).catch(function() { toast('Erreur réseau.', 'error'); })
+        .finally(function() { setBtnLoading(btn, false); });
+    });
+
+    document.getElementById('chk-reg-back')?.addEventListener('click', function() {
+        document.getElementById('chk-reg-2').classList.add('d-none');
+        document.getElementById('chk-reg-1').classList.remove('d-none');
+    });
+
+    document.getElementById('chk-back-auth')?.addEventListener('click', function() {
+        var u = window.allianceAuthUser;
+        if (u && u.id) {
+            bootstrap.Modal.getInstance(document.getElementById('allianceCheckoutModal'))?.hide();
+            return;
+        }
+        showStep('auth');
+    });
+
+    document.getElementById('chk-shipping-enabled')?.addEventListener('change', function() {
+        syncShippingUi();
+        refreshCheckoutSummary();
+    });
+    document.getElementById('chk-shipping-country')?.addEventListener('change', refreshCheckoutSummary);
+    document.getElementById('chk-shipping-city')?.addEventListener('input', refreshCheckoutSummary);
+    document.getElementById('chk-shipping-address')?.addEventListener('input', refreshCheckoutSummary);
+    document.getElementById('chk-shipping-phone')?.addEventListener('input', refreshCheckoutSummary);
+
+    document.getElementById('chk-confirm-order')?.addEventListener('click', function() {
+        var cart = cartPayload();
+        if (!cart.length) { toast('Panier vide.', 'error'); return; }
+        var items = cart.map(function(i) { return { id: i.id, qty: i.qty || 1 }; });
+        var cfg = window.allianceShippingConfig || {};
+        var shipPayload = { enabled: false };
+        var cbShip = document.getElementById('chk-shipping-enabled');
+        if (cfg.enabled && cbShip && cbShip.checked) {
+            var cty = document.getElementById('chk-shipping-country')?.value?.trim();
+            var city = document.getElementById('chk-shipping-city')?.value?.trim();
+            var addr = document.getElementById('chk-shipping-address')?.value?.trim();
+            var ph = document.getElementById('chk-shipping-phone')?.value?.trim();
+            if (!cty || !city || !addr || !ph) {
+                toast('Pour la livraison : pays, ville, adresse complète et numéro de contact sont requis.', 'error');
+                return;
+            }
+            shipPayload = { enabled: true, country: cty.toUpperCase(), city: city, address: addr, phone: ph };
+        }
+        var btn = this;
+        setBtnLoading(btn, true);
+        fetch(routes.orderInit, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': csrf,
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+            body: JSON.stringify({ items: items, shipping: shipPayload }),
+            credentials: 'same-origin',
+        }).then(function(r) { return r.json().then(function(d) { return { r: r, d: d }; }); })
+        .then(function(pair) {
+            if (pair.r.ok && pair.d.success) {
+                orderRef = pair.d.reference;
+                orderTotalStr = fmtMoneyCheckout(pair.d.total, pair.d.currency);
+                document.getElementById('chk-pay-ref').textContent = orderRef;
+                document.getElementById('chk-pay-total').textContent = orderTotalStr;
+                document.getElementById('chk-pay-reference').value = orderRef;
+                if (flexOn) {
+                    document.getElementById('checkout-no-online-pay').classList.add('d-none');
+                    document.getElementById('chk-order-offline').classList.add('d-none');
+                    document.getElementById('chk-pay-form').classList.remove('d-none');
+                } else {
+                    document.getElementById('chk-pay-form').classList.add('d-none');
+                    document.getElementById('checkout-no-online-pay').classList.remove('d-none');
+                    document.getElementById('chk-order-offline').classList.remove('d-none');
+                }
+                showStep('pay');
+            } else {
+                toast(pair.d.message || 'Impossible de créer la commande.', 'error');
+            }
+        }).catch(function() { toast('Erreur réseau.', 'error'); })
+        .finally(function() { setBtnLoading(btn, false); });
+    });
+
+    document.getElementById('chk-pay-channel')?.addEventListener('change', function() {
+        var w = document.getElementById('chk-pay-phone-wrap');
+        var p = document.getElementById('chk-pay-phone');
+        if (this.value === 'mobile_money') {
+            w.classList.remove('d-none');
+            p.required = true;
+        } else {
+            w.classList.add('d-none');
+            p.required = false;
+        }
+    });
+
+    function releasePayButton(btn) {
+        if (btn && window.allianceSetSubmitLoading) window.allianceSetSubmitLoading(btn, false);
+        else if (btn) { btn.disabled = false; }
+    }
+
+    function pollChk(ref, payBtn) {
+        var attempts = 0;
+        var max = 14;
+        var iv = setInterval(function() {
+            attempts++;
+            fetch(routes.paymentCheck + '?reference=' + encodeURIComponent(ref), { headers: { 'Accept': 'application/json' }, credentials: 'same-origin' })
+                .then(function(r) { return r.json(); })
+                .then(function(response) {
+                    if (response.reponse === true && Number(response.status) === 0) {
+                        clearInterval(iv);
+                        releasePayButton(payBtn);
+                        if (window.allianceSiteToast) window.allianceSiteToast(response.message || 'Paiement effectué.', 'success');
+                        localStorage.removeItem('alliance_cart');
+                        if (window.allianceCart) { window.allianceCart.clear(); }
+                        resetCheckoutSensitiveFields();
+                        bootstrap.Modal.getInstance(document.getElementById('allianceCheckoutModal'))?.hide();
+                        bootstrap.Modal.getInstance(document.getElementById('allianceCartModal'))?.hide();
+                    }
+                    if (response.reponse === false && Number(response.status) === 1) {
+                        clearInterval(iv);
+                        releasePayButton(payBtn);
+                        if (window.allianceSiteToast) window.allianceSiteToast(response.message || 'Paiement annulé.', 'error');
+                    }
+                    if (attempts >= max) {
+                        clearInterval(iv);
+                        releasePayButton(payBtn);
+                        if (window.allianceSiteToast) window.allianceSiteToast('Délai de confirmation dépassé. Vérifiez plus tard ou contactez-nous.', 'info');
+                    }
+                }).catch(function() {});
+        }, 5000);
+    }
+
+    document.getElementById('chk-pay-form')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (!flexOn) return;
+        var fd = new FormData(this);
+        var body = {
+            reference: fd.get('reference'),
+            channel: fd.get('channel'),
+            phone: fd.get('phone') || '',
+        };
+        var btn = document.getElementById('chk-pay-submit');
+        setBtnLoading(btn, true);
+        fetch(routes.paymentProcess, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': csrf,
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+            body: JSON.stringify(body),
+            credentials: 'same-origin',
+        }).then(function(r) { return r.json().then(function(d) { return { r: r, d: d }; }); })
+        .then(function(pair) {
+            var d = pair.d;
+            if (d.reponse) {
+                if (d.type === 'mobile') {
+                    if (window.allianceSiteToast) window.allianceSiteToast(d.message || 'Validez le paiement sur votre téléphone.', 'info');
+                    pollChk(d.orderNumber || body.reference, btn);
+                } else if (d.redirect_url) {
+                    try {
+                        sessionStorage.setItem('alliance_checkout_clear', '1');
+                    } catch (e) {}
+                    window.location.href = d.redirect_url;
+                } else {
+                    setBtnLoading(btn, false);
+                }
+            } else {
+                toast(d.message || 'Le paiement n’a pas réussi.', 'error');
+                setBtnLoading(btn, false);
+            }
+        }).catch(function() { toast('Erreur réseau.', 'error'); setBtnLoading(btn, false); });
+    });
+
+    document.getElementById('chk-order-offline')?.addEventListener('click', function() {
+        if (window.allianceSiteToast) window.allianceSiteToast('Commande enregistrée. Nous vous contacterons.', 'success');
+        localStorage.removeItem('alliance_cart');
+        if (window.allianceCart) window.allianceCart.clear();
+        resetCheckoutSensitiveFields();
+        bootstrap.Modal.getInstance(document.getElementById('allianceCheckoutModal'))?.hide();
+        bootstrap.Modal.getInstance(document.getElementById('allianceCartModal'))?.hide();
+    });
+
+    document.getElementById('allianceCheckoutModal')?.addEventListener('show.bs.modal', function() {
+        var u = window.allianceAuthUser;
+        if (u && u.id) {
+            syncShippingUi();
+            refreshCheckoutSummary();
+            showStep('summary');
+        } else {
+            showStep('auth');
+            document.getElementById('chk-login-1')?.classList.remove('d-none');
+            document.getElementById('chk-login-2')?.classList.add('d-none');
+            document.getElementById('chk-reg-1')?.classList.remove('d-none');
+            document.getElementById('chk-reg-2')?.classList.add('d-none');
+        }
+    });
+
+    document.getElementById('alliance-checkout-open')?.addEventListener('click', function(e) {
+        e.preventDefault();
+        var cart = cartPayload();
+        if (!cart.length) {
+            if (window.allianceSiteToast) window.allianceSiteToast('Panier vide.', 'error');
+            return;
+        }
+        bootstrap.Modal.getInstance(document.getElementById('allianceCartModal'))?.hide();
+        setTimeout(function() {
+            var m = document.getElementById('allianceCheckoutModal');
+            if (m && typeof bootstrap !== 'undefined') bootstrap.Modal.getOrCreateInstance(m).show();
+        }, 400);
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        try {
+            if (sessionStorage.getItem('alliance_checkout_clear') === '1') {
+                sessionStorage.removeItem('alliance_checkout_clear');
+                if (typeof window.allianceResetCheckoutModal === 'function') {
+                    window.allianceResetCheckoutModal();
+                }
+            }
+        } catch (e) {}
+    });
+})();
+</script>

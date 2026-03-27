@@ -1,0 +1,141 @@
+/*** 
+
+====================================================================
+    Map Section
+====================================================================
+
+***/
+
+.map-section{
+    position: relative;
+    z-index: 1;
+    .map{
+        position: relative;
+        min-height: 480px;
+        width: 100%;
+        display: block;
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+        @include for-lg{
+            min-height: 480px;
+        }
+    }
+
+    .outer-box{
+        position: relative;
+        background-color: #fff;
+        box-shadow: 0 10px 60px rgba(0,0,0,.10);
+        z-index: 9;
+        margin: 0 -40px -60px;
+        padding: 40px 40px;
+        display: flex;
+        align-items: center;
+        padding-right: 300px;
+        .row{
+            width: 100%;
+        }
+        @include for-lg{
+            padding-right: 40px;
+            margin-left: 0;
+            margin-right: 0;
+            flex-direction: column;
+        }
+        @include for-md{
+            padding: 30px 30px;
+        }
+        @include for-sm{
+            padding: 30px 20px 20px;
+        }
+    }
+
+    .social-link-outer{
+        position: absolute;
+        right: 0;
+        top: 0;
+        background-color: var(--bg-theme-color1);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+        width: 280px;
+        @include for-lg{
+            position: relative;
+            width: 100%;
+            padding: 20px;
+        }
+        .text{
+            position: relative;
+            font-size: 16px;
+            color: #c8c5c5;
+            text-transform: uppercase;
+            @include title-font;
+            font-weight: 400;
+            letter-spacing: .1em;
+            margin-bottom: 10px;
+        }
+    }
+
+
+}
+
+// Contact Info Block Two
+.contact-info-block-two{
+    position: relative;
+    .inner{
+        position: relative;
+        padding-left: 40px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        @include for-lg{
+            text-align: center;
+            margin-bottom: 30px;
+            padding-left: 0;
+        }
+        &:hover{
+            .icon-box{
+                background-color: var(--bg-theme-color1);
+                &:before{
+                    box-shadow: -60px 60px 0 0 var(--bg-theme-color1);
+                }
+            }
+        }
+    }
+    .icon{
+        position: absolute;
+        left: 0;
+        top: 5px;
+        color: var(--theme-color2);
+        font-size: 20px;
+        line-height: 1em;
+        transition: all 300ms ease;
+        @include for-lg{
+            position: relative;
+            top: 0;
+            margin-bottom: 10px;
+        }
+    }
+    .title{
+        font-size: 16px;
+        text-transform: uppercase;
+        color: #717070;
+        font-weight: 500;
+        letter-spacing: .02em;
+        margin-bottom: 5px;
+    }
+    .text{
+        font-size: 18px;
+        line-height: 30px;
+        color: #171717;
+        font-weight: 500;
+        a{
+            color: inherit;
+            font-weight: inherit;
+            &:hover{
+                color: var(--theme-color2);
+            }
+        }
+    }
+}

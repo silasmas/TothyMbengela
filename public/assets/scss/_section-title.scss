@@ -1,0 +1,81 @@
+/*** 
+
+====================================================================
+Section Title
+====================================================================
+
+***/
+
+.sec-title {
+    position: relative;
+    margin-bottom: 50px;
+    .sub-title {
+        position: relative;
+        font-size: var(--sec-title-subtitle-font-size);
+        color: var(--sec-title-subtitle-color);
+        line-height: var(--sec-title-subtitle-line-height);
+        font-weight: var(--sec-title-subtitle-font-weight);
+        font-family: var(--sec-title-subtitle-font-family);
+        letter-spacing: .1em;
+        top: -5px;
+        display: block;
+        text-transform: uppercase;
+    }
+    h1 {
+        position: relative;
+        font-size: 60px;
+        line-height: 1em;
+        color: var(--sec-title-color);
+        font-family: var(--sec-title-font-family);
+        font-weight: var(--sec-title-font-weight);
+    }
+    h2 {
+        position: relative;
+        font-size: var(--sec-title-font-size);
+        color: var(--sec-title-color);
+        font-family: var(--sec-title-font-family);
+        font-weight: var(--sec-title-font-weight);
+        letter-spacing: .002em;
+        margin-bottom: 0;
+        text-transform: uppercase;
+        @include for-md {
+            font-size: 36px;
+            line-height: 1.2em;
+        }
+        @include for-xs {
+            font-size: 30px;
+            line-height: 1.2em;
+        }
+    }
+    h3{
+        font-size: 40px;
+    }
+    .text {
+        margin-top: 30px;
+        font-weight: 500;
+        font-size: 16px;
+        @include for-lg{
+            margin-top: 15px;
+        }
+    }
+}
+
+.sec-title.light{
+    h3,
+    h2,
+    h1{
+        color: #fff;
+    }
+    .text{
+        color: #7f7f7f;
+    }
+}
+
+
+.sec-title.text-center{
+    .float-text-two:before,
+    .float-text:before{
+        left: 50%;
+        margin-left: -42px;
+    }
+}

@@ -1,0 +1,261 @@
+/*** 
+
+====================================================================
+		FAQ's Sectiom
+====================================================================
+
+***/
+
+.faqs-section {
+    position: relative;
+    padding: 120px 0 70px;
+    .upper-box{
+        padding: 120px 0 195px;
+        position: relative;
+        @include for-md{
+            padding-bottom: 10px
+        }
+        .bg{
+            @include overlay;
+            &::before{
+                @include overlay;
+                background-color: var(--bg-theme-color1);
+                opacity: .6;
+                content: "";
+            }
+            &::after{
+                position: absolute;
+                right: 0;
+                top: 100%;
+                margin-top: -280px;
+                height: 510px;
+                width: 510px;
+                background-color: #f5f5f9;
+                content: "";
+                z-index: -1;
+                border-radius: 0 0 0 500px;
+            }
+        }
+    }
+    .sec-title{
+        margin-bottom: 100px;
+        h1{
+            font-size: 60px;
+            line-height: 1.2em;
+            @include for-md{
+                font-size: 42px;
+            }
+        }
+    }
+}
+
+.faqs-section .faq-column {
+    position: relative;
+    margin-bottom: 50px;
+    .inner-column {
+        position: relative;
+        margin-top: -194px;
+        @include for-md{
+            margin-top: 0;
+        }
+    }
+    .sec-title{
+        margin-bottom: 80px;
+        padding: 60px 60px 55px;
+        padding-left: 0;
+        @include for-lg{
+            margin-bottom: 50px;
+        }
+        &:before{
+            @include overlay;
+            left: -380px;
+            right: 0;
+            width: auto;
+            background:var(--gradient-1);
+            content: "";
+            @include for-md{
+                left: -15px;
+                right: -15px;
+            }
+        }
+        .sub-title{
+            &:before,
+            &:after{
+                background: #ffffff;
+            }
+        }
+    }
+}
+
+.faqs-section .form-column{
+    margin-bottom: 50px;
+    .inner-column{
+        position: relative;
+        padding-left: 70px;
+        margin-top: -197px;
+        @include for-lg{
+            padding-left: 0;
+        }
+        @include for-md{
+            margin-top: 0;
+        }
+    }
+    .contact-form{
+        position: relative;
+        padding: 55px 60px 60px;
+        border-top: 6px solid var(--border-theme-color2);
+        box-shadow: 0 10px 60px rgba(0,0,0,.10);
+        @include for-lg{
+            padding: 40px 30px;
+        }
+    }
+    .sec-title{
+        margin-bottom: 30px;
+    }
+}
+
+.accordion-box {
+    position: relative;
+    .block {
+        position: relative;
+        background-color: #ffffff;
+        border-bottom: 1px solid #e6e2ef;
+        .acc-btn {
+            position: relative;
+            font-size: 20px;
+            line-height: 30px;
+            color: var(--theme-color1);
+            font-weight: 600;
+            cursor: pointer;
+            padding: 22px 0px;
+            padding-right: 50px;
+            letter-spacing: -.02em;
+            font-family: var(--title-font);
+            transition: all 500ms ease;
+            .icon {
+                position: absolute;
+                right: 0px;
+                top: 25px;
+                height: 30px;
+                font-size: 14px;
+                line-height: 25px;
+                color: var(--theme-color1);
+                font-weight: 900;
+                transition: all 500ms ease;
+            }
+            &.active {
+                color: var(--theme-color2);
+                .icon {
+                    color: var(--bg-theme-color2);
+            
+                    &:before {
+                        content: "\f068";
+                    }
+                }
+            }
+        }
+        .acc-content {
+            position: relative;
+            display: none;
+            .content {
+                position: relative;
+                padding: 0px 0px 20px;
+                margin-top: -10px;
+                .text {
+                    display: block;
+                    font-size: 16px;
+                    line-height: 30px;
+                    margin-bottom: 0;
+                }
+            }
+
+            &.current {
+                display: block;
+            }
+        }
+    }
+    &.style-two{
+        .block{
+            margin-bottom: 12px;
+            border: 0;
+            .acc-btn{
+                padding: 22px 40px;
+                padding-right: 60px;
+                .icon{
+                    right: 30px;
+                }
+            }
+            &.active-block{
+                box-shadow: 0 0 30px rgba(0,0,0,.10);
+            }
+        }
+        .acc-content{
+            .content{
+                padding: 10px 40px 30px;
+            }
+        }
+    }
+}
+
+/*** 
+
+====================================================================
+		FAQ's Sectiom Two
+====================================================================
+
+***/
+
+.faqs-section-two {
+    position: relative;
+    padding: 120px 0 70px;
+    background-color: #f5f5f9;
+
+    .sec-title{
+        h2{
+            letter-spacing: 0;
+        }
+        .text{
+            font-size: 18px;
+            line-height: 34px;
+        }
+    }
+    .content-column {
+        .inner-column {
+            padding-right: 30px;
+            @include for-lg{
+                padding-right: 0;
+            }
+        }
+    }
+
+    .faq-column{
+        .inner-column{
+            padding-top: 20px;
+        }
+    }
+
+
+    .graph-box {
+        position: relative;
+        display: flex;
+        @include for-xs{
+            flex-direction: column;
+        }
+        .pie-graph {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 0;
+            border-bottom: 0;
+            @include for-xs{
+                width: 100%;
+            }
+            .title {
+                top: -5px;
+                margin-left: 20px;
+                margin-bottom: 0;
+            }
+        }
+    }
+}

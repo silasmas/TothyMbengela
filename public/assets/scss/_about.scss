@@ -1,0 +1,497 @@
+/*** 
+
+====================================================================
+		About Section
+====================================================================
+
+***/
+
+.about-section {
+    position: relative;
+    padding: 120px 0 70px;
+
+    .content-column {
+        position: relative;
+        margin-bottom: 50px;
+        z-index: 1;
+        .inner-column{
+            position: relative;
+        }
+    }
+
+    .sec-title {
+        margin-bottom: 30px;
+        h4{
+            position: relative;
+            margin-top: 35px;
+            font-weight: 400;
+            color: var(--theme-color2);
+            margin-bottom: 0;
+        }
+        .text{
+            margin-top: 0;
+        }
+    }
+
+    .skills {
+        margin-bottom: 30px;
+    }
+
+    .list-style-one{
+        margin-bottom: 35px;
+    }
+
+    .bottom-box {
+        display: flex;
+        align-items: flex-start;
+        @include for-sm{
+            flex-direction: column;
+            .theme-btn{
+                order: 2;
+                width: 100%;
+            }
+        }
+    }
+
+    .exp-box{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        min-width: 260px;
+        box-shadow: 0 33px 67px rgba(0, 0, 0, .07);
+        padding: 40px 50px;
+        @include for-sm{
+            position: relative;
+            width: 100%;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        &:before{
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            right: 18px;
+            bottom: 18px;
+            border: 2px solid var(--border-theme-color2);
+            content: "";
+        }
+        .count{
+            position: relative;
+            padding-left: 90px;
+            padding-bottom: 15px;
+            margin-bottom: 0;
+            @include for-sm{
+                padding-left: 0;
+                flex-direction: column;
+                display: flex;
+                align-items: center;
+            }
+            .icon{
+                position: absolute;
+                left: 0;
+                top: 0;
+                color: var(--theme-color2);
+                font-size: 64px;
+                @include for-sm{
+                    position: relative;
+                    display: inline-block;
+                }
+            }
+        }
+        .txt {
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+    }
+}
+
+
+.about-section .image-column {
+    position: relative;
+    margin-bottom: 50px;
+    @include for-lg{
+        order: 2;
+    }
+    .inner-column {
+        position: relative;
+    }
+
+    .image-box {
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        flex-direction: column;
+        padding-bottom: 140px;
+        padding-right: 40px;
+        @include for-lg{
+            padding-bottom: 185px;
+        }
+        @include for-md{
+            padding-left: 250px;
+            padding-bottom: 0;
+        }
+        @include for-sm{
+            padding: 0;
+        }
+        .icon-dots-one{
+            position: absolute;
+            right: 100px;
+            bottom: 40px;
+        }
+    }
+
+    .image-1 {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 0;
+        img {
+            width: 100%;
+        }
+        @include for-md {
+            margin-right: 0;
+            min-width: 100%;
+        }
+    }
+
+    .image-2 {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        margin-bottom: 0px;
+        img {
+            width: 100%;
+        }
+        @include for-lg{
+            padding-left: 40px;
+        }
+        @include for-md{
+            bottom: auto;
+            top: 100px;
+        }
+        @include for-sm{
+            display: none;
+        }
+    }
+
+    .icon-box{
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 80px;
+        width: 80px;
+        @include flex-center;
+        font-size: 38px;
+        color: #fff;
+        background-color: var(--bg-theme-color1);
+        @include for-sm{
+            display: none;
+        }
+        &.icon-one{
+            left: 100px;
+            top: -20px;
+            @include for-md{
+                top: 50px;
+            }
+        }
+        &.icon-two{
+            left: -30px;
+            top: auto;
+            bottom: -20px;
+            background-color: var(--bg-theme-color2);
+            @include for-lg{
+                left: 0;
+            }
+            @include for-md{
+                bottom: 20px;
+            }
+        }
+    }
+}
+
+/*** 
+
+====================================================================
+		About Section Two
+====================================================================
+
+***/
+
+.about-section-two{
+    position: relative;
+    padding: 120px 0 70px;
+    .bg{
+        top: 60px;
+        bottom: 0;
+        height: auto;
+        background-position: center top;
+        @include for-lg{
+            top: 0;
+        }
+    }
+
+    .content-column {
+        position: relative;
+        margin-bottom: 50px;
+        z-index: 1;
+        .inner-column {
+            position: relative;
+            padding: 180px 0 0;
+            padding-left: 70px;
+            @include for-lg{
+                padding-left: 30px;
+                padding-top: 120px;
+            }
+            @include for-md{
+                padding-left: 0;
+            }
+        }
+
+        .info-box{
+            position: relative;
+            margin-bottom: 40px;
+            &:last-child{
+                margin-bottom: 0;
+                .inner{
+                    margin-bottom: 0;
+                    padding-bottom: 0;
+                    border-bottom: 0    ;
+                }
+            }
+            .inner{
+                position: relative;
+                padding-left: 90px;
+                padding-bottom: 45px;
+                border-bottom: 1px solid rgba(255,255,255,.10);
+                margin-bottom: 45px;
+                @include for-xs{
+                    padding-left: 50px;
+                }
+                &:hover{
+                    .icon{
+                        transform: rotate(180deg) scale(-1);
+                    }
+                }
+                .icon{
+                    position: absolute;
+                    left: 0;
+                    top: 0px;
+                    font-size: 62px;
+                    color: var(--theme-color2);
+                    border-radius: 50%;
+                    transition: all 300ms ease;
+                    @include for-xs{
+                        font-size: 38px;
+                    }
+                }
+                .title{
+                    color:#fff;
+                    margin-bottom: 15px;
+                }
+                .text{
+                    font-size: 16px;
+                    color: #ada8ba;
+                    line-height: 34px;
+                }
+            }
+        }    
+    }
+}
+
+.about-section-two .image-column {
+    position: relative;
+    margin-bottom: 50px;
+    @include for-md {
+        order: 2;
+    }
+    .image-box {
+        position: relative;
+        display: inline-block;
+        @include for-lg{
+            padding-top: 120px;
+        }
+        @include for-md{
+            padding-top: 40px;
+            display: block;
+        }
+        &::before{
+            position: absolute;
+            left: -20px;
+            top: 120px;
+            bottom: 80px;
+            width: 30px;
+            border-radius: 7px 0 0 7px;
+            background-color: #ffffff;
+            content: "";
+            @include for-md{
+                display: none;
+            }
+        }
+    }
+    .image{
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        margin-bottom: 0px;
+        img {
+            width: 100%;
+        }
+    }
+}
+
+/*** 
+
+====================================================================
+    About Section Three
+====================================================================
+
+***/
+
+.about-section-three{
+    position: relative;
+    padding: 120px 0 70px;
+    .content-column {
+        position: relative;
+        margin-bottom: 50px;
+        z-index: 1;
+        .inner-column{
+            position: relative;
+            padding-top: 80px;
+            padding-left: 100px;
+            @include for-lg{
+                padding-left: 0;
+            }
+        }
+    }
+
+    .sec-title {
+        margin-bottom: 40px;
+    }
+
+    .content-box{
+        position: relative;
+        padding-left: 240px;
+        @include for-sm{
+            padding-left: 0;
+        }
+        .image{
+            position: absolute;
+            left: 0;
+            top: 0;
+            @include for-sm{
+                display: none;
+            }
+        }
+        .text{
+            position: relative;
+            top: -10px;
+            margin-bottom: 10px;
+        }
+        .list-style-one{
+            margin-bottom: 25px;
+        }
+
+        .author-info{
+            position: relative;
+            padding-left: 80px;
+            padding-top: 10px;
+            .thumb{
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 60px;
+                width: 60px;
+                border: 2px solid var(--border-theme-color2);
+                border-radius: 50%;
+                padding: 3px;
+            }
+            .name{
+                margin-bottom: 0;
+                text-transform: uppercase;
+            }
+            .designation{
+                font-size: 14px;
+                text-transform: uppercase;
+                color: #717070;
+                @include title-font;
+                letter-spacing: .1em;
+            }
+        }
+
+    }
+
+    .features-column {
+        position: relative;
+        margin-bottom: 50px;
+        @include for-md{
+            order: 2;
+        }
+        .inner-column {
+            position: relative;
+            margin-right: -30px;
+            @include for-lg{
+                margin-right: 0;
+            }
+        }
+    }
+    
+    .features-list{
+        position: relative;
+        background-color: var(--bg-theme-color1);
+        background-image: url(../images/icons/line-2.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 80px 60px 50px;
+        @include for-lg{
+            padding: 80px 25px 55px;
+        }
+        @include for-md{
+            padding: 40px 40px 10px;
+        }
+        li{
+            position: relative;
+            padding-left: 90px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid rgba(255,255,255,.10);
+            margin-bottom: 30px;
+            padding-top: 5px;
+            min-height: 96px;
+            &:hover{
+                .icon{
+                    transform: rotate(-180deg) scale(-1);
+                }
+            }
+            @include for-sm{
+                padding-top: 0;
+                padding-left: 0;
+                text-align: center;
+            }
+            &:last-child{
+                padding-bottom: 0;
+                border-bottom: 0;
+                margin-bottom: 0;
+            }
+            .icon{
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 66px;
+                width: 66px;
+                border-radius: 50%;
+                @include flex-center;
+                background-color: var(--bg-theme-color2);
+                font-size: 32px;
+                color: #ffffff;
+                transition: all 300ms ease;
+                @include for-sm{
+                    position: relative;
+                    display: inline-flex;
+                    margin-bottom: 20px;
+                }
+            }
+            .title{
+                color: #ffffff;
+                margin-bottom: 0;
+            }
+        }
+    }
+}
