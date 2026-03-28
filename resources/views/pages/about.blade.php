@@ -116,43 +116,66 @@
 
             <div class="bottom-box">
                 Le ministère propose des contenus et des ouvrages pour chaque étape de votre cheminement spirituel.
-                <a href="{{ route('appointment.create') }}" class="theme-btn btn-style-one light-bg small"><span class="btn-title">Prendre rendez-vous</span></a>
+                <a href="{{ url('/#prise-rendez-vous') }}" class="theme-btn btn-style-one light-bg small"><span class="btn-title">Prendre rendez-vous</span></a>
             </div>
         </div>
     </section>
 
-    <!-- Team Section — la Pasteure uniquement -->
+    <!-- Team Section — données admin (table team_members) -->
     <section class="team-section">
         <div class="auto-container">
             <div class="sec-title text-center">
                 <span class="sub-title">Leadership</span>
-                <h2>La Pasteure Tothy Mbengela</h2>
+                <h2>{{ $teamMembers->count() === 1 ? $teamMembers->first()->name : 'Notre équipe' }}</h2>
             </div>
 
-            <div class="row justify-content-center">
-                <div class="team-block-two col-lg-4 col-md-6 col-sm-12 wow fadeInUp">
-                    <div class="inner-box">
-                        <div class="image-box">
-                            <figure class="image">
-                                <a href="https://www.youtube.com/@tothymbengela" target="_blank" rel="noopener noreferrer">
-                                    <img src="{{ asset('assets/images/about-ministry/team-pasteure-only.jpg') }}" alt="Pasteure Tothy Mbengela">
-                                </a>
-                            </figure>
-                            <div class="social-links">
-                                <a href="https://www.facebook.com/tothymbengela" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                                <a href="https://www.youtube.com/@tothymbengela" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                                <a href="https://www.instagram.com/tothymbengela" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                                <a href="https://www.tiktok.com/@tothymbengela" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            @if($teamMembers->isEmpty())
+                <p class="text-center text-muted mb-0">L’équipe sera bientôt présentée ici.</p>
+            @else
+                <div class="row justify-content-center">
+                    @foreach($teamMembers as $index => $member)
+                        <div class="team-block-two col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="{{ ($index % 3) * 200 }}ms">
+                            <div class="inner-box">
+                                <div class="image-box">
+                                    <figure class="image">
+                                        @php $profile = $member->profileHref(); @endphp
+                                        @if($profile)
+                                            <a href="{{ $profile }}" target="_blank" rel="noopener noreferrer">
+                                                <img src="{{ $member->photoDisplayUrl() }}" alt="{{ $member->name }}">
+                                            </a>
+                                        @else
+                                            <a href="{{ route('team.show', $member) }}">
+                                                <img src="{{ $member->photoDisplayUrl() }}" alt="{{ $member->name }}">
+                                            </a>
+                                        @endif
+                                    </figure>
+                                    <div class="social-links">
+                                        @if($member->social_facebook)
+                                            <a href="{{ $member->social_facebook }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                        @endif
+                                        @if($member->social_youtube)
+                                            <a href="{{ $member->social_youtube }}" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                                        @endif
+                                        @if($member->social_instagram)
+                                            <a href="{{ $member->social_instagram }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                        @endif
+                                        @if($member->social_tiktok)
+                                            <a href="{{ $member->social_tiktok }}" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                                        @endif
+                                    </div>
+                                    <span class="share-icon fa fa-share-alt"></span>
+                                </div>
+                                <div class="info-box">
+                                    <h5 class="name"><a href="{{ route('team.show', $member) }}">{{ $member->name }}</a></h5>
+                                    @if($member->role)
+                                        <span class="designation">{{ $member->role }}</span>
+                                    @endif
+                                </div>
                             </div>
-                            <span class="share-icon fa fa-share-alt"></span>
                         </div>
-                        <div class="info-box">
-                            <h5 class="name"><a href="{{ route('contents.index') }}">Tothy Mbengela</a></h5>
-                            <span class="designation">Pasteure, enseignante &amp; auteure</span>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
-            </div>
+            @endif
         </div>
     </section>
 

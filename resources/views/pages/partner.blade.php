@@ -21,7 +21,7 @@
 
     <section class="contact-section alliance-engagement-contact">
         <div class="bg bg-pattern-6"></div>
-        @include('partials.engagement-bg-image', ['filename' => 'image.jpeg', 'alt' => 'Portrait — devenir partenaire du ministère'])
+        @include('partials.engagement-bg-image', ['filename' => 'mm.jpg.jpeg', 'alt' => 'Portrait — devenir partenaire du ministère'])
         <div class="auto-container">
             <div class="row">
                 <div class="title-column col-lg-6 col-md-12">

@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\Content;
 use App\Models\Rubrique;
 use App\Models\Series;
+use App\Models\TeamMember;
 use App\Models\Testimonial;
 use Illuminate\View\View;
 
@@ -71,6 +72,8 @@ class HomeController extends Controller
 
     public function about(): View
     {
-        return view('pages.about');
+        $teamMembers = TeamMember::query()->activeOrdered()->get();
+
+        return view('pages.about', compact('teamMembers'));
     }
 }

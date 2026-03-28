@@ -14,11 +14,13 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\ShopCheckoutController;
+use App\Http\Controllers\TeamMemberController;
 use Illuminate\Support\Facades\Route;
 
 // ─── Pages publiques ──────────────────────────────────────
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/a-propos', [HomeController::class, 'about'])->name('about');
+Route::get('/equipe/{teamMember:slug}', [TeamMemberController::class, 'show'])->name('team.show');
 
 // Contenus (prédications, enseignements, etc.)
 Route::get('/recherche/suggestions', [SearchController::class, 'suggestions'])->name('search.suggest');
@@ -48,8 +50,7 @@ Route::get('/boutique/{slug}', [BookController::class, 'show'])->name('books.sho
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
-// Rendez-vous
-Route::get('/rendez-vous', [ContactController::class, 'appointmentForm'])->name('appointment.create');
+// Rendez-vous (formulaire global en bas de page — ancre #prise-rendez-vous)
 Route::post('/rendez-vous', [ContactController::class, 'appointmentStore'])->name('appointment.store');
 
 // Don

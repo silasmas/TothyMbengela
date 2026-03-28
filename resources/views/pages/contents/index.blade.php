@@ -118,9 +118,9 @@
                     @endforeach
                 </div>
 
-                <div class="d-flex justify-content-center mt-4">
+                <nav class="alliance-contents-pagination mt-5 pt-4" aria-label="Pagination des contenus">
                     {{ $contents->withQueryString()->links() }}
-                </div>
+                </nav>
             @endif
         </div>
     </section>
@@ -181,6 +181,42 @@
     .alliance-contents-listing .alliance-content-like-pill .alliance-content-like-count-num {
         margin-left: 0.25rem;
         font-weight: 800;
+    }
+    .alliance-contents-pagination .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.35rem;
+        margin-bottom: 0;
+    }
+    .alliance-contents-pagination .page-link {
+        border-radius: 10px !important;
+        min-width: 2.65rem;
+        text-align: center;
+        border: 1px solid #e5dfd4 !important;
+        color: #4a4338 !important;
+        background: #fdfcfa !important;
+        font-weight: 600;
+        padding: 0.5rem 0.75rem;
+    }
+    .alliance-contents-pagination .page-link:hover {
+        border-color: #c8922a !important;
+        color: #1a1a1a !important;
+        background: #fff9ed !important;
+    }
+    .alliance-contents-pagination .page-item.active .page-link {
+        background: linear-gradient(135deg, #c8922a, #d4a84a) !important;
+        border-color: #b87f1f !important;
+        color: #fff !important;
+        box-shadow: 0 4px 14px rgba(200, 146, 42, 0.35);
+    }
+    .alliance-contents-pagination .page-item.disabled .page-link {
+        opacity: 0.45;
+        pointer-events: none;
+    }
+    .alliance-contents-pagination .pagination .page-item:first-child .page-link,
+    .alliance-contents-pagination .pagination .page-item:last-child .page-link {
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 </style>
 @endpush

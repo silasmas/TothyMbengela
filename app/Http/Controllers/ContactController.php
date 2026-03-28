@@ -46,11 +46,6 @@ class ContactController extends Controller
         return back()->with('success', 'Votre message a bien été envoyé. Nous vous répondrons dans les plus brefs délais.');
     }
 
-    public function appointmentForm(): View
-    {
-        return view('pages.appointment');
-    }
-
     public function appointmentStore(Request $request): RedirectResponse|JsonResponse
     {
         $validated = $request->validate([

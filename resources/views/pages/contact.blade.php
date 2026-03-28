@@ -25,7 +25,7 @@
 
     <section class="contact-section alliance-engagement-contact">
 		<div class="bg bg-pattern-6"></div>
-		@include('partials.engagement-bg-image', ['filename' => 'alliance-engagement-contact.png', 'alt' => 'Portrait — Alliance, nous contacter'])
+		@include('partials.engagement-bg-image', ['filename' => 'mm.jpg.jpeg', 'alt' => 'Portrait — Alliance, nous contacter'])
 		<div class="auto-container">
 			<div class="row">
 				<!-- Title Column -->
@@ -55,7 +55,7 @@
 							<div class="inner">
 								<i class="icon fa fa-calendar-alt"></i>
 								<h6 class="title">Prendre rendez-vous</h6>
-								<div class="text"><a href="{{ route('appointment.create') }}">Demander un rendez-vous en ligne</a></div>
+                                <div class="text"><a href="{{ url('/#prise-rendez-vous') }}">Demander un rendez-vous en ligne</a></div>
 							</div>
 						</div>
 

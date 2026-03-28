@@ -24,7 +24,7 @@
                 <div class="contact-info col-lg-4 col-md-12 wow fadeInLeft" data-wow-delay="600ms">
                     <div class="inner-box">
                         <h4 class="title">Rendez-vous</h4>
-                        <div class="text"><a href="{{ route('appointment.create') }}">Prendre rendez-vous</a></div>
+                        <div class="text"><a href="{{ url('/#prise-rendez-vous') }}">Prendre rendez-vous</a></div>
                     </div>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                         <h6 class="widget-title">Services</h6>
                         <ul class="user-links">
                             <li><a href="{{ route('contact.create') }}">Nous contacter</a></li>
-                            <li><a href="{{ route('appointment.create') }}">Prendre rendez-vous</a></li>
+                            <li><a href="{{ url('/#prise-rendez-vous') }}">Prendre rendez-vous</a></li>
                             <li><a href="#" data-bs-toggle="modal" data-bs-target="#donatePartnerModal">Faire un don</a></li>
                             <li><a href="#" class="js-donate-modal-partner">Devenir partenaire</a></li>
                         </ul>

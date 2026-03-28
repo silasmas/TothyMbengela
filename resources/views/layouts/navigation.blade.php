@@ -44,11 +44,11 @@
                             <li><a href="{{ route('partner.create') }}">Page partenaire</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown {{ request()->is('contact') || request()->is('rendez-vous') ? 'current' : '' }}">
+                    <li class="dropdown {{ request()->is('contact') ? 'current' : '' }}">
                         <a href="{{ route('contact.create') }}">Contact</a>
                         <ul>
                             <li><a href="{{ route('contact.create') }}">Nous écrire</a></li>
-                            <li><a href="{{ route('appointment.create') }}">Prendre rendez-vous</a></li>
+                            <li><a href="{{ url('/#prise-rendez-vous') }}">Prendre rendez-vous</a></li>
                         </ul>
                     </li>
                     @guest

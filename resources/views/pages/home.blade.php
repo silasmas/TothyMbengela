@@ -326,7 +326,7 @@
                     <div class="inner-column wow fadeInLeft">
                         <div class="image-box alliance-support-image-box">
                             <figure class="image overlay-anim wow fadeInUp">
-                                <img src="{{ asset('assets/images/resource/about-1.jpg') }}" alt="Soutenir le ministère Alliance">
+                                <img src="{{ asset('assets/images/mg.jpg.jpeg') }}" alt="Soutenir le ministère Alliance">
                             </figure>
                             <span class="float-text">Luc 6:38</span>
                         </div>

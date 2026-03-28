@@ -230,7 +230,6 @@
         });
 
         bindAjaxForm(document.getElementById('contact-page-form'));
-        bindAjaxForm(document.getElementById('appointment-page-form'));
         bindAjaxForm(document.getElementById('home-appointment-form'));
         bindAjaxForm(document.getElementById('footer-newsletter-form'));
 

@@ -1,5 +1,4 @@
-{{-- Bloc rendez-vous : affiché en bas de toutes les pages publiques (avant le footer), sauf la page dédiée /rendez-vous --}}
-@if(! request()->routeIs('appointment.create'))
+{{-- Bloc rendez-vous : en bas de toutes les pages publiques (ancre #prise-rendez-vous) --}}
  {{-- ═══ APPEL AU DON ═══ --}}
     <!-- Call to Action - Soutenir le ministère -->
     <section class="call-to-action-home4 p-0">
@@ -18,7 +17,7 @@
         </div>
     </section>
     <!-- End Call to Action -->
-    <section class="contact-section-three">
+    <section class="contact-section-three" id="prise-rendez-vous">
         <div class="auto-container">
             <div class="row">
                 <div class="info-column col-md-6">
@@ -119,4 +118,3 @@
             </div>
         </div>
     </section>
-@endif

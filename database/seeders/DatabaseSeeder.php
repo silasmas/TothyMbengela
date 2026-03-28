@@ -33,5 +33,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(MinistryYoutubeSeeder::class);
         $this->call(BookSeeder::class);
+        $this->call(TeamMemberSeeder::class);
     }
 }

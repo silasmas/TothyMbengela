@@ -1,6 +1,6 @@
 -- -----------------------------------------------------------------
 -- Export MySQL — TothyMbengela
--- Généré le 2026-03-27T16:35:36+00:00
+-- Généré le 2026-03-27T20:28:52+00:00
 -- Base : `tothyMbengelaDB`
 -- Réimport : mysql -u USER -p < ce_fichier.sql
 -- (ajustez le nom de la base ci-dessous si besoin)
@@ -44,7 +44,7 @@ CREATE TABLE `admins` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Comptes d’administration Filament ; distincts des utilisateurs publics (garde session séparée).';
 
 -- Données : `admins` (1 ligne(s))
-INSERT INTO `admins` (`id`,`name`,`email`,`email_verified_at`,`password`,`remember_token`,`created_at`,`updated_at`) VALUES (1,'Admin','admin@example.com','2026-03-27 16:34:17','$2y$12$H8MZN/W.2WJSXJwgcACgNOPn96h6vvAKOBtjIqA1PI3UmSst3YTLm','4HSXHa8ZkV','2026-03-27 16:34:17','2026-03-27 16:34:17');
+INSERT INTO `admins` (`id`,`name`,`email`,`email_verified_at`,`password`,`remember_token`,`created_at`,`updated_at`) VALUES (1,'Admin','admin@example.com','2026-03-27 20:27:37','$2y$12$KYTt9aQ1MqHNkJvUpDo69u0wac.W1WLGBm8iDfI4Q2QYfrA3o4CK.','UILer3jjHu','2026-03-27 20:27:38','2026-03-27 20:27:38');
 
 
 -- -----------------------------
@@ -88,7 +88,13 @@ CREATE TABLE `books` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `books_slug_unique` (`slug`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Librairie en ligne : ouvrages numériques ou physiques vendus sur le site.';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Librairie en ligne : ouvrages numériques ou physiques vendus sur le site.';
+
+-- Données : `books` (4 ligne(s))
+INSERT INTO `books` (`id`,`title`,`slug`,`description`,`price`,`currency`,`cover_path`,`digital_file_path`,`isbn`,`is_active`,`stock_quantity`,`created_at`,`updated_at`,`deleted_at`) VALUES (1,'7 Bénéfices de la Résolution','7-benefices-de-la-resolution','Découvrez les sept bénéfices puissants qui découlent d\'une résolution ferme en Dieu. Cet ouvrage de la Pasteure Tothy Mbengela vous guide dans la compréhension de la force d\'une décision ancrée dans la foi et vous encourage à tenir ferme dans vos engagements spirituels.','10.00','USD',NULL,NULL,NULL,1,NULL,'2026-03-27 20:27:22','2026-03-27 20:27:22',NULL);
+INSERT INTO `books` (`id`,`title`,`slug`,`description`,`price`,`currency`,`cover_path`,`digital_file_path`,`isbn`,`is_active`,`stock_quantity`,`created_at`,`updated_at`,`deleted_at`) VALUES (2,'À l\'Instar d\'Élie','a-linstar-delie','Inspiré par la vie du prophète Élie, ce livre vous invite à vivre une foi audacieuse et courageuse. La Pasteure Tothy Mbengela explore les leçons tirées de la vie d\'Élie pour fortifier votre marche avec Dieu et vous préparer aux défis de la vie chrétienne.','10.00','USD',NULL,NULL,NULL,1,NULL,'2026-03-27 20:27:22','2026-03-27 20:27:22',NULL);
+INSERT INTO `books` (`id`,`title`,`slug`,`description`,`price`,`currency`,`cover_path`,`digital_file_path`,`isbn`,`is_active`,`stock_quantity`,`created_at`,`updated_at`,`deleted_at`) VALUES (3,'Attends-la cette Promesse !','attends-la-cette-promesse','Les promesses de Dieu sont certaines, mais elles demandent patience et persévérance. Dans cet ouvrage, la Pasteure Tothy Mbengela vous encourage à ne pas abandonner, à garder la foi et à attendre avec confiance l\'accomplissement des promesses divines dans votre vie.','10.00','USD',NULL,NULL,NULL,1,NULL,'2026-03-27 20:27:22','2026-03-27 20:27:22',NULL);
+INSERT INTO `books` (`id`,`title`,`slug`,`description`,`price`,`currency`,`cover_path`,`digital_file_path`,`isbn`,`is_active`,`stock_quantity`,`created_at`,`updated_at`,`deleted_at`) VALUES (4,'Sois Daniel ! La Préparation','sois-daniel-la-preparation','Faisant partie de la Collection S.D., ce livre s\'inspire de la vie de Daniel pour vous préparer à vivre une vie d\'excellence et d\'intégrité au milieu d\'un monde hostile. La Pasteure Tothy Mbengela partage des clés pratiques pour rester fidèle à Dieu en toutes circonstances.','10.00','USD',NULL,NULL,NULL,1,NULL,'2026-03-27 20:27:23','2026-03-27 20:27:23',NULL);
 
 
 -- -----------------------------
@@ -138,6 +144,64 @@ CREATE TABLE `contact_messages` (
 
 
 -- -----------------------------
+-- Structure : `content_comment_likes`
+-- -----------------------------
+DROP TABLE IF EXISTS `content_comment_likes`;
+CREATE TABLE `content_comment_likes` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `content_comment_id` bigint unsigned NOT NULL,
+  `user_id` bigint unsigned DEFAULT NULL,
+  `liker_fingerprint` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `cc_likes_comment_fp_unique` (`content_comment_id`,`liker_fingerprint`),
+  KEY `content_comment_likes_user_id_foreign` (`user_id`),
+  CONSTRAINT `content_comment_likes_content_comment_id_foreign` FOREIGN KEY (`content_comment_id`) REFERENCES `content_comments` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `content_comment_likes_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- -----------------------------
+-- Structure : `content_comments`
+-- -----------------------------
+DROP TABLE IF EXISTS `content_comments`;
+CREATE TABLE `content_comments` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `content_id` bigint unsigned NOT NULL,
+  `user_id` bigint unsigned DEFAULT NULL,
+  `author_name` varchar(160) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `author_email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `content_comments_user_id_foreign` (`user_id`),
+  KEY `content_comments_content_id_created_at_index` (`content_id`,`created_at`),
+  CONSTRAINT `content_comments_content_id_foreign` FOREIGN KEY (`content_id`) REFERENCES `contents` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `content_comments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- -----------------------------
+-- Structure : `content_likes`
+-- -----------------------------
+DROP TABLE IF EXISTS `content_likes`;
+CREATE TABLE `content_likes` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `content_id` bigint unsigned NOT NULL,
+  `user_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `content_likes_content_id_user_id_unique` (`content_id`,`user_id`),
+  KEY `content_likes_user_id_foreign` (`user_id`),
+  CONSTRAINT `content_likes_content_id_foreign` FOREIGN KEY (`content_id`) REFERENCES `contents` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `content_likes_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- -----------------------------
 -- Structure : `contents`
 -- -----------------------------
 DROP TABLE IF EXISTS `contents`;
@@ -179,30 +243,30 @@ CREATE TABLE `contents` (
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Contenus ministère : vidéo, audio, podcast, article ; une partie peut être hébergée sur YouTube (source externe).';
 
 -- Données : `contents` (24 ligne(s))
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (1,1,1,NULL,'video','youtube','Première vidéo — Proverbes','youtube-9MwDprKBkRg',NULL,NULL,NULL,'9MwDprKBkRg','https://www.youtube.com/watch?v=9MwDprKBkRg',NULL,NULL,NULL,1,0,1,'2026-03-26 16:34:17',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2s1I1uJ5EHDGBfZvQaOJ3K8\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (2,2,2,NULL,'video','youtube','Première vidéo — les minutes de ta destinée','youtube-GXQDovOqoBA',NULL,NULL,NULL,'GXQDovOqoBA','https://www.youtube.com/watch?v=GXQDovOqoBA',NULL,NULL,NULL,1,0,1,'2026-03-25 16:34:17',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2uCPMwKNnlFI-1v1es7AhjA\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (3,3,3,NULL,'video','youtube','Première vidéo — S’ACCOMPLIR','youtube-3FIhRR3qRog',NULL,NULL,NULL,'3FIhRR3qRog','https://www.youtube.com/watch?v=3FIhRR3qRog',NULL,NULL,NULL,1,0,1,'2026-03-24 16:34:17',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2vCBsN91hMIfQz5PHaiRlgX\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (4,2,4,NULL,'video','youtube','Première vidéo — SHORTS','youtube-J_CliWzm8ss',NULL,NULL,NULL,'J_CliWzm8ss','https://www.youtube.com/watch?v=J_CliWzm8ss',NULL,NULL,NULL,1,0,1,'2026-03-23 16:34:17',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2vFc808uhHmMBfyPaXXqKyI\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (5,4,5,NULL,'video','youtube','Première vidéo — PREDICATIONS','youtube-cFQT1lpg5Xw',NULL,NULL,NULL,'cFQT1lpg5Xw','https://www.youtube.com/watch?v=cFQT1lpg5Xw',NULL,NULL,NULL,1,0,1,'2026-03-22 16:34:17',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2tZGNj2cS8PElJCyc3-UoAX\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (6,4,6,NULL,'video','youtube','Première vidéo — NE POUR VAINCRE','youtube-oSUTbflBQsg',NULL,NULL,NULL,'oSUTbflBQsg','https://www.youtube.com/watch?v=oSUTbflBQsg',NULL,NULL,NULL,1,0,1,'2026-03-21 16:34:17',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2uzP1ZWOokLxP-coaOx2kgb\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (7,1,7,NULL,'video','youtube','Première vidéo — LES COMMENT','youtube-vYerKexKZyk',NULL,NULL,NULL,'vYerKexKZyk','https://www.youtube.com/watch?v=vYerKexKZyk',NULL,NULL,NULL,1,0,1,'2026-03-20 16:34:17',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2uiRaa-pyd5HXhx7qQ_iTXg\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (8,4,8,NULL,'video','youtube','VEUILLE SEULEMENT L’ÉTERNEL, TON DIEU, ÊTRE AVEC TOI | Pasteure Tothy Mbengela','youtube-Asc3iaC4IK4',NULL,NULL,NULL,'Asc3iaC4IK4','https://www.youtube.com/watch?v=Asc3iaC4IK4',NULL,NULL,NULL,1,0,1,'2026-03-17 08:14:06',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2sD9r4q7PdGyZo5puKtFvx9\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (9,5,9,NULL,'video','youtube','Première vidéo — FEMME DISCIPLE DE JESUS','youtube-7flJZzwDy_Q',NULL,NULL,NULL,'7flJZzwDy_Q','https://www.youtube.com/watch?v=7flJZzwDy_Q',NULL,NULL,NULL,1,0,1,'2026-03-18 16:34:17',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2v_8yPCFZhkQ9bXcT-oRjJr\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (10,6,10,NULL,'video','youtube','MES DECLARATIONS | Mars 2026 | Pasteure Tothy MBENGELA','youtube-6K1sZTwY9Vs',NULL,NULL,NULL,'6K1sZTwY9Vs','https://www.youtube.com/watch?v=6K1sZTwY9Vs',NULL,NULL,NULL,1,0,1,'2026-03-01 10:35:49',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2vf9n2r_mdvtPB6UhVf2aAC\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (11,3,11,NULL,'video','youtube','Première vidéo — ET SI TU PRIAIS / Court-Métrage','youtube-fPNDYt4WZog',NULL,NULL,NULL,'fPNDYt4WZog','https://www.youtube.com/watch?v=fPNDYt4WZog',NULL,NULL,NULL,1,0,1,'2026-03-16 16:34:17',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2uby5SrqpArUStxfl8cj1n4\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (12,2,4,NULL,'video','youtube','MES 4 LIVRES SONT DESORMAIS DISPONIBLES #livresinspirants','youtube-C7qfNyJKRn0','Les livres sont désormais disponibles et à votre portée.',NULL,NULL,'C7qfNyJKRn0','https://www.youtube.com/watch?v=C7qfNyJKRn0',NULL,NULL,NULL,1,0,1,'2026-03-18 12:43:29',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2vFc808uhHmMBfyPaXXqKyI\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (13,3,3,NULL,'video','youtube','MON HISTOIRE VERS L’ÉCRITURE | VERNISSAGE DE QUATRE LIVRES','youtube-0BH75IkAuq4',NULL,NULL,NULL,'0BH75IkAuq4','https://www.youtube.com/watch?v=0BH75IkAuq4',NULL,NULL,NULL,1,0,1,'2026-02-28 21:44:20',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2vCBsN91hMIfQz5PHaiRlgX\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (14,4,8,NULL,'video','youtube','IL PEUT FAIRE INFINIMENT AU DELÀ | Pasteure Tothy Mbengela','youtube-460ftY_DReE',NULL,NULL,NULL,'460ftY_DReE','https://www.youtube.com/watch?v=460ftY_DReE',NULL,NULL,NULL,1,0,1,'2026-02-16 13:03:26',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2sD9r4q7PdGyZo5puKtFvx9\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (15,4,8,NULL,'video','youtube','QUE L’ÉTERNEL VOUS BÉNISSE COMME IL VOUS L’A PROMIS | Pasteure Tothy Mbengela','youtube-ipfxjB-9KZ0',NULL,NULL,NULL,'ipfxjB-9KZ0','https://www.youtube.com/watch?v=ipfxjB-9KZ0',NULL,NULL,NULL,1,0,1,'2026-02-03 05:09:39',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2sD9r4q7PdGyZo5puKtFvx9\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (16,6,10,NULL,'video','youtube','MES DECLARATIONS | Février 2026 | Maman Lévi NGALULA','youtube-3HXUCDTAItE',NULL,NULL,NULL,'3HXUCDTAItE','https://www.youtube.com/watch?v=3HXUCDTAItE',NULL,NULL,NULL,1,0,1,'2026-02-01 10:27:51',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2vf9n2r_mdvtPB6UhVf2aAC\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (17,6,10,NULL,'video','youtube','MES DECLARATIONS | Février 2026 | Maman Lévi NGALULA','youtube-fc1CQ6g2GTU',NULL,NULL,NULL,'fc1CQ6g2GTU','https://www.youtube.com/watch?v=fc1CQ6g2GTU',NULL,NULL,NULL,1,0,1,'2026-01-31 21:27:15',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2vf9n2r_mdvtPB6UhVf2aAC\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (18,4,5,NULL,'video','youtube','FAITES DONC MOURIR VOTRE CHAIR | Pasteure Tothy Mbengela','youtube-d0cnu_4z2Jc',NULL,NULL,NULL,'d0cnu_4z2Jc','https://www.youtube.com/watch?v=d0cnu_4z2Jc',NULL,NULL,NULL,1,0,1,'2026-01-28 16:01:15',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2tZGNj2cS8PElJCyc3-UoAX\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (19,4,5,NULL,'video','youtube','SOUVIENS-TOI QUE TU ES EN VOYAGE | Pasteure Tothy Mbengela','youtube-7OkAo286H40',NULL,NULL,NULL,'7OkAo286H40','https://www.youtube.com/watch?v=7OkAo286H40',NULL,NULL,NULL,1,0,1,'2026-01-19 14:26:50',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2tZGNj2cS8PElJCyc3-UoAX\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (20,4,6,NULL,'video','youtube','VAINCRE LA COLÈRE PAR LA PRIÈRE - Pasteure Tothy Mbengela','youtube-qbQ2DOc_r4c',NULL,NULL,NULL,'qbQ2DOc_r4c','https://www.youtube.com/watch?v=qbQ2DOc_r4c',NULL,NULL,NULL,1,0,1,'2026-01-12 08:32:20',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2uzP1ZWOokLxP-coaOx2kgb\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (21,6,10,NULL,'video','youtube','MES DECLARATIONS | DÉCEMBRE 2025 | Pasteure Tothy MBENGELA','youtube-q4RsEMhO1WM',NULL,NULL,NULL,'q4RsEMhO1WM','https://www.youtube.com/watch?v=q4RsEMhO1WM',NULL,NULL,NULL,1,0,1,'2025-12-01 10:51:03',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2vf9n2r_mdvtPB6UhVf2aAC\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (22,6,10,NULL,'video','youtube','MES DÉCLARATIONS | NOVEMBRE 2025 | Pasteure Tothy MBENGELA','youtube-TzHPp3DgRuA',NULL,NULL,NULL,'TzHPp3DgRuA','https://www.youtube.com/watch?v=TzHPp3DgRuA',NULL,NULL,NULL,1,0,1,'2025-11-01 10:10:50',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2vf9n2r_mdvtPB6UhVf2aAC\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (23,6,10,NULL,'video','youtube','MES DECLARATIONS | OCTOBRE | Pasteure Tothy MBENGELA','youtube-ywJ81B3IQjs',NULL,NULL,NULL,'ywJ81B3IQjs','https://www.youtube.com/watch?v=ywJ81B3IQjs',NULL,NULL,NULL,1,0,1,'2025-09-30 21:59:36',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2vf9n2r_mdvtPB6UhVf2aAC\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
-INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (24,6,10,NULL,'video','youtube','MES DECLARATIONS | Mois de Septembre | Maman Lévi NGALULA','youtube-yfGCHRZIvDo',NULL,NULL,NULL,'yfGCHRZIvDo','https://www.youtube.com/watch?v=yfGCHRZIvDo',NULL,NULL,NULL,1,0,1,'2025-09-01 10:25:11',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2vf9n2r_mdvtPB6UhVf2aAC\"}','2026-03-27 16:34:17','2026-03-27 16:34:17',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (1,1,1,NULL,'video','youtube','Première vidéo — Proverbes','youtube-9MwDprKBkRg',NULL,NULL,NULL,'9MwDprKBkRg','https://www.youtube.com/watch?v=9MwDprKBkRg',NULL,NULL,NULL,1,0,1,'2026-03-26 20:27:18',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2s1I1uJ5EHDGBfZvQaOJ3K8\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (2,2,2,NULL,'video','youtube','Première vidéo — les minutes de ta destinée','youtube-GXQDovOqoBA',NULL,NULL,NULL,'GXQDovOqoBA','https://www.youtube.com/watch?v=GXQDovOqoBA',NULL,NULL,NULL,1,0,1,'2026-03-25 20:27:18',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2uCPMwKNnlFI-1v1es7AhjA\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (3,3,3,NULL,'video','youtube','Première vidéo — S’ACCOMPLIR','youtube-3FIhRR3qRog',NULL,NULL,NULL,'3FIhRR3qRog','https://www.youtube.com/watch?v=3FIhRR3qRog',NULL,NULL,NULL,1,0,1,'2026-03-24 20:27:18',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2vCBsN91hMIfQz5PHaiRlgX\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (4,2,4,NULL,'video','youtube','Première vidéo — SHORTS','youtube-J_CliWzm8ss',NULL,NULL,NULL,'J_CliWzm8ss','https://www.youtube.com/watch?v=J_CliWzm8ss',NULL,NULL,NULL,1,0,1,'2026-03-23 20:27:18',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2vFc808uhHmMBfyPaXXqKyI\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (5,4,5,NULL,'video','youtube','Première vidéo — PREDICATIONS','youtube-cFQT1lpg5Xw',NULL,NULL,NULL,'cFQT1lpg5Xw','https://www.youtube.com/watch?v=cFQT1lpg5Xw',NULL,NULL,NULL,1,0,1,'2026-03-22 20:27:18',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2tZGNj2cS8PElJCyc3-UoAX\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (6,4,6,NULL,'video','youtube','Première vidéo — NE POUR VAINCRE','youtube-oSUTbflBQsg',NULL,NULL,NULL,'oSUTbflBQsg','https://www.youtube.com/watch?v=oSUTbflBQsg',NULL,NULL,NULL,1,0,1,'2026-03-21 20:27:18',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2uzP1ZWOokLxP-coaOx2kgb\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (7,1,7,NULL,'video','youtube','Première vidéo — LES COMMENT','youtube-vYerKexKZyk',NULL,NULL,NULL,'vYerKexKZyk','https://www.youtube.com/watch?v=vYerKexKZyk',NULL,NULL,NULL,1,0,1,'2026-03-20 20:27:18',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2uiRaa-pyd5HXhx7qQ_iTXg\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (8,4,8,NULL,'video','youtube','VEUILLE SEULEMENT L’ÉTERNEL, TON DIEU, ÊTRE AVEC TOI | Pasteure Tothy Mbengela','youtube-Asc3iaC4IK4',NULL,NULL,NULL,'Asc3iaC4IK4','https://www.youtube.com/watch?v=Asc3iaC4IK4',NULL,NULL,NULL,1,0,1,'2026-03-17 08:14:06',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2sD9r4q7PdGyZo5puKtFvx9\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (9,5,9,NULL,'video','youtube','Première vidéo — FEMME DISCIPLE DE JESUS','youtube-7flJZzwDy_Q',NULL,NULL,NULL,'7flJZzwDy_Q','https://www.youtube.com/watch?v=7flJZzwDy_Q',NULL,NULL,NULL,1,0,1,'2026-03-18 20:27:18',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2v_8yPCFZhkQ9bXcT-oRjJr\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (10,6,10,NULL,'video','youtube','MES DECLARATIONS | Mars 2026 | Pasteure Tothy MBENGELA','youtube-6K1sZTwY9Vs',NULL,NULL,NULL,'6K1sZTwY9Vs','https://www.youtube.com/watch?v=6K1sZTwY9Vs',NULL,NULL,NULL,1,0,1,'2026-03-01 10:35:49',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2vf9n2r_mdvtPB6UhVf2aAC\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (11,3,11,NULL,'video','youtube','Première vidéo — ET SI TU PRIAIS / Court-Métrage','youtube-fPNDYt4WZog',NULL,NULL,NULL,'fPNDYt4WZog','https://www.youtube.com/watch?v=fPNDYt4WZog',NULL,NULL,NULL,1,0,1,'2026-03-16 20:27:18',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2uby5SrqpArUStxfl8cj1n4\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (12,2,4,NULL,'video','youtube','MES 4 LIVRES SONT DESORMAIS DISPONIBLES #livresinspirants','youtube-C7qfNyJKRn0','Les livres sont désormais disponibles et à votre portée.',NULL,NULL,'C7qfNyJKRn0','https://www.youtube.com/watch?v=C7qfNyJKRn0',NULL,NULL,NULL,1,0,1,'2026-03-18 12:43:29',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2vFc808uhHmMBfyPaXXqKyI\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (13,3,3,NULL,'video','youtube','MON HISTOIRE VERS L’ÉCRITURE | VERNISSAGE DE QUATRE LIVRES','youtube-0BH75IkAuq4',NULL,NULL,NULL,'0BH75IkAuq4','https://www.youtube.com/watch?v=0BH75IkAuq4',NULL,NULL,NULL,1,0,1,'2026-02-28 21:44:20',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2vCBsN91hMIfQz5PHaiRlgX\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (14,4,8,NULL,'video','youtube','IL PEUT FAIRE INFINIMENT AU DELÀ | Pasteure Tothy Mbengela','youtube-460ftY_DReE',NULL,NULL,NULL,'460ftY_DReE','https://www.youtube.com/watch?v=460ftY_DReE',NULL,NULL,NULL,1,0,1,'2026-02-16 13:03:26',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2sD9r4q7PdGyZo5puKtFvx9\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (15,4,8,NULL,'video','youtube','QUE L’ÉTERNEL VOUS BÉNISSE COMME IL VOUS L’A PROMIS | Pasteure Tothy Mbengela','youtube-ipfxjB-9KZ0',NULL,NULL,NULL,'ipfxjB-9KZ0','https://www.youtube.com/watch?v=ipfxjB-9KZ0',NULL,NULL,NULL,1,0,1,'2026-02-03 05:09:39',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2sD9r4q7PdGyZo5puKtFvx9\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (16,6,10,NULL,'video','youtube','MES DECLARATIONS | Février 2026 | Maman Lévi NGALULA','youtube-3HXUCDTAItE',NULL,NULL,NULL,'3HXUCDTAItE','https://www.youtube.com/watch?v=3HXUCDTAItE',NULL,NULL,NULL,1,0,1,'2026-02-01 10:27:51',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2vf9n2r_mdvtPB6UhVf2aAC\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (17,6,10,NULL,'video','youtube','MES DECLARATIONS | Février 2026 | Maman Lévi NGALULA','youtube-fc1CQ6g2GTU',NULL,NULL,NULL,'fc1CQ6g2GTU','https://www.youtube.com/watch?v=fc1CQ6g2GTU',NULL,NULL,NULL,1,0,1,'2026-01-31 21:27:15',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2vf9n2r_mdvtPB6UhVf2aAC\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (18,4,5,NULL,'video','youtube','FAITES DONC MOURIR VOTRE CHAIR | Pasteure Tothy Mbengela','youtube-d0cnu_4z2Jc',NULL,NULL,NULL,'d0cnu_4z2Jc','https://www.youtube.com/watch?v=d0cnu_4z2Jc',NULL,NULL,NULL,1,0,1,'2026-01-28 16:01:15',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2tZGNj2cS8PElJCyc3-UoAX\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (19,4,5,NULL,'video','youtube','SOUVIENS-TOI QUE TU ES EN VOYAGE | Pasteure Tothy Mbengela','youtube-7OkAo286H40',NULL,NULL,NULL,'7OkAo286H40','https://www.youtube.com/watch?v=7OkAo286H40',NULL,NULL,NULL,1,0,1,'2026-01-19 14:26:50',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2tZGNj2cS8PElJCyc3-UoAX\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (20,4,6,NULL,'video','youtube','VAINCRE LA COLÈRE PAR LA PRIÈRE - Pasteure Tothy Mbengela','youtube-qbQ2DOc_r4c',NULL,NULL,NULL,'qbQ2DOc_r4c','https://www.youtube.com/watch?v=qbQ2DOc_r4c',NULL,NULL,NULL,1,0,1,'2026-01-12 08:32:20',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2uzP1ZWOokLxP-coaOx2kgb\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (21,6,10,NULL,'video','youtube','MES DECLARATIONS | DÉCEMBRE 2025 | Pasteure Tothy MBENGELA','youtube-q4RsEMhO1WM',NULL,NULL,NULL,'q4RsEMhO1WM','https://www.youtube.com/watch?v=q4RsEMhO1WM',NULL,NULL,NULL,1,0,1,'2025-12-01 10:51:03',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2vf9n2r_mdvtPB6UhVf2aAC\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (22,6,10,NULL,'video','youtube','MES DÉCLARATIONS | NOVEMBRE 2025 | Pasteure Tothy MBENGELA','youtube-TzHPp3DgRuA',NULL,NULL,NULL,'TzHPp3DgRuA','https://www.youtube.com/watch?v=TzHPp3DgRuA',NULL,NULL,NULL,1,0,1,'2025-11-01 10:10:50',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2vf9n2r_mdvtPB6UhVf2aAC\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (23,6,10,NULL,'video','youtube','MES DECLARATIONS | OCTOBRE | Pasteure Tothy MBENGELA','youtube-ywJ81B3IQjs',NULL,NULL,NULL,'ywJ81B3IQjs','https://www.youtube.com/watch?v=ywJ81B3IQjs',NULL,NULL,NULL,1,0,1,'2025-09-30 21:59:36',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2vf9n2r_mdvtPB6UhVf2aAC\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
+INSERT INTO `contents` (`id`,`rubrique_id`,`series_id`,`theme_id`,`type`,`source`,`title`,`slug`,`excerpt`,`body`,`media_url`,`youtube_video_id`,`youtube_url`,`file_path`,`thumbnail_path`,`duration_seconds`,`allow_streaming`,`allow_download`,`is_published`,`published_at`,`is_featured`,`position`,`meta`,`created_at`,`updated_at`,`deleted_at`) VALUES (24,6,10,NULL,'video','youtube','MES DECLARATIONS | Mois de Septembre | Maman Lévi NGALULA','youtube-yfGCHRZIvDo',NULL,NULL,NULL,'yfGCHRZIvDo','https://www.youtube.com/watch?v=yfGCHRZIvDo',NULL,NULL,NULL,1,0,1,'2025-09-01 10:25:11',0,0,'{\"youtube_channel_id\": \"UCLp18bcg9ZMQWXaaqtqJn_A\", \"youtube_playlist_id\": \"PLsE9YNHy_f2vf9n2r_mdvtPB6UhVf2aAC\"}','2026-03-27 20:27:18','2026-03-27 20:27:18',NULL);
 
 
 -- -----------------------------
@@ -293,9 +357,9 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Données : `migrations` (26 ligne(s))
+-- Données : `migrations` (29 ligne(s))
 INSERT INTO `migrations` (`id`,`migration`,`batch`) VALUES (1,'0001_01_01_000000_create_users_table',1);
 INSERT INTO `migrations` (`id`,`migration`,`batch`) VALUES (2,'0001_01_01_000001_create_cache_table',1);
 INSERT INTO `migrations` (`id`,`migration`,`batch`) VALUES (3,'0001_01_01_000002_create_jobs_table',1);
@@ -322,6 +386,9 @@ INSERT INTO `migrations` (`id`,`migration`,`batch`) VALUES (23,'2026_03_25_14000
 INSERT INTO `migrations` (`id`,`migration`,`batch`) VALUES (24,'2026_03_25_140001_add_shipping_and_grand_total_to_orders_table',1);
 INSERT INTO `migrations` (`id`,`migration`,`batch`) VALUES (25,'2026_03_26_100000_add_shipping_address_and_phone_to_orders_table',1);
 INSERT INTO `migrations` (`id`,`migration`,`batch`) VALUES (26,'2026_03_26_120000_add_confirmation_token_to_newsletter_subscribers_table',1);
+INSERT INTO `migrations` (`id`,`migration`,`batch`) VALUES (27,'2026_03_27_180000_create_content_comments_and_likes_tables',1);
+INSERT INTO `migrations` (`id`,`migration`,`batch`) VALUES (28,'2026_03_27_180001_create_content_comment_likes_table_if_missing',1);
+INSERT INTO `migrations` (`id`,`migration`,`batch`) VALUES (29,'2026_03_27_184204_create_content_likes_table',1);
 
 
 -- -----------------------------
@@ -350,6 +417,9 @@ CREATE TABLE `model_has_roles` (
   KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`),
   CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Données : `model_has_roles` (1 ligne(s))
+INSERT INTO `model_has_roles` (`role_id`,`model_type`,`model_id`) VALUES (1,'App\\Models\\Admin',1);
 
 
 -- -----------------------------
@@ -474,7 +544,181 @@ CREATE TABLE `permissions` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=173 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Données : `permissions` (172 ligne(s))
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (1,'ViewAny:AppointmentRequest','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (2,'View:AppointmentRequest','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (3,'Create:AppointmentRequest','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (4,'Update:AppointmentRequest','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (5,'Delete:AppointmentRequest','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (6,'DeleteAny:AppointmentRequest','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (7,'Restore:AppointmentRequest','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (8,'ForceDelete:AppointmentRequest','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (9,'ForceDeleteAny:AppointmentRequest','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (10,'RestoreAny:AppointmentRequest','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (11,'Replicate:AppointmentRequest','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (12,'Reorder:AppointmentRequest','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (13,'ViewAny:Book','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (14,'View:Book','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (15,'Create:Book','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (16,'Update:Book','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (17,'Delete:Book','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (18,'DeleteAny:Book','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (19,'Restore:Book','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (20,'ForceDelete:Book','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (21,'ForceDeleteAny:Book','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (22,'RestoreAny:Book','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (23,'Replicate:Book','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (24,'Reorder:Book','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (25,'ViewAny:ContactMessage','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (26,'View:ContactMessage','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (27,'Create:ContactMessage','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (28,'Update:ContactMessage','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (29,'Delete:ContactMessage','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (30,'DeleteAny:ContactMessage','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (31,'Restore:ContactMessage','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (32,'ForceDelete:ContactMessage','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (33,'ForceDeleteAny:ContactMessage','admin','2026-03-27 20:28:11','2026-03-27 20:28:11');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (34,'RestoreAny:ContactMessage','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (35,'Replicate:ContactMessage','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (36,'Reorder:ContactMessage','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (37,'ViewAny:Content','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (38,'View:Content','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (39,'Create:Content','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (40,'Update:Content','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (41,'Delete:Content','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (42,'DeleteAny:Content','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (43,'Restore:Content','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (44,'ForceDelete:Content','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (45,'ForceDeleteAny:Content','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (46,'RestoreAny:Content','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (47,'Replicate:Content','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (48,'Reorder:Content','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (49,'ViewAny:Donation','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (50,'View:Donation','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (51,'Create:Donation','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (52,'Update:Donation','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (53,'Delete:Donation','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (54,'DeleteAny:Donation','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (55,'Restore:Donation','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (56,'ForceDelete:Donation','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (57,'ForceDeleteAny:Donation','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (58,'RestoreAny:Donation','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (59,'Replicate:Donation','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (60,'Reorder:Donation','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (61,'ViewAny:NewsletterSubscriber','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (62,'View:NewsletterSubscriber','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (63,'Create:NewsletterSubscriber','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (64,'Update:NewsletterSubscriber','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (65,'Delete:NewsletterSubscriber','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (66,'DeleteAny:NewsletterSubscriber','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (67,'Restore:NewsletterSubscriber','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (68,'ForceDelete:NewsletterSubscriber','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (69,'ForceDeleteAny:NewsletterSubscriber','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (70,'RestoreAny:NewsletterSubscriber','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (71,'Replicate:NewsletterSubscriber','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (72,'Reorder:NewsletterSubscriber','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (73,'ViewAny:Order','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (74,'View:Order','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (75,'Create:Order','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (76,'Update:Order','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (77,'Delete:Order','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (78,'DeleteAny:Order','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (79,'Restore:Order','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (80,'ForceDelete:Order','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (81,'ForceDeleteAny:Order','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (82,'RestoreAny:Order','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (83,'Replicate:Order','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (84,'Reorder:Order','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (85,'ViewAny:PartnerCommitment','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (86,'View:PartnerCommitment','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (87,'Create:PartnerCommitment','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (88,'Update:PartnerCommitment','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (89,'Delete:PartnerCommitment','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (90,'DeleteAny:PartnerCommitment','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (91,'Restore:PartnerCommitment','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (92,'ForceDelete:PartnerCommitment','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (93,'ForceDeleteAny:PartnerCommitment','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (94,'RestoreAny:PartnerCommitment','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (95,'Replicate:PartnerCommitment','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (96,'Reorder:PartnerCommitment','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (97,'ViewAny:Rubrique','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (98,'View:Rubrique','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (99,'Create:Rubrique','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (100,'Update:Rubrique','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (101,'Delete:Rubrique','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (102,'DeleteAny:Rubrique','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (103,'Restore:Rubrique','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (104,'ForceDelete:Rubrique','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (105,'ForceDeleteAny:Rubrique','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (106,'RestoreAny:Rubrique','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (107,'Replicate:Rubrique','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (108,'Reorder:Rubrique','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (109,'ViewAny:Series','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (110,'View:Series','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (111,'Create:Series','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (112,'Update:Series','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (113,'Delete:Series','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (114,'DeleteAny:Series','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (115,'Restore:Series','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (116,'ForceDelete:Series','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (117,'ForceDeleteAny:Series','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (118,'RestoreAny:Series','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (119,'Replicate:Series','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (120,'Reorder:Series','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (121,'ViewAny:ShippingSetting','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (122,'View:ShippingSetting','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (123,'Create:ShippingSetting','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (124,'Update:ShippingSetting','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (125,'Delete:ShippingSetting','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (126,'DeleteAny:ShippingSetting','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (127,'Restore:ShippingSetting','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (128,'ForceDelete:ShippingSetting','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (129,'ForceDeleteAny:ShippingSetting','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (130,'RestoreAny:ShippingSetting','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (131,'Replicate:ShippingSetting','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (132,'Reorder:ShippingSetting','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (133,'ViewAny:Theme','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (134,'View:Theme','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (135,'Create:Theme','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (136,'Update:Theme','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (137,'Delete:Theme','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (138,'DeleteAny:Theme','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (139,'Restore:Theme','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (140,'ForceDelete:Theme','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (141,'ForceDeleteAny:Theme','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (142,'RestoreAny:Theme','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (143,'Replicate:Theme','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (144,'Reorder:Theme','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (145,'ViewAny:User','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (146,'View:User','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (147,'Create:User','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (148,'Update:User','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (149,'Delete:User','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (150,'DeleteAny:User','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (151,'Restore:User','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (152,'ForceDelete:User','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (153,'ForceDeleteAny:User','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (154,'RestoreAny:User','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (155,'Replicate:User','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (156,'Reorder:User','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (157,'ViewAny:Role','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (158,'View:Role','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (159,'Create:Role','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (160,'Update:Role','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (161,'Delete:Role','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (162,'DeleteAny:Role','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (163,'Restore:Role','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (164,'ForceDelete:Role','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (165,'ForceDeleteAny:Role','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (166,'RestoreAny:Role','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (167,'Replicate:Role','admin','2026-03-27 20:28:12','2026-03-27 20:28:12');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (168,'Reorder:Role','admin','2026-03-27 20:28:13','2026-03-27 20:28:13');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (169,'View:ContenuMinistereStatsWidget','admin','2026-03-27 20:28:13','2026-03-27 20:28:13');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (170,'View:BoutiqueStatsWidget','admin','2026-03-27 20:28:13','2026-03-27 20:28:13');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (171,'View:EngagementStatsWidget','admin','2026-03-27 20:28:13','2026-03-27 20:28:13');
+INSERT INTO `permissions` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (172,'View:ComptesSiteStatsWidget','admin','2026-03-27 20:28:13','2026-03-27 20:28:13');
 
 
 -- -----------------------------
@@ -490,6 +734,180 @@ CREATE TABLE `role_has_permissions` (
   CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Données : `role_has_permissions` (172 ligne(s))
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (1,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (2,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (3,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (4,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (5,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (6,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (7,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (8,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (9,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (10,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (11,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (12,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (13,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (14,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (15,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (16,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (17,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (18,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (19,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (20,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (21,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (22,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (23,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (24,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (25,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (26,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (27,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (28,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (29,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (30,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (31,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (32,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (33,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (34,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (35,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (36,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (37,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (38,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (39,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (40,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (41,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (42,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (43,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (44,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (45,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (46,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (47,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (48,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (49,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (50,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (51,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (52,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (53,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (54,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (55,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (56,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (57,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (58,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (59,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (60,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (61,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (62,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (63,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (64,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (65,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (66,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (67,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (68,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (69,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (70,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (71,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (72,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (73,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (74,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (75,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (76,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (77,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (78,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (79,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (80,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (81,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (82,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (83,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (84,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (85,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (86,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (87,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (88,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (89,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (90,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (91,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (92,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (93,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (94,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (95,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (96,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (97,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (98,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (99,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (100,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (101,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (102,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (103,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (104,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (105,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (106,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (107,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (108,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (109,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (110,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (111,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (112,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (113,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (114,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (115,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (116,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (117,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (118,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (119,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (120,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (121,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (122,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (123,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (124,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (125,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (126,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (127,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (128,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (129,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (130,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (131,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (132,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (133,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (134,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (135,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (136,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (137,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (138,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (139,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (140,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (141,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (142,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (143,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (144,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (145,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (146,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (147,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (148,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (149,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (150,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (151,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (152,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (153,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (154,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (155,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (156,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (157,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (158,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (159,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (160,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (161,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (162,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (163,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (164,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (165,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (166,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (167,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (168,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (169,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (170,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (171,1);
+INSERT INTO `role_has_permissions` (`permission_id`,`role_id`) VALUES (172,1);
+
 
 -- -----------------------------
 -- Structure : `roles`
@@ -503,7 +921,10 @@ CREATE TABLE `roles` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Données : `roles` (1 ligne(s))
+INSERT INTO `roles` (`id`,`name`,`guard_name`,`created_at`,`updated_at`) VALUES (1,'super_admin','admin','2026-03-27 20:28:45','2026-03-27 20:28:45');
 
 
 -- -----------------------------
@@ -526,12 +947,12 @@ CREATE TABLE `rubriques` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Rubriques phares du ministère (ex. Proverbes, Prédications) ; regroupe les contenus multimédias.';
 
 -- Données : `rubriques` (6 ligne(s))
-INSERT INTO `rubriques` (`id`,`name`,`slug`,`description`,`icon`,`thumbnail_path`,`sort_order`,`is_active`,`created_at`,`updated_at`) VALUES (1,'Proverbes','proverbes','Méditations et commentaires autour des Proverbes.',NULL,NULL,10,1,'2026-03-27 16:34:17','2026-03-27 16:34:17');
-INSERT INTO `rubriques` (`id`,`name`,`slug`,`description`,`icon`,`thumbnail_path`,`sort_order`,`is_active`,`created_at`,`updated_at`) VALUES (2,'Minutes de ta destinée','minutes-de-ta-destinee','Capsules courtes pour avancer dans votre destinée.',NULL,NULL,20,1,'2026-03-27 16:34:17','2026-03-27 16:34:17');
-INSERT INTO `rubriques` (`id`,`name`,`slug`,`description`,`icon`,`thumbnail_path`,`sort_order`,`is_active`,`created_at`,`updated_at`) VALUES (3,'S’accomplir','s-accomplir','Série dédiée à l’accomplissement selon Dieu.',NULL,NULL,30,1,'2026-03-27 16:34:17','2026-03-27 16:34:17');
-INSERT INTO `rubriques` (`id`,`name`,`slug`,`description`,`icon`,`thumbnail_path`,`sort_order`,`is_active`,`created_at`,`updated_at`) VALUES (4,'Prédications','predications','Messages et cultes en vidéo.',NULL,NULL,40,1,'2026-03-27 16:34:17','2026-03-27 16:34:17');
-INSERT INTO `rubriques` (`id`,`name`,`slug`,`description`,`icon`,`thumbnail_path`,`sort_order`,`is_active`,`created_at`,`updated_at`) VALUES (5,'Femme disciple de Jésus','femme-disciple-de-jesus','Enseignements pour la femme disciple.',NULL,NULL,50,1,'2026-03-27 16:34:17','2026-03-27 16:34:17');
-INSERT INTO `rubriques` (`id`,`name`,`slug`,`description`,`icon`,`thumbnail_path`,`sort_order`,`is_active`,`created_at`,`updated_at`) VALUES (6,'Mes déclarations','mes-declarations','Le programme Mes déclarations.',NULL,NULL,60,1,'2026-03-27 16:34:17','2026-03-27 16:34:17');
+INSERT INTO `rubriques` (`id`,`name`,`slug`,`description`,`icon`,`thumbnail_path`,`sort_order`,`is_active`,`created_at`,`updated_at`) VALUES (1,'Proverbes','proverbes','Méditations et commentaires autour des Proverbes.',NULL,NULL,10,1,'2026-03-27 20:27:18','2026-03-27 20:27:18');
+INSERT INTO `rubriques` (`id`,`name`,`slug`,`description`,`icon`,`thumbnail_path`,`sort_order`,`is_active`,`created_at`,`updated_at`) VALUES (2,'Minutes de ta destinée','minutes-de-ta-destinee','Capsules courtes pour avancer dans votre destinée.',NULL,NULL,20,1,'2026-03-27 20:27:18','2026-03-27 20:27:18');
+INSERT INTO `rubriques` (`id`,`name`,`slug`,`description`,`icon`,`thumbnail_path`,`sort_order`,`is_active`,`created_at`,`updated_at`) VALUES (3,'S’accomplir','s-accomplir','Série dédiée à l’accomplissement selon Dieu.',NULL,NULL,30,1,'2026-03-27 20:27:18','2026-03-27 20:27:18');
+INSERT INTO `rubriques` (`id`,`name`,`slug`,`description`,`icon`,`thumbnail_path`,`sort_order`,`is_active`,`created_at`,`updated_at`) VALUES (4,'Prédications','predications','Messages et cultes en vidéo.',NULL,NULL,40,1,'2026-03-27 20:27:18','2026-03-27 20:27:18');
+INSERT INTO `rubriques` (`id`,`name`,`slug`,`description`,`icon`,`thumbnail_path`,`sort_order`,`is_active`,`created_at`,`updated_at`) VALUES (5,'Femme disciple de Jésus','femme-disciple-de-jesus','Enseignements pour la femme disciple.',NULL,NULL,50,1,'2026-03-27 20:27:18','2026-03-27 20:27:18');
+INSERT INTO `rubriques` (`id`,`name`,`slug`,`description`,`icon`,`thumbnail_path`,`sort_order`,`is_active`,`created_at`,`updated_at`) VALUES (6,'Mes déclarations','mes-declarations','Le programme Mes déclarations.',NULL,NULL,60,1,'2026-03-27 20:27:18','2026-03-27 20:27:18');
 
 
 -- -----------------------------
@@ -559,17 +980,17 @@ CREATE TABLE `series` (
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Séries d’enseignements au sein d’une rubrique ; optionnellement rattachées à un thème.';
 
 -- Données : `series` (11 ligne(s))
-INSERT INTO `series` (`id`,`rubrique_id`,`theme_id`,`title`,`slug`,`icon`,`thumbnail_path`,`description`,`sort_order`,`created_at`,`updated_at`) VALUES (1,1,NULL,'Proverbes','playlist-proverbes',NULL,NULL,'Playlist YouTube « Proverbes » (chaîne @tothy_mbengela).',0,'2026-03-27 16:34:17','2026-03-27 16:34:17');
-INSERT INTO `series` (`id`,`rubrique_id`,`theme_id`,`title`,`slug`,`icon`,`thumbnail_path`,`description`,`sort_order`,`created_at`,`updated_at`) VALUES (2,2,NULL,'les minutes de ta destinée','playlist-minutes-de-ta-destinee',NULL,NULL,'Playlist YouTube « les minutes de ta destinée » (chaîne @tothy_mbengela).',1,'2026-03-27 16:34:17','2026-03-27 16:34:17');
-INSERT INTO `series` (`id`,`rubrique_id`,`theme_id`,`title`,`slug`,`icon`,`thumbnail_path`,`description`,`sort_order`,`created_at`,`updated_at`) VALUES (3,3,NULL,'S’ACCOMPLIR','playlist-s-accomplir',NULL,NULL,'Playlist YouTube « S’ACCOMPLIR » (chaîne @tothy_mbengela).',2,'2026-03-27 16:34:17','2026-03-27 16:34:17');
-INSERT INTO `series` (`id`,`rubrique_id`,`theme_id`,`title`,`slug`,`icon`,`thumbnail_path`,`description`,`sort_order`,`created_at`,`updated_at`) VALUES (4,2,NULL,'SHORTS','playlist-shorts',NULL,NULL,'Playlist YouTube « SHORTS » (chaîne @tothy_mbengela).',3,'2026-03-27 16:34:17','2026-03-27 16:34:17');
-INSERT INTO `series` (`id`,`rubrique_id`,`theme_id`,`title`,`slug`,`icon`,`thumbnail_path`,`description`,`sort_order`,`created_at`,`updated_at`) VALUES (5,4,NULL,'PREDICATIONS','playlist-predications',NULL,NULL,'Playlist YouTube « PREDICATIONS » (chaîne @tothy_mbengela).',4,'2026-03-27 16:34:17','2026-03-27 16:34:17');
-INSERT INTO `series` (`id`,`rubrique_id`,`theme_id`,`title`,`slug`,`icon`,`thumbnail_path`,`description`,`sort_order`,`created_at`,`updated_at`) VALUES (6,4,NULL,'NE POUR VAINCRE','playlist-ne-pour-vaincre',NULL,NULL,'Playlist YouTube « NE POUR VAINCRE » (chaîne @tothy_mbengela).',5,'2026-03-27 16:34:17','2026-03-27 16:34:17');
-INSERT INTO `series` (`id`,`rubrique_id`,`theme_id`,`title`,`slug`,`icon`,`thumbnail_path`,`description`,`sort_order`,`created_at`,`updated_at`) VALUES (7,1,NULL,'LES COMMENT','playlist-les-comment',NULL,NULL,'Playlist YouTube « LES COMMENT » (chaîne @tothy_mbengela).',6,'2026-03-27 16:34:17','2026-03-27 16:34:17');
-INSERT INTO `series` (`id`,`rubrique_id`,`theme_id`,`title`,`slug`,`icon`,`thumbnail_path`,`description`,`sort_order`,`created_at`,`updated_at`) VALUES (8,4,NULL,'PAROLE DE LA SEMAINE','playlist-parole-de-la-semaine',NULL,NULL,'Playlist YouTube « PAROLE DE LA SEMAINE » (chaîne @tothy_mbengela).',7,'2026-03-27 16:34:17','2026-03-27 16:34:17');
-INSERT INTO `series` (`id`,`rubrique_id`,`theme_id`,`title`,`slug`,`icon`,`thumbnail_path`,`description`,`sort_order`,`created_at`,`updated_at`) VALUES (9,5,NULL,'FEMME DISCIPLE DE JESUS','playlist-femme-disciple-de-jesus',NULL,NULL,'Playlist YouTube « FEMME DISCIPLE DE JESUS » (chaîne @tothy_mbengela).',8,'2026-03-27 16:34:17','2026-03-27 16:34:17');
-INSERT INTO `series` (`id`,`rubrique_id`,`theme_id`,`title`,`slug`,`icon`,`thumbnail_path`,`description`,`sort_order`,`created_at`,`updated_at`) VALUES (10,6,NULL,'MES DECLARATIONS','playlist-mes-declarations',NULL,NULL,'Playlist YouTube « MES DECLARATIONS » (chaîne @tothy_mbengela).',9,'2026-03-27 16:34:17','2026-03-27 16:34:17');
-INSERT INTO `series` (`id`,`rubrique_id`,`theme_id`,`title`,`slug`,`icon`,`thumbnail_path`,`description`,`sort_order`,`created_at`,`updated_at`) VALUES (11,3,NULL,'ET SI TU PRIAIS / Court-Métrage','playlist-et-si-tu-priais-court-metrage',NULL,NULL,'Playlist YouTube « ET SI TU PRIAIS / Court-Métrage » (chaîne @tothy_mbengela).',10,'2026-03-27 16:34:17','2026-03-27 16:34:17');
+INSERT INTO `series` (`id`,`rubrique_id`,`theme_id`,`title`,`slug`,`icon`,`thumbnail_path`,`description`,`sort_order`,`created_at`,`updated_at`) VALUES (1,1,NULL,'Proverbes','playlist-proverbes',NULL,NULL,'Playlist YouTube « Proverbes » (chaîne @tothy_mbengela).',0,'2026-03-27 20:27:18','2026-03-27 20:27:18');
+INSERT INTO `series` (`id`,`rubrique_id`,`theme_id`,`title`,`slug`,`icon`,`thumbnail_path`,`description`,`sort_order`,`created_at`,`updated_at`) VALUES (2,2,NULL,'les minutes de ta destinée','playlist-minutes-de-ta-destinee',NULL,NULL,'Playlist YouTube « les minutes de ta destinée » (chaîne @tothy_mbengela).',1,'2026-03-27 20:27:18','2026-03-27 20:27:18');
+INSERT INTO `series` (`id`,`rubrique_id`,`theme_id`,`title`,`slug`,`icon`,`thumbnail_path`,`description`,`sort_order`,`created_at`,`updated_at`) VALUES (3,3,NULL,'S’ACCOMPLIR','playlist-s-accomplir',NULL,NULL,'Playlist YouTube « S’ACCOMPLIR » (chaîne @tothy_mbengela).',2,'2026-03-27 20:27:18','2026-03-27 20:27:18');
+INSERT INTO `series` (`id`,`rubrique_id`,`theme_id`,`title`,`slug`,`icon`,`thumbnail_path`,`description`,`sort_order`,`created_at`,`updated_at`) VALUES (4,2,NULL,'SHORTS','playlist-shorts',NULL,NULL,'Playlist YouTube « SHORTS » (chaîne @tothy_mbengela).',3,'2026-03-27 20:27:18','2026-03-27 20:27:18');
+INSERT INTO `series` (`id`,`rubrique_id`,`theme_id`,`title`,`slug`,`icon`,`thumbnail_path`,`description`,`sort_order`,`created_at`,`updated_at`) VALUES (5,4,NULL,'PREDICATIONS','playlist-predications',NULL,NULL,'Playlist YouTube « PREDICATIONS » (chaîne @tothy_mbengela).',4,'2026-03-27 20:27:18','2026-03-27 20:27:18');
+INSERT INTO `series` (`id`,`rubrique_id`,`theme_id`,`title`,`slug`,`icon`,`thumbnail_path`,`description`,`sort_order`,`created_at`,`updated_at`) VALUES (6,4,NULL,'NE POUR VAINCRE','playlist-ne-pour-vaincre',NULL,NULL,'Playlist YouTube « NE POUR VAINCRE » (chaîne @tothy_mbengela).',5,'2026-03-27 20:27:18','2026-03-27 20:27:18');
+INSERT INTO `series` (`id`,`rubrique_id`,`theme_id`,`title`,`slug`,`icon`,`thumbnail_path`,`description`,`sort_order`,`created_at`,`updated_at`) VALUES (7,1,NULL,'LES COMMENT','playlist-les-comment',NULL,NULL,'Playlist YouTube « LES COMMENT » (chaîne @tothy_mbengela).',6,'2026-03-27 20:27:18','2026-03-27 20:27:18');
+INSERT INTO `series` (`id`,`rubrique_id`,`theme_id`,`title`,`slug`,`icon`,`thumbnail_path`,`description`,`sort_order`,`created_at`,`updated_at`) VALUES (8,4,NULL,'PAROLE DE LA SEMAINE','playlist-parole-de-la-semaine',NULL,NULL,'Playlist YouTube « PAROLE DE LA SEMAINE » (chaîne @tothy_mbengela).',7,'2026-03-27 20:27:18','2026-03-27 20:27:18');
+INSERT INTO `series` (`id`,`rubrique_id`,`theme_id`,`title`,`slug`,`icon`,`thumbnail_path`,`description`,`sort_order`,`created_at`,`updated_at`) VALUES (9,5,NULL,'FEMME DISCIPLE DE JESUS','playlist-femme-disciple-de-jesus',NULL,NULL,'Playlist YouTube « FEMME DISCIPLE DE JESUS » (chaîne @tothy_mbengela).',8,'2026-03-27 20:27:18','2026-03-27 20:27:18');
+INSERT INTO `series` (`id`,`rubrique_id`,`theme_id`,`title`,`slug`,`icon`,`thumbnail_path`,`description`,`sort_order`,`created_at`,`updated_at`) VALUES (10,6,NULL,'MES DECLARATIONS','playlist-mes-declarations',NULL,NULL,'Playlist YouTube « MES DECLARATIONS » (chaîne @tothy_mbengela).',9,'2026-03-27 20:27:18','2026-03-27 20:27:18');
+INSERT INTO `series` (`id`,`rubrique_id`,`theme_id`,`title`,`slug`,`icon`,`thumbnail_path`,`description`,`sort_order`,`created_at`,`updated_at`) VALUES (11,3,NULL,'ET SI TU PRIAIS / Court-Métrage','playlist-et-si-tu-priais-court-metrage',NULL,NULL,'Playlist YouTube « ET SI TU PRIAIS / Court-Métrage » (chaîne @tothy_mbengela).',10,'2026-03-27 20:27:18','2026-03-27 20:27:18');
 
 
 -- -----------------------------
@@ -606,7 +1027,7 @@ CREATE TABLE `shipping_settings` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Données : `shipping_settings` (1 ligne(s))
-INSERT INTO `shipping_settings` (`id`,`is_active`,`domestic_country_code`,`price_domestic`,`price_international`,`currency`,`created_at`,`updated_at`) VALUES (1,0,'CD','5.00','25.00','USD','2026-03-27 16:34:15','2026-03-27 16:34:15');
+INSERT INTO `shipping_settings` (`id`,`is_active`,`domestic_country_code`,`price_domestic`,`price_international`,`currency`,`created_at`,`updated_at`) VALUES (1,0,'CD','5.00','25.00','USD','2026-03-27 20:26:22','2026-03-27 20:26:22');
 
 
 -- -----------------------------
@@ -647,8 +1068,8 @@ CREATE TABLE `themes` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Thèmes transverses pour classer séries et contenus (ex. foi, famille).';
 
 -- Données : `themes` (2 ligne(s))
-INSERT INTO `themes` (`id`,`name`,`slug`,`icon`,`thumbnail_path`,`description`,`created_at`,`updated_at`) VALUES (1,'Parole & prière','parole-et-priere',NULL,NULL,'Enseignements et temps de prière.','2026-03-27 16:34:17','2026-03-27 16:34:17');
-INSERT INTO `themes` (`id`,`name`,`slug`,`icon`,`thumbnail_path`,`description`,`created_at`,`updated_at`) VALUES (2,'Identité & destinée','identite-et-destinee',NULL,NULL,'Vocation, accomplissement et promesses.','2026-03-27 16:34:17','2026-03-27 16:34:17');
+INSERT INTO `themes` (`id`,`name`,`slug`,`icon`,`thumbnail_path`,`description`,`created_at`,`updated_at`) VALUES (1,'Parole & prière','parole-et-priere',NULL,NULL,'Enseignements et temps de prière.','2026-03-27 20:27:18','2026-03-27 20:27:18');
+INSERT INTO `themes` (`id`,`name`,`slug`,`icon`,`thumbnail_path`,`description`,`created_at`,`updated_at`) VALUES (2,'Identité & destinée','identite-et-destinee',NULL,NULL,'Vocation, accomplissement et promesses.','2026-03-27 20:27:18','2026-03-27 20:27:18');
 
 
 -- -----------------------------
@@ -679,6 +1100,6 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Comptes publics : fidèles, acheteurs en librairie ; un partenaire doit posséder un compte ici avant tout engagement.';
 
 -- Données : `users` (1 ligne(s))
-INSERT INTO `users` (`id`,`name`,`email`,`email_verified_at`,`password`,`phone`,`whatsapp`,`country`,`city`,`address_line`,`bio`,`avatar_path`,`preferred_locale`,`birthdate`,`gender`,`remember_token`,`created_at`,`updated_at`) VALUES (1,'Test User','test@example.com','2026-03-27 16:34:17','$2y$12$LJwQtxO72arwvFXgYr.6EO2EnjlkfdyqpKhT53D3EDWG662QIALji','+33689117527',NULL,'Tuvalu',NULL,NULL,NULL,NULL,'fr',NULL,NULL,'rRMvrhZS5E','2026-03-27 16:34:17','2026-03-27 16:34:17');
+INSERT INTO `users` (`id`,`name`,`email`,`email_verified_at`,`password`,`phone`,`whatsapp`,`country`,`city`,`address_line`,`bio`,`avatar_path`,`preferred_locale`,`birthdate`,`gender`,`remember_token`,`created_at`,`updated_at`) VALUES (1,'Test User','test@example.com','2026-03-27 20:27:37','$2y$12$sbe9D5IhGUxdx9YDfAmXJ.QNGqSz0hXxlvBYRyHtnyz18SSL3HiYe','+33805132878',NULL,'Chili','Clement',NULL,NULL,NULL,'fr',NULL,NULL,'dzwUQhVBAZ','2026-03-27 20:27:37','2026-03-27 20:27:37');
 
 SET FOREIGN_KEY_CHECKS=1;
