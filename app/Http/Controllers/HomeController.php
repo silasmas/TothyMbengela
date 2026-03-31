@@ -72,7 +72,7 @@ class HomeController extends Controller
             ->upcomingFromTomorrow()
             ->orderBy('starts_at')
             ->orderBy('sort_order')
-            ->take(4)
+            ->take(2)
             ->get();
 
         $pastorAgendaPast = PastorActivity::query()
@@ -80,7 +80,7 @@ class HomeController extends Controller
             ->pastCompleted()
             ->orderByRaw('COALESCE(ends_at, starts_at) DESC')
             ->orderBy('sort_order')
-            ->take(4)
+            ->take(2)
             ->get();
 
         return view('pages.home', compact(

@@ -9,7 +9,7 @@
         <div class="sec-title text-center">
             <span class="sub-title">Agenda</span>
             <h2>Activités de la pasteure</h2>
-            <div class="text">Prochains rendez-vous, journée en cours et temps forts récents.</div>
+            <div class="text">Aperçu sur l’accueil : la journée en cours si besoin, deux rendez-vous à venir et deux activités récentes — la liste complète sur la page Agenda.</div>
         </div>
 
         @if($pastorAgendaToday->isNotEmpty())
