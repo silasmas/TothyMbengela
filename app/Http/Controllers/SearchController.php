@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Content;
+use App\Models\PastorActivity;
 use App\Models\Series;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -23,6 +24,7 @@ class SearchController extends Controller
                 'contents' => [],
                 'books' => [],
                 'series' => [],
+                'activities' => [],
             ]);
         }
 
@@ -57,6 +59,18 @@ class SearchController extends Controller
             ->take(6)
             ->get(['title', 'slug']);
 
+        $activities = PastorActivity::query()
+            ->where('is_published', true)
+            ->where(function ($query) use ($like) {
+                $query->where('title', 'like', $like)
+                    ->orWhere('description', 'like', $like)
+                    ->orWhere('location', 'like', $like)
+                    ->orWhereHas('galleryItems', fn ($q) => $q->where('caption', 'like', $like));
+            })
+            ->orderByRaw('COALESCE(ends_at, starts_at) DESC')
+            ->take(6)
+            ->get(['title', 'slug', 'starts_at']);
+
         return response()->json([
             'contents' => $contents->map(fn (Content $c) => [
                 'title' => $c->title,
@@ -71,6 +85,11 @@ class SearchController extends Controller
                 'title' => $s->title,
                 'url' => route('series.show', $s->slug),
             ])->values()->all(),
+            'activities' => $activities->map(fn (PastorActivity $a) => [
+                'title' => $a->title,
+                'url' => route('pastor-activities.show', $a),
+                'meta' => $a->starts_at?->locale('fr')->isoFormat('D MMM YYYY'),
+            ])->values()->all(),
         ]);
     }
 
@@ -81,6 +100,7 @@ class SearchController extends Controller
         $contents = collect();
         $books = collect();
         $series = collect();
+        $activities = collect();
 
         if ($q !== '') {
             $like = '%'.$q.'%';
@@ -115,8 +135,20 @@ class SearchController extends Controller
                 ->latest()
                 ->take(30)
                 ->get();
+
+            $activities = PastorActivity::query()
+                ->where('is_published', true)
+                ->where(function ($query) use ($like) {
+                    $query->where('title', 'like', $like)
+                        ->orWhere('description', 'like', $like)
+                        ->orWhere('location', 'like', $like)
+                        ->orWhereHas('galleryItems', fn ($q) => $q->where('caption', 'like', $like));
+                })
+                ->orderByRaw('COALESCE(ends_at, starts_at) DESC')
+                ->take(30)
+                ->get();
         }
 
-        return view('pages.search', compact('q', 'contents', 'books', 'series'));
+        return view('pages.search', compact('q', 'contents', 'books', 'series', 'activities'));
     }
 }

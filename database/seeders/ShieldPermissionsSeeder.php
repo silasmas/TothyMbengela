@@ -16,6 +16,7 @@ class ShieldPermissionsSeeder extends Seeder
         Artisan::call('shield:generate', [
             '--all' => true,
             '--panel' => 'admin',
+            '--no-interaction' => true,
         ]);
 
         $this->command?->info(trim(Artisan::output()));

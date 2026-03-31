@@ -19,6 +19,7 @@
         <link href="{{ asset('assets/plugins/revolution/css/navigation.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/css/alliance-engagement-pages.css') }}?v=6" rel="stylesheet">
+        <link href="{{ asset('assets/css/pastor-activities.css') }}?v=8" rel="stylesheet">
 
         <!-- Alliance overrides -->
         <style>
@@ -319,23 +320,69 @@
             .sticky-header .header-cart-wrap .cart-btn {
                 color: #fff;
             }
+            .sticky-header .auto-container {
+                padding-left: clamp(14px, 2.8vw, 52px);
+                padding-right: clamp(14px, 2.8vw, 52px);
+            }
             .sticky-header .inner-container {
                 display: flex;
                 align-items: center;
-                flex-wrap: wrap;
+                flex-wrap: nowrap;
                 justify-content: space-between;
                 width: 100%;
+                gap: 0.5rem;
             }
             .sticky-header .nav-outer {
                 flex: 1;
                 min-width: 0;
             }
+            .sticky-header .main-menu .navigation {
+                display: flex;
+                flex-wrap: nowrap;
+                align-items: center;
+            }
+            .sticky-header .main-menu .navigation > li {
+                flex-shrink: 0;
+            }
             .sticky-header-actions {
                 display: flex;
                 align-items: center;
                 flex-shrink: 0;
-                gap: 16px;
-                margin-left: 16px;
+                flex-wrap: nowrap;
+                gap: 8px;
+                margin-left: 8px;
+            }
+            @media (min-width: 992px) and (max-width: 1699px) {
+                .sticky-header .main-menu .navigation > li {
+                    margin-left: 20px !important;
+                }
+            }
+            @media (min-width: 992px) and (max-width: 1399px) {
+                .sticky-header .main-menu .navigation > li {
+                    margin-left: 14px !important;
+                }
+                .sticky-header .main-menu .navigation > li > a {
+                    font-size: 12px;
+                }
+            }
+            /* Header principal (haut de page) : pas de retour à la ligne du bloc menu + actions */
+            @media (min-width: 1200px) {
+                .main-header.header-style-one .main-box {
+                    padding-left: clamp(18px, 3.5vw, 96px);
+                    padding-right: clamp(18px, 3.5vw, 96px);
+                }
+                .main-header.header-style-one .main-menu .navigation {
+                    display: flex;
+                    flex-wrap: nowrap;
+                }
+                .main-header.header-style-one .main-menu .navigation > li {
+                    flex-shrink: 0;
+                }
+            }
+            @media (min-width: 1200px) and (max-width: 1599px) {
+                .main-header.header-style-one .main-box .main-menu .navigation > li {
+                    margin-right: 22px !important;
+                }
             }
             /* Header principal : espace entre panier, avatar et « Faire un don » */
             .main-header .outer-box.alliance-header-outer-actions {
@@ -452,6 +499,11 @@
             }
             .alliance-site-toast.show {
                 transform: translateX(-50%) translateY(0);
+            }
+            /* Toast au-dessus de la modale agenda (z-index modale ~10060) */
+            .alliance-site-toast.agenda-modal-toast {
+                z-index: 10120;
+                pointer-events: none;
             }
             .alliance-site-toast.success {
                 background: #d4edda;
@@ -879,6 +931,7 @@
         {{-- Modales hors de .page-wrapper : le thème met page-wrapper en z-index:99 alors que le backdrop Bootstrap est sur body (z-index ~1050), ce qui plaçait l’overlay AU-DESSUS de la modale et bloquait les clics. --}}
         @include('layouts.cart-offcanvas')
         @include('layouts.donate-modal')
+        @include('partials.pastor-welcome-modal')
 
         @stack('modals')
 

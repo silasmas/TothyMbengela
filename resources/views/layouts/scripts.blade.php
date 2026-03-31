@@ -259,7 +259,8 @@
                 var nc = (data.contents && data.contents.length) || 0;
                 var nb = (data.books && data.books.length) || 0;
                 var ns = (data.series && data.series.length) || 0;
-                if (nc + nb + ns === 0) {
+                var na = (data.activities && data.activities.length) || 0;
+                if (nc + nb + ns + na === 0) {
                     box.innerHTML = '<p class="search-live-empty">Aucun résultat pour cette recherche.</p>';
                     box.classList.remove('d-none');
                     return;
@@ -280,6 +281,13 @@
                     html += '<p class="search-live-section-title">Séries</p>';
                     data.series.forEach(function(item){
                         html += '<a href="' + escapeHtml(item.url) + '"><span>' + escapeHtml(item.title) + '</span><span class="search-live-meta">Série</span></a>';
+                    });
+                }
+                if (na) {
+                    html += '<p class="search-live-section-title">Agenda</p>';
+                    data.activities.forEach(function(item){
+                        var meta = item.meta ? escapeHtml(item.meta) : 'Activité';
+                        html += '<a href="' + escapeHtml(item.url) + '"><span>' + escapeHtml(item.title) + '</span><span class="search-live-meta">' + meta + '</span></a>';
                     });
                 }
                 box.innerHTML = html;

@@ -32,6 +32,10 @@
         </div>
     </div>
 
+    <p class="mt-6 text-center text-sm text-gray-600">
+        <a class="underline" href="{{ route('register', array_filter(['return' => request('return')])) }}">Pas encore de compte ? S’inscrire</a>
+    </p>
+
     <script>
     (function(){
         var csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');

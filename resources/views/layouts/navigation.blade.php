@@ -21,6 +21,9 @@
                     <li class="{{ request()->is('a-propos') ? 'current' : '' }}">
                         <a href="{{ route('about') }}">À propos</a>
                     </li>
+                    <li class="{{ request()->is('activites-pasteure*') ? 'current' : '' }}">
+                        <a href="{{ route('pastor-activities.index') }}">Agenda</a>
+                    </li>
                     <li class="dropdown {{ request()->is('contenus*') || request()->is('series*') ? 'current' : '' }}">
                         <a href="{{ route('contents.index') }}">Contenus</a>
                         <ul>
@@ -51,11 +54,6 @@
                             <li><a href="{{ url('/#prise-rendez-vous') }}">Prendre rendez-vous</a></li>
                         </ul>
                     </li>
-                    @guest
-                        <li class="{{ request()->is('login') || request()->is('register') ? 'current' : '' }}">
-                            <a href="{{ route('login') }}">Connexion</a>
-                        </li>
-                    @endguest
                 </ul>
             </nav>
         </div>
@@ -68,10 +66,17 @@
                 </a>
             </div>
             @include('layouts.nav-account-toolbar', ['accountToolbarOnDark' => false])
-            <a href="#" class="info-btn" data-bs-toggle="modal" data-bs-target="#donatePartnerModal" title="Faire un don">
-                <i class="icon fa fa-heart"></i>
-                <strong class="text">Faire un don</strong>
-            </a>
+            @guest
+                <div class="alliance-header-auth-cluster" role="group" aria-label="Connexion et inscription">
+                    <a href="{{ route('login') }}" class="alliance-header-auth-link">Connexion</a>
+                    <a href="{{ route('register') }}" class="alliance-header-auth-cta">Inscription</a>
+                </div>
+            @else
+                <a href="#" class="info-btn" data-bs-toggle="modal" data-bs-target="#donatePartnerModal" title="Faire un don">
+                    <i class="icon fa fa-heart"></i>
+                    <strong class="text">Faire un don</strong>
+                </a>
+            @endguest
             <div class="mobile-nav-toggler"><span class="icon lnr-icon-bars"></span></div>
         </div>
     </div>
@@ -127,7 +132,7 @@
         <div class="search-inner" data-search-suggest-url="{{ route('search.suggest') }}">
             <form method="GET" action="{{ route('search') }}" id="header-search-form">
                 <div class="form-group">
-                    <input type="search" name="q" id="header-search-q" value="" autocomplete="off" placeholder="Rechercher des contenus, séries, livres…" required>
+                    <input type="search" name="q" id="header-search-q" value="" autocomplete="off" placeholder="Rechercher contenus, livres, séries, agenda…" required>
                     <button type="submit"><i class="fa fa-search"></i></button>
                 </div>
             </form>
@@ -165,9 +170,16 @@
                         </a>
                     </div>
                     @include('layouts.nav-account-toolbar', ['accountToolbarOnDark' => true])
-                    <a href="#" class="theme-btn btn-style-one btn-sm py-2 px-3" data-bs-toggle="modal" data-bs-target="#donatePartnerModal" style="white-space:nowrap;">
-                        <span class="btn-title"><i class="fa fa-heart"></i> Don</span>
-                    </a>
+                    @guest
+                        <div class="alliance-sticky-auth-cluster d-flex align-items-center gap-1 flex-shrink-0">
+                            <a href="{{ route('login') }}" class="btn btn-sm alliance-sticky-auth-connexion py-2 px-2 px-sm-3">Connexion</a>
+                            <a href="{{ route('register') }}" class="theme-btn btn-style-one btn-sm py-2 px-2 px-sm-3" style="white-space:nowrap;"><span class="btn-title">Inscription</span></a>
+                        </div>
+                    @else
+                        <a href="#" class="theme-btn btn-style-one btn-sm py-2 px-3" data-bs-toggle="modal" data-bs-target="#donatePartnerModal" style="white-space:nowrap;">
+                            <span class="btn-title"><i class="fa fa-heart"></i> Don</span>
+                        </a>
+                    @endguest
                 </div>
             </div>
         </div>

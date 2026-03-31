@@ -50,6 +50,7 @@
                                 <ul class="user-links">
                                     <li><a href="{{ route('home') }}">Accueil</a></li>
                                     <li><a href="{{ route('about') }}">À propos</a></li>
+                                    <li><a href="{{ route('pastor-activities.index') }}">Agenda</a></li>
                                     <li><a href="{{ route('contents.index') }}">Contenus</a></li>
                                     <li><a href="{{ route('series.index') }}">Séries</a></li>
                                     <li><a href="{{ route('books.index') }}">Boutique</a></li>

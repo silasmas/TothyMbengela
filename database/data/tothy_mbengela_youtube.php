@@ -4,6 +4,12 @@
  * Données issues de la page playlists @tothy_mbengela et du flux RSS de la chaîne.
  * Chaîne : https://www.youtube.com/@tothy_mbengela
  * RSS : https://www.youtube.com/feeds/videos.xml?channel_id=UCLp18bcg9ZMQWXaaqtqJn_A
+ *
+ * Mise à jour des entrées `rss_videos` : ajouter les dernières vidéos depuis le RSS
+ * (yt:videoId, titre, published) puis lancer `php artisan db:seed --class=MinistryYoutubeSeeder`
+ * ou un import ciblé. Les doublons de `video_id` sont ignorés côté seeder (updateOrCreate).
+ *
+ * Dernière révision manuelle du fichier : 2026-03-31 (alignement documentation / dump SQL).
  */
 return [
     'channel_id' => 'UCLp18bcg9ZMQWXaaqtqJn_A',

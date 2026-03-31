@@ -12,27 +12,43 @@ class DatabaseSeeder extends Seeder
     use WithoutModelEvents;
 
     /**
-     * Seed the application's database.
+     * Données de démonstration cohérentes avec le site Alliance / Tothy Mbengela.
+     *
+     * Comptes de test (à changer en production) :
+     * - Site : visiteur@alliance-ministere.com / password
+     * - Admin Filament : admin@alliance-ministere.com / password
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::query()->updateOrCreate(
+            ['email' => 'visiteur@alliance-ministere.com'],
+            [
+                'name' => 'Visiteur démonstration',
+                'password' => 'password',
+                'email_verified_at' => now(),
+                'preferred_locale' => 'fr',
+            ],
+        );
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
-
-        Admin::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@example.com',
-        ]);
+        $admin = Admin::query()->updateOrCreate(
+            ['email' => 'admin@alliance-ministere.com'],
+            [
+                'name' => 'Administrateur Alliance',
+                'password' => 'password',
+            ],
+        );
+        if ($admin->email_verified_at === null) {
+            $admin->forceFill(['email_verified_at' => now()])->save();
+        }
 
         $this->call(ShieldPermissionsSeeder::class);
         $this->call(AdminSuperAdminSeeder::class);
 
         $this->call(MinistryYoutubeSeeder::class);
         $this->call(BookSeeder::class);
+        $this->call(ShippingSettingsSeeder::class);
         $this->call(TeamMemberSeeder::class);
+        $this->call(TestimonialSeeder::class);
+        $this->call(PastorActivitySeeder::class);
     }
 }

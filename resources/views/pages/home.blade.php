@@ -162,6 +162,8 @@
     <!-- End Fun Fact Section -->
     @endif
 
+    @include('partials.pastor-agenda-home')
+
     {{-- ═══ LIVRES (Features Style) ═══ --}}
     <!-- Features Section - Livres de la Pasteure -->
     <section class="home5-features-section">

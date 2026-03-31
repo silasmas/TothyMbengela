@@ -28,7 +28,9 @@ class AdminSuperAdminSeeder extends Seeder
             $role->syncPermissions($permissions);
         }
 
-        $primary = Admin::query()->find(1);
+        $primary = Admin::query()->where('email', 'admin@alliance-ministere.com')->first()
+            ?? Admin::query()->orderBy('id')->first();
+
         if ($primary && ! $primary->hasRole($role)) {
             $primary->assignRole($role);
         }

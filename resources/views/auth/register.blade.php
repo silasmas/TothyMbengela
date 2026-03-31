@@ -30,7 +30,7 @@
     </div>
 
     <p class="mt-6 text-center text-sm text-gray-600">
-        <a class="underline" href="{{ route('login') }}">Déjà inscrit ? Se connecter</a>
+        <a class="underline" href="{{ route('login', array_filter(['return' => request('return')])) }}">Déjà inscrit ? Se connecter</a>
     </p>
 
     <script>

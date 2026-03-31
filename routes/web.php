@@ -10,6 +10,7 @@ use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DonationPaymentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\PastorActivityController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SeriesController;
@@ -20,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 // ─── Pages publiques ──────────────────────────────────────
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/a-propos', [HomeController::class, 'about'])->name('about');
+Route::get('/activites-pasteure', [PastorActivityController::class, 'index'])->name('pastor-activities.index');
+Route::get('/activites-pasteure/{pastorActivity:slug}', [PastorActivityController::class, 'show'])->name('pastor-activities.show');
 Route::get('/equipe/{teamMember:slug}', [TeamMemberController::class, 'show'])->name('team.show');
 
 // Contenus (prédications, enseignements, etc.)
@@ -84,9 +87,10 @@ Route::get('/newsletter/confirmer/{token}', [NewsletterController::class, 'confi
     ->where('token', '[A-Za-z0-9]+');
 
 // ─── Espace utilisateur (Breeze) ──────────────────────────
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Même écran que « Mon compte » (après connexion, liens Breeze/OTP vers dashboard).
+Route::get('/dashboard', [AccountController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/mon-compte', [AccountController::class, 'index'])->name('account.index');

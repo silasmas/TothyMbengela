@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Content;
+use App\Models\PastorActivity;
 use App\Models\Rubrique;
 use App\Models\Series;
 use App\Models\TeamMember;
@@ -59,6 +60,29 @@ class HomeController extends Controller
             ->orderBy('sort_order')
             ->get();
 
+        $pastorAgendaToday = PastorActivity::query()
+            ->published()
+            ->overlappingToday()
+            ->orderBy('starts_at')
+            ->orderBy('sort_order')
+            ->get();
+
+        $pastorAgendaUpcoming = PastorActivity::query()
+            ->published()
+            ->upcomingFromTomorrow()
+            ->orderBy('starts_at')
+            ->orderBy('sort_order')
+            ->take(4)
+            ->get();
+
+        $pastorAgendaPast = PastorActivity::query()
+            ->published()
+            ->pastCompleted()
+            ->orderByRaw('COALESCE(ends_at, starts_at) DESC')
+            ->orderBy('sort_order')
+            ->take(4)
+            ->get();
+
         return view('pages.home', compact(
             'featuredContents',
             'latestContents',
@@ -67,6 +91,9 @@ class HomeController extends Controller
             'books',
             'booksCartPayload',
             'testimonials',
+            'pastorAgendaToday',
+            'pastorAgendaUpcoming',
+            'pastorAgendaPast',
         ));
     }
 
