@@ -145,4 +145,83 @@ class Slide extends Model
             ->orderBy('sort_order')
             ->orderBy('id');
     }
+
+    /**
+     * Définition des slides affichées par défaut (modifiables / supprimables en admin).
+     *
+     * @return list<array<string, mixed>>
+     */
+    public static function defaultPayloads(): array
+    {
+        return [
+            [
+                'title' => 'Bienvenue chez Alliance',
+                'subtitle' => 'Ministère Tothy Mbengela',
+                'body' => 'Livres, ressources et enseignements pour votre édification.',
+                'image_path' => null,
+                'slide_type' => self::TYPE_CUSTOM,
+                'book_id' => null,
+                'primary_action' => self::ACTION_SHOP,
+                'primary_label' => 'Voir la boutique',
+                'primary_url' => null,
+                'secondary_action' => self::ACTION_ABOUT,
+                'secondary_label' => 'En savoir plus',
+                'secondary_url' => null,
+                'sort_order' => 10,
+                'is_active' => true,
+            ],
+            [
+                'title' => 'Écoutez la Parole',
+                'subtitle' => 'Contenus & enseignements',
+                'body' => 'Prédications, séries et ressources pour grandir dans la foi.',
+                'image_path' => null,
+                'slide_type' => self::TYPE_CUSTOM,
+                'book_id' => null,
+                'primary_action' => self::ACTION_CONTENTS,
+                'primary_label' => 'Voir les contenus',
+                'primary_url' => null,
+                'secondary_action' => self::ACTION_SHOP,
+                'secondary_label' => 'Boutique',
+                'secondary_url' => null,
+                'sort_order' => 20,
+                'is_active' => true,
+            ],
+            [
+                'title' => 'Soutenez le ministère',
+                'subtitle' => 'Don & partenariat',
+                'body' => 'Votre générosité nous permet de partager la Parole de Dieu et d’accompagner des vies à travers le monde.',
+                'image_path' => null,
+                'slide_type' => self::TYPE_DONATE,
+                'book_id' => null,
+                'primary_action' => self::ACTION_DONATE,
+                'primary_label' => 'Faire un don',
+                'primary_url' => null,
+                'secondary_action' => self::ACTION_PARTNER,
+                'secondary_label' => 'Devenir partenaire',
+                'secondary_url' => null,
+                'sort_order' => 30,
+                'is_active' => true,
+            ],
+        ];
+    }
+
+    /**
+     * Crée les slides par défaut uniquement si la table est vide.
+     *
+     * @return int Nombre de slides créées
+     */
+    public static function ensureDefaults(): int
+    {
+        if (static::query()->exists()) {
+            return 0;
+        }
+
+        $created = 0;
+        foreach (static::defaultPayloads() as $payload) {
+            static::query()->create($payload);
+            $created++;
+        }
+
+        return $created;
+    }
 }

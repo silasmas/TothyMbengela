@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Slides\Tables;
 
 use App\Models\Slide;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
@@ -60,7 +61,10 @@ class SlidesTable
             ])
             ->recordActions([
                 EditAction::make(),
+                DeleteAction::make(),
             ])
+            ->emptyStateHeading('Aucune slide')
+            ->emptyStateDescription('Les slides par défaut apparaissent après migration. Créez-en une ou relancez le seeder.')
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
