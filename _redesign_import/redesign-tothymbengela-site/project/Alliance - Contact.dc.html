@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Work+Sans:wght@400;500;600;700&family=Alex+Brush&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+body{margin:0;background:#F7F5F1;font-family:'Work Sans',sans-serif;color:#221E17}
+a{color:#C9A24B}
+a:hover{color:#AD8339}
+</style>
+</helmet>
+
+<div style="--bg:#F7F5F1;--bg-header:rgba(247,245,241,0.94);--text:#221E17;--muted1:#4A443C;--muted2:#5C5850;--muted3:#6B6156;--soft:#ECE8E0;--card:#FFFFFF;--line:#DAD5CC;--panel:#242019;--panel-hover:#332B21;--accent:#C9A24B;--accent-dark:#AD8339;--accent-light:#E8D4A0;--dur-hover:0.35s;max-width:1440px;margin:0 auto;overflow:hidden;background:var(--bg);color:var(--text)">
+
+<dc-import name="Header" accueil-active="0" apropos-active="0" agenda-active="0" contenus-active="0" boutique-active="0" contact-active="1" hint-size="100%,78px"></dc-import>
+<dc-import name="AnnounceBar" hint-size="100%,48px"></dc-import>
+
+<div style="padding:200px 64px 60px">
+<div style="font-size:13px;color:var(--muted3)"><a href="Alliance - Accueil.dc.html" style="color:var(--muted3);text-decoration:none">Accueil</a> / <span style="color:var(--text)">Contact</span></div>
+<div style="font-family:'Playfair Display',serif;font-size:48px;font-weight:600;margin-top:14px">Prenez rendez-vous avec la Pasteure</div>
+<p style="font-size:16px;color:var(--muted1);margin-top:14px;max-width:600px">Besoin d'un entretien spirituel, d'un conseil ou d'un accompagnement personnel ? Remplissez le formulaire et nous vous recontacterons rapidement.</p>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:70px;padding:0 64px 100px">
+<div style="font-size:14px;line-height:2.4;color:var(--muted2)">
+<div style="font-weight:600;color:var(--text);margin-bottom:4px">Nous rendre visite</div>Centre Missionnaire Philadelphie<br>N°17, Av. Nyangwe 1, Q/ Lido Golf — Lubumbashi
+<div style="font-weight:600;color:var(--text);margin:20px 0 4px">Appelez-nous</div>+243 816 681 958
+<div style="font-weight:600;color:var(--text);margin:20px 0 4px">Adresse e-mail</div>contact@alliance-ministere.com
+<div style="font-weight:600;color:var(--text);margin:20px 0 4px">Horaires</div>Lun – Sam : 8h00 – 18h00
+</div>
+<div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:44px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px">
+<div style="grid-column:1/-1"><div style="font-size:13px;font-weight:600;margin-bottom:8px">Nom complet</div><div style="padding:14px 16px;border:1px solid var(--line);border-radius:8px;color:var(--muted3);font-size:14px">Votre nom</div></div>
+<div><div style="font-size:13px;font-weight:600;margin-bottom:8px">Adresse e-mail</div><div style="padding:14px 16px;border:1px solid var(--line);border-radius:8px;color:var(--muted3);font-size:14px">vous@exemple.com</div></div>
+<div><div style="font-size:13px;font-weight:600;margin-bottom:8px">Téléphone (optionnel)</div><div style="padding:14px 16px;border:1px solid var(--line);border-radius:8px;color:var(--muted3);font-size:14px">+243 ...</div></div>
+<div><div style="font-size:13px;font-weight:600;margin-bottom:8px">Date souhaitée</div><div style="padding:14px 16px;border:1px solid var(--line);border-radius:8px;color:var(--muted3);font-size:14px">jj/mm/aaaa</div></div>
+<div><div style="font-size:13px;font-weight:600;margin-bottom:8px">Heure souhaitée</div><div style="padding:14px 16px;border:1px solid var(--line);border-radius:8px;color:var(--muted3);font-size:14px">Choisir un créneau</div></div>
+<div style="grid-column:1/-1"><div style="font-size:13px;font-weight:600;margin-bottom:8px">Motif du rendez-vous (optionnel)</div><div style="padding:14px 16px;border:1px solid var(--line);border-radius:8px;color:var(--muted3);font-size:14px;height:70px">Décrivez brièvement votre besoin</div></div>
+<div style="grid-column:1/-1;padding:16px 30px;background:var(--panel);color:#fff;font-size:15px;font-weight:600;border-radius:8px;text-align:center;cursor:pointer;transition:background var(--dur-hover) ease" style-hover="background:var(--panel-hover)">Demander un rendez-vous</div>
+</div>
+</div>
+
+<dc-import name="Footer" hint-size="100%,400px"></dc-import>
+<dc-import name="DonModal" hint-size="0,0"></dc-import>
+<dc-import name="RevueModal" hint-size="0,0"></dc-import>
+
+</div>
+
+</x-dc>
+</body>
+</html>

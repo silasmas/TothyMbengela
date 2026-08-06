@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
     <head>
         <meta charset="utf-8">
@@ -7,18 +7,21 @@
 
         <title>{{ config('app.name', 'Alliance') }} — Connexion</title>
 
-        <link rel="shortcut icon" href="{{ asset('assets/logo/logo-alliance.png') }}" type="image/png">
-        <link rel="icon" href="{{ asset('assets/logo/logo-alliance.png') }}" type="image/png">
-
+        <link rel="shortcut icon" href="{{ asset('assets/logo/logo-alliance-mark.png') }}" type="image/png">
+        <link rel="icon" href="{{ asset('assets/logo/logo-alliance-mark.png') }}" type="image/png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
         <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/css/fontawesome.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/css/alliance-brand.css') }}?v=1" rel="stylesheet">
 
         <style>
             body.alliance-auth-body {
                 min-height: 100vh;
                 margin: 0;
-                background: linear-gradient(165deg, #faf7f0 0%, #efe6d6 40%, #f8f4ec 100%);
+                background: linear-gradient(165deg, #FBF7F1 0%, #F0E4D8 40%, #F7F1E8 100%);
             }
             .alliance-auth-shell {
                 min-height: 100vh;
@@ -33,7 +36,7 @@
             .alliance-auth-card {
                 border-radius: 14px !important;
                 box-shadow: 0 18px 50px rgba(30, 20, 10, 0.08) !important;
-                border: 1px solid rgba(200, 146, 42, 0.18) !important;
+                border: 1px solid rgba(168, 108, 60, 0.22) !important;
             }
             .alliance-auth-card .block {
                 width: 100%;
@@ -54,13 +57,13 @@
                 background: #fdfcfa !important;
             }
             .alliance-auth-card input:focus {
-                border-color: #c8922a !important;
+                border-color: #A86C3C !important;
                 box-shadow: 0 0 0 3px rgba(200, 146, 42, 0.2) !important;
                 outline: none !important;
             }
             .alliance-auth-card button.inline-flex,
             .alliance-auth-card .inline-flex.items-center.px-4 {
-                background: linear-gradient(180deg, #d4a84a 0%, #c8922a 100%) !important;
+                background: linear-gradient(180deg, #d4a84a 0%, #A86C3C 100%) !important;
                 color: #fff !important;
                 border: none !important;
                 border-radius: 8px !important;

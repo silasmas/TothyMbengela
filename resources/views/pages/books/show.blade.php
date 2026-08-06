@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('page_banner_title', $book->title)
 
@@ -10,22 +10,15 @@
 @section('content')
 
 @php
-    $mainImage = $book->cover_path
-        ? Storage::disk('public')->url($book->cover_path)
-        : asset('assets/images/resource/about-1.jpg');
+    $imageUrls = $book->imageUrls();
+    $mainImage = $imageUrls[0];
     $priceFormatted = $book->price !== null
-        ? number_format((float) $book->price, 2, ',', ' ') . ' ' . ($book->currency ?? 'USD')
+        ? number_format((float) $book->price, 2, ',', ' ') . ' USD'
         : null;
     $shareUrl = url()->current();
     $shareText = rawurlencode($book->title . ' — Alliance');
-    $cartItemShow = [
-        'id' => $book->id,
-        'title' => $book->title,
-        'price' => $book->price !== null ? (float) $book->price : null,
-        'currency' => $book->currency ?? 'USD',
-        'cover_url' => $book->cover_url,
-    ];
-    $inStock = $book->stock_quantity === null || $book->stock_quantity > 0;
+    $cartItemShow = $book->toCartItem();
+    $inStock = $book->isPurchasable();
     $descriptionPreview = $book->description
         ? Str::limit(strip_tags($book->description), 220)
         : null;
@@ -39,32 +32,39 @@
             <div class="row">
                 <div class="col-lg-6 col-xl-6">
                     <div class="bxslider">
+                        @foreach($imageUrls as $imgUrl)
                         <div class="slider-content">
                             <figure class="image-box">
-                                <a href="{{ $mainImage }}" class="lightbox-image" data-fancybox="gallery-book" data-caption="{{ e($book->title) }}">
-                                    <img src="{{ $mainImage }}" alt="{{ $book->title }}">
+                                <a href="{{ $imgUrl }}" class="lightbox-image" data-fancybox="gallery-book" data-caption="{{ e($book->title) }}">
+                                    <img src="{{ $imgUrl }}" alt="{{ $book->title }}">
                                 </a>
                             </figure>
+                            @if(count($imageUrls) > 1)
                             <div class="slider-pager">
                                 <ul class="thumb-box">
+                                    @foreach($imageUrls as $thumbIdx => $thumbUrl)
                                     <li>
-                                        <a class="active" data-slide-index="0" href="#">
-                                            <figure><img src="{{ $mainImage }}" alt=""></figure>
+                                        <a class="{{ $loop->parent->first && $loop->first ? 'active' : '' }}" data-slide-index="{{ $thumbIdx }}" href="#">
+                                            <figure><img src="{{ $thumbUrl }}" alt=""></figure>
                                         </a>
                                     </li>
+                                    @endforeach
                                 </ul>
                             </div>
+                            @endif
                         </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-lg-6 col-xl-6 product-info">
                     <div class="product-details__top">
                         <h3 class="product-details__title">
                             {{ $book->title }}
-                            @if($priceFormatted)
-                                <span>{{ $priceFormatted }}</span>
+                            @if($book->price !== null)
+                                <span class="js-alliance-price" data-price-usd="{{ (float) $book->price }}">{{ $priceFormatted }}</span>
                             @endif
                         </h3>
+                        <p class="small text-muted mb-0">{{ $book->product_type_label }}</p>
                     </div>
                     <div class="product-details__reveiw">
                         <i class="fa fa-star"></i>
@@ -80,18 +80,9 @@
                         @endif
                         <p class="product-details__content-text2">
                             @if($book->isbn)
-                                <strong>RÉF.</strong> {{ $book->isbn }}<br>
+                                <strong>RÉF.</strong> {{ $book->isbn }}
                             @else
-                                <strong>RÉF.</strong> {{ $book->slug }}<br>
-                            @endif
-                            @if($book->stock_quantity !== null)
-                                @if($inStock)
-                                    <span class="text-success">Disponible ({{ $book->stock_quantity }} en stock)</span>
-                                @else
-                                    <span class="text-danger">Rupture de stock</span>
-                                @endif
-                            @else
-                                <span>Disponibilité sur demande</span>
+                                <strong>RÉF.</strong> {{ $book->slug }}
                             @endif
                         </p>
                     </div>
@@ -113,11 +104,14 @@
                                 <button type="button" class="theme-btn btn-style-one js-add-to-cart" data-item='@json($cartItemShow)'>
                                     <span class="btn-title"><i class="fa fa-cart-plus"></i> Ajouter au panier</span>
                                 </button>
+                                <button type="button" class="theme-btn btn-style-two js-buy-now ms-1" data-item='@json($cartItemShow)'>
+                                    <span class="btn-title"><i class="fa fa-bolt"></i> Acheter</span>
+                                </button>
                             @endif
                         </div>
                         <div class="product-details__buttons-2">
                             <a href="{{ route('books.index') }}" class="theme-btn btn-style-one">
-                                <span class="btn-title"><i class="fa fa-th-large"></i> Autres ouvrages</span>
+                                <span class="btn-title"><i class="fa fa-th-large"></i> Boutique</span>
                             </a>
                         </div>
                     </div>
@@ -186,7 +180,7 @@
                                                 @if($rev->avatar_path)
                                                     <img src="{{ Storage::disk('public')->url($rev->avatar_path) }}" alt="">
                                                 @else
-                                                    <img src="https://ui-avatars.com/api/?name={{ urlencode($rev->name) }}&background=C8922A&color=fff&size=160" alt="">
+                                                    <img src="https://ui-avatars.com/api/?name={{ urlencode($rev->name) }}&background=A86C3C&color=fff&size=160" alt="">
                                                 @endif
                                             </figure>
                                             @if($rev->rating)

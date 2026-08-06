@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div data-role="site-header" style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px clamp(20px,5vw,64px);background:var(--bg-header);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)">
+<a href="Alliance - Accueil.dc.html" style="display:block"><img src="assets/logo-alliance.png" alt="Alliance" style="height:84px;width:auto;display:block"></a>
+
+<sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;gap:34px;font-size:15px;font-weight:500">
+<a href="Alliance - Accueil.dc.html" style="text-decoration:none;color:var(--text);position:relative;padding-bottom:6px">Accueil<div style="position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--accent);opacity:{{ accueilActive }}"></div></a>
+<a href="Alliance - A propos.dc.html" style="text-decoration:none;color:var(--text);position:relative;padding-bottom:6px">À propos<div style="position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--accent);opacity:{{ aproposActive }}"></div></a>
+<a href="Alliance - Agenda.dc.html" style="text-decoration:none;color:var(--text);position:relative;padding-bottom:6px">Agenda<div style="position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--accent);opacity:{{ agendaActive }}"></div></a>
+<a href="Alliance - Contenus.dc.html" style="text-decoration:none;color:var(--text);position:relative;padding-bottom:6px">Contenus<div style="position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--accent);opacity:{{ contenusActive }}"></div></a>
+<a href="Alliance - Boutique.dc.html" style="text-decoration:none;color:var(--text);position:relative;padding-bottom:6px">Boutique<div style="position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--accent);opacity:{{ boutiqueActive }}"></div></a>
+<a href="Alliance - Contact.dc.html" style="text-decoration:none;color:var(--text);position:relative;padding-bottom:6px">Contact<div style="position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--accent);opacity:{{ contactActive }}"></div></a>
+</div>
+<div data-open-don-modal="1" style="padding:12px 26px;background:var(--accent);color:#fff;font-size:14px;font-weight:600;border-radius:8px;cursor:pointer;transition:background .2s ease,transform .2s ease" style-hover="background:var(--accent-dark);transform:translateY(-1px)">Faire un don</div>
+</sc-if>
+
+<sc-if value="{{ isMobileNav }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ openDrawer }}" style="font-size:26px;cursor:pointer;color:var(--text);padding:4px">☰</div>
+</sc-if>
+</div>
+
+<sc-if value="{{ drawerOpen }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ closeDrawer }}" style="position:fixed;inset:0;z-index:250;background:rgba(20,16,10,.5)"></div>
+<div style="position:fixed;top:0;right:0;height:100vh;width:min(78vw,300px);z-index:251;background:var(--card);box-shadow:-10px 0 30px rgba(0,0,0,.2);display:flex;flex-direction:column;padding:24px 28px">
+<div style="display:flex;justify-content:flex-end"><div onClick="{{ closeDrawer }}" style="cursor:pointer;font-size:26px;color:var(--text)">×</div></div>
+<div style="display:flex;flex-direction:column;gap:26px;margin-top:20px;font-size:17px;font-weight:600;color:var(--text)">
+<a href="Alliance - Accueil.dc.html" style="text-decoration:none;color:var(--text)">Accueil</a>
+<a href="Alliance - A propos.dc.html" style="text-decoration:none;color:var(--text)">À propos</a>
+<a href="Alliance - Agenda.dc.html" style="text-decoration:none;color:var(--text)">Agenda</a>
+<a href="Alliance - Contenus.dc.html" style="text-decoration:none;color:var(--text)">Contenus</a>
+<a href="Alliance - Boutique.dc.html" style="text-decoration:none;color:var(--text)">Boutique</a>
+<a href="Alliance - Contact.dc.html" style="text-decoration:none;color:var(--text)">Contact</a>
+</div>
+<div data-open-don-modal="1" onClick="{{ closeDrawer }}" style="margin-top:32px;text-align:center;padding:14px 26px;background:var(--accent);color:#fff;font-size:15px;font-weight:600;border-radius:8px;cursor:pointer">Faire un don</div>
+</div>
+</sc-if>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { isDesktop: true, drawerOpen: false };
+  componentDidMount() {
+    this._onResize = () => this.setState({ isDesktop: window.innerWidth >= 900 });
+    this._onResize();
+    window.addEventListener('resize', this._onResize);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize);
+  }
+  renderVals() {
+    return {
+      isDesktop: this.state.isDesktop,
+      isMobileNav: !this.state.isDesktop,
+      drawerOpen: this.state.drawerOpen && !this.state.isDesktop,
+      openDrawer: () => this.setState({ drawerOpen: true }),
+      closeDrawer: () => this.setState({ drawerOpen: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-{{-- Règles CSS partagées : inclure dans un bloc <style> parent --}}
+﻿{{-- Règles CSS partagées : inclure dans un bloc <style> parent --}}
     .alliance-series-episodes__heading {
         font-size: 1rem;
         font-weight: 800;
@@ -32,7 +32,7 @@
         color: inherit;
     }
     .alliance-series-episode-card.is-current {
-        border-color: #c8922a;
+        border-color: #A86C3C;
         box-shadow: 0 0 0 1px rgba(200, 146, 42, 0.25);
     }
     .alliance-series-episode-card__num {

@@ -27,9 +27,9 @@ class BookResource extends Resource
 
     protected static ?int $navigationSort = 20;
 
-    protected static ?string $modelLabel = 'livre';
+    protected static ?string $modelLabel = 'produit';
 
-    protected static ?string $pluralModelLabel = 'livres';
+    protected static ?string $pluralModelLabel = 'produits';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBookOpen;
 

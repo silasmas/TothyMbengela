@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Work+Sans:wght@400;500;600;700&family=Alex+Brush&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+body{margin:0;background:oklch(97.5% 0.012 75);font-family:'Work Sans',sans-serif;color:var(--panel)}
+a{color:var(--accent)}
+a:hover{color:var(--accent-dark)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(var(--reveal-dist,24px))}to{opacity:1;transform:translateY(0)}}
+@keyframes heroRevueBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+</style>
+</helmet>
+
+<div style="--bg:{{ theme.bg }};--bg-header:{{ theme.bgHeader }};--text:{{ theme.text }};--muted1:{{ theme.muted1 }};--muted2:{{ theme.muted2 }};--muted3:{{ theme.muted3 }};--soft:{{ theme.soft }};--card:{{ theme.card }};--line:{{ theme.line }};--panel:{{ theme.panel }};--panel-hover:{{ theme.panelHover }};--accent:{{ theme.accent }};--accent-dark:{{ theme.accentDark }};--accent-light:{{ theme.accentLight }};--dur-hover:{{ theme.durHover }};--dur-reveal:{{ theme.durReveal }};--lift-sm:{{ theme.liftSm }};--lift-lg:{{ theme.liftLg }};--reveal-dist:{{ theme.revealDist }};max-width:1440px;margin:0 auto;overflow:hidden;background:var(--bg);color:var(--text);transition:background .4s ease,color .4s ease">
+
+<dc-import name="Header" accueil-active="1" apropos-active="0" agenda-active="0" contenus-active="0" boutique-active="0" contact-active="0" hint-size="100%,78px"></dc-import>
+<dc-import name="AnnounceBar" hint-size="100%,48px"></dc-import>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:56px;padding:174px 64px 0;align-items:center">
+<div style="animation:fadeUp var(--dur-reveal) ease both">
+<div style="width:60px;height:2px;background:var(--accent);margin-bottom:24px"></div>
+<div style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:18px">Ministère Alliance</div>
+<div style="font-family:'Playfair Display',serif;font-size:56px;line-height:1.12;font-weight:600;font-style:italic">Bienvenue<br>chez Alliance</div>
+<p style="font-size:17px;line-height:1.7;max-width:520px;margin:26px 0 28px;color:var(--muted1)">Ministère de la Pasteure Tothy Mbengela — prédications, enseignements et ressources spirituelles pour accompagner votre marche avec Dieu, ici et à travers le monde.</p>
+<div style="display:flex;flex-direction:column;gap:10px;margin-bottom:34px">
+<div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted2)"><span style="width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0"></span>Pasteure du ministère Alliance</div>
+<div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted2)"><span style="width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0"></span>Auteure de 4 ouvrages</div>
+<div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted2)"><span style="width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0"></span>Prédicatrice &amp; enseignante</div>
+</div>
+<div style="display:flex;gap:16px">
+<div style="padding:16px 30px;background:var(--panel);color:#fff;font-size:15px;font-weight:600;border-radius:8px;cursor:pointer;transition:background var(--dur-hover) ease,transform var(--dur-hover) ease" style-hover="background:var(--panel-hover);transform:translateY(var(--lift-sm))">Découvrir les contenus</div>
+<div style="padding:16px 30px;border:1px solid var(--line);font-size:15px;font-weight:600;border-radius:8px;cursor:pointer;transition:background var(--dur-hover) ease" style-hover="background:var(--soft)">En savoir plus</div>
+</div>
+</div>
+<div style="position:relative;animation:fadeUp var(--dur-reveal) ease .15s both">
+<div style="height:400px;border-radius:12px;overflow:hidden">
+<image-slot id="hero-portrait" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/assets/images/Im4.jpg.jpeg" placeholder="Portrait pasteure"></image-slot>
+</div>
+<div data-open-revue-modal="1" style="position:absolute;left:16px;right:16px;bottom:16px;background:var(--card);border-radius:12px;box-shadow:0 16px 40px rgba(0,0,0,.2);padding:16px 18px;display:flex;gap:12px;align-items:center;cursor:pointer;animation:heroRevueBounce 2.6s ease-in-out infinite;transition:box-shadow .25s ease" style-hover="box-shadow:0 22px 48px rgba(0,0,0,.28)">
+<div style="width:48px;height:64px;border-radius:3px;overflow:hidden;flex-shrink:0;position:relative">
+<image-slot id="revue-mini-cover" shape="rect" style="width:100%;height:100%" placeholder="Revue"></image-slot>
+<div style="position:absolute;inset:0;background:rgba(36,32,25,.55);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;transition:backdrop-filter .3s ease,background .3s ease" style-hover="backdrop-filter:blur(1px);background:rgba(36,32,25,.25)">👁</div>
+</div>
+<div>
+<div style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:4px">Bientôt disponible</div>
+<div style="font-size:14px;font-weight:600;line-height:1.3">La Revue Alliance</div>
+<div style="font-size:12px;color:var(--muted3);margin-top:2px">Nouveau · trimestriel</div>
+</div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:10px;padding-left:14px;border-left:1px solid var(--line)">
+<div style="font-size:13px;font-weight:600;color:var(--accent);white-space:nowrap">Découvrir →</div>
+</div>
+</div>
+</div>
+</div>
+
+<div data-reveal="1" style="padding:150px 64px 40px">
+<div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600">Nos services</div>
+<div style="font-family:'Playfair Display',serif;font-size:40px;font-weight:600;margin:14px 0 50px">À votre service</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px">
+<div><div style="font-family:'Playfair Display',serif;font-size:32px;color:var(--accent)">01</div><div style="font-size:20px;font-weight:600;margin-top:10px">Proverbes</div><div style="font-size:14px;color:var(--muted1);margin-top:6px">2 contenus disponibles</div></div>
+<div><div style="font-family:'Playfair Display',serif;font-size:32px;color:var(--accent)">02</div><div style="font-size:20px;font-weight:600;margin-top:10px">Minutes de ta destinée</div><div style="font-size:14px;color:var(--muted1);margin-top:6px">3 contenus disponibles</div></div>
+<div><div style="font-family:'Playfair Display',serif;font-size:32px;color:var(--accent)">03</div><div style="font-size:20px;font-weight:600;margin-top:10px">S'accomplir</div><div style="font-size:14px;color:var(--muted1);margin-top:6px">3 contenus disponibles</div></div>
+<div><div style="font-family:'Playfair Display',serif;font-size:32px;color:var(--accent)">04</div><div style="font-size:20px;font-weight:600;margin-top:10px">Prédications</div><div style="font-size:14px;color:var(--muted1);margin-top:6px">8 contenus disponibles</div></div>
+<div><div style="font-family:'Playfair Display',serif;font-size:32px;color:var(--accent)">05</div><div style="font-size:20px;font-weight:600;margin-top:10px">Femme disciple de Jésus</div><div style="font-size:14px;color:var(--muted1);margin-top:6px">1 contenu disponible</div></div>
+<div><div style="font-family:'Playfair Display',serif;font-size:32px;color:var(--accent)">06</div><div style="font-size:20px;font-weight:600;margin-top:10px">Mes déclarations</div><div style="font-size:14px;color:var(--muted1);margin-top:6px">7 contenus disponibles</div></div>
+</div>
+</div>
+
+<div data-reveal="1" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:60px;padding:100px 64px;background:var(--soft);margin-top:60px;align-items:center;border-radius:16px">
+<div style="height:460px;border-radius:12px;overflow:hidden">
+<image-slot id="about-photo" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/assets/images/Im6.jpg.jpeg" placeholder="Portrait ministère"></image-slot>
+</div>
+<div>
+<div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600">À propos</div>
+<div style="font-family:'Playfair Display',serif;font-size:34px;font-weight:600;margin:14px 0 24px;line-height:1.25">Une communauté passionnée au service de votre croissance spirituelle</div>
+<p style="font-size:16px;line-height:1.7;color:var(--muted2)">Depuis plusieurs années, nous nous engageons à partager l'évangile et accompagner chacun dans sa vie chrétienne à travers des enseignements, ressources, et accompagnements adaptés à tous.</p>
+<div style="display:flex;gap:60px;margin-top:44px">
+<div><div style="font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:var(--accent)">120+</div><div style="font-size:13px;color:var(--muted1)">Contenus publiés</div></div>
+<div><div style="font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:var(--accent)">4</div><div style="font-size:13px;color:var(--muted1)">Livres disponibles</div></div>
+<div><div style="font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:var(--accent)">12</div><div style="font-size:13px;color:var(--muted1)">Séries d'enseignements</div></div>
+</div>
+<div style="margin-top:40px;padding:16px 30px;background:var(--panel);color:#fff;font-size:15px;font-weight:600;border-radius:8px;display:inline-block;cursor:pointer;transition:background var(--dur-hover) ease" style-hover="background:var(--panel-hover)">Découvrir le ministère</div>
+</div>
+</div>
+
+<div data-reveal="1" style="padding:100px 64px 40px">
+<div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:40px">
+<div><div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600">Agenda</div><div style="font-family:'Playfair Display',serif;font-size:34px;font-weight:600;margin-top:14px">Activités de la pasteure</div></div>
+<div style="font-size:14px;font-weight:600;color:var(--accent);cursor:pointer">Voir tout l'agenda →</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px">
+<div style="border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:transform var(--dur-hover) ease,box-shadow var(--dur-hover) ease" style-hover="transform:translateY(var(--lift-lg));box-shadow:0 12px 28px rgba(0,0,0,.08)">
+<div style="height:200px"><image-slot id="agenda-1" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/storage/pastor-activities/posters/seed/wa-07.jpeg" placeholder="Affiche — conférence"></image-slot></div>
+<div style="padding:24px"><div style="font-size:13px;color:var(--accent);font-weight:600">12 AVR 2026 · Lubumbashi</div><div style="font-size:19px;font-weight:600;margin-top:8px">Conférence — Femme disciple de Jésus</div><p style="font-size:14px;color:var(--muted1);margin-top:8px;line-height:1.6">Grande matinée d'enseignement : suivre Christ au quotidien.</p></div>
+</div>
+<div style="border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:transform var(--dur-hover) ease,box-shadow var(--dur-hover) ease" style-hover="transform:translateY(var(--lift-lg));box-shadow:0 12px 28px rgba(0,0,0,.08)">
+<div style="height:200px"><image-slot id="agenda-2" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/storage/pastor-activities/posters/seed/wa-06.jpeg" placeholder="Affiche — veillée de prière"></image-slot></div>
+<div style="padding:24px"><div style="font-size:13px;color:var(--accent);font-weight:600">05 AVR 2026 · Alliance</div><div style="font-size:19px;font-weight:600;margin-top:8px">Veillée de prière de fin de semaine</div><p style="font-size:14px;color:var(--muted1);margin-top:8px;line-height:1.6">Moment de prière pour clôturer la semaine dans la présence de Dieu.</p></div>
+</div>
+</div>
+</div>
+
+<div data-reveal="1" style="padding:100px 64px">
+<div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:40px">
+<div><div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600">Boutique</div><div style="font-family:'Playfair Display',serif;font-size:34px;font-weight:600;margin-top:14px">Les livres de la Pasteure</div></div>
+<div style="font-size:14px;font-weight:600;color:var(--accent);cursor:pointer">Voir la boutique →</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:32px">
+<div>
+<div style="position:relative;width:150px;height:260px;margin:0 auto;perspective:1200px;padding-right:14px">
+<div style="position:relative;height:100%;width:100%;transform-style:preserve-3d;transition:transform var(--dur-hover) ease" style-hover="transform:rotateY(-22deg)">
+<div style="position:absolute;top:3%;right:-12px;width:12px;height:94%;background:repeating-linear-gradient(to bottom,#f6f2e8,#f6f2e8 2px,#e2dccb 2px,#e2dccb 3px);transform:rotateY(90deg) translateZ(6px);transform-origin:right center;border-radius:0 3px 3px 0;box-shadow:inset -1px 0 3px rgba(0,0,0,.2)"></div>
+<div style="position:absolute;inset:0;border-radius:2px 5px 5px 2px;overflow:hidden;box-shadow:3px 6px 18px rgba(0,0,0,.28)">
+<image-slot id="book-1" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/assets/images/resource/testimonial-bg1-550x550.jpg" placeholder="Couverture"></image-slot>
+<div style="position:absolute;top:12px;left:12px;padding:5px 12px;background:var(--accent);color:var(--panel);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:999px">Disponible</div>
+</div>
+</div>
+</div>
+<div style="font-size:16px;font-weight:600;margin-top:16px;text-align:center">7 Bénéfices de la Résolution</div><div style="display:flex;align-items:baseline;justify-content:center;gap:12px;margin-top:4px"><span style="font-size:14px;color:var(--muted2)">10 USD</span><span style="font-size:13px;font-weight:600;color:var(--accent);cursor:pointer">Découvrir →</span></div></div>
+<div>
+<div style="position:relative;width:150px;height:260px;margin:0 auto;perspective:1200px;padding-right:14px">
+<div style="position:relative;height:100%;width:100%;transform-style:preserve-3d;transition:transform var(--dur-hover) ease" style-hover="transform:rotateY(-22deg)">
+<div style="position:absolute;top:3%;right:-12px;width:12px;height:94%;background:repeating-linear-gradient(to bottom,#f6f2e8,#f6f2e8 2px,#e2dccb 2px,#e2dccb 3px);transform:rotateY(90deg) translateZ(6px);transform-origin:right center;border-radius:0 3px 3px 0;box-shadow:inset -1px 0 3px rgba(0,0,0,.2)"></div>
+<div style="position:absolute;inset:0;border-radius:2px 5px 5px 2px;overflow:hidden;box-shadow:3px 6px 18px rgba(0,0,0,.28)">
+<image-slot id="book-2" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/assets/images/resource/testimonial-bg1-550x550.jpg" placeholder="Couverture"></image-slot>
+<div style="position:absolute;top:12px;left:12px;padding:5px 12px;background:var(--accent);color:var(--panel);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:999px">Disponible</div>
+</div>
+</div>
+</div>
+<div style="font-size:16px;font-weight:600;margin-top:16px;text-align:center">À l'Instar d'Élie</div><div style="display:flex;align-items:baseline;justify-content:center;gap:12px;margin-top:4px"><span style="font-size:14px;color:var(--muted2)">10 USD</span><span style="font-size:13px;font-weight:600;color:var(--accent);cursor:pointer">Découvrir →</span></div></div>
+<div>
+<div style="position:relative;width:150px;height:260px;margin:0 auto;perspective:1200px;padding-right:14px">
+<div style="position:relative;height:100%;width:100%;transform-style:preserve-3d;transition:transform var(--dur-hover) ease" style-hover="transform:rotateY(-22deg)">
+<div style="position:absolute;top:3%;right:-12px;width:12px;height:94%;background:repeating-linear-gradient(to bottom,#f6f2e8,#f6f2e8 2px,#e2dccb 2px,#e2dccb 3px);transform:rotateY(90deg) translateZ(6px);transform-origin:right center;border-radius:0 3px 3px 0;box-shadow:inset -1px 0 3px rgba(0,0,0,.2)"></div>
+<div style="position:absolute;inset:0;border-radius:2px 5px 5px 2px;overflow:hidden;box-shadow:3px 6px 18px rgba(0,0,0,.28)">
+<image-slot id="book-3" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/assets/images/resource/testimonial-bg1-550x550.jpg" placeholder="Couverture"></image-slot>
+<div style="position:absolute;top:12px;left:12px;padding:5px 12px;background:var(--accent);color:var(--panel);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:999px">Disponible</div>
+</div>
+</div>
+</div>
+<div style="font-size:16px;font-weight:600;margin-top:16px;text-align:center">Attends-la cette Promesse !</div><div style="display:flex;align-items:baseline;justify-content:center;gap:12px;margin-top:4px"><span style="font-size:14px;color:var(--muted2)">10 USD</span><span style="font-size:13px;font-weight:600;color:var(--accent);cursor:pointer">Découvrir →</span></div></div>
+<div>
+<div style="position:relative;width:150px;height:260px;margin:0 auto;perspective:1200px;padding-right:14px">
+<div style="position:relative;height:100%;width:100%;transform-style:preserve-3d;transition:transform var(--dur-hover) ease" style-hover="transform:rotateY(-22deg)">
+<div style="position:absolute;top:3%;right:-12px;width:12px;height:94%;background:repeating-linear-gradient(to bottom,#f6f2e8,#f6f2e8 2px,#e2dccb 2px,#e2dccb 3px);transform:rotateY(90deg) translateZ(6px);transform-origin:right center;border-radius:0 3px 3px 0;box-shadow:inset -1px 0 3px rgba(0,0,0,.2)"></div>
+<div style="position:absolute;inset:0;border-radius:2px 5px 5px 2px;overflow:hidden;box-shadow:3px 6px 18px rgba(0,0,0,.28)">
+<image-slot id="book-4" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/assets/images/resource/testimonial-bg1-550x550.jpg" placeholder="Couverture"></image-slot>
+<div style="position:absolute;top:12px;left:12px;padding:5px 12px;background:var(--accent);color:var(--panel);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:999px">Disponible</div>
+</div>
+</div>
+</div>
+<div style="font-size:16px;font-weight:600;margin-top:16px;text-align:center">Sois Daniel ! La Préparation</div><div style="display:flex;align-items:baseline;justify-content:center;gap:12px;margin-top:4px"><span style="font-size:14px;color:var(--muted2)">10 USD</span><span style="font-size:13px;font-weight:600;color:var(--accent);cursor:pointer">Découvrir →</span></div></div>
+</div>
+</div>
+
+<div data-reveal="1" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0;background:var(--panel);color:#fff;align-items:center;border-radius:16px;overflow:hidden;margin:0 64px 60px">
+<div style="position:relative;height:460px;overflow:hidden" style-hover="--veil-op:.14">
+<image-slot id="revue-cover" shape="rect" style="width:100%;height:100%" placeholder="Maquette — couverture de la revue"></image-slot>
+<div style="position:absolute;inset:0;pointer-events:none;background:rgba(20,17,12,var(--veil-op,.3));transition:background .4s ease;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:0 10%;box-sizing:border-box">
+<div style="font-size:26px">👁</div>
+<div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:oklch(90% 0.01 75)">À découvrir bientôt</div>
+</div>
+<div style="position:absolute;top:24px;left:24px;padding:8px 18px;background:var(--accent);color:var(--panel);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;z-index:2">Bientôt disponible</div>
+</div>
+<div style="padding:80px 64px">
+<div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-light);font-weight:600">Nouveauté</div>
+<div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:600;margin:14px 0 20px;line-height:1.25">Une revue pour nourrir votre foi arrive bientôt</div>
+<p style="font-size:16px;line-height:1.7;color:oklch(80% 0.01 75)">Enseignements, témoignages et réflexions du ministère Alliance réunis dans un nouveau rendez-vous périodique. Soyez parmi les premiers informés de sa parution.</p>
+<div style="display:flex;gap:12px;margin-top:32px;max-width:420px">
+<div style="flex:1;padding:14px 18px;border:1px solid var(--muted3);border-radius:8px;font-size:14px;color:oklch(70% 0.01 75)">Votre adresse e-mail</div>
+<div style="padding:14px 24px;background:var(--accent);color:var(--panel);font-size:14px;font-weight:600;border-radius:8px;cursor:pointer;white-space:nowrap;transition:background var(--dur-hover) ease" style-hover="background:var(--accent-light)">Être averti·e</div>
+</div>
+</div>
+</div>
+
+<div data-reveal="1" style="padding:100px 64px">
+<div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:40px">
+<div><div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600">À la une</div><div style="font-family:'Playfair Display',serif;font-size:34px;font-weight:600;margin-top:14px">Nos publications et enseignements</div></div>
+<div style="font-size:14px;font-weight:600;color:var(--accent);cursor:pointer">Tous les contenus →</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px">
+<div><div style="height:170px;border-radius:10px;overflow:hidden"><image-slot id="video-1" shape="rect" style="width:100%;height:100%" src="https://i.ytimg.com/vi/9MwDprKBkRg/hqdefault.jpg" placeholder="Vignette vidéo"></image-slot></div><div style="font-size:13px;color:var(--accent);font-weight:600;margin-top:14px">PROVERBES · VIDÉO</div><div style="font-size:17px;font-weight:600;margin-top:8px">Première vidéo — Proverbes</div></div>
+<div><div style="height:170px;border-radius:10px;overflow:hidden"><image-slot id="video-2" shape="rect" style="width:100%;height:100%" src="https://i.ytimg.com/vi/GXQDovOqoBA/hqdefault.jpg" placeholder="Vignette vidéo"></image-slot></div><div style="font-size:13px;color:var(--accent);font-weight:600;margin-top:14px">MINUTES DE TA DESTINÉE · VIDÉO</div><div style="font-size:17px;font-weight:600;margin-top:8px">Première vidéo — les minutes de ta destinée</div></div>
+<div><div style="height:170px;border-radius:10px;overflow:hidden"><image-slot id="video-3" shape="rect" style="width:100%;height:100%" src="https://i.ytimg.com/vi/3FIhRR3qRog/hqdefault.jpg" placeholder="Vignette vidéo"></image-slot></div><div style="font-size:13px;color:var(--accent);font-weight:600;margin-top:14px">S'ACCOMPLIR · VIDÉO</div><div style="font-size:17px;font-weight:600;margin-top:8px">Première vidéo — S'accomplir</div></div>
+</div>
+</div>
+
+<div data-reveal="1" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0;background:var(--panel);color:#fff;align-items:center;border-radius:16px;overflow:hidden;margin:60px 64px">
+<div style="padding:80px 64px">
+<div style="font-family:'Playfair Display',serif;font-size:34px;font-weight:600;font-style:italic;line-height:1.3">Votre soutien permet de toucher des vies à travers la Parole de Dieu</div>
+<p style="font-family:'Alex Brush',cursive;font-size:26px;color:var(--accent-light);margin:18px 0 32px">« Donnez et il vous sera donné » — Luc 6:38</p>
+<div style="display:flex;gap:16px">
+<div data-open-don-modal="1" style="padding:16px 30px;background:var(--accent);color:oklch(20% 0.01 75);font-size:15px;font-weight:600;border-radius:8px;cursor:pointer;transition:background var(--dur-hover) ease" style-hover="background:var(--accent-light)">Faire un don</div>
+<div data-open-don-modal="1" data-don-tab="partenaire" style="padding:16px 30px;border:1px solid var(--muted3);font-size:15px;font-weight:600;border-radius:8px;cursor:pointer;transition:background var(--dur-hover) ease" style-hover="background:var(--panel-hover)">Devenir partenaire</div>
+</div>
+</div>
+<div style="height:420px"><image-slot id="dons-photo" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/assets/images/mg.jpg.jpeg" placeholder="Photo — impact du ministère"></image-slot></div>
+</div>
+
+<div data-reveal="1" style="padding:100px 64px">
+<div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;text-align:center">Témoignages</div>
+<div style="font-family:'Playfair Display',serif;font-size:34px;font-weight:600;margin:14px 0 50px;text-align:center">Ce qu'ils disent de nous</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px">
+<div style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:32px;transition:transform var(--dur-hover) ease,box-shadow var(--dur-hover) ease" style-hover="transform:translateY(var(--lift-lg));box-shadow:0 12px 28px rgba(0,0,0,.06)">
+<p style="font-size:15px;line-height:1.7;color:var(--muted2);font-style:italic">« Les enseignements de la Pasteure Tothy m'ont profondément transformée. J'ai retrouvé ma foi et compris ma destinée en Christ. »</p>
+<div style="font-size:14px;font-weight:600;margin-top:20px">Grace Mutombo</div><div style="font-size:13px;color:var(--muted3)">Membre fidèle — Lubumbashi, RDC</div>
+</div>
+<div style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:32px;transition:transform var(--dur-hover) ease,box-shadow var(--dur-hover) ease" style-hover="transform:translateY(var(--lift-lg));box-shadow:0 12px 28px rgba(0,0,0,.06)">
+<p style="font-size:15px;line-height:1.7;color:var(--muted2);font-style:italic">« Depuis que je suis les prédications d'Alliance, ma vie spirituelle a pris un tournant incroyable. »</p>
+<div style="font-size:14px;font-weight:600;margin-top:20px">Patrick Kabongo</div><div style="font-size:13px;color:var(--muted3)">Partenaire du ministère — Kinshasa, RDC</div>
+</div>
+<div style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:32px;transition:transform var(--dur-hover) ease,box-shadow var(--dur-hover) ease" style-hover="transform:translateY(var(--lift-lg));box-shadow:0 12px 28px rgba(0,0,0,.06)">
+<p style="font-size:15px;line-height:1.7;color:var(--muted2);font-style:italic">« Le livre '7 Bénéfices de la Résolution' a changé ma façon de voir les engagements envers Dieu. »</p>
+<div style="font-size:14px;font-weight:600;margin-top:20px">Marie-Claire Ilunga</div><div style="font-size:13px;color:var(--muted3)">Responsable cellule de prière — Likasi, RDC</div>
+</div>
+</div>
+</div>
+
+<div data-reveal="1" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:60px;padding:100px 64px;background:var(--soft);border-radius:16px;margin:0 64px 100px;align-items:center">
+<div>
+<div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600">Rendez-vous</div>
+<div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:600;margin:14px 0 20px">Prenez rendez-vous avec la Pasteure</div>
+<p style="font-size:15px;line-height:1.7;color:oklch(40% 0.01 75)">Besoin d'un entretien spirituel, d'un conseil ou d'un accompagnement personnel ? Remplissez le formulaire et nous vous recontacterons rapidement.</p>
+<div style="margin-top:28px;padding:16px 30px;background:var(--panel);color:#fff;font-size:15px;font-weight:600;border-radius:8px;display:inline-block;cursor:pointer;transition:background var(--dur-hover) ease" style-hover="background:var(--panel-hover)">Prendre rendez-vous</div>
+</div>
+<div style="font-size:14px;line-height:2;color:var(--muted2)">
+<div style="font-weight:600;margin-bottom:6px">Nous rendre visite</div>Centre Missionnaire Philadelphie, N°17, Av. Nyangwe 1, Q/ Lido Golf — Lubumbashi
+<div style="font-weight:600;margin:20px 0 6px">Appelez-nous</div>+243 816 681 958
+<div style="font-weight:600;margin:20px 0 6px">Adresse e-mail</div>contact@alliance-ministere.com
+</div>
+</div>
+
+<dc-import name="Footer" hint-size="100%,400px"></dc-import>
+<dc-import name="DonModal" hint-size="0,0"></dc-import>
+<dc-import name="RevueModal" hint-size="0,0"></dc-import>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;clair&quot;,&quot;options&quot;:[&quot;clair&quot;,&quot;sombre&quot;],&quot;tsType&quot;:&quot;'clair'|'sombre'&quot;,&quot;section&quot;:&quot;Apparence&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:[&quot;#C9A24B&quot;,&quot;#AD8339&quot;,&quot;#E8D4A0&quot;],&quot;options&quot;:[[&quot;#C9A24B&quot;,&quot;#AD8339&quot;,&quot;#E8D4A0&quot;],[&quot;#3B5A82&quot;,&quot;#2C4665&quot;,&quot;#B7C8DA&quot;],[&quot;#B5603A&quot;,&quot;#954B2B&quot;,&quot;#E7BFA8&quot;]],&quot;tsType&quot;:&quot;string[]&quot;,&quot;section&quot;:&quot;Apparence&quot;},&quot;motion&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;expressif&quot;,&quot;options&quot;:[&quot;sobre&quot;,&quot;expressif&quot;],&quot;tsType&quot;:&quot;'sobre'|'expressif'&quot;,&quot;section&quot;:&quot;Apparence&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const themeName = this.props.theme ?? 'clair';
+    const accentPal = this.props.accent ?? ['#C9A24B', '#AD8339', '#E8D4A0'];
+    const motion = this.props.motion ?? 'expressif';
+    const palettes = {
+      clair: { bg:'#F7F5F1', bgHeader:'rgba(247,245,241,0.94)', text:'#221E17', muted1:'#4A443C', muted2:'#5C5850', muted3:'#6B6156', soft:'#ECE8E0', card:'#FFFFFF', line:'#DAD5CC', panel:'#242019', panelHover:'#332B21' },
+      sombre: { bg:'#17140F', bgHeader:'rgba(23,20,15,0.85)', text:'#F3EEE4', muted1:'#C9C2B6', muted2:'#B7AFA1', muted3:'#8F887C', soft:'#221E17', card:'#221E17', line:'#362F26', panel:'#2A2318', panelHover:'#352C1F' }
+    };
+    const motionVals = {
+      sobre: { durHover:'0.15s', durReveal:'0.4s', liftSm:'-1px', liftLg:'-2px', revealDist:'10px' },
+      expressif: { durHover:'0.35s', durReveal:'0.9s', liftSm:'-2px', liftLg:'-6px', revealDist:'28px' }
+    };
+    const p = palettes[themeName] ?? palettes.clair;
+    const m = motionVals[motion] ?? motionVals.expressif;
+    return {
+      theme: { ...p, ...m, accent: accentPal[0], accentDark: accentPal[1], accentLight: accentPal[2] }
+    };
+  }
+  componentDidMount() {
+    const header = document.querySelector('[data-role="site-header"]');
+    this._onScroll = () => {
+      if (header) header.style.boxShadow = window.scrollY > 10 ? '0 4px 24px rgba(0,0,0,.06)' : 'none';
+    };
+    window.addEventListener('scroll', this._onScroll);
+
+    const motion = this.props.motion ?? 'expressif';
+    const revealDur = motion === 'sobre' ? '0.4s' : '0.8s';
+    const revealDist = motion === 'sobre' ? '10px' : '28px';
+    const els = document.querySelectorAll('[data-reveal]');
+    els.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = `translateY(${revealDist})`;
+      el.style.transition = `opacity ${revealDur} ease, transform ${revealDur} ease`;
+    });
+    this._io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          this._io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    els.forEach(el => this._io.observe(el));
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._onScroll);
+    if (this._io) this._io.disconnect();
+  }
+}
+</script>
+</body>
+</html>

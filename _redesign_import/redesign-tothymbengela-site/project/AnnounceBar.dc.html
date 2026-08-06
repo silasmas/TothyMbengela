@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<style>
+@keyframes abFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-7px) rotate(3deg)}}
+@keyframes abFadeIn{from{opacity:0;transform:translateY(14px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
+</style>
+</helmet>
+<sc-if value="{{ visible }}" hint-placeholder-val="{{ true }}">
+
+<sc-if value="{{ collapsed }}" hint-placeholder-val="{{ true }}">
+<div onClick="{{ expand }}" style="position:fixed;right:28px;bottom:28px;z-index:150;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-dark));box-shadow:0 14px 30px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;cursor:pointer;animation:abFadeIn .4s ease both">
+<div style="animation:abFloat 3.2s ease-in-out infinite;font-size:22px;color:#fff">✦</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ expanded }}" hint-placeholder-val="{{ false }}">
+<div data-open-revue-modal="1" style="position:fixed;right:28px;bottom:28px;z-index:150;display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 20px 45px rgba(0,0,0,.18);padding:14px 18px 14px 14px;cursor:pointer;color:var(--text);max-width:270px;animation:abFadeIn .4s cubic-bezier(.34,1.56,.64,1) both;transition:box-shadow .25s ease" style-hover="box-shadow:0 24px 55px rgba(0,0,0,.24)">
+<div style="width:46px;height:64px;flex-shrink:0;perspective:600px">
+<div style="position:relative;width:100%;height:100%;animation:abFloat 3.2s ease-in-out infinite;transform-style:preserve-3d">
+<div style="position:absolute;top:4%;right:-6px;width:6px;height:92%;background:repeating-linear-gradient(to bottom,#f6f2e8,#f6f2e8 2px,#e2dccb 2px,#e2dccb 3px);transform:rotateY(90deg) translateZ(3px);transform-origin:right center;border-radius:0 2px 2px 0"></div>
+<div style="position:absolute;inset:0;border-radius:2px 4px 4px 2px;overflow:hidden;box-shadow:2px 8px 18px rgba(0,0,0,.32);background:linear-gradient(135deg,var(--accent),var(--accent-dark))">
+<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff">✦</div>
+</div>
+</div>
+</div>
+<div style="flex:1">
+<div style="font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:700">Bientôt</div>
+<div style="font-size:13px;font-weight:600;margin-top:3px;line-height:1.3">La Revue Alliance arrive — découvrez-en plus</div>
+</div>
+<div onClick="{{ dismiss }}" style="cursor:pointer;opacity:.45;font-size:15px;flex-shrink:0;padding:2px">×</div>
+</div>
+</sc-if>
+
+</sc-if>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { dismissed: false, expanded: false };
+  componentDidMount() {
+    this._t = setTimeout(() => this.setState({ expanded: true }), 3000);
+  }
+  componentWillUnmount() {
+    clearTimeout(this._t);
+  }
+  renderVals() {
+    return {
+      visible: !this.state.dismissed,
+      collapsed: !this.state.expanded,
+      expanded: this.state.expanded,
+      expand: () => this.setState({ expanded: true }),
+      dismiss: (e) => { e.preventDefault(); e.stopPropagation(); this.setState({ dismissed: true }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

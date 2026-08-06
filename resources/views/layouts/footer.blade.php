@@ -9,7 +9,7 @@
                 <div class="contact-info logo-box col-lg-4 col-md-12 wow fadeInUp text-center">
                     <div class="logo">
                         <a href="{{ route('home') }}">
-                            <img src="{{ asset('assets/logo/logo-alliance.png') }}" alt="Alliance — Ministère Tothy Mbengela">
+                            <img src="{{ asset('assets/logo/alliance-wordmark-gold-on-black.png') }}" alt="Alliance — Ministère Tothy Mbengela" class="alliance-logo-footer">
                         </a>
                     </div>
                 </div>

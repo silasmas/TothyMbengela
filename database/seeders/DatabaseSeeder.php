@@ -45,7 +45,9 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminSuperAdminSeeder::class);
 
         $this->call(MinistryYoutubeSeeder::class);
+        $this->call(ShopSettingSeeder::class);
         $this->call(BookSeeder::class);
+        $this->call(SlideSeeder::class);
         $this->call(ShippingSettingsSeeder::class);
         $this->call(TeamMemberSeeder::class);
         $this->call(TestimonialSeeder::class);

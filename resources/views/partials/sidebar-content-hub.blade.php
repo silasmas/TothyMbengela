@@ -1,4 +1,4 @@
-@php
+﻿@php
     $highlightRubriqueId = $highlightRubriqueId ?? null;
     /** @var string $sidebarHubMode full = sidebar complète ; pastor_detail = recherche + autres activités uniquement */
     $sidebarHubMode = $sidebarHubMode ?? 'full';
@@ -112,7 +112,7 @@
             </ul>
         </div>
 
-        <div class="sidebar__single text-center" style="background:#C8922A;padding:28px;border-radius:10px;">
+        <div class="sidebar__single text-center" style="background:#A86C3C;padding:28px;border-radius:10px;">
             <h4 style="color:#fff;margin-bottom:8px;">Soutenir le ministère</h4>
             <p style="color:rgba(255,255,255,0.9);font-size:14px;margin-bottom:14px;">Chaque geste compte pour poursuivre la mission.</p>
             <button type="button" class="theme-btn btn-style-two" data-bs-toggle="modal" data-bs-target="#donatePartnerModal"><span class="btn-title">Faire un don</span></button>

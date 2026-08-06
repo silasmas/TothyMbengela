@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('page_banner_title', Str::limit($content->title, 52))
 
@@ -231,7 +231,7 @@
                                 @foreach($contentComments->take(2) as $c)
                                     <div class="comment-one__single alliance-comment-preview-item">
                                         <div class="comment-one__image">
-                                            <img src="https://ui-avatars.com/api/?name={{ urlencode($c->author_name) }}&background=C8922A&color=fff&size=80" alt="">
+                                            <img src="https://ui-avatars.com/api/?name={{ urlencode($c->author_name) }}&background=A86C3C&color=fff&size=80" alt="">
                                         </div>
                                         <div class="comment-one__content">
                                             <h3>{{ $c->author_name }}</h3>
@@ -325,7 +325,7 @@
                             </ul>
                         </div>
 
-                        <div class="sidebar__single text-center" style="background:#C8922A;padding:28px;border-radius:10px;">
+                        <div class="sidebar__single text-center" style="background:#A86C3C;padding:28px;border-radius:10px;">
                             <h4 style="color:#fff;margin-bottom:8px;">Soutenir le ministère</h4>
                             <p style="color:rgba(255,255,255,0.9);font-size:14px;margin-bottom:14px;">Chaque geste compte pour poursuivre la mission.</p>
                             <button type="button" class="theme-btn btn-style-two" data-bs-toggle="modal" data-bs-target="#donatePartnerModal"><span class="btn-title">Faire un don</span></button>
@@ -451,7 +451,7 @@
         display: none !important;
     }
     .alliance-blog-details .alliance-blog-social.blog-details__social-list a {
-        background-color: #c8922a !important;
+        background-color: #A86C3C !important;
         color: #fff !important;
         overflow: visible;
     }
@@ -493,7 +493,7 @@
 @include('partials.alliance-series-episode-card-styles')
 
     .alliance-comments-modal-content { box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
-    .alliance-comment-like-btn.btn-warning { border-color: #c8922a; }
+    .alliance-comment-like-btn.btn-warning { border-color: #A86C3C; }
     .alliance-content-comments-preview .comment-one__title { font-size: 1.35rem; }
 </style>
 @endpush
@@ -633,7 +633,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var row = document.createElement('div');
         row.className = 'comment-one__single alliance-comment-preview-item';
         row.innerHTML = '<div class="comment-one__image">' +
-            '<img src="https://ui-avatars.com/api/?name=' + encodeURIComponent(c.author_name) + '&background=C8922A&color=fff&size=80" alt="">' +
+            '<img src="https://ui-avatars.com/api/?name=' + encodeURIComponent(c.author_name) + '&background=A86C3C&color=fff&size=80" alt="">' +
             '</div><div class="comment-one__content"><h3>' + escHtml(c.author_name) + '</h3>' +
             '<p>' + escHtml(bodyPreview).split('\n').join('<br>') + '</p>' +
             '<div class="d-flex align-items-center gap-2 flex-wrap">' +

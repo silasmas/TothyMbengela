@@ -42,4 +42,10 @@
             max-width: 48rem;
         }
     }
+
+    /* ── Accents charte Alliance ── */
+    .fi-sidebar-item-button.fi-active,
+    .fi-sidebar-item-button:hover {
+        background-color: rgba(168, 108, 60, 0.12) !important;
+    }
 </style>

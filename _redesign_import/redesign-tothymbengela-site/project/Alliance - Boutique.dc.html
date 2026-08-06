@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Work+Sans:wght@400;500;600;700&family=Alex+Brush&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+body{margin:0;background:#F7F5F1;font-family:'Work Sans',sans-serif;color:#221E17}
+a{color:#C9A24B}
+a:hover{color:#AD8339}
+</style>
+</helmet>
+
+<div style="--bg:#F7F5F1;--bg-header:rgba(247,245,241,0.94);--text:#221E17;--muted1:#4A443C;--muted2:#5C5850;--muted3:#6B6156;--soft:#ECE8E0;--card:#FFFFFF;--line:#DAD5CC;--panel:#242019;--panel-hover:#332B21;--accent:#C9A24B;--accent-dark:#AD8339;--accent-light:#E8D4A0;--dur-hover:0.35s;max-width:1440px;margin:0 auto;overflow:hidden;background:var(--bg);color:var(--text)">
+
+<dc-import name="Header" accueil-active="0" apropos-active="0" agenda-active="0" contenus-active="0" boutique-active="1" contact-active="0" hint-size="100%,78px"></dc-import>
+<dc-import name="AnnounceBar" hint-size="100%,48px"></dc-import>
+
+<div style="padding:200px 64px 60px">
+<div style="font-size:13px;color:var(--muted3)"><a href="Alliance - Accueil.dc.html" style="color:var(--muted3);text-decoration:none">Accueil</a> / <span style="color:var(--text)">Boutique</span></div>
+<div style="font-family:'Playfair Display',serif;font-size:48px;font-weight:600;margin-top:14px">Les livres de la Pasteure</div>
+<p style="font-size:16px;color:var(--muted1);margin-top:14px;max-width:600px">4 ouvrages disponibles — 10 $ par livre.</p>
+</div>
+
+<div style="padding:0 64px 100px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:32px">
+<a href="Alliance - Livre.dc.html" style="text-decoration:none;color:inherit">
+<div style="position:relative;width:150px;height:260px;margin:0 auto;perspective:1200px;padding-right:14px">
+<div style="position:relative;height:100%;width:100%;transform-style:preserve-3d;transition:transform var(--dur-hover) ease" style-hover="transform:rotateY(-22deg)">
+<div style="position:absolute;top:3%;right:-12px;width:12px;height:94%;background:repeating-linear-gradient(to bottom,#f6f2e8,#f6f2e8 2px,#e2dccb 2px,#e2dccb 3px);transform:rotateY(90deg) translateZ(6px);transform-origin:right center;border-radius:0 3px 3px 0;box-shadow:inset -1px 0 3px rgba(0,0,0,.2)"></div>
+<div style="position:absolute;inset:0;border-radius:2px 5px 5px 2px;overflow:hidden;box-shadow:3px 6px 18px rgba(0,0,0,.28)">
+<image-slot id="bshop-1" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/assets/images/resource/testimonial-bg1-550x550.jpg" placeholder="Couverture"></image-slot>
+<div style="position:absolute;top:12px;left:12px;padding:5px 12px;background:var(--accent);color:var(--panel);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:999px">Disponible</div>
+</div>
+</div>
+</div>
+<div style="font-size:16px;font-weight:600;margin-top:16px;text-align:center">7 Bénéfices de la Résolution</div><div style="display:flex;align-items:baseline;justify-content:center;gap:12px;margin-top:4px"><span style="font-size:14px;color:var(--muted2)">10 USD</span><span style="font-size:13px;font-weight:600;color:var(--accent)">Découvrir →</span></div>
+</a>
+<a href="Alliance - Livre.dc.html" style="text-decoration:none;color:inherit">
+<div style="position:relative;width:150px;height:260px;margin:0 auto;perspective:1200px;padding-right:14px">
+<div style="position:relative;height:100%;width:100%;transform-style:preserve-3d;transition:transform var(--dur-hover) ease" style-hover="transform:rotateY(-22deg)">
+<div style="position:absolute;top:3%;right:-12px;width:12px;height:94%;background:repeating-linear-gradient(to bottom,#f6f2e8,#f6f2e8 2px,#e2dccb 2px,#e2dccb 3px);transform:rotateY(90deg) translateZ(6px);transform-origin:right center;border-radius:0 3px 3px 0;box-shadow:inset -1px 0 3px rgba(0,0,0,.2)"></div>
+<div style="position:absolute;inset:0;border-radius:2px 5px 5px 2px;overflow:hidden;box-shadow:3px 6px 18px rgba(0,0,0,.28)">
+<image-slot id="bshop-2" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/assets/images/resource/testimonial-bg1-550x550.jpg" placeholder="Couverture"></image-slot>
+<div style="position:absolute;top:12px;left:12px;padding:5px 12px;background:var(--accent);color:var(--panel);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:999px">Disponible</div>
+</div>
+</div>
+</div>
+<div style="font-size:16px;font-weight:600;margin-top:16px;text-align:center">À l'Instar d'Élie</div><div style="display:flex;align-items:baseline;justify-content:center;gap:12px;margin-top:4px"><span style="font-size:14px;color:var(--muted2)">10 USD</span><span style="font-size:13px;font-weight:600;color:var(--accent)">Découvrir →</span></div>
+</a>
+<a href="Alliance - Livre.dc.html" style="text-decoration:none;color:inherit">
+<div style="position:relative;width:150px;height:260px;margin:0 auto;perspective:1200px;padding-right:14px">
+<div style="position:relative;height:100%;width:100%;transform-style:preserve-3d;transition:transform var(--dur-hover) ease" style-hover="transform:rotateY(-22deg)">
+<div style="position:absolute;top:3%;right:-12px;width:12px;height:94%;background:repeating-linear-gradient(to bottom,#f6f2e8,#f6f2e8 2px,#e2dccb 2px,#e2dccb 3px);transform:rotateY(90deg) translateZ(6px);transform-origin:right center;border-radius:0 3px 3px 0;box-shadow:inset -1px 0 3px rgba(0,0,0,.2)"></div>
+<div style="position:absolute;inset:0;border-radius:2px 5px 5px 2px;overflow:hidden;box-shadow:3px 6px 18px rgba(0,0,0,.28)">
+<image-slot id="bshop-3" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/assets/images/resource/testimonial-bg1-550x550.jpg" placeholder="Couverture"></image-slot>
+<div style="position:absolute;top:12px;left:12px;padding:5px 12px;background:var(--accent);color:var(--panel);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:999px">Disponible</div>
+</div>
+</div>
+</div>
+<div style="font-size:16px;font-weight:600;margin-top:16px;text-align:center">Attends-la cette Promesse !</div><div style="display:flex;align-items:baseline;justify-content:center;gap:12px;margin-top:4px"><span style="font-size:14px;color:var(--muted2)">10 USD</span><span style="font-size:13px;font-weight:600;color:var(--accent)">Découvrir →</span></div>
+</a>
+<a href="Alliance - Livre.dc.html" style="text-decoration:none;color:inherit">
+<div style="position:relative;width:150px;height:260px;margin:0 auto;perspective:1200px;padding-right:14px">
+<div style="position:relative;height:100%;width:100%;transform-style:preserve-3d;transition:transform var(--dur-hover) ease" style-hover="transform:rotateY(-22deg)">
+<div style="position:absolute;top:3%;right:-12px;width:12px;height:94%;background:repeating-linear-gradient(to bottom,#f6f2e8,#f6f2e8 2px,#e2dccb 2px,#e2dccb 3px);transform:rotateY(90deg) translateZ(6px);transform-origin:right center;border-radius:0 3px 3px 0;box-shadow:inset -1px 0 3px rgba(0,0,0,.2)"></div>
+<div style="position:absolute;inset:0;border-radius:2px 5px 5px 2px;overflow:hidden;box-shadow:3px 6px 18px rgba(0,0,0,.28)">
+<image-slot id="bshop-4" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/assets/images/resource/testimonial-bg1-550x550.jpg" placeholder="Couverture"></image-slot>
+<div style="position:absolute;top:12px;left:12px;padding:5px 12px;background:var(--accent);color:var(--panel);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:999px">Disponible</div>
+</div>
+</div>
+</div>
+<div style="font-size:16px;font-weight:600;margin-top:16px;text-align:center">Sois Daniel ! La Préparation</div><div style="display:flex;align-items:baseline;justify-content:center;gap:12px;margin-top:4px"><span style="font-size:14px;color:var(--muted2)">10 USD</span><span style="font-size:13px;font-weight:600;color:var(--accent)">Découvrir →</span></div>
+</a>
+</div>
+
+<dc-import name="Footer" hint-size="100%,400px"></dc-import>
+<dc-import name="DonModal" hint-size="0,0"></dc-import>
+<dc-import name="RevueModal" hint-size="0,0"></dc-import>
+
+</div>
+
+</x-dc>
+</body>
+</html>

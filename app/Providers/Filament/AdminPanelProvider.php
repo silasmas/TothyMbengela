@@ -35,9 +35,10 @@ class AdminPanelProvider extends PanelProvider
             ->authPasswordBroker('admins')
             ->brandLogo(asset('assets/logo/logo-alliance.png'))
             ->brandLogoHeight('3.5rem')
+            ->favicon(asset('assets/logo/logo-alliance-mark.png'))
             ->profile(page: EditAdminProfile::class, isSimple: false)
             ->colors([
-                'primary' => Color::hex('#C8922A'),
+                'primary' => Color::hex('#A86C3C'),
             ])
             ->globalSearch()
             ->globalSearchKeyBindings(['command+k', 'ctrl+k'])

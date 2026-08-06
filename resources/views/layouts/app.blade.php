@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
     <head>
         <meta charset="utf-8">
@@ -9,8 +9,13 @@
         <title>{{ $title ?? 'Accueil' }} — Alliance | Ministère Tothy Mbengela</title>
         <meta name="description" content="{{ $metaDescription ?? 'Alliance — Le ministère de la Pasteure Tothy Mbengela. Prédications, enseignements, livres et ressources spirituelles.' }}">
 
-        <link rel="shortcut icon" href="{{ asset('assets/logo/logo-alliance.png') }}" type="image/png">
-        <link rel="icon" href="{{ asset('assets/logo/logo-alliance.png') }}" type="image/png">
+        <link rel="shortcut icon" href="{{ asset('assets/logo/logo-alliance-mark.png') }}" type="image/png">
+        <link rel="icon" href="{{ asset('assets/logo/logo-alliance-mark.png') }}" type="image/png">
+
+        <!-- Charte Alliance — polices -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Great+Vibes&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
 
         <!-- Stylesheets -->
         <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -18,6 +23,7 @@
         <link href="{{ asset('assets/plugins/revolution/css/layers.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/plugins/revolution/css/navigation.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/css/alliance-brand.css') }}?v=4" rel="stylesheet">
         <link href="{{ asset('assets/css/alliance-engagement-pages.css') }}?v=6" rel="stylesheet">
         <link href="{{ asset('assets/css/pastor-activities.css') }}?v=8" rel="stylesheet">
 
@@ -32,33 +38,86 @@
                 background-color: transparent !important;
             }
 
-            /* Logo dans le header principal */
-            .main-header .logo img {
-                max-height: 60px;
+            /* Logo header (fond blanc) : version foncée, plus grande */
+            .main-header .logo img,
+            .main-header .logo img.alliance-logo-header {
+                max-height: 104px;
                 width: auto;
             }
 
-            /* Logo dans le sticky header */
+            /* Logo sticky */
             .sticky-header .logo img {
-                max-height: 45px;
+                max-height: 78px;
                 width: auto;
             }
 
-            /* Logo dans le menu mobile */
+            /* Logo menu mobile */
             .mobile-menu .nav-logo img {
-                max-height: 50px;
+                max-height: 80px;
                 width: auto;
             }
 
-            /* Logo dans le footer */
+            /* Logo footer : agrandi */
             .main-footer .logo img {
-                max-height: 60px;
+                max-height: 140px;
                 width: auto;
             }
 
-            /* Preloader : fond clair + logo réel (ne dépend pas seul du ::after du thème) */
+            /* Cards boutique accueil : titre court, couverture plus visible, prix lisible */
+            .home5-features-section .feature-block-home5 .image-box {
+                padding-bottom: 8px;
+            }
+            .home5-features-section .feature-block-home5 .image-box .image img {
+                height: 400px;
+                object-fit: cover;
+            }
+            .home5-features-section .feature-block-home5 .info-box {
+                padding: 10px 40px 10px 70px;
+            }
+            .home5-features-section .feature-block-home5 .info-box .icon {
+                height: 44px;
+                width: 44px;
+                font-size: 18px;
+                top: -22px;
+                left: 14px;
+            }
+            .home5-features-section .feature-block-home5 .image-box > .info-box .title {
+                font-size: 13px;
+                line-height: 1.2;
+                margin-bottom: 6px;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                max-width: 100%;
+            }
+            .home5-features-section .feature-block-home5 .read-more {
+                top: 12px;
+                right: 10px;
+                height: 28px;
+                width: 28px;
+                font-size: 14px;
+            }
+            .home5-features-section .book-price-tag,
+            .book-price-tag {
+                display: inline-block !important;
+                background: #A86C3C !important;
+                color: #ffffff !important;
+                -webkit-text-fill-color: #ffffff !important;
+                font-weight: 700 !important;
+                font-size: 14px !important;
+                line-height: 1.2 !important;
+                padding: 6px 14px !important;
+                border-radius: 999px !important;
+                margin-top: 0;
+                opacity: 1 !important;
+            }
+
+            /* Preloader : fond noir charte + logo or */
             .preloader.alliance-preloader {
-                background-color: #f8f6f2 !important;
+                background-color: #141414 !important;
             }
             .preloader.alliance-preloader::after,
             .preloader.alliance-preloader::before {
@@ -94,26 +153,9 @@
                 text-transform: uppercase;
             }
 
-            /* Livres : images carrées 1:1 (550x550) */
+            /* Livres : cadre image */
             .home5-features-section .feature-block-home5 .image-box .image {
                 overflow: hidden;
-            }
-            .home5-features-section .feature-block-home5 .image-box .image img {
-                width: 100%;
-                height: 350px;
-                object-fit: cover;
-            }
-
-            /* Prix visible sur les cards livres */
-            .book-price-tag {
-                display: inline-block;
-                background: #C8922A;
-                color: #fff;
-                font-weight: 700;
-                font-size: 14px;
-                padding: 3px 12px;
-                border-radius: 20px;
-                margin-top: 4px;
             }
 
             /* Contenus à la une (carousel) : images carrées 1:1 */
@@ -299,7 +341,7 @@
                 position: absolute;
                 top: -4px;
                 right: -2px;
-                background: #c8922a;
+                background: #A86C3C;
                 color: #fff;
                 font-size: 11px;
                 font-weight: 700;
@@ -389,9 +431,32 @@
                 gap: 6px 20px;
                 flex-wrap: nowrap;
             }
+            /* Loupe à côté du panier (pas près du logo) */
+            .main-header .outer-box.alliance-header-outer-actions .search-btn,
+            .sticky-header-actions .search-btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                margin: 0;
+                padding: 0;
+                border: none;
+                background: transparent;
+                color: #A86C3C;
+                font-size: 20px;
+                flex-shrink: 0;
+            }
+            .main-header .outer-box.alliance-header-outer-actions .search-btn:hover,
+            .sticky-header-actions .search-btn:hover {
+                color: #8a552e;
+            }
             .main-header .outer-box.alliance-header-outer-actions .header-cart-wrap {
                 margin-right: 0;
                 padding-right: 20px;
+            }
+            .sticky-header-actions .search-btn {
+                margin-right: 8px;
             }
             .main-header .outer-box.alliance-header-outer-actions .alliance-toolbar-account {
                 margin-left: 0 !important;
@@ -405,8 +470,8 @@
                 border: 1px solid #e8e8e8;
             }
             .alliance-donate-modal .nav-pills .nav-link.active {
-                background: #c8922a;
-                border-color: #c8922a;
+                background: #A86C3C;
+                border-color: #A86C3C;
                 color: #fff;
             }
 
@@ -439,7 +504,7 @@
                 height: 44px;
                 border-radius: 50%;
                 background: rgba(200, 146, 42, 0.18);
-                border: 2px solid #c8922a;
+                border: 2px solid #A86C3C;
                 color: #1a1a1a !important;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             }
@@ -533,7 +598,7 @@
                 align-items: center;
                 justify-content: center;
                 border-radius: 50%;
-                background: linear-gradient(145deg, #c8922a, #a87622);
+                background: linear-gradient(145deg, #A86C3C, #a87622);
                 color: #fff;
                 font-weight: 700;
                 font-size: 15px;
@@ -664,7 +729,7 @@
                 overflow: hidden;
                 background: #141414 !important;
                 color: #e5ab2e !important;
-                border: 2px solid #c8922a !important;
+                border: 2px solid #A86C3C !important;
                 box-shadow: none !important;
             }
             .theme-btn.alliance-btn-partner .btn-title,
@@ -673,7 +738,7 @@
             }
             .theme-btn.alliance-btn-partner:hover,
             .theme-btn.alliance-btn-partner:focus {
-                background: #c8922a !important;
+                background: #A86C3C !important;
                 color: #141414 !important;
                 border-color: #e5ab2e !important;
             }
@@ -710,7 +775,7 @@
             .theme-btn.btn-style-one.is-loading::after,
             .theme-btn.hvr-dark.is-loading::after {
                 border-color: rgba(200, 146, 42, 0.35);
-                border-top-color: #c8922a;
+                border-top-color: #A86C3C;
             }
             .theme-btn.alliance-btn-partner.is-loading::after {
                 border-color: rgba(229, 171, 46, 0.3);
@@ -835,13 +900,13 @@
                 box-shadow: 0 24px 55px rgba(0, 0, 0, 0.08);
             }
             .alliance-about-collage .alliance-about-exp-static:before {
-                border-color: var(--border-theme-color2, #c8922a);
+                border-color: var(--border-theme-color2, #A86C3C);
             }
             .alliance-about-collage .alliance-about-exp-static .count {
                 padding-left: 88px;
             }
             .alliance-about-collage .alliance-about-exp-static .count .icon {
-                color: var(--theme-color2, #c8922a);
+                color: var(--theme-color2, #A86C3C);
             }
             @media only screen and (max-width: 991px) {
                 .alliance-about-collage .alliance-about-exp-static {
@@ -891,7 +956,7 @@
         <div class="page-wrapper">
             <div class="preloader alliance-preloader" role="status" aria-live="polite" aria-busy="true" aria-label="Chargement">
                 <div class="alliance-preloader-inner">
-                    <img src="{{ asset('assets/logo/logo-alliance.png') }}" alt="Alliance" width="320" height="120" decoding="async" fetchpriority="high">
+                    <img src="{{ asset('assets/logo/logo-alliance-dark.png') }}" alt="Alliance" width="320" height="120" decoding="async" fetchpriority="high">
                     <span class="alliance-preloader-label">Chargement…</span>
                 </div>
             </div>
@@ -931,6 +996,7 @@
         {{-- Modales hors de .page-wrapper : le thème met page-wrapper en z-index:99 alors que le backdrop Bootstrap est sur body (z-index ~1050), ce qui plaçait l’overlay AU-DESSUS de la modale et bloquait les clics. --}}
         @include('layouts.cart-offcanvas')
         @include('layouts.donate-modal')
+        @include('partials.products-welcome-modal')
         @include('partials.pastor-welcome-modal')
 
         @stack('modals')
@@ -945,7 +1011,7 @@
                         </div>
                         <h4 class="modal-title fw-bold mb-2" id="allianceNewsletterOkModalLabel">Inscription confirmée</h4>
                         <p class="text-muted mb-4 px-sm-2">{{ session('newsletter_success') }}</p>
-                        <button type="button" class="btn btn-lg text-white px-5 fw-semibold" style="background: #c8922a; border: none;" data-bs-dismiss="modal">Parfait</button>
+                        <button type="button" class="btn btn-lg text-white px-5 fw-semibold" style="background: #A86C3C; border: none;" data-bs-dismiss="modal">Parfait</button>
                     </div>
                 </div>
             </div>
@@ -970,11 +1036,18 @@
                 'international' => (float) $shipCfg->price_international,
                 'currency' => (string) ($shipCfg->currency ?: 'USD'),
             ];
+            $shopCfg = $shopSetting ?? \App\Models\ShopSetting::instance();
+            $allianceShopCurrencyPayload = [
+                'rate' => (float) ($shopCfg->usd_to_cdf_rate ?? 2850),
+                'default' => (string) ($shopCfg->default_currency ?? 'USD'),
+                'allowSwitch' => (bool) ($shopCfg->allow_currency_switch ?? true),
+            ];
         @endphp
         <script>
             window.allianceFlexPayEnabled = @json((bool) config('services.flexpay.enabled'));
             window.allianceAuthUser = @json(auth()->check() ? ['id' => auth()->id(), 'name' => auth()->user()->name, 'email' => auth()->user()->email] : null);
             window.allianceShippingConfig = @json($allianceShippingConfigPayload);
+            window.allianceShopCurrency = @json($allianceShopCurrencyPayload);
             window.allianceRoutes = {
                 loginSend: @json(route('login.send-code')),
                 loginVerify: @json(route('login.verify')),

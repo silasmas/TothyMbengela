@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('page_banner_title', 'Mes achats')
 
@@ -65,7 +65,7 @@
                         <div class="text-end">
                             <span class="badge {{ $orderStatusClass($order->status) }} me-1">{{ $orderStatusLabel($order->status) }}</span>
                             <span class="badge {{ $payStatusClass($order->payment_status) }}">{{ $payStatusLabel($order->payment_status) }}</span>
-                            <strong class="ms-2 d-inline-block" style="color:#C8922A;">{{ number_format($due, 2, ',', ' ') }} {{ $order->currency }}</strong>
+                            <strong class="ms-2 d-inline-block" style="color:#A86C3C;">{{ number_format($due, 2, ',', ' ') }} {{ $order->currency }}</strong>
                         </div>
                     </div>
                     <div class="card-body pt-0">

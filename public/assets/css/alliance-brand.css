@@ -1,0 +1,331 @@
+/**
+ * Charte graphique Alliance — couleurs, typo et accents issus du PDF + logos.
+ * Ocre #A86C3C · Or #C9A25A · Noir #141414 · Crème #F7F1E8
+ */
+:root {
+  --alliance-ochre: #A86C3C;
+  --alliance-ochre-dark: #845430;
+  --alliance-gold: #C9A25A;
+  --alliance-gold-light: #E2C48A;
+  --alliance-gold-deep: #B48448;
+  --alliance-black: #141414;
+  --alliance-ink: #1C1C1C;
+  --alliance-cream: #F7F1E8;
+  --alliance-cream-soft: #FBF7F1;
+  --alliance-muted: #6E6358;
+
+  --theme-color1: var(--alliance-black);
+  --theme-color2: var(--alliance-ochre);
+  --theme-color3: var(--alliance-cream);
+  --bg-theme-color1: var(--theme-color1);
+  --bg-theme-color2: var(--theme-color2);
+  --border-theme-color1: var(--theme-color1);
+  --border-theme-color2: var(--theme-color2);
+  --text-color-bg-theme-color1: #fff;
+  --text-color-bg-theme-color2: #fff;
+  --text-color: var(--alliance-muted);
+  --headings-color: var(--alliance-ink);
+  --link-color: var(--alliance-ochre-dark);
+  --link-hover-color: var(--alliance-gold-deep);
+
+  --gradient-1: linear-gradient(135deg, rgba(20, 20, 20, 0) 0%, rgba(20, 20, 20, 0.7) 60%, var(--alliance-ochre) 100%);
+  --gradient-2: linear-gradient(to bottom, transparent 0%, var(--alliance-ochre) 100%);
+  --gradient-4: linear-gradient(90deg, #141414 0%, #A86C3C 55%, #C9A25A 100%);
+  --gradient-3: linear-gradient(-135deg, rgba(20, 20, 20, 0) 45%, var(--alliance-ochre) 100%);
+
+  --text-font: "Source Sans 3", "Segoe UI", sans-serif;
+  --title-font: "Cormorant Garamond", Georgia, serif;
+  --script-font: "Great Vibes", cursive;
+
+  --body-font-size: 16px;
+  --body-line-height: 1.7;
+  --body-font-weight: 400;
+  --h1-font-size: 64px;
+  --h2-font-size: 44px;
+  --h3-font-size: 32px;
+  --h4-font-size: 24px;
+  --h5-font-size: 20px;
+  --h6-font-size: 18px;
+  --h1-font-weight: 600;
+  --h2-font-weight: 600;
+  --h3-font-weight: 600;
+  --sec-title-subtitle-color: var(--alliance-ochre);
+  --sec-title-subtitle-font-size: 15px;
+  --sec-title-subtitle-font-weight: 600;
+  --sec-title-subtitle-letter-spacing: 0.14em;
+  --theme-light-background: var(--alliance-cream-soft);
+  --theme-black: var(--alliance-black);
+}
+
+body {
+  font-family: var(--text-font);
+  color: var(--text-color);
+  background-color: #fff;
+}
+
+h1, h2, h3, h4, h5, h6,
+.sec-title h2,
+.sec-title h3,
+.main-slider h1,
+.product-details__title,
+.theme-btn {
+  font-family: var(--title-font);
+  letter-spacing: 0.01em;
+}
+
+.sec-title .sub-title {
+  font-family: var(--text-font);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--alliance-ochre);
+}
+
+.alliance-script {
+  font-family: var(--script-font);
+  font-weight: 400;
+  color: var(--alliance-gold);
+}
+
+/* Boutons thème → ocre / or */
+.theme-btn.btn-style-one {
+  background: var(--alliance-ochre) !important;
+  border-color: var(--alliance-ochre) !important;
+}
+.theme-btn.btn-style-one:hover,
+.theme-btn.btn-style-one:focus {
+  background: var(--alliance-gold-deep) !important;
+  border-color: var(--alliance-gold-deep) !important;
+}
+.theme-btn.btn-style-one .btn-title,
+.theme-btn.btn-style-one:hover .btn-title {
+  color: #fff !important;
+}
+.theme-btn.btn-style-two,
+.theme-btn.btn-style-one.light-bg {
+  background: transparent !important;
+  border: 2px solid var(--alliance-ochre) !important;
+  color: var(--alliance-ochre) !important;
+}
+.theme-btn.btn-style-two .btn-title,
+.theme-btn.btn-style-one.light-bg .btn-title {
+  color: var(--alliance-ochre) !important;
+}
+.theme-btn.btn-style-two:hover,
+.theme-btn.btn-style-one.light-bg:hover {
+  background: var(--alliance-ochre) !important;
+}
+.theme-btn.btn-style-two:hover .btn-title,
+.theme-btn.btn-style-one.light-bg:hover .btn-title {
+  color: #fff !important;
+}
+
+.alliance-btn-partner {
+  background: var(--alliance-black) !important;
+  border-color: var(--alliance-black) !important;
+  color: var(--alliance-gold-light) !important;
+}
+.alliance-btn-partner .btn-title {
+  color: var(--alliance-gold-light) !important;
+}
+
+/* Header / footer */
+.main-header {
+  background: #fff;
+}
+
+/* Menu : marron par défaut ; souligné uniquement au survol / actif */
+.main-header .main-menu .navigation > li > a,
+.sticky-header .main-menu .navigation > li > a {
+  font-family: var(--text-font);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 13px;
+  color: var(--alliance-ochre) !important;
+  text-decoration: none !important;
+}
+.main-header .main-menu .navigation > li:before,
+.sticky-header .main-menu .navigation > li:before {
+  background-color: var(--alliance-ochre) !important;
+  height: 2px !important;
+  bottom: 22px !important;
+}
+.main-header .main-menu .navigation > li > a:hover,
+.main-header .main-menu .navigation > li.current > a,
+.sticky-header .main-menu .navigation > li > a:hover,
+.sticky-header .main-menu .navigation > li.current > a {
+  color: var(--alliance-ochre-dark) !important;
+}
+.mobile-menu .navigation li > a {
+  color: var(--alliance-ochre) !important;
+}
+.mobile-menu .navigation li.current > a,
+.mobile-menu .navigation li > a:hover {
+  color: var(--alliance-ochre-dark) !important;
+}
+.main-footer {
+  background: var(--alliance-black) !important;
+  color: rgba(255, 255, 255, 0.78);
+}
+.main-footer a {
+  color: var(--alliance-gold-light);
+}
+.main-footer a:hover {
+  color: #fff;
+}
+
+/* Logos */
+.main-header .logo img,
+.sticky-header .logo img,
+.mobile-menu .nav-logo img {
+  max-height: 104px;
+  width: auto;
+  object-fit: contain;
+}
+.sticky-header .logo img {
+  max-height: 78px;
+}
+.main-footer .logo img {
+  max-height: 140px;
+  width: auto;
+  filter: none;
+}
+
+/* Preloader charte */
+.preloader.alliance-preloader {
+  background: var(--alliance-black) !important;
+}
+.alliance-preloader-label {
+  color: var(--alliance-gold-light) !important;
+  font-family: var(--text-font);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+/* Champ quantité (fiche produit + panier) — lisible sur fond blanc */
+.product-details__quantity .quantity-box {
+  width: 120px !important;
+  height: 52px !important;
+  border: 2px solid var(--alliance-ochre) !important;
+  background: #fff !important;
+  border-radius: 10px !important;
+  box-shadow: 0 0 0 1px rgba(168, 108, 60, 0.15);
+}
+.product-details__quantity .quantity-box input,
+#alliance-book-qty {
+  width: 100% !important;
+  height: 48px !important;
+  color: #141414 !important;
+  background: #fff !important;
+  font-weight: 700 !important;
+  font-size: 18px !important;
+  border: none !important;
+  padding-left: 18px !important;
+  -webkit-text-fill-color: #141414;
+}
+.product-details__quantity .quantity-box button {
+  color: #fff !important;
+  background: var(--alliance-ochre) !important;
+  border-left: 1px solid var(--alliance-ochre-dark) !important;
+  width: 32px !important;
+  height: 24px !important;
+}
+.product-details__quantity .quantity-box button:hover {
+  background: var(--alliance-ochre-dark) !important;
+  color: #fff !important;
+}
+.alliance-cart-qty-input {
+  border: 2px solid var(--alliance-ochre) !important;
+  background: #fff !important;
+  color: var(--alliance-black) !important;
+  font-weight: 700 !important;
+  border-radius: 6px !important;
+}
+.alliance-cart-qty-dec,
+.alliance-cart-qty-inc {
+  border-color: var(--alliance-ochre) !important;
+  color: var(--alliance-ochre) !important;
+  font-weight: 700 !important;
+  background: var(--alliance-cream-soft) !important;
+}
+.alliance-cart-qty-dec:hover,
+.alliance-cart-qty-inc:hover {
+  background: var(--alliance-ochre) !important;
+  color: #fff !important;
+}
+
+/* Accents or/ocre récurrents (jamais appliquer la couleur ocre à .book-price-tag) */
+.scroll-to-top,
+.filter-tabs .filter.active,
+.ui-btn.add-to-cart,
+.alliance-products-welcome-type,
+.alliance-slide-product-type {
+  color: var(--alliance-ochre) !important;
+}
+
+/* Prix cards boutique : fond ocre + texte blanc toujours lisible (avant survol) */
+.home5-features-section .book-price-tag,
+.book-price-tag {
+  display: inline-block !important;
+  background: var(--alliance-ochre) !important;
+  background-color: var(--alliance-ochre) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-family: var(--text-font) !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.02em !important;
+  padding: 6px 14px !important;
+  border-radius: 999px !important;
+  border: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.filter-tabs .filter.active {
+  border-color: var(--alliance-ochre) !important;
+  background: rgba(168, 108, 60, 0.1) !important;
+}
+
+.main-slider .text,
+.main-slider h1 {
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+}
+
+/* Modales / toasts or */
+.alliance-site-toast.success {
+  background: var(--alliance-ochre) !important;
+}
+.nav-pills .nav-link.active,
+.btn[style*="background:#A86C3C"],
+.btn[style*="background:#C8922A"],
+.alliance-checkout-gold-btn {
+  background: var(--alliance-ochre) !important;
+  border-color: var(--alliance-ochre) !important;
+}
+
+/* Sections crème légères */
+.home5-features-section,
+.services-section {
+  background: linear-gradient(180deg, var(--alliance-cream-soft) 0%, #fff 55%);
+}
+
+@media (max-width: 767px) {
+  :root {
+    --h1-font-size: 40px;
+    --h2-font-size: 32px;
+    --h3-font-size: 26px;
+  }
+  .main-header .logo img {
+    max-height: 72px;
+  }
+  .main-footer .logo img {
+    max-height: 110px;
+  }
+  .main-footer .logo img {
+    max-height: 88px;
+  }
+}

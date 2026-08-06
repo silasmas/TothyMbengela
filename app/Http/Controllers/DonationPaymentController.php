@@ -119,7 +119,7 @@ class DonationPaymentController extends Controller
             return response()->json(['reponse' => false, 'message' => 'Transaction introuvable'], 404);
         }
 
-        if ($shopOrder && Auth::id() !== $shopOrder->user_id) {
+        if ($shopOrder && ! $this->canPayShopOrder($request, $shopOrder)) {
             return response()->json(['reponse' => false, 'message' => 'Commande non autorisée'], 403);
         }
 
@@ -137,7 +137,7 @@ class DonationPaymentController extends Controller
         } else {
             $amount = (float) $shopOrder->amount_due;
             $currency = $shopOrder->currency;
-            $label = 'Commande livres — '.($shopOrder->user?->name ?? 'Client');
+            $label = 'Commande boutique — '.($shopOrder->user?->name ?? $shopOrder->guest_email ?? 'Client');
             $flexType = 'shop';
         }
 
@@ -327,5 +327,29 @@ class DonationPaymentController extends Controller
             'amount' => $amount,
             'currency' => $currency,
         ]);
+    }
+
+    /**
+     * Autorise le paiement d’une commande boutique (propriétaire connecté, session checkout, ou e-mail invité).
+     *
+     * @param  Request  $request  Requête courante
+     * @param  Order  $shopOrder  Commande à payer
+     * @return bool
+     */
+    private function canPayShopOrder(Request $request, Order $shopOrder): bool
+    {
+        if (Auth::check() && Auth::id() === $shopOrder->user_id) {
+            return true;
+        }
+
+        $refs = $request->session()->get('shop_order_refs', []);
+        if (is_array($refs) && in_array($shopOrder->reference, $refs, true)) {
+            return true;
+        }
+
+        $sessionEmail = strtolower((string) $request->session()->get('shop_checkout_email', ''));
+        $guestEmail = strtolower((string) ($shopOrder->guest_email ?? ''));
+
+        return $sessionEmail !== '' && $guestEmail !== '' && $sessionEmail === $guestEmail;
     }
 }

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('page_banner_title', 'Séries')
 
@@ -87,7 +87,7 @@
         padding-top: clamp(2.25rem, 5vw, 3.75rem) !important;
     }
     .alliance-series-stack-card__title:hover {
-        color: var(--theme-color1, #c8922a) !important;
+        color: var(--theme-color1, #A86C3C) !important;
     }
     .alliance-series-stack-card__media img {
         transition: transform 0.35s ease;

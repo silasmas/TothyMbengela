@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('page_banner_title', 'Activités de la pasteure')
 
@@ -13,7 +13,7 @@
             <div class="col-12">
                 <div class="blog-details__left">
                     <div class="sec-title mb-4">
-                        <span class="sub-title" style="color:#c8922a;letter-spacing:0.12em;">Agenda</span>
+                        <span class="sub-title" style="color:#A86C3C;letter-spacing:0.12em;">Agenda</span>
                         <h2 class="mb-2">Activités de la pasteure</h2>
                         <p class="text mb-0" style="color:#666;">Prochains rendez-vous, journée en cours et temps forts récents.</p>
                     </div>

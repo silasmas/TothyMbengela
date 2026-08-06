@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('page_banner_title', 'Faire un don')
 
@@ -109,13 +109,13 @@
                                         <label>Fréquence *</label>
                                         <div class="row g-2">
                                             <div class="col-6">
-                                                <label class="d-flex align-items-center justify-content-center gap-2 py-3 px-2 rounded w-100 h-100" style="border:2px solid {{ old('frequency', 'once') === 'once' ? '#C8922A' : '#ddd' }};cursor:pointer;{{ old('frequency', 'once') === 'once' ? 'background:#fdf8eb;' : '' }}">
+                                                <label class="d-flex align-items-center justify-content-center gap-2 py-3 px-2 rounded w-100 h-100" style="border:2px solid {{ old('frequency', 'once') === 'once' ? '#A86C3C' : '#ddd' }};cursor:pointer;{{ old('frequency', 'once') === 'once' ? 'background:#fdf8eb;' : '' }}">
                                                     <input type="radio" name="frequency" value="once" {{ old('frequency', 'once') === 'once' ? 'checked' : '' }}>
                                                     <strong class="small">Don unique</strong>
                                                 </label>
                                             </div>
                                             <div class="col-6">
-                                                <label class="d-flex align-items-center justify-content-center gap-2 py-3 px-2 rounded w-100 h-100" style="border:2px solid {{ old('frequency') === 'monthly' ? '#C8922A' : '#ddd' }};cursor:pointer;{{ old('frequency') === 'monthly' ? 'background:#fdf8eb;' : '' }}">
+                                                <label class="d-flex align-items-center justify-content-center gap-2 py-3 px-2 rounded w-100 h-100" style="border:2px solid {{ old('frequency') === 'monthly' ? '#A86C3C' : '#ddd' }};cursor:pointer;{{ old('frequency') === 'monthly' ? 'background:#fdf8eb;' : '' }}">
                                                     <input type="radio" name="frequency" value="monthly" {{ old('frequency') === 'monthly' ? 'checked' : '' }}>
                                                     <strong class="small">Don mensuel</strong>
                                                 </label>

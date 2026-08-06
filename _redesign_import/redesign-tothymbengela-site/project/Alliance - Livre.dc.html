@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Work+Sans:wght@400;500;600;700&family=Alex+Brush&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+body{margin:0;background:#F7F5F1;font-family:'Work Sans',sans-serif;color:#221E17}
+a{color:#C9A24B}
+@keyframes pageFlipNext{0%{transform:rotateY(0deg)}100%{transform:rotateY(-179.9deg)}}
+@keyframes pageFlipPrev{0%{transform:rotateY(0deg)}100%{transform:rotateY(179.9deg)}}
+@keyframes pageShade{0%{opacity:0}45%{opacity:.6}100%{opacity:0}}
+a:hover{color:#AD8339}
+</style>
+</helmet>
+
+<div style="--bg:#F7F5F1;--bg-header:rgba(247,245,241,0.94);--text:#221E17;--muted1:#4A443C;--muted2:#5C5850;--muted3:#6B6156;--soft:#ECE8E0;--card:#FFFFFF;--line:#DAD5CC;--panel:#242019;--panel-hover:#332B21;--accent:#C9A24B;--accent-dark:#AD8339;--accent-light:#E8D4A0;--dur-hover:0.35s;max-width:1440px;margin:0 auto;overflow:hidden;background:var(--bg);color:var(--text)">
+
+<dc-import name="Header" accueil-active="0" apropos-active="0" agenda-active="0" contenus-active="0" boutique-active="1" contact-active="0" hint-size="100%,78px"></dc-import>
+<dc-import name="AnnounceBar" hint-size="100%,48px"></dc-import>
+
+<div style="padding:200px 64px 20px">
+<div style="font-size:13px;color:var(--muted3)"><a href="Alliance - Accueil.dc.html" style="color:var(--muted3);text-decoration:none">Accueil</a> / <a href="Alliance - Boutique.dc.html" style="color:var(--muted3);text-decoration:none">Boutique</a> / <span style="color:var(--text)">7 Bénéfices de la Résolution</span></div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:70px;padding:20px 64px 60px">
+<div>
+<div style="position:relative;width:280px;height:420px;margin:0 auto;perspective:1400px;padding-right:20px">
+<div style="position:relative;height:100%;width:100%;transform-style:preserve-3d;transition:transform var(--dur-hover) ease" style-hover="transform:rotateY(-22deg)">
+<div style="position:absolute;top:2%;right:-16px;width:16px;height:96%;background:repeating-linear-gradient(to bottom,#f6f2e8,#f6f2e8 2px,#e2dccb 2px,#e2dccb 3px);transform:rotateY(90deg) translateZ(8px);transform-origin:right center;border-radius:0 3px 3px 0;box-shadow:inset -1px 0 3px rgba(0,0,0,.2)"></div>
+<div style="position:absolute;inset:0;border-radius:2px 6px 6px 2px;overflow:hidden;box-shadow:6px 12px 30px rgba(0,0,0,.28)">
+<image-slot id="livre-cover" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/assets/images/resource/testimonial-bg1-550x550.jpg" placeholder="Couverture"></image-slot>
+</div>
+</div>
+</div>
+<div onClick="{{ openExcerpt }}" style="margin-top:24px;display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 20px;border:1px solid var(--line);border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;transition:background var(--dur-hover) ease" style-hover="background:var(--soft)">📖 Lire un extrait</div>
+
+<audio id="book-audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="metadata" style="display:none"></audio>
+<div style="margin-top:16px;padding:18px 20px;background:var(--card);border:1px solid var(--line);border-radius:12px">
+<div style="display:flex;align-items:center;gap:14px">
+<div onClick="{{ togglePlay }}" style="width:40px;height:40px;border-radius:50%;background:var(--panel);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:14px">{{ playIcon }}</div>
+<div style="flex:1">
+<div style="font-size:13px;font-weight:600">Extrait audio — Introduction</div>
+<div onMouseDown="{{ startSeek }}" style="position:relative;height:14px;display:flex;align-items:center;margin-top:8px;cursor:pointer">
+<div style="width:100%;height:4px;border-radius:2px;background:var(--soft);overflow:hidden"><div style="width:{{ audioProgress }}%;height:100%;background:var(--accent)"></div></div>
+<div style="position:absolute;left:{{ audioProgress }}%;top:50%;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 2px #fff;transform:translate(-50%,-50%)"></div>
+</div>
+</div>
+<div style="font-size:11px;color:var(--muted3);white-space:nowrap">{{ audioTimeLabel }}</div>
+</div>
+<div style="font-size:11px;color:var(--muted3);margin-top:10px">Extrait audio de démonstration — à remplacer par la narration réelle</div>
+</div>
+</div>
+
+<div>
+<div style="padding:6px 16px;background:var(--soft);color:var(--accent-dark);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;display:inline-block">Disponible</div>
+<div style="font-family:'Playfair Display',serif;font-size:38px;font-weight:600;margin:18px 0 10px;line-height:1.2">7 Bénéfices de la Résolution</div>
+<div style="font-size:15px;color:var(--muted2)">Par la Pasteure Tothy Mbengela</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:0;border:1px solid var(--line);border-radius:10px;margin:24px 0;overflow:hidden">
+<div style="padding:14px;text-align:center;border-right:1px solid var(--line)"><div style="font-size:16px;font-weight:700">96</div><div style="font-size:11px;color:var(--muted3);text-transform:uppercase">Pages</div></div>
+<div style="padding:14px;text-align:center;border-right:1px solid var(--line)"><div style="font-size:16px;font-weight:700">12 min</div><div style="font-size:11px;color:var(--muted3);text-transform:uppercase">Lecture</div></div>
+<div style="padding:14px;text-align:center;border-right:1px solid var(--line)"><div style="font-size:16px;font-weight:700">Français</div><div style="font-size:11px;color:var(--muted3);text-transform:uppercase">Langue</div></div>
+<div style="padding:14px;text-align:center"><div style="font-size:16px;font-weight:700">2024</div><div style="font-size:11px;color:var(--muted3);text-transform:uppercase">Parution</div></div>
+</div>
+
+<p style="font-size:16px;line-height:1.75;color:var(--muted2)">Découvrez les sept bénéfices puissants qui découlent d'une résolution ferme dans la foi — un guide pour ancrer vos engagements spirituels et tenir bon face aux épreuves du quotidien.</p>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px">
+<div style="padding:6px 14px;background:var(--soft);border-radius:999px;font-size:12px;color:var(--muted2)">Résolution</div>
+<div style="padding:6px 14px;background:var(--soft);border-radius:999px;font-size:12px;color:var(--muted2)">Foi</div>
+<div style="padding:6px 14px;background:var(--soft);border-radius:999px;font-size:12px;color:var(--muted2)">Engagement</div>
+<div style="padding:6px 14px;background:var(--soft);border-radius:999px;font-size:12px;color:var(--muted2)">Vie chrétienne</div>
+</div>
+
+<div style="margin-top:28px">
+<div style="font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted3);margin-bottom:10px">Choisir un format</div>
+<div onClick="{{ selectBroche }}" style="display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border:1px solid {{ brocheBorder }};background:{{ brocheBg }};border-radius:10px;cursor:pointer;margin-bottom:10px">
+<div><div style="font-size:14px;font-weight:600">Broché</div><div style="font-size:12px;color:var(--muted3)">Édition imprimée</div></div>
+<div style="font-size:15px;font-weight:700">10 USD</div>
+</div>
+<div onClick="{{ selectEpub }}" style="display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border:1px solid {{ epubBorder }};background:{{ epubBg }};border-radius:10px;cursor:pointer;margin-bottom:10px">
+<div><div style="font-size:14px;font-weight:600">EPUB</div><div style="font-size:12px;color:var(--muted3)">Version numérique</div></div>
+<div style="font-size:15px;font-weight:700">8 USD</div>
+</div>
+<div onClick="{{ selectAudio }}" style="display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border:1px solid {{ audioBorder }};background:{{ audioBg }};border-radius:10px;cursor:pointer">
+<div><div style="font-size:14px;font-weight:600">Livre audio</div><div style="font-size:12px;color:var(--muted3)">Narration complète</div></div>
+<div style="font-size:15px;font-weight:700">12 USD</div>
+</div>
+</div>
+
+<div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--accent);margin:26px 0 18px">{{ selectedPrice }}</div>
+<div style="display:flex;gap:16px">
+<div style="padding:16px 30px;background:var(--panel);color:#fff;font-size:15px;font-weight:600;border-radius:8px;cursor:pointer;transition:background var(--dur-hover) ease" style-hover="background:var(--panel-hover)">Ajouter au panier</div>
+<div data-open-don-modal="1" data-don-tab="partenaire" style="padding:16px 30px;border:1px solid var(--line);font-size:15px;font-weight:600;border-radius:8px;cursor:pointer;transition:background var(--dur-hover) ease" style-hover="background:var(--soft)">Soutenir ce livre</div>
+</div>
+</div>
+</div>
+
+<div style="padding:0 64px 100px">
+<div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:24px">Autres ouvrages</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px">
+<div>
+<div style="position:relative;width:150px;height:260px;margin:0 auto;perspective:1200px;padding-right:14px">
+<div style="position:relative;height:100%;width:100%;transform-style:preserve-3d;transition:transform var(--dur-hover) ease" style-hover="transform:rotateY(-22deg)">
+<div style="position:absolute;top:3%;right:-12px;width:12px;height:94%;background:repeating-linear-gradient(to bottom,#f6f2e8,#f6f2e8 2px,#e2dccb 2px,#e2dccb 3px);transform:rotateY(90deg) translateZ(6px);transform-origin:right center;border-radius:0 3px 3px 0;box-shadow:inset -1px 0 3px rgba(0,0,0,.2)"></div>
+<div style="position:absolute;inset:0;border-radius:2px 5px 5px 2px;overflow:hidden;box-shadow:3px 6px 18px rgba(0,0,0,.28)">
+<image-slot id="rel-1" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/assets/images/resource/testimonial-bg1-550x550.jpg" placeholder="Couverture"></image-slot>
+<div style="position:absolute;top:12px;left:12px;padding:5px 12px;background:var(--accent);color:var(--panel);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:999px">Disponible</div>
+</div>
+</div>
+</div>
+<div style="font-size:15px;font-weight:600;margin-top:16px;text-align:center">À l'Instar d'Élie</div><div style="font-size:13px;color:var(--accent);margin-top:4px;text-align:center">10 USD</div></div>
+<div>
+<div style="position:relative;width:150px;height:260px;margin:0 auto;perspective:1200px;padding-right:14px">
+<div style="position:relative;height:100%;width:100%;transform-style:preserve-3d;transition:transform var(--dur-hover) ease" style-hover="transform:rotateY(-22deg)">
+<div style="position:absolute;top:3%;right:-12px;width:12px;height:94%;background:repeating-linear-gradient(to bottom,#f6f2e8,#f6f2e8 2px,#e2dccb 2px,#e2dccb 3px);transform:rotateY(90deg) translateZ(6px);transform-origin:right center;border-radius:0 3px 3px 0;box-shadow:inset -1px 0 3px rgba(0,0,0,.2)"></div>
+<div style="position:absolute;inset:0;border-radius:2px 5px 5px 2px;overflow:hidden;box-shadow:3px 6px 18px rgba(0,0,0,.28)">
+<image-slot id="rel-2" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/assets/images/resource/testimonial-bg1-550x550.jpg" placeholder="Couverture"></image-slot>
+<div style="position:absolute;top:12px;left:12px;padding:5px 12px;background:var(--accent);color:var(--panel);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:999px">Disponible</div>
+</div>
+</div>
+</div>
+<div style="font-size:15px;font-weight:600;margin-top:16px;text-align:center">Attends-la cette Promesse !</div><div style="font-size:13px;color:var(--accent);margin-top:4px;text-align:center">10 USD</div></div>
+<div>
+<div style="position:relative;width:150px;height:260px;margin:0 auto;perspective:1200px;padding-right:14px">
+<div style="position:relative;height:100%;width:100%;transform-style:preserve-3d;transition:transform var(--dur-hover) ease" style-hover="transform:rotateY(-22deg)">
+<div style="position:absolute;top:3%;right:-12px;width:12px;height:94%;background:repeating-linear-gradient(to bottom,#f6f2e8,#f6f2e8 2px,#e2dccb 2px,#e2dccb 3px);transform:rotateY(90deg) translateZ(6px);transform-origin:right center;border-radius:0 3px 3px 0;box-shadow:inset -1px 0 3px rgba(0,0,0,.2)"></div>
+<div style="position:absolute;inset:0;border-radius:2px 5px 5px 2px;overflow:hidden;box-shadow:3px 6px 18px rgba(0,0,0,.28)">
+<image-slot id="rel-3" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/assets/images/resource/testimonial-bg1-550x550.jpg" placeholder="Couverture"></image-slot>
+<div style="position:absolute;top:12px;left:12px;padding:5px 12px;background:var(--accent);color:var(--panel);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:999px">Disponible</div>
+</div>
+</div>
+</div>
+<div style="font-size:15px;font-weight:600;margin-top:16px;text-align:center">Sois Daniel ! La Préparation</div><div style="font-size:13px;color:var(--accent);margin-top:4px;text-align:center">10 USD</div></div>
+</div>
+</div>
+
+<dc-import name="Footer" hint-size="100%,400px"></dc-import>
+<dc-import name="DonModal" hint-size="0,0"></dc-import>
+<dc-import name="RevueModal" hint-size="0,0"></dc-import>
+
+<sc-if value="{{ excerptOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position:fixed;inset:0;z-index:300;background:rgba(10,8,5,.92);display:flex;flex-direction:column">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:20px 32px;color:#fff">
+<div><div style="font-size:16px;font-weight:600">7 Bénéfices de la Résolution</div><div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:oklch(70% 0.01 75)">Aperçu · Feuilleter</div></div>
+<div onClick="{{ closeExcerpt }}" style="cursor:pointer;font-size:26px;line-height:1;opacity:.8">×</div>
+</div>
+<div style="flex:1;display:flex;align-items:center;justify-content:center;gap:24px;padding:0 32px">
+<div onClick="{{ prevPage }}" style="cursor:pointer;color:#fff;font-size:28px;opacity:.7">‹</div>
+<div data-flip-surface="1" style="position:relative;height:min(70vh,640px);width:auto;aspect-ratio:3/4;perspective:2000px;cursor:grab;touch-action:pan-y">
+
+<div style="position:absolute;inset:0;z-index:1;border-radius:4px;box-shadow:inset 0 0 40px rgba(0,0,0,.15)">
+<sc-if value="{{ backIsCover }}" hint-placeholder-val="{{ false }}">
+<div style="width:100%;height:100%;border-radius:4px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.4)">
+<image-slot id="excerpt-cover-b" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/assets/images/resource/testimonial-bg1-550x550.jpg" placeholder="Couverture"></image-slot>
+</div>
+</sc-if>
+<sc-if value="{{ backIsBack }}" hint-placeholder-val="{{ false }}">
+<div style="width:100%;height:100%;background:var(--panel);border-radius:4px;box-shadow:0 30px 60px rgba(0,0,0,.4);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px;box-sizing:border-box">
+<div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;font-style:italic">Fin de l'aperçu</div>
+<p style="font-size:14px;color:oklch(75% 0.01 75);margin-top:14px;line-height:1.7">Le livre complet est disponible dès maintenant dans la boutique.</p>
+</div>
+</sc-if>
+<sc-if value="{{ backIsText }}" hint-placeholder-val="{{ true }}">
+<div style="width:100%;height:100%;background:#faf7f0;border-radius:4px;box-shadow:0 30px 60px rgba(0,0,0,.4);padding:48px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center">
+<div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted3)">Extrait</div>
+<div style="width:36px;height:2px;background:var(--accent);margin:14px 0 22px"></div>
+<div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--text);margin-bottom:16px">{{ backPageTitle }}</div>
+<p style="font-size:14px;line-height:1.8;color:var(--muted2)">{{ backPageBody }}</p>
+</div>
+</sc-if>
+</div>
+
+<div style="position:absolute;inset:0;z-index:2;transform-style:preserve-3d;backface-visibility:hidden;transform-origin:{{ flipOrigin }} center;{{ frontAnimStyle }}">
+<sc-if value="{{ frontIsCover }}" hint-placeholder-val="{{ true }}">
+<div style="width:100%;height:100%;border-radius:4px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.4)">
+<image-slot id="excerpt-cover-f" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/assets/images/resource/testimonial-bg1-550x550.jpg" placeholder="Couverture"></image-slot>
+</div>
+</sc-if>
+<sc-if value="{{ frontIsBack }}" hint-placeholder-val="{{ false }}">
+<div style="width:100%;height:100%;background:var(--panel);border-radius:4px;box-shadow:0 30px 60px rgba(0,0,0,.4);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px;box-sizing:border-box">
+<div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;font-style:italic">Fin de l'aperçu</div>
+<p style="font-size:14px;color:oklch(75% 0.01 75);margin-top:14px;line-height:1.7">Le livre complet est disponible dès maintenant dans la boutique.</p>
+</div>
+</sc-if>
+<sc-if value="{{ frontIsText }}" hint-placeholder-val="{{ false }}">
+<div style="width:100%;height:100%;background:#faf7f0;border-radius:4px;box-shadow:0 30px 60px rgba(0,0,0,.4);padding:48px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center">
+<div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted3)">Extrait</div>
+<div style="width:36px;height:2px;background:var(--accent);margin:14px 0 22px"></div>
+<div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--text);margin-bottom:16px">{{ frontPageTitle }}</div>
+<p style="font-size:14px;line-height:1.8;color:var(--muted2)">{{ frontPageBody }}</p>
+</div>
+</sc-if>
+<div style="position:absolute;inset:0;background:{{ shadeGradient }};pointer-events:none;border-radius:4px;{{ shadeAnimStyle }}"></div>
+</div>
+
+</div>
+<div onClick="{{ nextPage }}" style="cursor:pointer;color:#fff;font-size:28px;opacity:.7">›</div>
+</div>
+<div style="text-align:center;padding:20px;color:oklch(70% 0.01 75);font-size:13px">Page {{ pageNumber }} sur 4 · Utilisez les flèches</div>
+</div>
+</sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { format: 'broche', playing: false, excerptOpen: false, page: 0, targetPage: 0, phase: 'idle', flipDir: 'next', audioProgress: 0, audioTimeLabel: '0:00 / 0:00' };
+  pages = [
+    { title: 'Couverture', body: '', kind: 'cover' },
+    { title: 'Introduction', body: "Une résolution ferme, ancrée dans la foi, change durablement le cours d'une vie. Ce livre en explore les sept bénéfices essentiels.", kind: 'text' },
+    { title: 'Chapitre 1 — La clarté', body: "Prendre une résolution devant Dieu apporte une clarté nouvelle sur ses priorités et son chemin de vie.", kind: 'text' },
+    { title: 'Fin', body: '', kind: 'back' }
+  ];
+  componentDidMount() {
+    this.audio = document.getElementById('book-audio');
+    if (this.audio) {
+      this._onTime = () => {
+        const d = this.audio.duration || 0;
+        const c = this.audio.currentTime || 0;
+        const fmt = (t) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
+        this.setState({ audioProgress: d ? (c / d) * 100 : 0, audioTimeLabel: `${fmt(c)} / ${fmt(d)}` });
+      };
+      this._onEnd = () => this.setState({ playing: false });
+      this.audio.addEventListener('timeupdate', this._onTime);
+      this.audio.addEventListener('loadedmetadata', this._onTime);
+      this.audio.addEventListener('ended', this._onEnd);
+    }
+    this._dragStartX = null;
+    this._onDragStart = (e) => {
+      const el = e.target.closest && e.target.closest('[data-flip-surface]');
+      if (!el) return;
+      this._dragStartX = e.touches ? e.touches[0].clientX : e.clientX;
+    };
+    this._onDragEnd = (e) => {
+      if (this._dragStartX == null) return;
+      const endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+      const dx = endX - this._dragStartX;
+      this._dragStartX = null;
+      if (Math.abs(dx) < 40) return;
+      if (dx < 0) this.goToPage(this.state.page + 1);
+      else this.goToPage(this.state.page - 1);
+    };
+    document.addEventListener('mousedown', this._onDragStart);
+    document.addEventListener('mouseup', this._onDragEnd);
+    document.addEventListener('touchstart', this._onDragStart, { passive: true });
+    document.addEventListener('touchend', this._onDragEnd);
+  }
+  componentWillUnmount() {
+    if (this.audio) {
+      this.audio.removeEventListener('timeupdate', this._onTime);
+      this.audio.removeEventListener('loadedmetadata', this._onTime);
+      this.audio.removeEventListener('ended', this._onEnd);
+    }
+    document.removeEventListener('mousedown', this._onDragStart);
+    document.removeEventListener('mouseup', this._onDragEnd);
+    document.removeEventListener('touchstart', this._onDragStart);
+    document.removeEventListener('touchend', this._onDragEnd);
+  }
+  goToPage(next) {
+    if (next < 0 || next >= this.pages.length || this.state.phase === 'flipping') return;
+    const dir = next > this.state.page ? 'next' : 'prev';
+    this.setState({ flipDir: dir, targetPage: next, phase: 'flipping' });
+    setTimeout(() => {
+      this.setState({ page: next, phase: 'reset' });
+      requestAnimationFrame(() => requestAnimationFrame(() => this.setState({ phase: 'idle' })));
+    }, 650);
+  }
+  renderVals() {
+    const prices = { broche: '10 USD', epub: '8 USD', audio: '12 USD' };
+    const sel = (key) => this.state.format === key;
+    const front = this.pages[this.state.page];
+    const back = this.pages[this.state.targetPage] || front;
+    const dirSign = this.state.flipDir === 'next' ? -1 : 1;
+    const flipping = this.state.phase === 'flipping';
+    const anim = this.state.flipDir === 'next' ? 'pageFlipNext' : 'pageFlipPrev';
+    const frontAnimStyle = flipping
+      ? `animation:${anim} .65s ease-in-out forwards;`
+      : `transform:rotateY(0deg);`;
+    const shadeAnimStyle = flipping
+      ? `animation:pageShade .65s ease-in-out forwards;`
+      : `opacity:0;`;
+    const shadeGradient = this.state.flipDir === 'next'
+      ? 'linear-gradient(90deg, transparent 55%, rgba(0,0,0,.6))'
+      : 'linear-gradient(270deg, transparent 55%, rgba(0,0,0,.6))';
+    return {
+      brocheBorder: sel('broche') ? 'var(--accent)' : 'var(--line)',
+      brocheBg: sel('broche') ? 'var(--soft)' : 'transparent',
+      epubBorder: sel('epub') ? 'var(--accent)' : 'var(--line)',
+      epubBg: sel('epub') ? 'var(--soft)' : 'transparent',
+      audioBorder: sel('audio') ? 'var(--accent)' : 'var(--line)',
+      audioBg: sel('audio') ? 'var(--soft)' : 'transparent',
+      selectedPrice: prices[this.state.format],
+      selectBroche: () => this.setState({ format: 'broche' }),
+      selectEpub: () => this.setState({ format: 'epub' }),
+      selectAudio: () => this.setState({ format: 'audio' }),
+      playIcon: this.state.playing ? '❚❚' : '▶',
+      togglePlay: () => {
+        if (!this.audio) return;
+        if (this.state.playing) { this.audio.pause(); this.setState({ playing: false }); }
+        else { this.audio.play().then(() => this.setState({ playing: true })).catch(() => {}); }
+      },
+      audioProgress: this.state.audioProgress,
+      audioTimeLabel: this.state.audioTimeLabel,
+      startSeek: (e) => {
+        if (!this.audio) return;
+        const rect = e.currentTarget.getBoundingClientRect();
+        const apply = (clientX) => {
+          if (!this.audio.duration) return;
+          const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+          this.audio.currentTime = ratio * this.audio.duration;
+        };
+        apply(e.clientX);
+        const move = (ev) => apply(ev.clientX);
+        const up = () => { document.removeEventListener('mousemove', move); document.removeEventListener('mouseup', up); };
+        document.addEventListener('mousemove', move);
+        document.addEventListener('mouseup', up);
+      },
+      excerptOpen: this.state.excerptOpen,
+      openExcerpt: () => this.setState({ excerptOpen: true, page: 0, targetPage: 0, phase: 'idle' }),
+      closeExcerpt: () => this.setState({ excerptOpen: false }),
+      prevPage: () => this.goToPage(this.state.page - 1),
+      nextPage: () => this.goToPage(this.state.page + 1),
+      frontIsCover: front.kind === 'cover',
+      frontIsBack: front.kind === 'back',
+      frontIsText: front.kind === 'text',
+      frontPageTitle: front.title,
+      frontPageBody: front.body,
+      backIsCover: back.kind === 'cover',
+      backIsBack: back.kind === 'back',
+      backIsText: back.kind === 'text',
+      backPageTitle: back.title,
+      backPageBody: back.body,
+      pageNumber: this.state.page + 1,
+      frontAnimStyle, shadeAnimStyle, shadeGradient,
+      flipOrigin: this.state.flipDir === 'next' ? 'left' : 'right'
+    };
+  }
+}
+</script>
+</body>
+</html>

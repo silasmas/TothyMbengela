@@ -4,12 +4,9 @@
         <div class="logo-box">
             <div class="logo">
                 <a href="{{ route('home') }}">
-                    <img src="{{ asset('assets/logo/logo-alliance.png') }}" alt="Alliance — Ministère Tothy Mbengela" title="Alliance">
+                    <img src="{{ asset('assets/logo/alliance-wordmark-dark-on-white.png') }}" alt="Alliance — Ministère Tothy Mbengela" title="Alliance" class="alliance-logo-header">
                 </a>
             </div>
-            <button class="ui-btn ui-btn search-btn">
-                <span class="icon lnr lnr-icon-search"></span>
-            </button>
         </div>
 
         <div class="nav-outer">
@@ -59,6 +56,9 @@
         </div>
 
         <div class="outer-box alliance-header-outer-actions">
+            <button type="button" class="ui-btn search-btn" title="Rechercher" aria-label="Rechercher">
+                <span class="icon lnr lnr-icon-search"></span>
+            </button>
             <div class="header-cart-wrap">
                 <a href="#" class="ui-btn cart-btn" title="Panier" data-bs-toggle="modal" data-bs-target="#allianceCartModal">
                     <span class="icon fa fa-shopping-cart"></span>
@@ -89,7 +89,7 @@
             <div class="upper-box">
                 <div class="nav-logo">
                     <a href="{{ route('home') }}">
-                        <img src="{{ asset('assets/logo/logo-alliance.png') }}" alt="Alliance" title="Alliance">
+                        <img src="{{ asset('assets/logo/alliance-wordmark-dark-on-white.png') }}" alt="Alliance" title="Alliance" class="alliance-logo-header">
                     </a>
                 </div>
                 <div class="close-btn"><i class="icon fa fa-times"></i></div>
@@ -146,7 +146,7 @@
             <div class="inner-container">
                 <div class="logo">
                     <a href="{{ route('home') }}" title="Alliance">
-                        <img src="{{ asset('assets/logo/logo-alliance.png') }}" alt="Alliance" title="Alliance">
+                        <img src="{{ asset('assets/logo/alliance-wordmark-dark-on-white.png') }}" alt="Alliance" title="Alliance" class="alliance-logo-header">
                     </a>
                 </div>
 
@@ -163,6 +163,9 @@
                 </div>
 
                 <div class="sticky-header-actions d-flex align-items-center">
+                    <button type="button" class="ui-btn search-btn" title="Rechercher" aria-label="Rechercher">
+                        <span class="icon lnr lnr-icon-search"></span>
+                    </button>
                     <div class="header-cart-wrap">
                         <a href="#" class="ui-btn cart-btn" title="Panier" data-bs-toggle="modal" data-bs-target="#allianceCartModal">
                             <span class="icon fa fa-shopping-cart"></span>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Work+Sans:wght@400;500;600;700&family=Alex+Brush&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+body{margin:0;background:#F7F5F1;font-family:'Work Sans',sans-serif;color:#221E17}
+a{color:#C9A24B}
+a:hover{color:#AD8339}
+</style>
+</helmet>
+
+<div style="--bg:#F7F5F1;--bg-header:rgba(247,245,241,0.94);--text:#221E17;--muted1:#4A443C;--muted2:#5C5850;--muted3:#6B6156;--soft:#ECE8E0;--card:#FFFFFF;--line:#DAD5CC;--panel:#242019;--panel-hover:#332B21;--accent:#C9A24B;--accent-dark:#AD8339;--accent-light:#E8D4A0;--dur-hover:0.35s;max-width:1440px;margin:0 auto;overflow:hidden;background:var(--bg);color:var(--text)">
+
+<dc-import name="Header" accueil-active="0" apropos-active="1" agenda-active="0" contenus-active="0" boutique-active="0" contact-active="0" hint-size="100%,78px"></dc-import>
+<dc-import name="AnnounceBar" hint-size="100%,48px"></dc-import>
+
+<div style="padding:200px 64px 60px">
+<div style="font-size:13px;color:var(--muted3)"><a href="Alliance - Accueil.dc.html" style="color:var(--muted3);text-decoration:none">Accueil</a> / <span style="color:var(--text)">À propos</span></div>
+<div style="font-family:'Playfair Display',serif;font-size:48px;font-weight:600;margin-top:14px;max-width:700px">Une communauté passionnée au service de votre croissance spirituelle</div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:60px;padding:0 64px 100px;align-items:center">
+<div style="height:520px;border-radius:12px;overflow:hidden">
+<image-slot id="apropos-portrait" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/assets/images/Im6.jpg.jpeg" placeholder="Portrait ministère"></image-slot>
+</div>
+<div>
+<div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600">Notre histoire</div>
+<div style="font-family:'Playfair Display',serif;font-size:30px;font-weight:600;margin:14px 0 22px;line-height:1.3">Depuis plusieurs années au service de l'évangile</div>
+<p style="font-size:16px;line-height:1.75;color:var(--muted2)">Le ministère Alliance, conduit par la Pasteure Tothy Mbengela, s'engage à partager l'évangile et à accompagner chacun dans sa vie chrétienne à travers des enseignements, des ressources et un accompagnement personnalisé, adaptés à tous les âges et à tous les besoins.</p>
+<p style="font-size:16px;line-height:1.75;color:var(--muted2);margin-top:16px">Un ministère à l'écoute et engagé, disponible sept jours sur sept pour prier, répondre aux questions et guider chacun dans sa marche avec Dieu.</p>
+<div style="display:flex;gap:60px;margin-top:36px">
+<div><div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--accent)">120+</div><div style="font-size:13px;color:var(--muted1)">Contenus publiés</div></div>
+<div><div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--accent)">4</div><div style="font-size:13px;color:var(--muted1)">Livres disponibles</div></div>
+<div><div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--accent)">12</div><div style="font-size:13px;color:var(--muted1)">Séries d'enseignements</div></div>
+</div>
+</div>
+</div>
+
+<div style="padding:0 64px 100px">
+<div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;text-align:center">Notre engagement</div>
+<div style="font-family:'Playfair Display',serif;font-size:34px;font-weight:600;margin:14px 0 50px;text-align:center">Ce qui nous porte</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px">
+<div style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:36px">
+<div style="width:44px;height:44px;border-radius:10px;background:var(--soft);display:flex;align-items:center;justify-content:center;color:var(--accent);font-family:'Playfair Display',serif;font-size:20px;font-weight:700">V</div>
+<div style="font-size:19px;font-weight:600;margin-top:20px">Vision</div>
+<p style="font-size:14px;line-height:1.7;color:var(--muted2);margin-top:10px">Voir une génération enracinée dans la Parole, capable de tenir debout face aux défis de son époque.</p>
+</div>
+<div style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:36px">
+<div style="width:44px;height:44px;border-radius:10px;background:var(--soft);display:flex;align-items:center;justify-content:center;color:var(--accent);font-family:'Playfair Display',serif;font-size:20px;font-weight:700">M</div>
+<div style="font-size:19px;font-weight:600;margin-top:20px">Mission</div>
+<p style="font-size:14px;line-height:1.7;color:var(--muted2);margin-top:10px">Transmettre l'évangile à travers des enseignements, des livres et un accompagnement personnel adaptés à chacun.</p>
+</div>
+<div style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:36px">
+<div style="width:44px;height:44px;border-radius:10px;background:var(--soft);display:flex;align-items:center;justify-content:center;color:var(--accent);font-family:'Playfair Display',serif;font-size:20px;font-weight:700">V</div>
+<div style="font-size:19px;font-weight:600;margin-top:20px">Valeurs</div>
+<p style="font-size:14px;line-height:1.7;color:var(--muted2);margin-top:10px">Écoute, authenticité et fidélité à la Parole, au service de la croissance spirituelle de chacun.</p>
+</div>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0;background:var(--panel);color:#fff;align-items:center;border-radius:16px;overflow:hidden;margin:0 64px 100px">
+<div style="padding:80px 64px">
+<div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:600;font-style:italic;line-height:1.3">Découvrez les enseignements de la Pasteure Tothy Mbengela</div>
+<p style="font-size:15px;line-height:1.7;color:oklch(80% 0.01 75);margin:22px 0 32px">Prédications, séries et ressources pour votre édification, disponibles dès maintenant.</p>
+<a href="Alliance - Contenus.dc.html" style="display:inline-block;text-decoration:none;padding:16px 30px;background:var(--accent);color:var(--panel);font-size:15px;font-weight:600;border-radius:8px;cursor:pointer;transition:background var(--dur-hover) ease" style-hover="background:var(--accent-light)">Découvrir les contenus</a>
+</div>
+<div style="height:380px">
+<image-slot id="apropos-cta" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/assets/images/mg.jpg.jpeg" placeholder="Photo — ministère"></image-slot>
+</div>
+</div>
+
+<dc-import name="Footer" hint-size="100%,400px"></dc-import>
+<dc-import name="DonModal" hint-size="0,0"></dc-import>
+<dc-import name="RevueModal" hint-size="0,0"></dc-import>
+
+</div>
+
+</x-dc>
+</body>
+</html>

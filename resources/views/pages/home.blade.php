@@ -164,26 +164,24 @@
 
     @include('partials.pastor-agenda-home')
 
-    {{-- ═══ LIVRES (Features Style) ═══ --}}
-    <!-- Features Section - Livres de la Pasteure -->
+    {{-- ═══ PRODUITS (livres, USB, packs…) ═══ --}}
     <section class="home5-features-section">
         <div class="auto-container">
             <div class="sec-title text-center">
                 <span class="sub-title">Boutique</span>
-                <h2>Les livres de la Pasteure</h2>
-                <div class="text">4 ouvrages disponibles — 10 $ par livre</div>
+                <h2>Les produits de la Pasteure</h2>
+                <div class="text">Livres, Flash USB + bracelet et packs — ressources pour votre édification</div>
             </div>
             <div class="row">
                 @foreach($books->take(4) as $book)
                 @php
-                    $homeBookCart = [
-                        'id' => $book->id,
-                        'title' => $book->title,
-                        'price' => $book->price !== null ? (float) $book->price : null,
-                        'currency' => $book->currency ?? 'USD',
-                        'cover_url' => $book->cover_url,
-                    ];
-                    $canAddHomeBook = $book->stock_quantity === null || $book->stock_quantity > 0;
+                    $homeBookCart = $book->toCartItem();
+                    $canAddHomeBook = $book->isPurchasable();
+                    $typeIcon = match ($book->product_type ?? 'book') {
+                        'usb' => 'fa-hdd',
+                        'pack' => 'fa-gift',
+                        default => 'fa-book',
+                    };
                 @endphp
                 <div class="feature-block-home5 col-md-6 col-lg-3">
                     <div class="inner-box">
@@ -198,21 +196,23 @@
                                 </a>
                             </figure>
                             <div class="info-box">
-                                <i class="icon fa fa-book"></i>
-                                <h6 class="title">{{ $book->title }}</h6>
-                                <span class="book-price-tag">{{ number_format((float) $book->price, 0, ',', ' ') }} {{ $book->currency ?? 'USD' }}</span>
-                                <a href="{{ route('books.show', $book->slug) }}" class="read-more"><i class="fa fa-long-arrow-alt-right"></i></a>
+                                <i class="icon fa {{ $typeIcon }}"></i>
+                                <h6 class="title" title="{{ $book->title }}">{{ Str::limit($book->title, 18) }}</h6>
+                                <span class="book-price-tag js-alliance-price" data-price-usd="{{ (float) $book->price }}">{{ number_format((float) $book->price, 0, ',', ' ') }}&nbsp;USD</span>
+                                <a href="{{ route('books.show', $book->slug) }}" class="read-more" aria-label="Voir {{ $book->title }}"><i class="fa fa-long-arrow-alt-right"></i></a>
                             </div>
                         </div>
                         <div class="overlay-content">
                             <div class="info-box">
-                                <i class="icon fa fa-book"></i>
+                                <i class="icon fa {{ $typeIcon }}"></i>
                                 <h6 class="title"><a href="{{ route('books.show', $book->slug) }}">{{ $book->title }}</a></h6>
-                                <div class="text">{{ Str::limit($book->description, 60) }}</div>
+                                <div class="text"><strong>{{ $book->product_type_label }}</strong> — {{ Str::limit($book->description, 50) }}</div>
                                 @if($canAddHomeBook)
                                 <button type="button" class="theme-btn btn-style-one btn-sm js-add-to-cart" style="padding:6px 18px;font-size:13px;margin-top:8px;" data-item='@json($homeBookCart)'><span class="btn-title"><i class="fa fa-cart-plus"></i> Panier</span></button>
+                                <button type="button" class="theme-btn btn-style-two btn-sm js-buy-now" style="padding:6px 18px;font-size:13px;margin-top:8px;margin-left:6px;" data-item='@json($homeBookCart)'><span class="btn-title">Acheter</span></button>
+                                @else
+                                <a href="{{ route('books.show', $book->slug) }}" class="theme-btn btn-style-two btn-sm" style="padding:6px 18px;font-size:13px;margin-top:8px;"><span class="btn-title">Détails</span></a>
                                 @endif
-                                <a href="{{ route('books.show', $book->slug) }}" class="theme-btn btn-style-two btn-sm" style="padding:6px 18px;font-size:13px;margin-top:8px;{{ $canAddHomeBook ? 'margin-left:6px;' : '' }}"><span class="btn-title">Détails</span></a>
                             </div>
                         </div>
                     </div>
@@ -221,13 +221,12 @@
             </div>
             <div class="text-center mt-4 d-flex flex-wrap justify-content-center align-items-center gap-2">
                 @if(!empty($booksCartPayload))
-                <button type="button" class="theme-btn btn-style-one js-add-all-books-to-cart" data-books='@json($booksCartPayload)'><span class="btn-title"><i class="fa fa-shopping-cart"></i> Ajouter les ouvrages au panier</span></button>
+                <button type="button" class="theme-btn btn-style-one js-add-all-books-to-cart" data-books='@json($booksCartPayload)'><span class="btn-title"><i class="fa fa-shopping-cart"></i> Tout ajouter au panier</span></button>
                 @endif
                 <a href="{{ route('books.index') }}" class="theme-btn btn-style-two"><span class="btn-title">Voir la boutique</span></a>
             </div>
         </div>
     </section>
-    <!-- End Features Section - Livres -->
 
     {{-- ═══ CONTENUS À LA UNE ═══ --}}
     <!-- News Section Two -->

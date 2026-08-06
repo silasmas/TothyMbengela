@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Work+Sans:wght@400;500;600;700&family=Alex+Brush&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+body{margin:0;background:#F7F5F1;font-family:'Work Sans',sans-serif;color:#221E17}
+a{color:#C9A24B}
+a:hover{color:#AD8339}
+</style>
+</helmet>
+
+<div style="--bg:#F7F5F1;--bg-header:rgba(247,245,241,0.94);--text:#221E17;--muted1:#4A443C;--muted2:#5C5850;--muted3:#6B6156;--soft:#ECE8E0;--card:#FFFFFF;--line:#DAD5CC;--panel:#242019;--panel-hover:#332B21;--accent:#C9A24B;--accent-dark:#AD8339;--accent-light:#E8D4A0;--dur-hover:0.35s;max-width:1440px;margin:0 auto;overflow:hidden;background:var(--bg);color:var(--text)">
+
+<dc-import name="Header" accueil-active="0" apropos-active="0" agenda-active="1" contenus-active="0" boutique-active="0" contact-active="0" hint-size="100%,78px"></dc-import>
+<dc-import name="AnnounceBar" hint-size="100%,48px"></dc-import>
+
+<div style="padding:200px 64px 60px">
+<div style="font-size:13px;color:var(--muted3)"><a href="Alliance - Accueil.dc.html" style="color:var(--muted3);text-decoration:none">Accueil</a> / <span style="color:var(--text)">Agenda</span></div>
+<div style="font-family:'Playfair Display',serif;font-size:48px;font-weight:600;margin-top:14px">Activités de la Pasteure</div>
+<p style="font-size:16px;color:var(--muted1);margin-top:14px;max-width:600px">Conférences, veillées et rencontres à venir ou passées avec la Pasteure Tothy Mbengela.</p>
+</div>
+
+<div style="padding:0 64px 80px">
+<div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:20px">À venir</div>
+<div style="border:1px dashed var(--line);border-radius:12px;padding:48px;text-align:center;color:var(--muted2);font-size:15px">Aucune activité annoncée pour le moment.</div>
+</div>
+
+<div style="padding:0 64px 100px">
+<div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:20px">Récemment</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px">
+<div style="border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:transform var(--dur-hover) ease,box-shadow var(--dur-hover) ease" style-hover="transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.08)">
+<div style="height:220px"><image-slot id="agenda-1" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/storage/pastor-activities/posters/seed/wa-07.jpeg" placeholder="Affiche — conférence"></image-slot></div>
+<div style="padding:28px"><div style="font-size:13px;color:var(--accent);font-weight:600">12 AVR 2026 · Lubumbashi</div><div style="font-size:20px;font-weight:600;margin-top:8px">Conférence — Femme disciple de Jésus</div><p style="font-size:14px;color:var(--muted1);margin-top:10px;line-height:1.6">Grande matinée d'enseignement : suivre Christ au quotidien.</p><a href="https://www.youtube.com/watch?v=7flJZzwDy_Q" style="display:inline-block;margin-top:14px;font-size:14px;font-weight:600;text-decoration:none;color:var(--accent)">Voir le spot →</a></div>
+</div>
+<div style="border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:transform var(--dur-hover) ease,box-shadow var(--dur-hover) ease" style-hover="transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.08)">
+<div style="height:220px"><image-slot id="agenda-2" shape="rect" style="width:100%;height:100%" src="https://tothymbengela.com/storage/pastor-activities/posters/seed/wa-06.jpeg" placeholder="Affiche — veillée de prière"></image-slot></div>
+<div style="padding:28px"><div style="font-size:13px;color:var(--accent);font-weight:600">05 AVR 2026 · Alliance</div><div style="font-size:20px;font-weight:600;margin-top:8px">Veillée de prière de fin de semaine</div><p style="font-size:14px;color:var(--muted1);margin-top:10px;line-height:1.6">Moment de prière pour clôturer la semaine dans la présence de Dieu.</p><a href="https://www.youtube.com/watch?v=460ftY_DReE" style="display:inline-block;margin-top:14px;font-size:14px;font-weight:600;text-decoration:none;color:var(--accent)">Voir le spot →</a></div>
+</div>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:60px;padding:60px 64px 100px;background:var(--soft);border-radius:16px;margin:0 64px 100px;align-items:center">
+<div>
+<div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600">Rendez-vous</div>
+<div style="font-family:'Playfair Display',serif;font-size:30px;font-weight:600;margin:14px 0 20px">Une question, une invitation ?</div>
+<p style="font-size:15px;line-height:1.7;color:var(--muted2)">Pour organiser une rencontre ou inviter la Pasteure à une activité, contactez le ministère.</p>
+<a href="Alliance - Contact.dc.html" style="display:inline-block;text-decoration:none;margin-top:24px;padding:16px 30px;background:var(--panel);color:#fff;font-size:15px;font-weight:600;border-radius:8px;transition:background var(--dur-hover) ease" style-hover="background:var(--panel-hover)">Nous contacter</a>
+</div>
+</div>
+
+<dc-import name="Footer" hint-size="100%,400px"></dc-import>
+<dc-import name="DonModal" hint-size="0,0"></dc-import>
+<dc-import name="RevueModal" hint-size="0,0"></dc-import>
+
+</div>
+
+</x-dc>
+</body>
+</html>

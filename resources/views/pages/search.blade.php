@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('page_banner_title', 'Recherche')
 
@@ -34,7 +34,7 @@
                     <p>Aucun résultat. Essayez d’autres termes ou parcourez les <a href="{{ route('contents.index') }}">contenus</a>, l’<a href="{{ route('pastor-activities.index') }}">agenda</a> et la <a href="{{ route('books.index') }}">boutique</a>.</p>
                 @else
                     @if($contents->isNotEmpty())
-                        <h3 class="mt-4 mb-3" style="font-size:1.25rem;color:#C8922A;">Contenus</h3>
+                        <h3 class="mt-4 mb-3" style="font-size:1.25rem;color:#A86C3C;">Contenus</h3>
                         <ul class="list-unstyled mb-5">
                             @foreach($contents as $c)
                                 <li class="mb-2 pb-2 border-bottom">
@@ -48,7 +48,7 @@
                     @endif
 
                     @if($books->isNotEmpty())
-                        <h3 class="mt-4 mb-3" style="font-size:1.25rem;color:#C8922A;">Livres</h3>
+                        <h3 class="mt-4 mb-3" style="font-size:1.25rem;color:#A86C3C;">Livres</h3>
                         <ul class="list-unstyled mb-5">
                             @foreach($books as $b)
                                 <li class="mb-2 pb-2 border-bottom">
@@ -62,7 +62,7 @@
                     @endif
 
                     @if($series->isNotEmpty())
-                        <h3 class="mt-4 mb-3" style="font-size:1.25rem;color:#C8922A;">Séries</h3>
+                        <h3 class="mt-4 mb-3" style="font-size:1.25rem;color:#A86C3C;">Séries</h3>
                         <ul class="list-unstyled mb-5">
                             @foreach($series as $s)
                                 <li class="mb-2 pb-2 border-bottom">
@@ -73,7 +73,7 @@
                     @endif
 
                     @if($activities->isNotEmpty())
-                        <h3 class="mt-4 mb-3" style="font-size:1.25rem;color:#C8922A;">Agenda</h3>
+                        <h3 class="mt-4 mb-3" style="font-size:1.25rem;color:#A86C3C;">Agenda</h3>
                         <ul class="list-unstyled">
                             @foreach($activities as $a)
                                 <li class="mb-2 pb-2 border-bottom">

@@ -1,9 +1,9 @@
-{{-- Même flux que la boutique (code e-mail sans mot de passe). Hors .page-wrapper via @stack('modals'). --}}
+﻿{{-- Même flux que la boutique (code e-mail sans mot de passe). Hors .page-wrapper via @stack('modals'). --}}
 <div class="modal fade" id="allianceOtpAuthModal" tabindex="-1" aria-labelledby="allianceOtpAuthModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
         <div class="modal-content" style="border-radius:12px;">
             <div class="modal-header border-bottom">
-                <h5 class="modal-title" id="allianceOtpAuthModalLabel"><i class="fa fa-user-circle me-2" style="color:#C8922A;"></i> Connexion ou inscription</h5>
+                <h5 class="modal-title" id="allianceOtpAuthModalLabel"><i class="fa fa-user-circle me-2" style="color:#A86C3C;"></i> Connexion ou inscription</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
             </div>
             <div class="modal-body">
@@ -21,7 +21,7 @@
                         <div id="aot-login-1">
                             <label class="form-label small fw-bold">E-mail</label>
                             <input type="email" class="form-control mb-2" id="aot-login-email" autocomplete="username">
-                            <button type="button" class="btn w-100 text-white fw-bold" style="background:#C8922A;" id="aot-login-send">Recevoir le code</button>
+                            <button type="button" class="btn w-100 text-white fw-bold" style="background:#A86C3C;" id="aot-login-send">Recevoir le code</button>
                         </div>
                         <div id="aot-login-2" class="d-none">
                             <p class="small text-muted">Code envoyé à <span id="aot-login-email-show"></span></p>
@@ -37,7 +37,7 @@
                             <input type="text" class="form-control mb-2" id="aot-reg-name" autocomplete="name">
                             <label class="form-label small fw-bold">E-mail</label>
                             <input type="email" class="form-control mb-2" id="aot-reg-email" autocomplete="username">
-                            <button type="button" class="btn w-100 text-white fw-bold" style="background:#C8922A;" id="aot-reg-send">Recevoir le code</button>
+                            <button type="button" class="btn w-100 text-white fw-bold" style="background:#A86C3C;" id="aot-reg-send">Recevoir le code</button>
                         </div>
                         <div id="aot-reg-2" class="d-none">
                             <p class="small text-muted">Code envoyé à <span id="aot-reg-email-show"></span></p>

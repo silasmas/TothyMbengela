@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('page_banner_title', 'Nos contenus')
 
@@ -166,7 +166,7 @@
         background: #fdfcfa !important;
     }
     .alliance-filter-control:focus {
-        border-color: #c8922a !important;
+        border-color: #A86C3C !important;
         box-shadow: 0 0 0 3px rgba(200, 146, 42, 0.18) !important;
     }
     .alliance-contents-listing .alliance-content-like-pill {
@@ -199,12 +199,12 @@
         padding: 0.5rem 0.75rem;
     }
     .alliance-contents-pagination .page-link:hover {
-        border-color: #c8922a !important;
+        border-color: #A86C3C !important;
         color: #1a1a1a !important;
         background: #fff9ed !important;
     }
     .alliance-contents-pagination .page-item.active .page-link {
-        background: linear-gradient(135deg, #c8922a, #d4a84a) !important;
+        background: linear-gradient(135deg, #A86C3C, #d4a84a) !important;
         border-color: #b87f1f !important;
         color: #fff !important;
         box-shadow: 0 4px 14px rgba(200, 146, 42, 0.35);

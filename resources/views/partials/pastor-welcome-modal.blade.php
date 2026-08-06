@@ -379,8 +379,26 @@
         });
     }
 
+    /**
+     * Ouvre l’agenda après la modale produits (priorité boutique à l’ouverture).
+     *
+     * @param {HTMLElement} el Modale agenda
+     * @returns {void}
+     */
+    function openPastorAgendaWelcome(el) {
+        try {
+            if (localStorage.getItem(STORAGE_NEVER) === '1' || sessionStorage.getItem(STORAGE_SESSION) === '1') {
+                return;
+            }
+            sessionStorage.setItem(STORAGE_SESSION, '1');
+        } catch (eOpen) {
+            return;
+        }
+        bootstrap.Modal.getOrCreateInstance(el, { keyboard: true }).show();
+    }
+
     function maybeAutoOpenPastorAgendaWelcomeModal(el) {
-        var delayMs = 950;
+        var delayMs = 1200;
         setTimeout(function () {
             try {
                 if (localStorage.getItem(STORAGE_NEVER) === '1' || sessionStorage.getItem(STORAGE_SESSION) === '1') {
@@ -389,8 +407,29 @@
             } catch (e2) {
                 return;
             }
-            sessionStorage.setItem(STORAGE_SESSION, '1');
-            bootstrap.Modal.getOrCreateInstance(el, { keyboard: true }).show();
+            var productsModal = document.getElementById('allianceProductsWelcomeModal');
+            var productsNever = false;
+            try {
+                productsNever = localStorage.getItem('alliance_products_welcome_never') === '1';
+            } catch (eProducts) {}
+
+            // Si une modale produits existe et n’est pas désactivée, attendre sa fermeture.
+            if (productsModal && !productsNever) {
+                if (productsModal.classList.contains('show')) {
+                    productsModal.addEventListener('hidden.bs.modal', function openAgendaAfterProducts() {
+                        productsModal.removeEventListener('hidden.bs.modal', openAgendaAfterProducts);
+                        openPastorAgendaWelcome(el);
+                    });
+                    return;
+                }
+                // Produits déjà montrés cette session : ne pas empiler l’agenda automatiquement.
+                try {
+                    if (sessionStorage.getItem('alliance_products_welcome_shown_session') === '1') {
+                        return;
+                    }
+                } catch (eSkip) {}
+            }
+            openPastorAgendaWelcome(el);
         }, delayMs);
     }
 

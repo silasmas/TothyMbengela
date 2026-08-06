@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="utf-8">
@@ -20,9 +20,9 @@
                             <p style="margin:0 0 16px;">Merci de votre intérêt pour la newsletter du ministère Alliance.</p>
                             <p style="margin:0 0 24px;">Cliquez sur le bouton ci-dessous pour valider votre adresse e-mail et recevoir nos actualités.</p>
                             <p style="margin:0 0 28px;text-align:center;">
-                                <a href="{{ $confirmUrl }}" style="display:inline-block;background:#c8922a;color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:14px 28px;border-radius:6px;text-transform:uppercase;letter-spacing:0.06em;">Confirmer mon inscription</a>
+                                <a href="{{ $confirmUrl }}" style="display:inline-block;background:#A86C3C;color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:14px 28px;border-radius:6px;text-transform:uppercase;letter-spacing:0.06em;">Confirmer mon inscription</a>
                             </p>
-                            <p style="margin:0;font-size:13px;color:#666;">Si le bouton ne fonctionne pas, copiez ce lien dans votre navigateur :<br><a href="{{ $confirmUrl }}" style="color:#c8922a;word-break:break-all;">{{ $confirmUrl }}</a></p>
+                            <p style="margin:0;font-size:13px;color:#666;">Si le bouton ne fonctionne pas, copiez ce lien dans votre navigateur :<br><a href="{{ $confirmUrl }}" style="color:#A86C3C;word-break:break-all;">{{ $confirmUrl }}</a></p>
                         </td>
                     </tr>
                     <tr>

@@ -1,8 +1,8 @@
-{{-- Modale don / partenaire + paiement sécurisé (si activé) --}}
+﻿{{-- Modale don / partenaire + paiement sécurisé (si activé) --}}
 <div class="modal fade" id="donatePartnerModal" tabindex="-1" aria-labelledby="donatePartnerModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
         <div class="modal-content alliance-donate-modal" style="border:none;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.2);">
-            <div class="modal-header text-white border-0" style="background:linear-gradient(135deg,#1a1a2e 0%,#2d2d44 50%,#C8922A 180%);padding:1.25rem 1.5rem;">
+            <div class="modal-header text-white border-0" style="background:linear-gradient(135deg,#141414 0%,#3d2a1c 55%,#A86C3C 180%);padding:1.25rem 1.5rem;">
                 <div>
                     <h5 class="modal-title mb-0" id="donatePartnerModalLabel"><i class="fa fa-heart me-2"></i> Soutenir le ministère</h5>
                     <small class="opacity-75">Don ou engagement partenaire — paiement sécurisé lorsque le service est activé</small>
@@ -63,7 +63,7 @@
                                     <label class="d-flex align-items-center gap-2"><input type="checkbox" name="is_anonymous" value="1" id="modal_anon"> Don anonyme</label>
                                 </div>
                                 <div class="col-12 d-grid">
-                                    <button type="submit" class="btn btn-lg text-white fw-bold" style="background:#C8922A;border:none;" id="btnModalDonSubmit">
+                                    <button type="submit" class="btn btn-lg text-white fw-bold" style="background:#A86C3C;border:none;" id="btnModalDonSubmit">
                                         @if(config('services.flexpay.enabled'))
                                             Continuer vers le paiement
                                         @else
@@ -132,7 +132,7 @@
                                     <textarea name="message" id="modal_message_partner" class="form-control" rows="2"></textarea>
                                 </div>
                                 <div class="col-12 d-grid">
-                                    <button type="submit" class="btn btn-lg text-white fw-bold" style="background:#C8922A;border:none;" id="btnModalPartnerSubmit">
+                                    <button type="submit" class="btn btn-lg text-white fw-bold" style="background:#A86C3C;border:none;" id="btnModalPartnerSubmit">
                                         @if(config('services.flexpay.enabled'))
                                             Continuer vers le paiement
                                         @else

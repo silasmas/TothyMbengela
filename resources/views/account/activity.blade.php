@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('page_banner_title', 'Historique des transactions')
 
@@ -66,7 +66,7 @@
                         @foreach($items as $row)
                             <tr>
                                 <td class="text-nowrap small">{{ $row['at']?->format('d/m/Y H:i') ?? '—' }}</td>
-                                <td><i class="fa {{ $row['icon'] }} me-1" style="color:#C8922A;"></i> {{ $row['title'] }}</td>
+                                <td><i class="fa {{ $row['icon'] }} me-1" style="color:#A86C3C;"></i> {{ $row['title'] }}</td>
                                 <td><code class="small">{{ $row['ref'] }}</code></td>
                                 <td>{{ $row['detail'] }}</td>
                                 <td>
