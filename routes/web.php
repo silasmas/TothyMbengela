@@ -10,6 +10,7 @@ use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DonationPaymentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\OpsMigrateController;
 use App\Http\Controllers\PastorActivityController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
@@ -103,6 +104,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
- // Generate symbolic link
- Route::get('/symlink', function () { return view('symlink'); })->name('generate_symlink');
+// Generate symbolic link
+Route::get('/symlink', function () {
+    return view('symlink');
+})->name('generate_symlink');
+
+// Migrations en production via URL (protégé par MIGRATE_TOKEN)
+Route::get('/ops/migrate', OpsMigrateController::class)
+    ->middleware('throttle:3,10')
+    ->name('ops.migrate');
+
 require __DIR__.'/auth.php';
+

@@ -123,4 +123,17 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Jeton migrations via URL (/ops/migrate?token=...)
+    |--------------------------------------------------------------------------
+    |
+    | Si vide, la route répond 404. Définir une valeur longue en production
+    | (MIGRATE_TOKEN), puis la régénérer après usage si possible.
+    |
+    */
+
+    'migrate_token' => env('MIGRATE_TOKEN'),
+
 ];
+
