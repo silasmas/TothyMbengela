@@ -369,8 +369,27 @@ h1, h2, h3, h4, h5, h6,
   color: #fff !important;
 }
 
-/* Accents or/ocre récurrents (jamais appliquer la couleur ocre à .book-price-tag) */
+/* Bouton remonter en haut : fond ocre, flèche blanche */
 .scroll-to-top,
+.scroll-to-top span,
+.scroll-to-top i {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+.scroll-to-top {
+  background-color: var(--alliance-ochre) !important;
+}
+.scroll-to-top:hover,
+.scroll-to-top:hover span,
+.scroll-to-top:hover i {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+.scroll-to-top:hover {
+  background-color: var(--alliance-ochre-dark) !important;
+}
+
+/* Accents or/ocre récurrents (jamais appliquer la couleur ocre à .book-price-tag ni .scroll-to-top) */
 .filter-tabs .filter.active,
 .ui-btn.add-to-cart,
 .alliance-products-welcome-type,
