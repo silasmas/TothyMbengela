@@ -150,7 +150,7 @@
     font-weight: 700;
 }
 .alliance-slide-product-actions .theme-btn {
-    margin: 4px;
+    margin: 0;
 }
 </style>
 

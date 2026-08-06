@@ -88,6 +88,39 @@ h1, h2, h3, h4, h5, h6,
   color: var(--alliance-gold);
 }
 
+/* Boutons thème : mêmes métriques (hauteur / padding) pour style 1 et 2 */
+.theme-btn.btn-style-one:not(.btn-sm),
+.theme-btn.btn-style-two:not(.btn-sm) {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+  padding: 15px 48px !important;
+  font-size: 14px !important;
+  line-height: 1.2 !important;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  border-width: 2px;
+  border-style: solid;
+}
+.theme-btn.btn-style-one.btn-sm,
+.theme-btn.btn-style-two.btn-sm {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-width: 2px;
+  border-style: solid;
+  min-height: 40px;
+  padding: 8px 18px !important;
+  font-size: 13px !important;
+  line-height: 1.2 !important;
+  text-transform: uppercase;
+}
+
 /* Boutons thème → ocre / or
    Survol btn-style-one : le thème révèle un fond blanc (:before) → texte marron foncé */
 .theme-btn.btn-style-one {
@@ -173,6 +206,40 @@ h1, h2, h3, h4, h5, h6,
 }
 .alliance-btn-partner .btn-title {
   color: var(--alliance-gold-light) !important;
+}
+
+/* Slides : boutons alignés, même taille (plein + contour) */
+.main-slider .btn-box,
+.alliance-slide-product-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.main-slider .btn-box .theme-btn,
+.alliance-slide-product-actions .theme-btn {
+  margin: 0 !important;
+  min-height: 60px;
+  height: 60px;
+  padding: 0 40px !important;
+}
+@media (max-width: 767px) {
+  .main-slider .btn-box .theme-btn,
+  .alliance-slide-product-actions .theme-btn {
+    min-height: 52px;
+    height: 52px;
+    padding: 0 28px !important;
+    font-size: 13px !important;
+  }
+}
+@media (max-width: 599px) {
+  .main-slider .btn-box .theme-btn,
+  .alliance-slide-product-actions .theme-btn {
+    min-height: 48px;
+    height: 48px;
+    padding: 0 20px !important;
+    font-size: 12px !important;
+  }
 }
 
 /* Header / footer */
