@@ -88,37 +88,82 @@ h1, h2, h3, h4, h5, h6,
   color: var(--alliance-gold);
 }
 
-/* Boutons thème → ocre / or */
+/* Boutons thème → ocre / or
+   Survol btn-style-one : le thème révèle un fond blanc (:before) → texte marron foncé */
 .theme-btn.btn-style-one {
   background: var(--alliance-ochre) !important;
   border-color: var(--alliance-ochre) !important;
+  color: #fff !important;
+}
+.theme-btn.btn-style-one .btn-title,
+.theme-btn.btn-style-one .btn-title i,
+.theme-btn.btn-style-one > i {
+  color: #fff !important;
 }
 .theme-btn.btn-style-one:hover,
 .theme-btn.btn-style-one:focus {
-  background: var(--alliance-gold-deep) !important;
-  border-color: var(--alliance-gold-deep) !important;
+  background: var(--alliance-ochre) !important;
+  border-color: var(--alliance-ochre) !important;
+  color: var(--alliance-ochre-dark) !important;
 }
-.theme-btn.btn-style-one .btn-title,
-.theme-btn.btn-style-one:hover .btn-title {
-  color: #fff !important;
+.theme-btn.btn-style-one:hover .btn-title,
+.theme-btn.btn-style-one:focus .btn-title,
+.theme-btn.btn-style-one:hover .btn-title i,
+.theme-btn.btn-style-one:focus .btn-title i,
+.theme-btn.btn-style-one:hover > i,
+.theme-btn.btn-style-one:focus > i {
+  color: var(--alliance-ochre-dark) !important;
 }
+
+/* Variante claire / style 2 : fond transparent → au survol fond ocre + texte blanc */
 .theme-btn.btn-style-two,
 .theme-btn.btn-style-one.light-bg {
   background: transparent !important;
   border: 2px solid var(--alliance-ochre) !important;
-  color: var(--alliance-ochre) !important;
+  color: var(--alliance-ochre-dark) !important;
 }
 .theme-btn.btn-style-two .btn-title,
-.theme-btn.btn-style-one.light-bg .btn-title {
-  color: var(--alliance-ochre) !important;
+.theme-btn.btn-style-two .btn-title i,
+.theme-btn.btn-style-one.light-bg .btn-title,
+.theme-btn.btn-style-one.light-bg .btn-title i {
+  color: var(--alliance-ochre-dark) !important;
 }
 .theme-btn.btn-style-two:hover,
-.theme-btn.btn-style-one.light-bg:hover {
+.theme-btn.btn-style-two:focus,
+.theme-btn.btn-style-one.light-bg:hover,
+.theme-btn.btn-style-one.light-bg:focus {
   background: var(--alliance-ochre) !important;
+  border-color: var(--alliance-ochre) !important;
+  color: #fff !important;
 }
 .theme-btn.btn-style-two:hover .btn-title,
-.theme-btn.btn-style-one.light-bg:hover .btn-title {
+.theme-btn.btn-style-two:focus .btn-title,
+.theme-btn.btn-style-two:hover .btn-title i,
+.theme-btn.btn-style-two:focus .btn-title i,
+.theme-btn.btn-style-one.light-bg:hover .btn-title,
+.theme-btn.btn-style-one.light-bg:focus .btn-title,
+.theme-btn.btn-style-one.light-bg:hover .btn-title i,
+.theme-btn.btn-style-one.light-bg:focus .btn-title i {
   color: #fff !important;
+}
+
+/* Boutons Bootstrap / CTA site : même logique (fond clair au survol → texte marron) */
+.btn-primary,
+.alliance-checkout-gold-btn,
+.alliance-header-auth-cta {
+  background-color: var(--alliance-ochre) !important;
+  border-color: var(--alliance-ochre) !important;
+  color: #fff !important;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.alliance-checkout-gold-btn:hover,
+.alliance-checkout-gold-btn:focus,
+.alliance-header-auth-cta:hover,
+.alliance-header-auth-cta:focus {
+  background-color: #fff !important;
+  border-color: var(--alliance-ochre-dark) !important;
+  color: var(--alliance-ochre-dark) !important;
 }
 
 .alliance-btn-partner {
