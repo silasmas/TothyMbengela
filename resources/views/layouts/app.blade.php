@@ -23,9 +23,9 @@
         <link href="{{ asset('assets/plugins/revolution/css/layers.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/plugins/revolution/css/navigation.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-        <link href="{{ asset('assets/css/alliance-brand.css') }}?v=7" rel="stylesheet">
+        <link href="{{ asset('assets/css/alliance-brand.css') }}?v=8" rel="stylesheet">
         <link href="{{ asset('assets/css/alliance-engagement-pages.css') }}?v=6" rel="stylesheet">
-        <link href="{{ asset('assets/css/pastor-activities.css') }}?v=8" rel="stylesheet">
+        <link href="{{ asset('assets/css/pastor-activities.css') }}?v=9" rel="stylesheet">
 
         <!-- Alliance overrides -->
         <style>
@@ -38,23 +38,29 @@
                 background-color: transparent !important;
             }
 
-            /* Logo header (fond blanc) : version foncée, plus grande */
+            /* Logo header : ocre, compact, proche du menu */
             .main-header .logo img,
             .main-header .logo img.alliance-logo-header {
-                max-height: 104px;
+                max-height: 52px;
                 width: auto;
             }
 
             /* Logo sticky */
             .sticky-header .logo img {
-                max-height: 78px;
+                max-height: 44px;
                 width: auto;
             }
 
             /* Logo menu mobile */
             .mobile-menu .nav-logo img {
-                max-height: 80px;
+                max-height: 48px;
                 width: auto;
+            }
+
+            .header-style-one .main-box .logo-box {
+                min-height: 72px !important;
+                padding: 8px 0 !important;
+                margin-right: 16px !important;
             }
 
             /* Logo footer : agrandi */
@@ -330,9 +336,7 @@
             }
             .header-cart-wrap .cart-btn {
                 position: relative;
-                font-size: 20px;
-                color: #333;
-                padding: 8px 10px;
+                font-size: 18px;
                 line-height: 1;
             }
             /* Badge sur le bord du cercle (pastille qui chevauche l’anneau), pas au centre */
@@ -359,9 +363,7 @@
             .sticky-header .header-cart-wrap {
                 border-right-color: rgba(255, 255, 255, 0.2);
             }
-            .sticky-header .header-cart-wrap .cart-btn {
-                color: #fff;
-            }
+            /* Couleur panier sticky : alliance-brand.css */
             .sticky-header .auto-container {
                 padding-left: clamp(14px, 2.8vw, 52px);
                 padding-right: clamp(14px, 2.8vw, 52px);
@@ -437,14 +439,14 @@
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                width: 44px;
-                height: 44px;
+                width: 40px;
+                height: 40px;
                 margin: 0;
                 padding: 0;
                 border: none;
                 background: transparent;
                 color: #A86C3C;
-                font-size: 20px;
+                font-size: 18px;
                 flex-shrink: 0;
             }
             .main-header .outer-box.alliance-header-outer-actions .search-btn:hover,
@@ -495,30 +497,7 @@
                 color: #212529;
             }
 
-            /* Panier : contraste fort (header + sticky) */
-            .header-cart-wrap .cart-btn {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                width: 44px;
-                height: 44px;
-                border-radius: 50%;
-                background: rgba(200, 146, 42, 0.18);
-                border: 2px solid #A86C3C;
-                color: #1a1a1a !important;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            }
-            .main-header.fixed-header .header-cart-wrap .cart-btn {
-                background: rgba(200, 146, 42, 0.25);
-                color: #fff !important;
-                border-color: #e5ab2e;
-                box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
-            }
-            .sticky-header .header-cart-wrap .cart-btn {
-                background: rgba(200, 146, 42, 0.35);
-                border-color: #e5ab2e;
-                color: #fff !important;
-            }
+            /* Panier : styles finaux dans alliance-brand.css (harmonie Connexion) */
 
             .alliance-toolbar-account .dropdown-menu {
                 z-index: 1085;

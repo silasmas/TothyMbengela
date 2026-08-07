@@ -28,11 +28,12 @@ class AdminSuperAdminSeeder extends Seeder
             $role->syncPermissions($permissions);
         }
 
-        $primary = Admin::query()->where('email', 'admin@alliance-ministere.com')->first()
-            ?? Admin::query()->orderBy('id')->first();
-
-        if ($primary && ! $primary->hasRole($role)) {
-            $primary->assignRole($role);
-        }
+        // Tous les admins sans rôle reçoivent super_admin (accès dashboard Filament).
+        Admin::query()->each(function (Admin $admin) use ($role): void {
+            if (! $admin->hasRole($role)) {
+                $admin->assignRole($role);
+            }
+        });
     }
 }
+

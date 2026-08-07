@@ -125,7 +125,7 @@
                 '<small class="text-muted">' + (priceStr ? priceStr + ' / u · ' : '') + 'Ligne : ' + lineStr + '</small>' +
                 '<div class="d-flex align-items-center gap-2 mt-2">' +
                 '<button type="button" class="btn btn-sm btn-outline-secondary alliance-cart-qty-dec" data-id="' + String(item.id) + '" aria-label="Diminuer">−</button>' +
-                '<input type="number" class="form-control form-control-sm alliance-cart-qty-input" data-id="' + String(item.id) + '" value="' + qty + '" min="1" max="99" style="width:64px;text-align:center;border:2px solid #A86C3C;background:#fff;color:#141414;font-weight:700;">' +
+                '<input type="number" class="form-control form-control-sm alliance-cart-qty-input" data-id="' + String(item.id) + '" value="' + qty + '" min="1" max="99" style="width:64px;text-align:center;border:2px solid #A86C3C;background:#fff;color:#141414;-webkit-text-fill-color:#141414;font-weight:700;font-size:15px;">' +
                 '<button type="button" class="btn btn-sm btn-outline-secondary alliance-cart-qty-inc" data-id="' + String(item.id) + '" aria-label="Augmenter">+</button>' +
                 '</div></div>' +
                 '<button type="button" class="btn btn-sm btn-outline-danger alliance-cart-remove flex-shrink-0" data-id="' + String(item.id) + '" aria-label="Retirer">×</button>';

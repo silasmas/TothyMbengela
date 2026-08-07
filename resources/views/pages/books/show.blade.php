@@ -98,25 +98,24 @@
                         </div>
                     @endif
 
-                    <div class="product-details__buttons">
-                        <div class="product-details__buttons-1">
+                    <div class="product-details__buttons alliance-book-actions">
+                        <div class="alliance-book-actions-row">
                             @if($inStock)
                                 <button type="button" class="theme-btn btn-style-one js-add-to-cart" data-item='@json($cartItemShow)'>
                                     <span class="btn-title"><i class="fa fa-cart-plus"></i> Ajouter au panier</span>
                                 </button>
-                                <button type="button" class="theme-btn btn-style-two js-buy-now ms-1" data-item='@json($cartItemShow)'>
+                                <button type="button" class="theme-btn btn-style-two js-buy-now" data-item='@json($cartItemShow)'>
                                     <span class="btn-title"><i class="fa fa-bolt"></i> Acheter</span>
                                 </button>
                             @endif
-                        </div>
-                        <div class="product-details__buttons-2">
                             <a href="{{ route('books.index') }}" class="theme-btn btn-style-one">
                                 <span class="btn-title"><i class="fa fa-th-large"></i> Boutique</span>
                             </a>
                         </div>
                     </div>
-                    <div class="product-details__social">
-                        <div class="title mt-10">
+
+                    <div class="product-details__social alliance-book-share">
+                        <div class="title">
                             <h3>Partager</h3>
                         </div>
                         <ul class="social-icon-one">
@@ -135,11 +134,11 @@
                         </ul>
                     </div>
 
-                    <p class="mt-4 mb-0">
+                    <div class="alliance-book-contact">
                         <a href="{{ route('contact.create') }}?subject={{ urlencode('Commande : '.$book->title) }}" class="theme-btn btn-style-two">
                             <span class="btn-title"><i class="fa fa-envelope"></i> Nous contacter pour ce livre</span>
                         </a>
-                    </p>
+                    </div>
                 </div>
             </div>
         </div>

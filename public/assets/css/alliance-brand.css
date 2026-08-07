@@ -182,8 +182,7 @@ h1, h2, h3, h4, h5, h6,
 
 /* Boutons Bootstrap / CTA site : même logique (fond clair au survol → texte marron) */
 .btn-primary,
-.alliance-checkout-gold-btn,
-.alliance-header-auth-cta {
+.alliance-checkout-gold-btn {
   background-color: var(--alliance-ochre) !important;
   border-color: var(--alliance-ochre) !important;
   color: #fff !important;
@@ -191,12 +190,94 @@ h1, h2, h3, h4, h5, h6,
 .btn-primary:hover,
 .btn-primary:focus,
 .alliance-checkout-gold-btn:hover,
-.alliance-checkout-gold-btn:focus,
-.alliance-header-auth-cta:hover,
-.alliance-header-auth-cta:focus {
+.alliance-checkout-gold-btn:focus {
   background-color: #fff !important;
   border-color: var(--alliance-ochre-dark) !important;
   color: var(--alliance-ochre-dark) !important;
+}
+
+/* Header : Connexion + Inscription harmonisés (même taille / ocre) */
+.main-header .alliance-header-auth-link,
+.main-header .alliance-header-auth-cta,
+.sticky-header .alliance-sticky-auth-connexion,
+.sticky-header .alliance-sticky-auth-cluster .theme-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  height: 40px;
+  padding: 0 16px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 8px !important;
+  border: 2px solid var(--alliance-ochre) !important;
+  line-height: 1 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+.main-header .alliance-header-auth-link,
+.sticky-header .alliance-sticky-auth-connexion {
+  background: #fff !important;
+  color: var(--alliance-ochre-dark) !important;
+}
+.main-header .alliance-header-auth-cta,
+.sticky-header .alliance-sticky-auth-cluster .theme-btn {
+  background: var(--alliance-ochre) !important;
+  color: #fff !important;
+}
+.main-header .alliance-header-auth-cta .btn-title,
+.sticky-header .alliance-sticky-auth-cluster .theme-btn .btn-title {
+  color: inherit !important;
+}
+.main-header .alliance-header-auth-link:hover,
+.main-header .alliance-header-auth-link:focus,
+.sticky-header .alliance-sticky-auth-connexion:hover,
+.sticky-header .alliance-sticky-auth-connexion:focus {
+  background: var(--alliance-ochre) !important;
+  border-color: var(--alliance-ochre) !important;
+  color: #fff !important;
+}
+.main-header .alliance-header-auth-cta:hover,
+.main-header .alliance-header-auth-cta:focus,
+.sticky-header .alliance-sticky-auth-cluster .theme-btn:hover,
+.sticky-header .alliance-sticky-auth-cluster .theme-btn:focus {
+  background: #fff !important;
+  border-color: var(--alliance-ochre-dark) !important;
+  color: var(--alliance-ochre-dark) !important;
+}
+.sticky-header .alliance-sticky-auth-cluster .theme-btn:hover .btn-title,
+.sticky-header .alliance-sticky-auth-cluster .theme-btn:focus .btn-title {
+  color: var(--alliance-ochre-dark) !important;
+}
+
+/* Panier header : même hauteur / logique de survol que Connexion */
+.header-cart-wrap .cart-btn {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  background: #fff !important;
+  border: 2px solid var(--alliance-ochre) !important;
+  color: var(--alliance-ochre-dark) !important;
+  box-shadow: none !important;
+}
+.header-cart-wrap .cart-btn:hover,
+.header-cart-wrap .cart-btn:focus {
+  background: var(--alliance-ochre) !important;
+  border-color: var(--alliance-ochre) !important;
+  color: #fff !important;
+}
+.main-header.fixed-header .header-cart-wrap .cart-btn,
+.sticky-header .header-cart-wrap .cart-btn {
+  background: #fff !important;
+  border-color: var(--alliance-ochre) !important;
+  color: var(--alliance-ochre-dark) !important;
+}
+.main-header.fixed-header .header-cart-wrap .cart-btn:hover,
+.sticky-header .header-cart-wrap .cart-btn:hover {
+  background: var(--alliance-ochre) !important;
+  color: #fff !important;
 }
 
 .alliance-btn-partner {
@@ -288,21 +369,44 @@ h1, h2, h3, h4, h5, h6,
   color: #fff;
 }
 
-/* Logos */
+/* Logos : ocre, plus compact, rapproché du menu */
 .main-header .logo img,
 .sticky-header .logo img,
 .mobile-menu .nav-logo img {
-  max-height: 104px;
+  max-height: 52px;
   width: auto;
   object-fit: contain;
 }
 .sticky-header .logo img {
-  max-height: 78px;
+  max-height: 44px;
 }
 .main-footer .logo img {
   max-height: 140px;
   width: auto;
   filter: none;
+}
+
+/* Header plus bas pour ne pas masquer les bannières */
+.header-style-one .main-box .logo-box {
+  min-height: 72px !important;
+  padding: 8px 0 !important;
+  margin-right: 16px !important;
+}
+.main-header .main-box {
+  min-height: 72px;
+  align-items: center;
+}
+.main-header .main-menu .navigation > li > a,
+.sticky-header .main-menu .navigation > li > a {
+  padding-top: 24px !important;
+  padding-bottom: 24px !important;
+}
+.main-header .main-menu .navigation > li:before,
+.sticky-header .main-menu .navigation > li:before {
+  bottom: 14px !important;
+}
+.page-title {
+  padding-top: 100px !important;
 }
 
 /* Preloader charte */
@@ -336,7 +440,9 @@ h1, h2, h3, h4, h5, h6,
   font-size: 18px !important;
   border: none !important;
   padding-left: 18px !important;
-  -webkit-text-fill-color: #141414;
+  -webkit-text-fill-color: #141414 !important;
+  caret-color: #141414 !important;
+  opacity: 1 !important;
 }
 .product-details__quantity .quantity-box button {
   color: #fff !important;
@@ -349,12 +455,69 @@ h1, h2, h3, h4, h5, h6,
   background: var(--alliance-ochre-dark) !important;
   color: #fff !important;
 }
-.alliance-cart-qty-input {
+/* Quantité panier : texte toujours visible (jamais blanc sur blanc) */
+.alliance-cart-qty-input,
+#alliance-cart-list input[type="number"],
+#allianceCartModal input[type="number"].alliance-cart-qty-input {
   border: 2px solid var(--alliance-ochre) !important;
   background: #fff !important;
-  color: var(--alliance-black) !important;
+  background-color: #fff !important;
+  color: #141414 !important;
+  -webkit-text-fill-color: #141414 !important;
+  caret-color: #141414 !important;
   font-weight: 700 !important;
+  font-size: 15px !important;
   border-radius: 6px !important;
+  opacity: 1 !important;
+}
+.alliance-cart-qty-input:focus,
+#allianceCartModal input[type="number"].alliance-cart-qty-input:focus {
+  color: #141414 !important;
+  -webkit-text-fill-color: #141414 !important;
+  background: #fff !important;
+  box-shadow: 0 0 0 2px rgba(168, 108, 60, 0.25);
+}
+
+/* Fiche produit : boutons alignés + contact plus bas */
+.alliance-book-actions {
+  display: flex !important;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 28px !important;
+  margin-bottom: 8px !important;
+  align-items: stretch;
+}
+.alliance-book-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: stretch;
+}
+.alliance-book-actions-row .theme-btn {
+  flex: 1 1 160px;
+  margin: 0 !important;
+  min-height: 52px !important;
+  height: 52px !important;
+  padding: 0 20px !important;
+}
+.alliance-book-share {
+  margin-top: 28px !important;
+}
+.alliance-book-share .title {
+  margin-top: 0 !important;
+  margin-bottom: 12px;
+}
+.alliance-book-contact {
+  margin-top: 2.75rem !important;
+  margin-bottom: 0.5rem;
+}
+.alliance-book-contact .theme-btn {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 !important;
+  min-height: 52px !important;
+  height: auto !important;
+  padding: 14px 24px !important;
 }
 .alliance-cart-qty-dec,
 .alliance-cart-qty-inc {
@@ -451,10 +614,13 @@ h1, h2, h3, h4, h5, h6,
     --h3-font-size: 26px;
   }
   .main-header .logo img {
-    max-height: 72px;
+    max-height: 44px;
   }
   .main-footer .logo img {
     max-height: 110px;
+  }
+  .header-style-one .main-box .logo-box {
+    min-height: 64px !important;
   }
   .main-footer .logo img {
     max-height: 88px;
