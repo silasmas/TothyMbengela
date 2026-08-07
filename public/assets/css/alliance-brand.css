@@ -252,15 +252,36 @@ h1, h2, h3, h4, h5, h6,
   color: var(--alliance-ochre-dark) !important;
 }
 
-/* Panier header : même hauteur / logique de survol que Connexion */
+/* Panier header : icône parfaitement centrée dans le cercle */
+.header-cart-wrap .cart-btn.ui-btn,
 .header-cart-wrap .cart-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   width: 40px !important;
   height: 40px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  font-size: 16px !important;
+  text-align: center !important;
   border-radius: 50% !important;
   background: #fff !important;
   border: 2px solid var(--alliance-ochre) !important;
   color: var(--alliance-ochre-dark) !important;
   box-shadow: none !important;
+  position: relative;
+}
+.header-cart-wrap .cart-btn .icon,
+.header-cart-wrap .cart-btn .fa {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  width: auto !important;
+  height: auto !important;
+  position: static !important;
+  transform: translate(0, 0);
 }
 .header-cart-wrap .cart-btn:hover,
 .header-cart-wrap .cart-btn:focus {
@@ -369,16 +390,23 @@ h1, h2, h3, h4, h5, h6,
   color: #fff;
 }
 
-/* Logos : ocre, plus compact, rapproché du menu */
+/*
+ * Logo header : plus grand visuellement sans hausser la barre.
+ * Espacement équilibré avant scroll (pas trop loin) et après scroll (pas collé).
+ */
 .main-header .logo img,
+.main-header .logo img.alliance-logo-header,
 .sticky-header .logo img,
 .mobile-menu .nav-logo img {
-  max-height: 52px;
-  width: auto;
+  max-height: 56px !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: none !important;
   object-fit: contain;
+  display: block;
 }
 .sticky-header .logo img {
-  max-height: 44px;
+  max-height: 48px !important;
 }
 .main-footer .logo img {
   max-height: 140px;
@@ -386,27 +414,93 @@ h1, h2, h3, h4, h5, h6,
   filter: none;
 }
 
-/* Header plus bas pour ne pas masquer les bannières */
+/* Avant scroll : logo + menu regroupés (plus de grand vide à gauche) */
+.header-style-one .main-box {
+  min-height: 72px !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 0;
+  padding-left: clamp(16px, 2.2vw, 40px) !important;
+  padding-right: clamp(16px, 2.2vw, 40px) !important;
+}
 .header-style-one .main-box .logo-box {
   min-height: 72px !important;
-  padding: 8px 0 !important;
-  margin-right: 16px !important;
+  padding: 6px 0 !important;
+  margin-right: 28px !important;
+  flex: 0 0 auto;
+  justify-content: flex-start !important;
 }
-.main-header .main-box {
-  min-height: 72px;
+.header-style-one .main-box .logo-box .logo,
+.header-style-one .main-box .logo-box .logo a {
+  display: flex;
   align-items: center;
 }
+.header-style-one .main-box .nav-outer {
+  flex: 1 1 auto;
+  width: auto !important;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.header-style-one .main-box .outer-box {
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+
+/* Après scroll : logo un peu plus grand, écart confortable avec le menu */
+.sticky-header .logo {
+  padding: 6px 0 !important;
+  margin-right: 28px !important;
+  flex: 0 0 auto;
+}
+.sticky-header .logo a {
+  display: flex;
+  align-items: center;
+}
+.sticky-header .inner-container {
+  align-items: center;
+  gap: 0;
+  padding-left: clamp(16px, 2.2vw, 40px);
+  padding-right: clamp(16px, 2.2vw, 40px);
+}
+.sticky-header .nav-outer {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.sticky-header-actions {
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+
 .main-header .main-menu .navigation > li > a,
 .sticky-header .main-menu .navigation > li > a {
-  padding-top: 24px !important;
-  padding-bottom: 24px !important;
+  padding-top: 22px !important;
+  padding-bottom: 22px !important;
 }
 .main-header .main-menu .navigation > li:before,
 .sticky-header .main-menu .navigation > li:before {
-  bottom: 14px !important;
+  bottom: 12px !important;
 }
 .page-title {
   padding-top: 100px !important;
+}
+
+@media (max-width: 1199px) {
+  .header-style-one .main-box .logo-box {
+    margin-right: 18px !important;
+  }
+  .sticky-header .logo {
+    margin-right: 18px !important;
+  }
+  .main-header .logo img,
+  .main-header .logo img.alliance-logo-header {
+    max-height: 48px;
+  }
+  .sticky-header .logo img {
+    max-height: 42px;
+  }
 }
 
 /* Preloader charte */
@@ -613,14 +707,19 @@ h1, h2, h3, h4, h5, h6,
     --h2-font-size: 32px;
     --h3-font-size: 26px;
   }
-  .main-header .logo img {
-    max-height: 44px;
+  .main-header .logo img,
+  .main-header .logo img.alliance-logo-header {
+    max-height: 42px;
+  }
+  .sticky-header .logo img {
+    max-height: 38px;
   }
   .main-footer .logo img {
     max-height: 110px;
   }
   .header-style-one .main-box .logo-box {
     min-height: 64px !important;
+    margin-right: 12px !important;
   }
   .main-footer .logo img {
     max-height: 88px;

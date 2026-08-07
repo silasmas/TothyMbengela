@@ -23,7 +23,7 @@
         <link href="{{ asset('assets/plugins/revolution/css/layers.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/plugins/revolution/css/navigation.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-        <link href="{{ asset('assets/css/alliance-brand.css') }}?v=8" rel="stylesheet">
+        <link href="{{ asset('assets/css/alliance-brand.css') }}?v=9" rel="stylesheet">
         <link href="{{ asset('assets/css/alliance-engagement-pages.css') }}?v=6" rel="stylesheet">
         <link href="{{ asset('assets/css/pastor-activities.css') }}?v=9" rel="stylesheet">
 
@@ -38,30 +38,7 @@
                 background-color: transparent !important;
             }
 
-            /* Logo header : ocre, compact, proche du menu */
-            .main-header .logo img,
-            .main-header .logo img.alliance-logo-header {
-                max-height: 52px;
-                width: auto;
-            }
-
-            /* Logo sticky */
-            .sticky-header .logo img {
-                max-height: 44px;
-                width: auto;
-            }
-
-            /* Logo menu mobile */
-            .mobile-menu .nav-logo img {
-                max-height: 48px;
-                width: auto;
-            }
-
-            .header-style-one .main-box .logo-box {
-                min-height: 72px !important;
-                padding: 8px 0 !important;
-                margin-right: 16px !important;
-            }
+            /* Logo : tailles/espacements gérés dans alliance-brand.css */
 
             /* Logo footer : agrandi */
             .main-footer .logo img {
@@ -336,8 +313,6 @@
             }
             .header-cart-wrap .cart-btn {
                 position: relative;
-                font-size: 18px;
-                line-height: 1;
             }
             /* Badge sur le bord du cercle (pastille qui chevauche l’anneau), pas au centre */
             .header-cart-wrap .cart-count-badge {
@@ -365,8 +340,8 @@
             }
             /* Couleur panier sticky : alliance-brand.css */
             .sticky-header .auto-container {
-                padding-left: clamp(14px, 2.8vw, 52px);
-                padding-right: clamp(14px, 2.8vw, 52px);
+                padding-left: clamp(16px, 2.2vw, 40px);
+                padding-right: clamp(16px, 2.2vw, 40px);
             }
             .sticky-header .inner-container {
                 display: flex;
@@ -412,8 +387,8 @@
             /* Header principal (haut de page) : pas de retour à la ligne du bloc menu + actions */
             @media (min-width: 1200px) {
                 .main-header.header-style-one .main-box {
-                    padding-left: clamp(18px, 3.5vw, 96px);
-                    padding-right: clamp(18px, 3.5vw, 96px);
+                    padding-left: clamp(16px, 2.2vw, 40px);
+                    padding-right: clamp(16px, 2.2vw, 40px);
                 }
                 .main-header.header-style-one .main-menu .navigation {
                     display: flex;

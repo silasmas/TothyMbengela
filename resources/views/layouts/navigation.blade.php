@@ -4,7 +4,7 @@
         <div class="logo-box">
             <div class="logo">
                 <a href="{{ route('home') }}">
-                    <img src="{{ asset('assets/logo/alliance-wordmark-ochre-on-white.png') }}?v=1" alt="Alliance — Ministère Tothy Mbengela" title="Alliance" class="alliance-logo-header">
+                    <img src="{{ asset('assets/logo/alliance-wordmark-ochre-on-white.png') }}?v=2" alt="Alliance — Ministère Tothy Mbengela" title="Alliance" class="alliance-logo-header">
                 </a>
             </div>
         </div>
@@ -89,7 +89,7 @@
             <div class="upper-box">
                 <div class="nav-logo">
                     <a href="{{ route('home') }}">
-                        <img src="{{ asset('assets/logo/alliance-wordmark-ochre-on-white.png') }}?v=1" alt="Alliance" title="Alliance" class="alliance-logo-header">
+                        <img src="{{ asset('assets/logo/alliance-wordmark-ochre-on-white.png') }}?v=2" alt="Alliance" title="Alliance" class="alliance-logo-header">
                     </a>
                 </div>
                 <div class="close-btn"><i class="icon fa fa-times"></i></div>
@@ -146,7 +146,7 @@
             <div class="inner-container">
                 <div class="logo">
                     <a href="{{ route('home') }}" title="Alliance">
-                        <img src="{{ asset('assets/logo/alliance-wordmark-ochre-on-white.png') }}?v=1" alt="Alliance" title="Alliance" class="alliance-logo-header">
+                        <img src="{{ asset('assets/logo/alliance-wordmark-ochre-on-white.png') }}?v=2" alt="Alliance" title="Alliance" class="alliance-logo-header">
                     </a>
                 </div>
 
