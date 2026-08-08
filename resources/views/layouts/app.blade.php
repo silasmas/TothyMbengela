@@ -23,9 +23,9 @@
         <link href="{{ asset('assets/plugins/revolution/css/layers.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/plugins/revolution/css/navigation.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-        <link href="{{ asset('assets/css/alliance-brand.css') }}?v=9" rel="stylesheet">
+        <link href="{{ asset('assets/css/alliance-brand.css') }}?v=10" rel="stylesheet">
         <link href="{{ asset('assets/css/alliance-engagement-pages.css') }}?v=6" rel="stylesheet">
-        <link href="{{ asset('assets/css/pastor-activities.css') }}?v=9" rel="stylesheet">
+        <link href="{{ asset('assets/css/pastor-activities.css') }}?v=10" rel="stylesheet">
 
         <!-- Alliance overrides -->
         <style>
@@ -44,6 +44,7 @@
             .main-footer .logo img {
                 max-height: 140px;
                 width: auto;
+                background: transparent !important;
             }
 
             /* Cards boutique accueil : titre court, couverture plus visible, prix lisible */
@@ -910,7 +911,7 @@
         <div class="page-wrapper">
             <div class="preloader alliance-preloader" role="status" aria-live="polite" aria-busy="true" aria-label="Chargement">
                 <div class="alliance-preloader-inner">
-                    <img src="{{ asset('assets/logo/logo-alliance-dark.png') }}" alt="Alliance" width="320" height="120" decoding="async" fetchpriority="high">
+                    <img src="{{ asset('assets/logo/alliance-wordmark-gold-transparent.png') }}?v=1" alt="Alliance" width="320" height="120" decoding="async" fetchpriority="high">
                     <span class="alliance-preloader-label">Chargement…</span>
                 </div>
             </div>
@@ -951,7 +952,8 @@
         @include('layouts.cart-offcanvas')
         @include('layouts.donate-modal')
         @include('partials.products-welcome-modal')
-        @include('partials.pastor-welcome-modal')
+            @include('partials.pastor-welcome-modal')
+            @include('partials.alliance-float-actions')
 
         @stack('modals')
 

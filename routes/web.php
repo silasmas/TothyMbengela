@@ -52,10 +52,14 @@ Route::get('/boutique/{slug}', [BookController::class, 'show'])->name('books.sho
 
 // Contact
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::post('/contact', [ContactController::class, 'store'])
+    ->middleware('throttle:5,10')
+    ->name('contact.store');
 
 // Rendez-vous (formulaire global en bas de page — ancre #prise-rendez-vous)
-Route::post('/rendez-vous', [ContactController::class, 'appointmentStore'])->name('appointment.store');
+Route::post('/rendez-vous', [ContactController::class, 'appointmentStore'])
+    ->middleware('throttle:5,10')
+    ->name('appointment.store');
 
 // Don
 Route::get('/don', [DonationController::class, 'donateForm'])->name('donate.create');

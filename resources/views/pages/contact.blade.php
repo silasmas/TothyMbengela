@@ -83,6 +83,11 @@
 
 							<form method="POST" action="{{ route('contact.store') }}" id="contact-page-form">
 								@csrf
+								{{-- Honeypot anti-bots (ne pas remplir) --}}
+								<div class="alliance-hp" aria-hidden="true">
+									<label for="contact-website-url">Site web</label>
+									<input type="text" name="website_url" id="contact-website-url" value="" tabindex="-1" autocomplete="off">
+								</div>
 								<div class="row">
 									<div class="form-group col-lg-12">
 										<input type="text" name="name" value="{{ old('name') }}" placeholder="Votre nom complet" required autocomplete="name">

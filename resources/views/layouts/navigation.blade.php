@@ -35,15 +35,7 @@
                     <li class="{{ request()->is('boutique*') ? 'current' : '' }}">
                         <a href="{{ route('books.index') }}">Boutique</a>
                     </li>
-                    <li class="dropdown {{ request()->is('don') || request()->is('partenaire') ? 'current' : '' }}">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#donatePartnerModal">Soutenir</a>
-                        <ul>
-                            <li><a href="#" data-bs-toggle="modal" data-bs-target="#donatePartnerModal">Faire un don</a></li>
-                            <li><a href="#" class="js-donate-modal-partner">Devenir partenaire</a></li>
-                            <li><a href="{{ route('donate.create') }}">Page don (détails)</a></li>
-                            <li><a href="{{ route('partner.create') }}">Page partenaire</a></li>
-                        </ul>
-                    </li>
+                    {{-- Soutenir : bouton flottant (partials/alliance-float-actions) --}}
                     <li class="dropdown {{ request()->is('contact') ? 'current' : '' }}">
                         <a href="{{ route('contact.create') }}">Contact</a>
                         <ul>
@@ -104,7 +96,7 @@
                     <div class="contact-info-box">
                         <span class="icon lnr-icon-envelope1"></span>
                         <span class="title">E-mail</span>
-                        <a href="mailto:contact@alliance-ministere.com">contact@alliance-ministere.com</a>
+                        <a href="mailto:{{ $siteSetting->email ?? 'contact@alliance-ministere.com' }}">{{ $siteSetting->email ?? 'contact@alliance-ministere.com' }}</a>
                     </div>
                 </li>
                 <li>
@@ -117,9 +109,15 @@
             </ul>
 
             <ul class="social-links">
-                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                @if(!empty($siteSetting?->facebook_url))
+                    <li><a href="{{ $siteSetting->facebook_url }}" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a></li>
+                @endif
+                @if(!empty($siteSetting?->youtube_url))
+                    <li><a href="{{ $siteSetting->youtube_url }}" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a></li>
+                @endif
+                @if(!empty($siteSetting?->instagram_url))
+                    <li><a href="{{ $siteSetting->instagram_url }}" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a></li>
+                @endif
             </ul>
         </nav>
     </div>

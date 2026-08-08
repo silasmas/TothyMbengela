@@ -67,6 +67,10 @@
                             <form method="POST" action="{{ route('appointment.store') }}" id="home-appointment-form">
                                 @csrf
                                 <input type="hidden" name="home_appointment" value="1">
+                                <div class="alliance-hp" aria-hidden="true">
+                                    <label for="rdv-website-url">Site web</label>
+                                    <input type="text" name="website_url" id="rdv-website-url" value="" tabindex="-1" autocomplete="off">
+                                </div>
                                 <div class="row">
                                     <div class="mb-15 col-lg-6">
                                         <label class="field-label" for="home-rdv-name">Nom complet <span class="field-hint">(obligatoire)</span></label>

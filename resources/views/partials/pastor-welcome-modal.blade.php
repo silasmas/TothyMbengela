@@ -231,26 +231,11 @@
     </div>
 </div>
 
+{{-- FAB Agenda intégré dans partials/alliance-float-actions (bouton Soutenir) --}}
 @php
     $pastorAgendaFabCount = $pastorWelcomeModalActivities->count();
 @endphp
-<button
-    type="button"
-    id="alliancePastorAgendaFab"
-    class="alliance-pastor-agenda-fab"
-    aria-haspopup="dialog"
-    aria-controls="alliancePastorAgendaWelcomeModal"
-    title="Activités — ouvrir l’agenda"
->
-    <span class="alliance-pastor-agenda-fab-inner">
-        <i class="fa fa-calendar-check alliance-pastor-agenda-fab-icon" aria-hidden="true"></i>
-        <span class="alliance-pastor-agenda-fab-text">Agenda</span>
-        @if($pastorAgendaFabCount > 0)
-            <span class="alliance-pastor-agenda-fab-badge" aria-hidden="true">{{ $pastorAgendaFabCount }}</span>
-        @endif
-    </span>
-    <span class="visually-hidden">Ouvrir la fenêtre des activités de la pasteure ({{ $pastorAgendaFabCount }} annonce{{ $pastorAgendaFabCount > 1 ? 's' : '' }})</span>
-</button>
+<button type="button" id="alliancePastorAgendaFab" class="d-none" aria-hidden="true" tabindex="-1"></button>
 
 @push('scripts')
 <script>

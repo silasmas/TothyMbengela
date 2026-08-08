@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Book;
 use App\Models\PastorActivity;
 use App\Models\ShopSetting;
+use App\Models\SiteSetting;
 use App\Models\Slide;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
@@ -61,6 +62,11 @@ class AppServiceProvider extends ServiceProvider
                 ? ShopSetting::instance()
                 : null;
             $view->with('shopSetting', $shopSetting);
+
+            $siteSetting = Schema::hasTable('site_settings')
+                ? SiteSetting::instance()
+                : null;
+            $view->with('siteSetting', $siteSetting);
         });
     }
 }

@@ -9,7 +9,7 @@
                 <div class="contact-info logo-box col-lg-4 col-md-12 wow fadeInUp text-center">
                     <div class="logo">
                         <a href="{{ route('home') }}">
-                            <img src="{{ asset('assets/logo/alliance-wordmark-gold-on-black.png') }}" alt="Alliance — Ministère Tothy Mbengela" class="alliance-logo-footer">
+                            <img src="{{ asset('assets/logo/alliance-wordmark-gold-transparent.png') }}?v=1" alt="Alliance — Ministère Tothy Mbengela" class="alliance-logo-footer">
                         </a>
                     </div>
                 </div>
@@ -17,7 +17,11 @@
                 <div class="contact-info col-lg-4 col-md-12 wow fadeInRight">
                     <div class="inner-box">
                         <h4 class="title">Écrivez-nous</h4>
-                        <div class="text"><a href="mailto:contact@alliance-ministere.com">contact@alliance-ministere.com</a></div>
+                        @php $siteEmail = $siteSetting->email ?? 'contact@alliance-ministere.com'; @endphp
+                        <div class="text"><a href="mailto:{{ $siteEmail }}">{{ $siteEmail }}</a></div>
+                        @if(!empty($siteSetting?->phone))
+                            <div class="text mt-1"><a href="tel:{{ preg_replace('/\s+/', '', $siteSetting->phone) }}">{{ $siteSetting->phone }}</a></div>
+                        @endif
                     </div>
                 </div>
 
@@ -41,7 +45,10 @@
                         <div class="col-xl-7 col-lg-6 col-md-6">
                             <div class="footer-widget about-widget">
                                 <h6 class="widget-title">À propos</h6>
-                                <div class="text">Ministère de la Pasteure Tothy Mbengela — Prédications, enseignements et accompagnement spirituel pour l'édification de la foi.</div>
+                                <div class="text">{{ $siteSetting->slogan ?? 'Ministère de la Pasteure Tothy Mbengela — Prédications, enseignements et accompagnement spirituel pour l\'édification de la foi.' }}</div>
+                                @if(!empty($siteSetting?->address))
+                                    <div class="text mt-2"><i class="fa fa-map-marker-alt me-1"></i> {{ $siteSetting->address }}</div>
+                                @endif
                             </div>
                         </div>
                         <div class="col-xl-5 col-lg-6 col-md-6">
@@ -71,9 +78,21 @@
                             <li><a href="#" class="js-donate-modal-partner">Devenir partenaire</a></li>
                         </ul>
                         <ul class="social-icon-two">
-                            <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                            @if(!empty($siteSetting?->facebook_url))
+                                <li><a href="{{ $siteSetting->facebook_url }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook"></i></a></li>
+                            @endif
+                            @if(!empty($siteSetting?->youtube_url))
+                                <li><a href="{{ $siteSetting->youtube_url }}" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a></li>
+                            @endif
+                            @if(!empty($siteSetting?->instagram_url))
+                                <li><a href="{{ $siteSetting->instagram_url }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+                            @endif
+                            @if(!empty($siteSetting?->tiktok_url))
+                                <li><a href="{{ $siteSetting->tiktok_url }}" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a></li>
+                            @endif
+                            @if(!empty($siteSetting?->whatsapp_url))
+                                <li><a href="{{ $siteSetting->whatsapp_url }}" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></li>
+                            @endif
                         </ul>
                     </div>
                 </div>
