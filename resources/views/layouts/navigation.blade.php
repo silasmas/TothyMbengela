@@ -1,50 +1,53 @@
 <!-- Main Header -->
 <header class="main-header header-style-one">
     <div class="main-box">
-        <div class="logo-box">
-            <div class="logo">
-                <a href="{{ route('home') }}">
-                    <img src="{{ asset('assets/logo/alliance-wordmark-ochre-on-white.png') }}?v=2" alt="Alliance — Ministère Tothy Mbengela" title="Alliance" class="alliance-logo-header">
-                </a>
+        {{-- Groupe logo + menu (gap maîtrisé), actions à droite avec espace garanti --}}
+        <div class="alliance-header-brand-nav">
+            <div class="logo-box">
+                <div class="logo">
+                    <a href="{{ route('home') }}">
+                        <img src="{{ asset('assets/logo/alliance-wordmark-ochre-on-white.png') }}?v=2" alt="Alliance — Ministère Tothy Mbengela" title="Alliance" class="alliance-logo-header">
+                    </a>
+                </div>
             </div>
-        </div>
 
-        <div class="nav-outer">
-            <nav class="nav main-menu">
-                <ul class="navigation">
-                    <li class="{{ request()->is('/') ? 'current' : '' }}">
-                        <a href="{{ route('home') }}">Accueil</a>
-                    </li>
-                    <li class="{{ request()->is('a-propos') ? 'current' : '' }}">
-                        <a href="{{ route('about') }}">À propos</a>
-                    </li>
-                    <li class="{{ request()->is('activites-pasteure*') ? 'current' : '' }}">
-                        <a href="{{ route('pastor-activities.index') }}">Agenda</a>
-                    </li>
-                    <li class="dropdown {{ request()->is('contenus*') || request()->is('series*') ? 'current' : '' }}">
-                        <a href="{{ route('contents.index') }}">Contenus</a>
-                        <ul>
-                            <li><a href="{{ route('contents.index') }}">Toutes les publications</a></li>
-                            <li><a href="{{ route('contents.index', ['type' => 'video']) }}">Vidéos</a></li>
-                            <li><a href="{{ route('contents.index', ['type' => 'audio']) }}">Audio</a></li>
-                            <li><a href="{{ route('contents.index', ['type' => 'podcast']) }}">Podcasts</a></li>
-                            <li><a href="{{ route('contents.index', ['type' => 'article']) }}">Articles</a></li>
-                            <li><a href="{{ route('series.index') }}">Séries</a></li>
-                        </ul>
-                    </li>
-                    <li class="{{ request()->is('boutique*') ? 'current' : '' }}">
-                        <a href="{{ route('books.index') }}">Boutique</a>
-                    </li>
-                    {{-- Soutenir : bouton flottant (partials/alliance-float-actions) --}}
-                    <li class="dropdown {{ request()->is('contact') ? 'current' : '' }}">
-                        <a href="{{ route('contact.create') }}">Contact</a>
-                        <ul>
-                            <li><a href="{{ route('contact.create') }}">Nous écrire</a></li>
-                            <li><a href="{{ url('/#prise-rendez-vous') }}">Prendre rendez-vous</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
+            <div class="nav-outer">
+                <nav class="nav main-menu">
+                    <ul class="navigation">
+                        <li class="{{ request()->is('/') ? 'current' : '' }}">
+                            <a href="{{ route('home') }}">Accueil</a>
+                        </li>
+                        <li class="{{ request()->is('a-propos') ? 'current' : '' }}">
+                            <a href="{{ route('about') }}">À propos</a>
+                        </li>
+                        <li class="{{ request()->is('activites-pasteure*') ? 'current' : '' }}">
+                            <a href="{{ route('pastor-activities.index') }}">Agenda</a>
+                        </li>
+                        <li class="dropdown {{ request()->is('contenus*') || request()->is('series*') ? 'current' : '' }}">
+                            <a href="{{ route('contents.index') }}">Contenus</a>
+                            <ul>
+                                <li><a href="{{ route('contents.index') }}">Toutes les publications</a></li>
+                                <li><a href="{{ route('contents.index', ['type' => 'video']) }}">Vidéos</a></li>
+                                <li><a href="{{ route('contents.index', ['type' => 'audio']) }}">Audio</a></li>
+                                <li><a href="{{ route('contents.index', ['type' => 'podcast']) }}">Podcasts</a></li>
+                                <li><a href="{{ route('contents.index', ['type' => 'article']) }}">Articles</a></li>
+                                <li><a href="{{ route('series.index') }}">Séries</a></li>
+                            </ul>
+                        </li>
+                        <li class="{{ request()->is('boutique*') ? 'current' : '' }}">
+                            <a href="{{ route('books.index') }}">Boutique</a>
+                        </li>
+                        {{-- Soutenir : bouton flottant (partials/alliance-float-actions) --}}
+                        <li class="dropdown {{ request()->is('contact') ? 'current' : '' }}">
+                            <a href="{{ route('contact.create') }}">Contact</a>
+                            <ul>
+                                <li><a href="{{ route('contact.create') }}">Nous écrire</a></li>
+                                <li><a href="{{ url('/#prise-rendez-vous') }}">Prendre rendez-vous</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
 
         <div class="outer-box alliance-header-outer-actions">
@@ -142,22 +145,24 @@
     <div class="sticky-header">
         <div class="auto-container">
             <div class="inner-container">
-                <div class="logo">
-                    <a href="{{ route('home') }}" title="Alliance">
-                        <img src="{{ asset('assets/logo/alliance-wordmark-ochre-on-white.png') }}?v=2" alt="Alliance" title="Alliance" class="alliance-logo-header">
-                    </a>
-                </div>
+                <div class="alliance-header-brand-nav">
+                    <div class="logo">
+                        <a href="{{ route('home') }}" title="Alliance">
+                            <img src="{{ asset('assets/logo/alliance-wordmark-ochre-on-white.png') }}?v=2" alt="Alliance" title="Alliance" class="alliance-logo-header">
+                        </a>
+                    </div>
 
-                <div class="nav-outer">
-                    <nav class="main-menu">
-                        <div class="navbar-collapse show collapse clearfix">
-                            <ul class="navigation clearfix">
-                                <!-- Menu injecté automatiquement par le JS du template -->
-                            </ul>
-                        </div>
-                    </nav>
+                    <div class="nav-outer">
+                        <nav class="main-menu">
+                            <div class="navbar-collapse show collapse clearfix">
+                                <ul class="navigation clearfix">
+                                    <!-- Menu injecté automatiquement par le JS du template -->
+                                </ul>
+                            </div>
+                        </nav>
 
-                    <div class="mobile-nav-toggler"><span class="icon lnr-icon-bars"></span></div>
+                        <div class="mobile-nav-toggler"><span class="icon lnr-icon-bars"></span></div>
+                    </div>
                 </div>
 
                 <div class="sticky-header-actions d-flex align-items-center">

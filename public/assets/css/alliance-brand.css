@@ -415,95 +415,107 @@ h1, h2, h3, h4, h5, h6,
 }
 
 /*
- * Header : logo + menu regroupés (gap maîtrisé), actions à droite
- * avec espace clair avant loupe / panier (évite CONTACT collé au scroll).
+ * Header définitif (avant + après scroll)
+ * - Bloc logo+menu regroupé (pas collé au bord gauche)
+ * - Actions (loupe/panier/auth) à droite avec écart fixe avant CONTACT
  */
-.header-style-one .main-box {
+.header-style-one .main-box,
+.sticky-header .inner-container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: nowrap !important;
+  gap: 0 !important;
+  width: 100% !important;
   min-height: 72px !important;
+  padding-left: clamp(40px, 5vw, 96px) !important;
+  padding-right: clamp(40px, 5vw, 96px) !important;
+  box-sizing: border-box !important;
+}
+
+.alliance-header-brand-nav {
+  display: flex !important;
+  align-items: center !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  gap: 32px !important;
+  margin-right: 40px !important;
+  padding-right: 8px !important;
+}
+
+.header-style-one .main-box .logo-box,
+.sticky-header .logo {
+  flex: 0 0 auto !important;
+  position: relative !important;
+  min-height: 0 !important;
+  padding: 6px 0 !important;
+  margin: 0 !important;
+  justify-content: flex-start !important;
+}
+
+.header-style-one .main-box .logo-box .logo,
+.header-style-one .main-box .logo-box .logo a,
+.sticky-header .logo a {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.header-style-one .main-box .nav-outer,
+.sticky-header .nav-outer,
+.main-header .main-box .nav-outer {
+  flex: 0 1 auto !important;
+  width: auto !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
-  gap: 0;
-  padding-left: clamp(16px, 2.2vw, 40px) !important;
-  padding-right: clamp(16px, 2.2vw, 40px) !important;
-}
-.header-style-one .main-box .logo-box {
-  flex: 0 0 auto;
-  min-height: 72px !important;
-  padding: 6px 0 !important;
-  margin-right: 28px !important;
-  justify-content: flex-start !important;
-}
-.header-style-one .main-box .logo-box .logo,
-.header-style-one .main-box .logo-box .logo a {
-  display: flex;
-  align-items: center;
-}
-.header-style-one .main-box .nav-outer {
-  flex: 1 1 auto;
-  width: auto !important;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start !important;
-  min-width: 0;
-}
-.header-style-one .main-box .outer-box {
-  flex: 0 0 auto;
-  margin-left: 28px !important;
-  padding-left: 20px !important;
-  border-left: 1px solid rgba(20, 20, 20, 0.08);
-  justify-self: end;
+  margin: 0 !important;
+  position: relative !important;
 }
 
-/* Sticky : même logique flex */
-.sticky-header .logo {
-  flex: 0 0 auto;
-  padding: 6px 0 !important;
-  margin-right: 24px !important;
-}
-.sticky-header .logo a {
-  display: flex;
-  align-items: center;
-}
-.sticky-header .inner-container {
-  display: flex !important;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0;
-  padding-left: clamp(16px, 2.2vw, 40px);
-  padding-right: clamp(16px, 2.2vw, 40px);
-}
-.sticky-header .nav-outer {
-  flex: 1 1 auto;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start !important;
-  min-width: 0;
-}
+.header-style-one .main-box .outer-box,
 .sticky-header-actions {
-  flex: 0 0 auto;
-  margin-left: 24px !important;
-  padding-left: 18px !important;
-  border-left: 1px solid rgba(20, 20, 20, 0.08);
+  flex: 0 0 auto !important;
   display: flex !important;
-  align-items: center;
-  gap: 10px;
-  justify-self: end;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  margin: 0 !important;
+  margin-left: 0 !important;
+  padding-left: 28px !important;
+  border-left: 1px solid rgba(20, 20, 20, 0.1) !important;
+  gap: 12px !important;
 }
+
+/* Espacement items menu : annule les 40/50px du thème qui collent CONTACT à la loupe */
+.header-style-one .main-box .main-menu .navigation > li,
 .sticky-header .main-menu .navigation > li {
-  margin-left: 10px !important;
-  margin-right: 10px !important;
+  margin: 0 10px !important;
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+  flex-shrink: 0 !important;
 }
-.sticky-header .main-menu .navigation > li:last-child {
-  margin-right: 4px !important;
-}
-.sticky-header-actions .search-btn {
-  margin-right: 4px !important;
+.header-style-one .main-box .main-menu .navigation > li:first-child,
+.sticky-header .main-menu .navigation > li:first-child {
   margin-left: 0 !important;
 }
+.header-style-one .main-box .main-menu .navigation > li:last-child,
+.sticky-header .main-menu .navigation > li:last-child {
+  margin-right: 0 !important;
+}
+
+.sticky-header .auto-container {
+  max-width: none !important;
+  width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.sticky-header-actions .search-btn {
+  margin: 0 !important;
+}
 .sticky-header-actions .header-cart-wrap {
-  margin-left: 2px;
-  margin-right: 4px;
+  margin: 0 4px 0 0 !important;
 }
 
 .main-header .main-menu .navigation > li > a,
@@ -529,13 +541,22 @@ h1, h2, h3, h4, h5, h6,
 }
 
 @media (max-width: 1199px) {
-  .header-style-one .main-box .logo-box {
-    margin-right: 16px !important;
+  .header-style-one .main-box,
+  .sticky-header .inner-container {
+    padding-left: clamp(20px, 3vw, 40px) !important;
+    padding-right: clamp(20px, 3vw, 40px) !important;
+  }
+  .alliance-header-brand-nav {
+    gap: 18px !important;
+    margin-right: 20px !important;
   }
   .header-style-one .main-box .outer-box,
   .sticky-header-actions {
-    margin-left: 16px !important;
-    padding-left: 12px !important;
+    padding-left: 16px !important;
+  }
+  .header-style-one .main-box .main-menu .navigation > li,
+  .sticky-header .main-menu .navigation > li {
+    margin: 0 7px !important;
   }
   .main-header .logo img,
   .main-header .logo img.alliance-logo-header {
@@ -816,9 +837,12 @@ h1, h2, h3, h4, h5, h6,
   .main-footer .logo img {
     max-height: 110px;
   }
+  .alliance-header-brand-nav {
+    gap: 14px !important;
+    margin-right: 12px !important;
+  }
   .header-style-one .main-box .logo-box {
     min-height: 64px !important;
-    margin-right: 12px !important;
   }
   .main-footer .logo img {
     max-height: 88px;

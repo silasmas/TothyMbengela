@@ -23,7 +23,7 @@
         <link href="{{ asset('assets/plugins/revolution/css/layers.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/plugins/revolution/css/navigation.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-        <link href="{{ asset('assets/css/alliance-brand.css') }}?v=11" rel="stylesheet">
+        <link href="{{ asset('assets/css/alliance-brand.css') }}?v=12" rel="stylesheet">
         <link href="{{ asset('assets/css/alliance-engagement-pages.css') }}?v=6" rel="stylesheet">
         <link href="{{ asset('assets/css/pastor-activities.css') }}?v=10" rel="stylesheet">
 
@@ -340,74 +340,25 @@
                 border-right-color: rgba(255, 255, 255, 0.2);
             }
             /* Couleur panier sticky : alliance-brand.css */
-            .sticky-header .auto-container {
-                padding-left: clamp(16px, 2.2vw, 40px);
-                padding-right: clamp(16px, 2.2vw, 40px);
-            }
-            .sticky-header .inner-container {
-                display: flex;
-                align-items: center;
-                flex-wrap: nowrap;
-                justify-content: space-between;
-                width: 100%;
-                gap: 0.5rem;
-            }
-            .sticky-header .nav-outer {
-                flex: 1;
-                min-width: 0;
-            }
+            /* Header : layout géré dans alliance-brand.css (v12+) — éviter les conflits ici */
             .sticky-header .main-menu .navigation {
                 display: flex;
                 flex-wrap: nowrap;
                 align-items: center;
             }
-            .sticky-header .main-menu .navigation > li {
-                flex-shrink: 0;
-            }
-            .sticky-header-actions {
-                display: flex;
-                align-items: center;
-                flex-shrink: 0;
-                flex-wrap: nowrap;
-                gap: 10px;
-                margin-left: 24px;
-                padding-left: 18px;
-            }
-            @media (min-width: 992px) and (max-width: 1699px) {
-                .sticky-header .main-menu .navigation > li {
-                    margin-left: 20px !important;
-                }
-            }
             @media (min-width: 992px) and (max-width: 1399px) {
-                .sticky-header .main-menu .navigation > li {
-                    margin-left: 14px !important;
-                }
-                .sticky-header .main-menu .navigation > li > a {
+                .sticky-header .main-menu .navigation > li > a,
+                .main-header.header-style-one .main-menu .navigation > li > a {
                     font-size: 12px;
                 }
             }
-            /* Header principal (haut de page) : pas de retour à la ligne du bloc menu + actions */
-            @media (min-width: 1200px) {
-                .main-header.header-style-one .main-box {
-                    padding-left: clamp(16px, 2.2vw, 40px);
-                    padding-right: clamp(16px, 2.2vw, 40px);
-                }
-                .main-header.header-style-one .main-menu .navigation {
-                    display: flex;
-                    flex-wrap: nowrap;
-                }
-                .main-header.header-style-one .main-menu .navigation > li {
-                    flex-shrink: 0;
-                }
-            }
-            @media (min-width: 1200px) and (max-width: 1599px) {
-                .main-header.header-style-one .main-box .main-menu .navigation > li {
-                    margin-right: 22px !important;
-                }
+            .main-header.header-style-one .main-menu .navigation {
+                display: flex;
+                flex-wrap: nowrap;
             }
             /* Header principal : espace entre panier, avatar et « Faire un don » */
             .main-header .outer-box.alliance-header-outer-actions {
-                gap: 6px 14px;
+                gap: 6px 12px;
                 flex-wrap: nowrap;
             }
             /* Loupe à côté du panier (pas près du logo) */
@@ -432,10 +383,7 @@
             }
             .main-header .outer-box.alliance-header-outer-actions .header-cart-wrap {
                 margin-right: 0;
-                padding-right: 16px;
-            }
-            .sticky-header-actions .search-btn {
-                margin-right: 6px;
+                padding-right: 12px;
             }
             .main-header .outer-box.alliance-header-outer-actions .alliance-toolbar-account {
                 margin-left: 0 !important;
