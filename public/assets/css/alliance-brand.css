@@ -684,7 +684,7 @@ h1, h2, h3, h4, h5, h6,
   padding: 0 !important;
 }
 
-/* Fiche produit : boutons alignés + contact plus bas */
+/* Fiche produit : boutons proportionnels au texte + partage toujours visible */
 .alliance-book-actions {
   display: flex !important;
   flex-direction: column;
@@ -697,14 +697,28 @@ h1, h2, h3, h4, h5, h6,
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  align-items: stretch;
+  align-items: center;
 }
-.alliance-book-actions-row .theme-btn {
-  flex: 1 1 160px;
+.alliance-book-actions-row .theme-btn,
+.alliance-book-actions-row .alliance-book-btn-fit {
+  flex: 0 1 auto !important;
+  width: auto !important;
+  max-width: 100% !important;
   margin: 0 !important;
   min-height: 52px !important;
-  height: 52px !important;
-  padding: 0 20px !important;
+  height: auto !important;
+  padding: 14px 26px !important;
+  white-space: nowrap !important;
+}
+.alliance-book-actions-row .theme-btn .btn-title,
+.alliance-book-actions-row .alliance-book-btn-fit .btn-title {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
+  white-space: nowrap !important;
+  width: auto !important;
+  max-width: none !important;
+  overflow: visible !important;
 }
 .alliance-book-share {
   margin-top: 28px !important;
@@ -712,6 +726,52 @@ h1, h2, h3, h4, h5, h6,
 .alliance-book-share .title {
   margin-top: 0 !important;
   margin-bottom: 12px;
+}
+/* Icônes de partage : toujours visibles (le thème les mettait en blanc) */
+.alliance-book-share .social-icon-one,
+.alliance-book-share-list {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 0.65rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.alliance-book-share .social-icon-one li,
+.alliance-book-share-list li {
+  margin: 0 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.alliance-book-share .social-icon-one li a,
+.alliance-book-share-list li a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 40px !important;
+  height: 40px !important;
+  line-height: 1 !important;
+  border: 1.5px solid var(--alliance-ochre) !important;
+  border-radius: 50% !important;
+  color: var(--alliance-ochre) !important;
+  background: #fff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  font-size: 15px !important;
+}
+.alliance-book-share .social-icon-one li a:hover,
+.alliance-book-share-list li a:hover {
+  background: var(--alliance-ochre) !important;
+  color: #fff !important;
+  border-color: var(--alliance-ochre) !important;
+}
+.alliance-book-share .alliance-icon-x {
+  display: block;
+  width: 15px;
+  height: 15px;
 }
 .alliance-book-contact {
   margin-top: 2.75rem !important;
@@ -724,6 +784,7 @@ h1, h2, h3, h4, h5, h6,
   min-height: 52px !important;
   height: auto !important;
   padding: 14px 24px !important;
+  white-space: normal !important;
 }
 .alliance-cart-qty-dec,
 .alliance-cart-qty-inc {

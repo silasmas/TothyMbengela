@@ -101,14 +101,14 @@
                     <div class="product-details__buttons alliance-book-actions">
                         <div class="alliance-book-actions-row">
                             @if($inStock)
-                                <button type="button" class="theme-btn btn-style-one js-add-to-cart" data-item='@json($cartItemShow)'>
+                                <button type="button" class="theme-btn btn-style-one js-add-to-cart alliance-book-btn-fit" data-item='@json($cartItemShow)'>
                                     <span class="btn-title"><i class="fa fa-cart-plus"></i> Ajouter au panier</span>
                                 </button>
-                                <button type="button" class="theme-btn btn-style-two js-buy-now" data-item='@json($cartItemShow)'>
+                                <button type="button" class="theme-btn btn-style-two js-buy-now alliance-book-btn-fit" data-item='@json($cartItemShow)'>
                                     <span class="btn-title"><i class="fa fa-bolt"></i> Acheter</span>
                                 </button>
                             @endif
-                            <a href="{{ route('books.index') }}" class="theme-btn btn-style-one">
+                            <a href="{{ route('books.index') }}" class="theme-btn btn-style-one alliance-book-btn-fit">
                                 <span class="btn-title"><i class="fa fa-th-large"></i> Boutique</span>
                             </a>
                         </div>
@@ -118,18 +118,22 @@
                         <div class="title">
                             <h3>Partager</h3>
                         </div>
-                        <ul class="social-icon-one">
+                        <ul class="social-icon-one alliance-book-share-list">
                             <li>
-                                <a href="https://twitter.com/intent/tweet?url={{ rawurlencode($shareUrl) }}&text={{ $shareText }}" target="_blank" rel="noopener noreferrer" aria-label="Partager sur X"><i class="fab fa-twitter"></i></a>
+                                <a href="https://x.com/intent/tweet?url={{ rawurlencode($shareUrl) }}&text={{ $shareText }}" target="_blank" rel="noopener noreferrer" aria-label="Partager sur X" title="X">
+                                    <svg class="alliance-icon-x" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+                                        <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.727-8.835L1.992 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/>
+                                    </svg>
+                                </a>
                             </li>
                             <li>
-                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ rawurlencode($shareUrl) }}" target="_blank" rel="noopener noreferrer" aria-label="Partager sur Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ rawurlencode($shareUrl) }}" target="_blank" rel="noopener noreferrer" aria-label="Partager sur Facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                             </li>
                             <li>
-                                <a href="https://wa.me/?text={{ rawurlencode($book->title . ' ' . $shareUrl) }}" target="_blank" rel="noopener noreferrer" aria-label="Partager sur WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                                <a href="https://wa.me/?text={{ rawurlencode($book->title . ' ' . $shareUrl) }}" target="_blank" rel="noopener noreferrer" aria-label="Partager sur WhatsApp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                             </li>
                             <li>
-                                <a href="mailto:?subject={{ rawurlencode($book->title) }}&body={{ rawurlencode($shareUrl) }}" aria-label="Partager par e-mail"><i class="fa fa-envelope"></i></a>
+                                <a href="mailto:?subject={{ rawurlencode($book->title) }}&body={{ rawurlencode($shareUrl) }}" aria-label="Partager par e-mail" title="E-mail"><i class="fa fa-envelope"></i></a>
                             </li>
                         </ul>
                     </div>
