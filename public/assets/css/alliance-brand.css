@@ -415,42 +415,37 @@ h1, h2, h3, h4, h5, h6,
 }
 
 /*
- * Header définitif (avant + après scroll)
- * - Bloc logo+menu regroupé (pas collé au bord gauche)
- * - Actions (loupe/panier/auth) à droite avec écart fixe avant CONTACT
+ * Header équilibré (avant + après scroll)
+ * Grille 1fr | auto | 1fr : l’espace libre est partagé à gauche et à droite du menu
+ * → écart logo↔menu ≈ écart CONTACT↔loupe
  */
 .header-style-one .main-box,
 .sticky-header .inner-container {
-  display: flex !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) !important;
   align-items: center !important;
-  justify-content: space-between !important;
-  flex-wrap: nowrap !important;
-  gap: 0 !important;
+  column-gap: clamp(20px, 2.2vw, 36px) !important;
   width: 100% !important;
   min-height: 72px !important;
-  padding-left: clamp(40px, 5vw, 96px) !important;
-  padding-right: clamp(40px, 5vw, 96px) !important;
+  padding-left: clamp(24px, 3.5vw, 64px) !important;
+  padding-right: clamp(24px, 3.5vw, 64px) !important;
   box-sizing: border-box !important;
-}
-
-.alliance-header-brand-nav {
-  display: flex !important;
-  align-items: center !important;
-  flex: 1 1 auto !important;
-  min-width: 0 !important;
-  gap: 32px !important;
-  margin-right: 40px !important;
-  padding-right: 8px !important;
 }
 
 .header-style-one .main-box .logo-box,
 .sticky-header .logo {
-  flex: 0 0 auto !important;
+  grid-column: 1 !important;
+  justify-self: end !important;
+  flex: none !important;
   position: relative !important;
   min-height: 0 !important;
+  width: auto !important;
+  max-width: 100% !important;
   padding: 6px 0 !important;
   margin: 0 !important;
-  justify-content: flex-start !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
 }
 
 .header-style-one .main-box .logo-box .logo,
@@ -463,31 +458,34 @@ h1, h2, h3, h4, h5, h6,
 .header-style-one .main-box .nav-outer,
 .sticky-header .nav-outer,
 .main-header .main-box .nav-outer {
-  flex: 0 1 auto !important;
+  grid-column: 2 !important;
+  justify-self: center !important;
   width: auto !important;
   max-width: 100% !important;
   min-width: 0 !important;
   display: flex !important;
   align-items: center !important;
-  justify-content: flex-start !important;
+  justify-content: center !important;
   margin: 0 !important;
   position: relative !important;
 }
 
 .header-style-one .main-box .outer-box,
 .sticky-header-actions {
-  flex: 0 0 auto !important;
+  grid-column: 3 !important;
+  justify-self: start !important;
   display: flex !important;
   align-items: center !important;
   flex-wrap: nowrap !important;
+  width: auto !important;
+  max-width: 100% !important;
   margin: 0 !important;
-  margin-left: 0 !important;
-  padding-left: 28px !important;
-  border-left: 1px solid rgba(20, 20, 20, 0.1) !important;
+  padding: 0 !important;
+  border: none !important;
   gap: 12px !important;
 }
 
-/* Espacement items menu : annule les 40/50px du thème qui collent CONTACT à la loupe */
+/* Items menu : espacement régulier (annule les 40/50px du thème) */
 .header-style-one .main-box .main-menu .navigation > li,
 .sticky-header .main-menu .navigation > li {
   margin: 0 10px !important;
@@ -518,6 +516,11 @@ h1, h2, h3, h4, h5, h6,
   margin: 0 4px 0 0 !important;
 }
 
+/* Ancien wrapper (si cache HTML) : rester neutre */
+.alliance-header-brand-nav {
+  display: contents !important;
+}
+
 .main-header .main-menu .navigation > li > a,
 .sticky-header .main-menu .navigation > li > a {
   padding-top: 20px !important;
@@ -543,16 +546,9 @@ h1, h2, h3, h4, h5, h6,
 @media (max-width: 1199px) {
   .header-style-one .main-box,
   .sticky-header .inner-container {
-    padding-left: clamp(20px, 3vw, 40px) !important;
-    padding-right: clamp(20px, 3vw, 40px) !important;
-  }
-  .alliance-header-brand-nav {
-    gap: 18px !important;
-    margin-right: 20px !important;
-  }
-  .header-style-one .main-box .outer-box,
-  .sticky-header-actions {
-    padding-left: 16px !important;
+    padding-left: clamp(16px, 2.5vw, 32px) !important;
+    padding-right: clamp(16px, 2.5vw, 32px) !important;
+    column-gap: 14px !important;
   }
   .header-style-one .main-box .main-menu .navigation > li,
   .sticky-header .main-menu .navigation > li {
@@ -836,10 +832,6 @@ h1, h2, h3, h4, h5, h6,
   }
   .main-footer .logo img {
     max-height: 110px;
-  }
-  .alliance-header-brand-nav {
-    gap: 14px !important;
-    margin-right: 12px !important;
   }
   .header-style-one .main-box .logo-box {
     min-height: 64px !important;
