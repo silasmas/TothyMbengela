@@ -23,7 +23,7 @@
         <link href="{{ asset('assets/plugins/revolution/css/layers.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/plugins/revolution/css/navigation.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-        <link href="{{ asset('assets/css/alliance-brand.css') }}?v=15" rel="stylesheet">
+        <link href="{{ asset('assets/css/alliance-brand.css') }}?v=16" rel="stylesheet">
         <link href="{{ asset('assets/css/alliance-engagement-pages.css') }}?v=6" rel="stylesheet">
         <link href="{{ asset('assets/css/pastor-activities.css') }}?v=10" rel="stylesheet">
 
