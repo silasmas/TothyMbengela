@@ -122,7 +122,7 @@
             li.innerHTML = thumb +
                 '<div class="min-w-0 flex-grow-1">' +
                 '<strong>' + escapeHtml(item.title) + '</strong><br>' +
-                '<small class="text-muted">' + (priceStr ? priceStr + ' / u · ' : '') + 'Ligne : ' + lineStr + '</small>' +
+                '<small class="text-muted d-block mb-2">' + (priceStr ? priceStr + ' / u · ' : '') + 'Ligne : ' + lineStr + '</small>' +
                 '<div class="alliance-cart-qty" role="group" aria-label="Quantité">' +
                 '<button type="button" class="btn btn-sm alliance-cart-qty-dec" data-id="' + String(item.id) + '" aria-label="Diminuer">−</button>' +
                 '<span class="alliance-cart-qty-value" data-id="' + String(item.id) + '" aria-live="polite">' + String(qty) + '</span>' +

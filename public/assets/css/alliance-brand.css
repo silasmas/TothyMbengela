@@ -614,10 +614,12 @@ h1, h2, h3, h4, h5, h6,
 }
 /* Quantité panier : − / valeur / + (pas d’input number ni flèches natives) */
 .alliance-cart-qty {
-  display: inline-flex !important;
+  display: flex !important;
   align-items: center !important;
   gap: 0 !important;
-  margin-top: 0.5rem;
+  width: fit-content;
+  margin-top: 0.75rem !important;
+  margin-left: 0 !important;
 }
 .alliance-cart-qty-value {
   display: inline-flex !important;
