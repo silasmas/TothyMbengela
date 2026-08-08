@@ -612,27 +612,49 @@ h1, h2, h3, h4, h5, h6,
   background: var(--alliance-ochre-dark) !important;
   color: #fff !important;
 }
-/* Quantité panier : texte toujours visible (jamais blanc sur blanc) */
-.alliance-cart-qty-input,
-#alliance-cart-list input[type="number"],
-#allianceCartModal input[type="number"].alliance-cart-qty-input {
-  border: 2px solid var(--alliance-ochre) !important;
+/* Quantité panier : − / valeur / + (pas d’input number ni flèches natives) */
+.alliance-cart-qty {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+  margin-top: 0.5rem;
+}
+.alliance-cart-qty-value {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 2.75rem !important;
+  height: 2rem !important;
+  padding: 0 0.4rem !important;
+  margin: 0 !important;
+  border-top: 2px solid var(--alliance-ochre) !important;
+  border-bottom: 2px solid var(--alliance-ochre) !important;
+  border-left: none !important;
+  border-right: none !important;
   background: #fff !important;
-  background-color: #fff !important;
   color: #141414 !important;
   -webkit-text-fill-color: #141414 !important;
-  caret-color: #141414 !important;
   font-weight: 700 !important;
   font-size: 15px !important;
-  border-radius: 6px !important;
-  opacity: 1 !important;
+  line-height: 1 !important;
+  text-align: center !important;
+  user-select: none;
 }
-.alliance-cart-qty-input:focus,
-#allianceCartModal input[type="number"].alliance-cart-qty-input:focus {
-  color: #141414 !important;
-  -webkit-text-fill-color: #141414 !important;
-  background: #fff !important;
-  box-shadow: 0 0 0 2px rgba(168, 108, 60, 0.25);
+.alliance-cart-qty .alliance-cart-qty-dec {
+  border-radius: 6px 0 0 6px !important;
+  border: 2px solid var(--alliance-ochre) !important;
+  min-width: 2rem !important;
+  height: 2rem !important;
+  line-height: 1 !important;
+  padding: 0 !important;
+}
+.alliance-cart-qty .alliance-cart-qty-inc {
+  border-radius: 0 6px 6px 0 !important;
+  border: 2px solid var(--alliance-ochre) !important;
+  min-width: 2rem !important;
+  height: 2rem !important;
+  line-height: 1 !important;
+  padding: 0 !important;
 }
 
 /* Fiche produit : boutons alignés + contact plus bas */
@@ -687,6 +709,22 @@ h1, h2, h3, h4, h5, h6,
 .alliance-cart-qty-inc:hover {
   background: var(--alliance-ochre) !important;
   color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+/* Fiche produit : masquer les flèches natives du champ quantité */
+#alliance-book-qty,
+.product-details__quantity .quantity-box input[type="number"] {
+  -moz-appearance: textfield !important;
+  appearance: textfield !important;
+}
+#alliance-book-qty::-webkit-outer-spin-button,
+#alliance-book-qty::-webkit-inner-spin-button,
+.product-details__quantity .quantity-box input[type="number"]::-webkit-outer-spin-button,
+.product-details__quantity .quantity-box input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+  display: none !important;
 }
 
 /* Bouton remonter en haut : fond ocre, flèche blanche */

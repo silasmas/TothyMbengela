@@ -123,10 +123,10 @@
                 '<div class="min-w-0 flex-grow-1">' +
                 '<strong>' + escapeHtml(item.title) + '</strong><br>' +
                 '<small class="text-muted">' + (priceStr ? priceStr + ' / u · ' : '') + 'Ligne : ' + lineStr + '</small>' +
-                '<div class="d-flex align-items-center gap-2 mt-2">' +
-                '<button type="button" class="btn btn-sm btn-outline-secondary alliance-cart-qty-dec" data-id="' + String(item.id) + '" aria-label="Diminuer">−</button>' +
-                '<input type="number" class="form-control form-control-sm alliance-cart-qty-input" data-id="' + String(item.id) + '" value="' + qty + '" min="1" max="99" style="width:64px;text-align:center;border:2px solid #A86C3C;background:#fff;color:#141414;-webkit-text-fill-color:#141414;font-weight:700;font-size:15px;">' +
-                '<button type="button" class="btn btn-sm btn-outline-secondary alliance-cart-qty-inc" data-id="' + String(item.id) + '" aria-label="Augmenter">+</button>' +
+                '<div class="alliance-cart-qty" role="group" aria-label="Quantité">' +
+                '<button type="button" class="btn btn-sm alliance-cart-qty-dec" data-id="' + String(item.id) + '" aria-label="Diminuer">−</button>' +
+                '<span class="alliance-cart-qty-value" data-id="' + String(item.id) + '" aria-live="polite">' + String(qty) + '</span>' +
+                '<button type="button" class="btn btn-sm alliance-cart-qty-inc" data-id="' + String(item.id) + '" aria-label="Augmenter">+</button>' +
                 '</div></div>' +
                 '<button type="button" class="btn btn-sm btn-outline-danger alliance-cart-remove flex-shrink-0" data-id="' + String(item.id) + '" aria-label="Retirer">×</button>';
             list.appendChild(li);
@@ -283,12 +283,6 @@
                 var itemInc = cartInc.find(function(i){ return String(i.id) === String(inc.getAttribute('data-id')); });
                 if (itemInc) window.allianceCart.setQty(itemInc.id, (itemInc.qty || 1) + 1);
             }
-        });
-
-        document.getElementById('alliance-cart-list')?.addEventListener('change', function(e){
-            var input = e.target.closest('.alliance-cart-qty-input');
-            if (!input || !input.getAttribute('data-id')) return;
-            window.allianceCart.setQty(input.getAttribute('data-id'), input.value);
         });
 
         document.querySelectorAll('.js-site-currency').forEach(function(btn){
