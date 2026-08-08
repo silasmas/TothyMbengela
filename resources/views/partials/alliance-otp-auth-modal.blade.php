@@ -1,14 +1,14 @@
 ﻿{{-- Même flux que la boutique (code e-mail sans mot de passe). Hors .page-wrapper via @stack('modals'). --}}
 <div class="modal fade" id="allianceOtpAuthModal" tabindex="-1" aria-labelledby="allianceOtpAuthModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
-        <div class="modal-content" style="border-radius:12px;">
+        <div class="modal-content alliance-otp-auth-modal" style="border-radius:12px;">
             <div class="modal-header border-bottom">
                 <h5 class="modal-title" id="allianceOtpAuthModalLabel"><i class="fa fa-user-circle me-2" style="color:#A86C3C;"></i> Connexion ou inscription</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
             </div>
             <div class="modal-body">
                 <p class="text-muted small mb-3">Comme pour finaliser une commande : <strong>code reçu par e-mail</strong>, sans mot de passe. Votre compte est enregistré dans la base <strong>users</strong> après validation du code.</p>
-                <ul class="nav nav-pills nav-fill mb-3 gap-2" role="tablist">
+                <ul class="nav nav-pills nav-fill mb-3 gap-2 alliance-otp-tabs" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active rounded-pill" id="aot-tab-login" data-bs-toggle="pill" data-bs-target="#aot-pane-login" type="button" role="tab">Connexion</button>
                     </li>

@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\EditAdminProfile;
 use App\Http\Middleware\SetFilamentAdminLocale;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
@@ -22,23 +23,40 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
+/**
+ * Configuration du panel Filament admin (charte Alliance).
+ */
 class AdminPanelProvider extends PanelProvider
 {
+    /**
+     * Déclare le panel /admin (login, couleurs, logos, hooks).
+     *
+     * @param  Panel  $panel  Instance Filament
+     * @return Panel
+     */
     public function panel(Panel $panel): Panel
     {
         return $panel
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login()
+            ->login(Login::class)
             ->authGuard('admin')
             ->authPasswordBroker('admins')
-            ->brandLogo(asset('assets/logo/logo-alliance.png'))
-            ->brandLogoHeight('3.5rem')
+            ->brandName('Alliance')
+            ->brandLogo(asset('assets/logo/alliance-wordmark-ochre-on-white.png'))
+            ->darkModeBrandLogo(asset('assets/logo/alliance-wordmark-gold-transparent.png'))
+            ->brandLogoHeight('2.75rem')
             ->favicon(asset('assets/logo/logo-alliance-mark.png'))
+            ->font('Source Sans 3')
             ->profile(page: EditAdminProfile::class, isSimple: false)
             ->colors([
                 'primary' => Color::hex('#A86C3C'),
+                'warning' => Color::hex('#C9A25A'),
+                'info' => Color::hex('#845430'),
+                'success' => Color::hex('#5F6B4A'),
+                'danger' => Color::hex('#A33B2B'),
+                'gray' => Color::Zinc,
             ])
             ->globalSearch()
             ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
@@ -57,8 +75,20 @@ class AdminPanelProvider extends PanelProvider
                 FilamentShieldPlugin::make(),
             ])
             ->renderHook(
+                PanelsRenderHook::HEAD_START,
+                fn (): string => view('filament.hooks.admin-brand-head')->render(),
+            )
+            ->renderHook(
                 PanelsRenderHook::STYLES_AFTER,
                 fn (): string => view('filament.hooks.admin-styles')->render(),
+            )
+            ->renderHook(
+                PanelsRenderHook::FOOTER,
+                fn (): string => view('filament.hooks.admin-footer')->render(),
+            )
+            ->renderHook(
+                PanelsRenderHook::SIDEBAR_FOOTER,
+                fn (): string => view('filament.hooks.admin-sidebar-footer')->render(),
             )
             ->renderHook(
                 PanelsRenderHook::SCRIPTS_AFTER,

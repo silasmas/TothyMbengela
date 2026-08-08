@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 #[Fillable([
     'name',
@@ -55,5 +57,35 @@ class User extends Authenticatable
     public function contentLikes(): HasMany
     {
         return $this->hasMany(ContentLike::class);
+    }
+
+    /**
+     * Retrouve un utilisateur par e-mail ou en crée un (mot de passe aléatoire).
+     *
+     * @param  string  $email  E-mail
+     * @param  string  $name  Nom affiché
+     * @return self
+     */
+    public static function findOrRegisterByEmail(string $email, string $name): self
+    {
+        $email = mb_strtolower(trim($email));
+        $name = trim($name) !== '' ? trim($name) : 'Partenaire Alliance';
+
+        $user = static::query()->where('email', $email)->first();
+        if ($user) {
+            if ($user->name === '' || $user->name === null) {
+                $user->forceFill(['name' => $name])->save();
+            }
+
+            return $user;
+        }
+
+        return static::query()->create([
+            'name' => $name,
+            'email' => $email,
+            'password' => Hash::make(Str::random(32)),
+            'email_verified_at' => now(),
+            'preferred_locale' => 'fr',
+        ]);
     }
 }

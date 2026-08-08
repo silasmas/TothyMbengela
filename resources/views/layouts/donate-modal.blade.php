@@ -104,17 +104,28 @@
                         @endif
                     </div>
 
-                    {{-- ONGLET PARTENAIRE --}}
+                    {{-- ONGLET PARTENAIRE : compte créé en même temps que l’engagement --}}
                     <div class="tab-pane fade" id="pane-partner" role="tabpanel">
-                        @guest
-                            <div class="text-center py-4 px-2">
-                                <p class="mb-3">Pour souscrire un engagement partenaire avec paiement en ligne, connectez-vous ou créez un compte <strong>par code e-mail</strong> (comme pour la commande).</p>
-                                <button type="button" class="theme-btn btn-style-one" onclick="(function(){ if (typeof bootstrap === 'undefined') return; var dm = bootstrap.Modal.getInstance(document.getElementById('donatePartnerModal')); if (dm) dm.hide(); setTimeout(function(){ var el = document.getElementById('allianceOtpAuthModal'); if (el) bootstrap.Modal.getOrCreateInstance(el).show(); }, 400); })();"><span class="btn-title">Connexion / créer un compte</span></button>
-                            </div>
-                        @else
                         <div id="partner-step1">
+                            <p class="small text-muted mb-3">
+                                @guest
+                                    Remplissez le formulaire : votre compte est créé automatiquement avec l’e-mail indiqué (comme pour une commande boutique).
+                                @else
+                                    Votre engagement sera lié à votre compte <strong>{{ auth()->user()->email }}</strong>.
+                                @endguest
+                            </p>
                             <form id="formModalPartner" class="row g-3">
                                 @csrf
+                                @guest
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-bold">Nom complet *</label>
+                                    <input type="text" name="name" id="modal_partner_name" class="form-control" placeholder="Nom complet" required autocomplete="name">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-bold">E-mail *</label>
+                                    <input type="email" name="email" id="modal_partner_email" class="form-control" placeholder="email@exemple.com" required autocomplete="email">
+                                </div>
+                                @endguest
                                 <div class="col-md-6">
                                     <label class="form-label small fw-bold">Montant mensuel *</label>
                                     <input type="number" name="monthly_amount" id="modal_partner_amount" class="form-control form-control-lg" min="1" step="0.01" required>
@@ -171,7 +182,6 @@
                             </form>
                         </div>
                         @endif
-                        @endguest
                     </div>
                 </div>
             </div>
@@ -365,10 +375,16 @@
             currency: fd.get('currency'),
             message: fd.get('message'),
         };
+        if (fd.get('name')) payload.name = fd.get('name');
+        if (fd.get('email')) payload.email = fd.get('email');
         try {
             if (flexpayEnabled) {
                 const data = await postJson(@json(route('payment.init.partner')), payload);
-                if (!data.success) { showDonateAlert(data.message || 'Erreur', true); return; }
+                if (!data.success) {
+                    const msg = data.errors ? Object.values(data.errors).flat().join(' ') : (data.message || 'Erreur');
+                    showDonateAlert(msg, true);
+                    return;
+                }
                 document.getElementById('partner_reference').value = data.reference;
                 document.getElementById('partner_total_display').textContent = data.total + ' ' + data.currency;
                 document.getElementById('partner-step1').classList.add('d-none');
@@ -379,6 +395,8 @@
                 classic.append('monthly_amount', payload.monthly_amount);
                 classic.append('currency', payload.currency);
                 classic.append('message', payload.message || '');
+                if (payload.name) classic.append('name', payload.name);
+                if (payload.email) classic.append('email', payload.email);
                 const res = await fetch(@json(route('partner.store')), {
                     method: 'POST',
                     headers: { 'Accept': 'application/json', 'X-CSRF-TOKEN': csrf, 'X-Requested-With': 'XMLHttpRequest' },
@@ -391,7 +409,8 @@
                     bootstrap.Modal.getInstance(document.getElementById('donatePartnerModal'))?.hide();
                     this.reset();
                 } else {
-                    showDonateAlert(json.message || 'Erreur', true);
+                    const msg = json.errors ? Object.values(json.errors).flat().join(' ') : (json.message || 'Erreur');
+                    showDonateAlert(msg, true);
                 }
             }
         } catch (err) { showDonateAlert('Erreur réseau', true); }

@@ -415,25 +415,24 @@ h1, h2, h3, h4, h5, h6,
 }
 
 /*
- * Header en 3 colonnes : logo | menu CENTRÉ | actions
- * (le menu ne suit plus le logo à gauche)
+ * Header : logo + menu regroupés (gap maîtrisé), actions à droite
+ * avec espace clair avant loupe / panier (évite CONTACT collé au scroll).
  */
 .header-style-one .main-box {
   min-height: 72px !important;
-  display: grid !important;
-  grid-template-columns: minmax(120px, 1fr) auto minmax(120px, 1fr);
+  display: flex !important;
   align-items: center !important;
-  gap: 8px;
+  justify-content: flex-start !important;
+  gap: 0;
   padding-left: clamp(16px, 2.2vw, 40px) !important;
   padding-right: clamp(16px, 2.2vw, 40px) !important;
 }
 .header-style-one .main-box .logo-box {
-  grid-column: 1;
+  flex: 0 0 auto;
   min-height: 72px !important;
   padding: 6px 0 !important;
-  margin-right: 0 !important;
+  margin-right: 28px !important;
   justify-content: flex-start !important;
-  justify-self: start;
 }
 .header-style-one .main-box .logo-box .logo,
 .header-style-one .main-box .logo-box .logo a {
@@ -441,46 +440,70 @@ h1, h2, h3, h4, h5, h6,
   align-items: center;
 }
 .header-style-one .main-box .nav-outer {
-  grid-column: 2;
+  flex: 1 1 auto;
   width: auto !important;
   display: flex;
   align-items: center;
-  justify-content: center;
-  justify-self: center;
+  justify-content: flex-start !important;
+  min-width: 0;
 }
 .header-style-one .main-box .outer-box {
-  grid-column: 3;
-  margin-left: 0 !important;
+  flex: 0 0 auto;
+  margin-left: 28px !important;
+  padding-left: 20px !important;
+  border-left: 1px solid rgba(20, 20, 20, 0.08);
   justify-self: end;
 }
 
-/* Sticky : même logique — menu centré */
+/* Sticky : même logique flex */
 .sticky-header .logo {
+  flex: 0 0 auto;
   padding: 6px 0 !important;
-  margin-right: 0 !important;
-  justify-self: start;
+  margin-right: 24px !important;
 }
 .sticky-header .logo a {
   display: flex;
   align-items: center;
 }
 .sticky-header .inner-container {
-  display: grid !important;
-  grid-template-columns: minmax(100px, 1fr) auto minmax(100px, 1fr);
+  display: flex !important;
   align-items: center;
-  gap: 8px;
+  justify-content: flex-start;
+  gap: 0;
   padding-left: clamp(16px, 2.2vw, 40px);
   padding-right: clamp(16px, 2.2vw, 40px);
 }
 .sticky-header .nav-outer {
+  flex: 1 1 auto;
   display: flex;
   align-items: center;
-  justify-content: center;
-  justify-self: center;
+  justify-content: flex-start !important;
+  min-width: 0;
 }
 .sticky-header-actions {
-  margin-left: 0 !important;
+  flex: 0 0 auto;
+  margin-left: 24px !important;
+  padding-left: 18px !important;
+  border-left: 1px solid rgba(20, 20, 20, 0.08);
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
   justify-self: end;
+}
+.sticky-header .main-menu .navigation > li {
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+}
+.sticky-header .main-menu .navigation > li:last-child {
+  margin-right: 4px !important;
+}
+.sticky-header-actions .search-btn {
+  margin-right: 4px !important;
+  margin-left: 0 !important;
+}
+.sticky-header-actions .header-cart-wrap {
+  margin-left: 2px;
+  margin-right: 4px;
 }
 
 .main-header .main-menu .navigation > li > a,
@@ -506,9 +529,13 @@ h1, h2, h3, h4, h5, h6,
 }
 
 @media (max-width: 1199px) {
-  .header-style-one .main-box,
-  .sticky-header .inner-container {
-    grid-template-columns: auto 1fr auto;
+  .header-style-one .main-box .logo-box {
+    margin-right: 16px !important;
+  }
+  .header-style-one .main-box .outer-box,
+  .sticky-header-actions {
+    margin-left: 16px !important;
+    padding-left: 12px !important;
   }
   .main-header .logo img,
   .main-header .logo img.alliance-logo-header {
@@ -712,6 +739,59 @@ h1, h2, h3, h4, h5, h6,
 .alliance-checkout-gold-btn {
   background: var(--alliance-ochre) !important;
   border-color: var(--alliance-ochre) !important;
+  color: #fff !important;
+}
+
+/*
+ * Auth OTP + onglets modales : charte ocre (pas de bleu Bootstrap),
+ * bordures de champs bien visibles.
+ */
+#allianceOtpAuthModal .nav-pills .nav-link,
+.alliance-donate-modal .nav-pills .nav-link {
+  color: var(--alliance-ochre-dark) !important;
+  background: #fff !important;
+  border: 1.5px solid rgba(168, 108, 60, 0.45) !important;
+  font-weight: 600;
+}
+#allianceOtpAuthModal .nav-pills .nav-link:hover,
+#allianceOtpAuthModal .nav-pills .nav-link:focus,
+.alliance-donate-modal .nav-pills .nav-link:hover,
+.alliance-donate-modal .nav-pills .nav-link:focus {
+  color: var(--alliance-ochre-dark) !important;
+  background: rgba(168, 108, 60, 0.08) !important;
+  border-color: var(--alliance-ochre) !important;
+}
+#allianceOtpAuthModal .nav-pills .nav-link.active,
+.alliance-donate-modal .nav-pills .nav-link.active {
+  color: #fff !important;
+  background: var(--alliance-ochre) !important;
+  border-color: var(--alliance-ochre) !important;
+}
+#allianceOtpAuthModal .form-control,
+#allianceOtpAuthModal .form-select,
+.alliance-donate-modal .form-control,
+.alliance-donate-modal .form-select {
+  border: 1.5px solid rgba(20, 20, 20, 0.28) !important;
+  background: #faf9f7 !important;
+  color: #212529 !important;
+  box-shadow: none !important;
+}
+#allianceOtpAuthModal .form-control:focus,
+#allianceOtpAuthModal .form-select:focus,
+.alliance-donate-modal .form-control:focus,
+.alliance-donate-modal .form-select:focus {
+  border-color: var(--alliance-ochre) !important;
+  background: #fff !important;
+  box-shadow: 0 0 0 0.2rem rgba(168, 108, 60, 0.18) !important;
+}
+#allianceOtpAuthModal .btn-link,
+.alliance-donate-modal .btn-link {
+  color: var(--alliance-ochre-dark) !important;
+  text-decoration: underline;
+}
+#allianceOtpAuthModal .btn-link:hover,
+.alliance-donate-modal .btn-link:hover {
+  color: var(--alliance-ochre) !important;
 }
 
 /* Sections crème légères */
@@ -845,6 +925,19 @@ h1, h2, h3, h4, h5, h6,
 .alliance-float-actions__item:hover .alliance-float-actions__badge {
   background: #fff;
   color: var(--alliance-ochre-dark);
+}
+.alliance-float-actions__item--close {
+  border-color: rgba(20, 20, 20, 0.25);
+  color: #444;
+  background: #f7f5f2;
+}
+.alliance-float-actions__item--close:hover {
+  background: #141414;
+  border-color: #141414;
+  color: #fff;
+}
+.alliance-float-actions[data-open="1"] .alliance-float-actions__toggle {
+  background: #141414;
 }
 
 /* Clignotement différent quand un programme Agenda est disponible */

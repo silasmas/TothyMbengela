@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Donation;
 use App\Models\Order;
 use App\Models\PartnerCommitment;
+use App\Models\User;
 use App\Services\FlexPayService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -63,12 +64,14 @@ class DonationPaymentController extends Controller
         ]);
     }
 
+    /**
+     * Initialise un engagement partenaire (crée / connecte le compte si invité).
+     *
+     * @param  Request  $request  Montant, devise, message, name?, email?
+     * @return JsonResponse
+     */
     public function initPartner(Request $request): JsonResponse
     {
-        if (! Auth::check()) {
-            return response()->json(['success' => false, 'message' => 'Connexion requise.'], 401);
-        }
-
         if (! config('services.flexpay.enabled')) {
             return response()->json([
                 'success' => false,
@@ -76,16 +79,33 @@ class DonationPaymentController extends Controller
             ], 503);
         }
 
-        $validated = $request->validate([
+        $rules = [
             'monthly_amount' => 'required|numeric|min:1',
             'currency' => 'required|string|in:USD,EUR,CDF',
             'message' => 'nullable|string|max:2000',
-        ]);
+        ];
+
+        if (! Auth::check()) {
+            $rules['name'] = 'required|string|max:255';
+            $rules['email'] = 'required|email|max:255';
+        }
+
+        $validated = $request->validate($rules);
+
+        if (Auth::check()) {
+            $user = Auth::user();
+        } else {
+            $user = User::findOrRegisterByEmail(
+                (string) $validated['email'],
+                (string) $validated['name'],
+            );
+            Auth::login($user, true);
+        }
 
         $reference = generateUniqueReference('PARTNER', PartnerCommitment::class);
 
         $commitment = PartnerCommitment::create([
-            'user_id' => Auth::id(),
+            'user_id' => $user->id,
             'reference' => $reference,
             'payment_reference' => $reference,
             'monthly_amount' => $validated['monthly_amount'],

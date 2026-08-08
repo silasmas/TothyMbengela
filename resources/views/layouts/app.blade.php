@@ -23,7 +23,7 @@
         <link href="{{ asset('assets/plugins/revolution/css/layers.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/plugins/revolution/css/navigation.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-        <link href="{{ asset('assets/css/alliance-brand.css') }}?v=10" rel="stylesheet">
+        <link href="{{ asset('assets/css/alliance-brand.css') }}?v=11" rel="stylesheet">
         <link href="{{ asset('assets/css/alliance-engagement-pages.css') }}?v=6" rel="stylesheet">
         <link href="{{ asset('assets/css/pastor-activities.css') }}?v=10" rel="stylesheet">
 
@@ -369,8 +369,9 @@
                 align-items: center;
                 flex-shrink: 0;
                 flex-wrap: nowrap;
-                gap: 8px;
-                margin-left: 8px;
+                gap: 10px;
+                margin-left: 24px;
+                padding-left: 18px;
             }
             @media (min-width: 992px) and (max-width: 1699px) {
                 .sticky-header .main-menu .navigation > li {
@@ -406,7 +407,7 @@
             }
             /* Header principal : espace entre panier, avatar et « Faire un don » */
             .main-header .outer-box.alliance-header-outer-actions {
-                gap: 6px 20px;
+                gap: 6px 14px;
                 flex-wrap: nowrap;
             }
             /* Loupe à côté du panier (pas près du logo) */
@@ -431,10 +432,10 @@
             }
             .main-header .outer-box.alliance-header-outer-actions .header-cart-wrap {
                 margin-right: 0;
-                padding-right: 20px;
+                padding-right: 16px;
             }
             .sticky-header-actions .search-btn {
-                margin-right: 8px;
+                margin-right: 6px;
             }
             .main-header .outer-box.alliance-header-outer-actions .alliance-toolbar-account {
                 margin-left: 0 !important;

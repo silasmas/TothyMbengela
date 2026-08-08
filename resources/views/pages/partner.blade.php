@@ -56,14 +56,12 @@
                             </div>
                         </div>
 
-                        @auth
                         <div class="text-center mt-4">
                             <button type="button" class="theme-btn btn-style-one js-donate-modal-partner">
                                 <span class="btn-title"><i class="fa fa-bolt"></i> Souscrire (fenêtre sécurisée)</span>
                             </button>
-                            <p class="small text-muted mt-2 mb-0">Ouvre l’onglet « Devenir partenaire » dans la fenêtre de soutien.</p>
+                            <p class="small text-muted mt-2 mb-0">Ouvre l’onglet « Devenir partenaire ». Compte créé en même temps que l’engagement.</p>
                         </div>
-                        @endauth
                     </div>
                 </div>
 
@@ -75,14 +73,31 @@
                             </div>
                         @endif
 
-                        @auth
                         <div class="contact-form wow fadeInLeft">
                             <h2 class="title">Votre engagement</h2>
-                            <p class="text-center small text-muted mb-3">— Formulaire sans passage par la fenêtre de paiement —</p>
+                            <p class="text-center small text-muted mb-3">
+                                @guest
+                                    Indiquez vos coordonnées : votre compte est créé automatiquement à l’envoi.
+                                @else
+                                    Engagement lié à <strong>{{ auth()->user()->email }}</strong> — formulaire sans fenêtre de paiement.
+                                @endguest
+                            </p>
 
                             <form method="POST" action="{{ route('partner.store') }}">
                                 @csrf
                                 <div class="row">
+                                    @guest
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                        <label>Nom complet *</label>
+                                        <input type="text" name="name" value="{{ old('name') }}" placeholder="Votre nom" required autocomplete="name">
+                                        @error('name') <small class="d-block mt-1" style="color:#dc3545;">{{ $message }}</small> @enderror
+                                    </div>
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                        <label>E-mail *</label>
+                                        <input type="email" name="email" value="{{ old('email') }}" placeholder="email@exemple.com" required autocomplete="email">
+                                        @error('email') <small class="d-block mt-1" style="color:#dc3545;">{{ $message }}</small> @enderror
+                                    </div>
+                                    @endguest
                                     <div class="form-group col-lg-6 col-md-6 col-sm-12">
                                         <label>Montant mensuel *</label>
                                         <input type="number" name="monthly_amount" value="{{ old('monthly_amount') }}" min="1" step="0.01" placeholder="Ex. 25" required>
@@ -108,16 +123,6 @@
                                 </div>
                             </form>
                         </div>
-                        @else
-                        <div class="contact-form wow fadeInLeft">
-                            <h2 class="title">Espace partenaires</h2>
-                            <p class="text-center text-muted">Vous devez être connecté pour enregistrer un engagement partenaire avec votre compte.</p>
-                            <div class="text-center mt-4">
-                                <a href="{{ route('login') }}" class="theme-btn btn-style-one me-2 mb-2"><span class="btn-title">Se connecter</span></a>
-                                <a href="{{ route('register') }}" class="theme-btn btn-style-two mb-2"><span class="btn-title">Créer un compte</span></a>
-                            </div>
-                        </div>
-                        @endauth
                     </div>
                 </div>
             </div>

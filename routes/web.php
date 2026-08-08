@@ -68,7 +68,7 @@ Route::get('/don/merci', fn () => view('pages.donate-thanks'))->name('donate.mer
 
 // Paiement en ligne (prestataire configuré dans .env — voir docs/integration-paiement-flexpay/)
 Route::post('/paiement/init-don', [DonationPaymentController::class, 'initDon'])->name('payment.init.don');
-Route::post('/paiement/init-partenaire', [DonationPaymentController::class, 'initPartner'])->middleware('auth')->name('payment.init.partner');
+Route::post('/paiement/init-partenaire', [DonationPaymentController::class, 'initPartner'])->name('payment.init.partner');
 Route::post('/commande/init', [ShopCheckoutController::class, 'initOrder'])->name('shop.order.init');
 Route::post('/paiement/process', [DonationPaymentController::class, 'processPayment'])->name('payment.process');
 Route::get('/paiement/statut', [DonationPaymentController::class, 'checkTransactionStatus'])->name('payment.check');

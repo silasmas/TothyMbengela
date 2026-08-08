@@ -31,6 +31,10 @@
                 @endif
             </button>
         @endif
+        <button type="button" class="alliance-float-actions__item alliance-float-actions__item--close" id="allianceFloatActionsClose" aria-label="Fermer le menu">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span>Fermer</span>
+        </button>
     </div>
     <button
         type="button"
@@ -61,26 +65,57 @@
             return;
         }
 
+        /**
+         * Ferme le menu flottant sans lancer d’action.
+         *
+         * @returns {void}
+         */
+        function closeMenu() {
+            root.setAttribute('data-open', '0');
+            toggle.setAttribute('aria-expanded', 'false');
+            menu.hidden = true;
+        }
+
+        /**
+         * Ouvre le menu flottant.
+         *
+         * @returns {void}
+         */
+        function openMenu() {
+            root.setAttribute('data-open', '1');
+            toggle.setAttribute('aria-expanded', 'true');
+            menu.hidden = false;
+        }
+
         toggle.addEventListener('click', function () {
-            var open = root.getAttribute('data-open') === '1';
-            root.setAttribute('data-open', open ? '0' : '1');
-            toggle.setAttribute('aria-expanded', open ? 'false' : 'true');
-            menu.hidden = open;
+            if (root.getAttribute('data-open') === '1') {
+                closeMenu();
+            } else {
+                openMenu();
+            }
         });
 
-        menu.querySelectorAll('.alliance-float-actions__item').forEach(function (btn) {
+        document.getElementById('allianceFloatActionsClose')?.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            closeMenu();
+        });
+
+        menu.querySelectorAll('.alliance-float-actions__item:not(.alliance-float-actions__item--close)').forEach(function (btn) {
             btn.addEventListener('click', function () {
-                root.setAttribute('data-open', '0');
-                toggle.setAttribute('aria-expanded', 'false');
-                menu.hidden = true;
+                closeMenu();
             });
         });
 
         document.addEventListener('click', function (e) {
             if (!root.contains(e.target) && root.getAttribute('data-open') === '1') {
-                root.setAttribute('data-open', '0');
-                toggle.setAttribute('aria-expanded', 'false');
-                menu.hidden = true;
+                closeMenu();
+            }
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && root.getAttribute('data-open') === '1') {
+                closeMenu();
             }
         });
     }
