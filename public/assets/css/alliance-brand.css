@@ -591,6 +591,211 @@ h1, h2, h3, h4, h5, h6,
   }
 }
 
+/*
+ * Mobile / tablette : menu desktop masqué → navigation dans le drawer
+ */
+@media (max-width: 1023px) {
+  .header-style-one .main-box,
+  .sticky-header .inner-container {
+    display: flex !important;
+    grid-template-columns: none !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 10px !important;
+    min-height: 64px !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .header-style-one .main-box .logo-box,
+  .sticky-header .logo {
+    grid-column: auto !important;
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+  }
+
+  .header-style-one .main-box .nav-outer,
+  .sticky-header .nav-outer,
+  .main-header .main-box .nav-outer,
+  .header-style-one .main-box .main-menu,
+  .sticky-header .main-menu,
+  .main-header .main-menu {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    visibility: hidden !important;
+  }
+
+  .header-style-one .main-box .outer-box,
+  .sticky-header-actions {
+    grid-column: auto !important;
+    margin-left: auto !important;
+    gap: 8px !important;
+    flex: 0 0 auto !important;
+  }
+
+  /* Masquer Connexion / Inscription dans la barre (disponibles dans le drawer) */
+  .alliance-header-auth-cluster,
+  .alliance-sticky-auth-cluster,
+  .main-header .outer-box .info-btn,
+  .sticky-header-actions .theme-btn {
+    display: none !important;
+  }
+
+  .mobile-nav-toggler {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 42px !important;
+    height: 42px !important;
+    margin: 0 !important;
+    border-radius: 10px !important;
+    background: rgba(168, 108, 60, 0.1) !important;
+    color: var(--alliance-ochre) !important;
+    font-size: 22px !important;
+    order: 10 !important;
+    flex-shrink: 0 !important;
+  }
+
+  .main-header .logo img,
+  .main-header .logo img.alliance-logo-header,
+  .sticky-header .logo img {
+    max-height: 40px !important;
+  }
+
+  .page-title {
+    padding-top: 110px !important;
+    min-height: 220px !important;
+  }
+}
+
+/* Drawer mobile Alliance */
+.mobile-menu.alliance-mobile-drawer {
+  width: min(320px, 88vw) !important;
+  z-index: 100050 !important;
+}
+.mobile-menu.alliance-mobile-drawer .menu-box {
+  background: #141414 !important;
+  box-shadow: -12px 0 40px rgba(0, 0, 0, 0.35);
+}
+.mobile-menu.alliance-mobile-drawer .upper-box {
+  padding: 18px 18px 14px !important;
+  border-bottom: 1px solid rgba(201, 162, 90, 0.25);
+  background: linear-gradient(135deg, #141414 0%, #2a1c14 100%);
+}
+.mobile-menu.alliance-mobile-drawer .nav-logo img {
+  max-height: 44px !important;
+  width: auto !important;
+}
+.mobile-menu.alliance-mobile-drawer .close-btn {
+  top: 0 !important;
+  transform: none !important;
+  width: 40px;
+  height: 40px;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #E2C48A !important;
+  font-size: 18px !important;
+  padding: 0;
+  flex-shrink: 0;
+}
+.mobile-menu.alliance-mobile-drawer .close-btn:hover {
+  background: var(--alliance-ochre);
+  color: #fff !important;
+  opacity: 1;
+}
+.mobile-menu.alliance-mobile-drawer .navigation {
+  border-top: none !important;
+  flex: 1 1 auto;
+  margin: 0 !important;
+  padding: 8px 0 !important;
+}
+.mobile-menu.alliance-mobile-drawer .navigation li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+.mobile-menu.alliance-mobile-drawer .navigation li > a {
+  color: #f5f0ea !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  letter-spacing: 0.04em;
+  text-transform: uppercase !important;
+  padding: 14px 20px !important;
+}
+.mobile-menu.alliance-mobile-drawer .navigation li.current > a,
+.mobile-menu.alliance-mobile-drawer .navigation li > a:hover {
+  color: var(--alliance-gold-light) !important;
+  background: rgba(168, 108, 60, 0.12);
+}
+.mobile-menu.alliance-mobile-drawer .navigation li.dropdown .dropdown-btn {
+  color: var(--alliance-gold-light) !important;
+  width: 48px !important;
+  height: 52px !important;
+  line-height: 52px !important;
+}
+.mobile-menu.alliance-mobile-drawer .navigation li > ul > li > a {
+  text-transform: none !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  letter-spacing: 0;
+  color: rgba(245, 240, 234, 0.85) !important;
+  padding: 10px 20px 10px 14px !important;
+}
+.alliance-mobile-drawer__cta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 20px 8px;
+}
+.alliance-mobile-drawer__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none !important;
+}
+.alliance-mobile-drawer__btn--outline {
+  border: 2px solid var(--alliance-ochre);
+  color: var(--alliance-gold-light) !important;
+  background: transparent;
+}
+.alliance-mobile-drawer__btn--solid {
+  border: 2px solid var(--alliance-ochre);
+  background: var(--alliance-ochre);
+  color: #fff !important;
+}
+.mobile-menu.alliance-mobile-drawer .contact-list-one {
+  padding: 16px 20px 8px !important;
+}
+.mobile-menu.alliance-mobile-drawer .contact-list-one .title {
+  color: rgba(226, 196, 138, 0.8) !important;
+}
+.mobile-menu.alliance-mobile-drawer .contact-list-one a {
+  color: #fff !important;
+}
+.mobile-menu.alliance-mobile-drawer .social-links {
+  padding: 8px 20px 28px !important;
+  margin: 0 !important;
+}
+.mobile-menu.alliance-mobile-drawer .social-links li a {
+  color: var(--alliance-gold-light) !important;
+  border-color: rgba(201, 162, 90, 0.4) !important;
+}
+.mobile-menu-visible .mobile-menu.alliance-mobile-drawer .close-btn {
+  transform: none !important;
+}
+
 /* Preloader charte */
 .preloader.alliance-preloader {
   background: var(--alliance-black) !important;

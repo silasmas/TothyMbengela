@@ -74,23 +74,33 @@
         </div>
     </div>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu">
-        <div class="menu-backdrop"></div>
+    <!-- Menu mobile : tiroir (drawer) -->
+    <div class="mobile-menu alliance-mobile-drawer" id="allianceMobileDrawer" aria-hidden="true">
+        <div class="menu-backdrop" tabindex="-1"></div>
 
-        <nav class="menu-box">
+        <nav class="menu-box" role="dialog" aria-modal="true" aria-label="Menu de navigation">
             <div class="upper-box">
                 <div class="nav-logo">
                     <a href="{{ route('home') }}">
                         <img src="{{ asset('assets/logo/alliance-wordmark-ochre-on-white.png') }}?v=2" alt="Alliance" title="Alliance" class="alliance-logo-header">
                     </a>
                 </div>
-                <div class="close-btn"><i class="icon fa fa-times"></i></div>
+                <button type="button" class="close-btn" aria-label="Fermer le menu"><i class="icon fa fa-times"></i></button>
             </div>
 
             <ul class="navigation clearfix">
-                <!--  Menu injecté automatiquement par le JS du template -->
+                <!-- Menu injecté automatiquement par le JS du template -->
             </ul>
+
+            <div class="alliance-mobile-drawer__cta">
+                @guest
+                    <a href="{{ route('login') }}" class="alliance-mobile-drawer__btn alliance-mobile-drawer__btn--outline">Connexion</a>
+                    <a href="{{ route('register') }}" class="alliance-mobile-drawer__btn alliance-mobile-drawer__btn--solid">Inscription</a>
+                @else
+                    <a href="{{ route('account.index') }}" class="alliance-mobile-drawer__btn alliance-mobile-drawer__btn--outline">Mon compte</a>
+                    <a href="#" class="alliance-mobile-drawer__btn alliance-mobile-drawer__btn--solid" data-bs-toggle="modal" data-bs-target="#donatePartnerModal">Faire un don</a>
+                @endguest
+            </div>
 
             <ul class="contact-list-one">
                 <li>
@@ -100,24 +110,26 @@
                         <a href="mailto:{{ $siteSetting->email ?? 'contact@alliance-ministere.com' }}">{{ $siteSetting->email ?? 'contact@alliance-ministere.com' }}</a>
                     </div>
                 </li>
+                @if(!empty($siteSetting?->phone))
                 <li>
                     <div class="contact-info-box">
-                        <span class="icon lnr-icon-clock"></span>
-                        <span class="title">Horaires</span>
-                        Lun – Sam : 8h00 – 18h00
+                        <span class="icon lnr-icon-phone-handset"></span>
+                        <span class="title">Téléphone</span>
+                        <a href="tel:{{ preg_replace('/\s+/', '', $siteSetting->phone) }}">{{ $siteSetting->phone }}</a>
                     </div>
                 </li>
+                @endif
             </ul>
 
             <ul class="social-links">
                 @if(!empty($siteSetting?->facebook_url))
-                    <li><a href="{{ $siteSetting->facebook_url }}" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="{{ $siteSetting->facebook_url }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
                 @endif
                 @if(!empty($siteSetting?->youtube_url))
-                    <li><a href="{{ $siteSetting->youtube_url }}" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a></li>
+                    <li><a href="{{ $siteSetting->youtube_url }}" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a></li>
                 @endif
                 @if(!empty($siteSetting?->instagram_url))
-                    <li><a href="{{ $siteSetting->instagram_url }}" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="{{ $siteSetting->instagram_url }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
                 @endif
             </ul>
         </nav>
@@ -157,8 +169,6 @@
                             </ul>
                         </div>
                     </nav>
-
-                    <div class="mobile-nav-toggler"><span class="icon lnr-icon-bars"></span></div>
                 </div>
 
                 <div class="sticky-header-actions d-flex align-items-center">
@@ -182,6 +192,7 @@
                             <span class="btn-title"><i class="fa fa-heart"></i> Don</span>
                         </a>
                     @endguest
+                    <div class="mobile-nav-toggler" role="button" tabindex="0" aria-label="Ouvrir le menu"><span class="icon lnr-icon-bars"></span></div>
                 </div>
             </div>
         </div>
