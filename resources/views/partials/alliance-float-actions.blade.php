@@ -42,7 +42,6 @@
                 id="allianceFloatProductsBtn"
                 data-bs-toggle="modal"
                 data-bs-target="#allianceProductsWelcomeModal"
-                hidden
             >
                 <i class="fa fa-book-open" aria-hidden="true"></i>
                 <span>Produits</span>
@@ -104,34 +103,9 @@
             menu.hidden = false;
         }
 
-        /**
-         * Affiche le bouton Produits dans le menu flottant.
-         *
-         * @returns {void}
-         */
-        function showProductsShortcut() {
-            var btn = document.getElementById('allianceFloatProductsBtn');
-            if (!btn) {
-                return;
-            }
-            btn.hidden = false;
-            btn.classList.remove('d-none');
+        if (root.getAttribute('data-products-modal') === '1') {
             root.classList.add('has-products');
         }
-
-        document.addEventListener('alliance:products-modal-dismissed', showProductsShortcut);
-
-        try {
-            if (
-                root.getAttribute('data-products-modal') === '1'
-                && (
-                    sessionStorage.getItem('alliance_products_welcome_dismissed') === '1'
-                    || localStorage.getItem('alliance_products_welcome_never') === '1'
-                )
-            ) {
-                showProductsShortcut();
-            }
-        } catch (e) {}
 
         toggle.addEventListener('click', function () {
             if (root.getAttribute('data-open') === '1') {

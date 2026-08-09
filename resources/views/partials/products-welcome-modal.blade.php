@@ -163,24 +163,14 @@
     var STORAGE_DISMISSED = 'alliance_products_welcome_dismissed';
 
     /**
-     * Affiche le raccourci « Produits » dans le menu flottant.
+     * Mémorise la fermeture de la modale (session).
      *
      * @returns {void}
      */
-    function revealProductsFloatShortcut() {
+    function markProductsModalDismissed() {
         try {
             sessionStorage.setItem(STORAGE_DISMISSED, '1');
         } catch (e) {}
-        document.dispatchEvent(new CustomEvent('alliance:products-modal-dismissed'));
-        var btn = document.getElementById('allianceFloatProductsBtn');
-        if (btn) {
-            btn.hidden = false;
-            btn.classList.remove('d-none');
-        }
-        var root = document.getElementById('allianceFloatActions');
-        if (root) {
-            root.classList.add('has-products');
-        }
     }
 
     /**
@@ -194,13 +184,9 @@
         setTimeout(function () {
             try {
                 if (localStorage.getItem(STORAGE_NEVER) === '1') {
-                    revealProductsFloatShortcut();
                     return;
                 }
                 if (sessionStorage.getItem(STORAGE_SESSION) === '1') {
-                    if (sessionStorage.getItem(STORAGE_DISMISSED) === '1') {
-                        revealProductsFloatShortcut();
-                    }
                     return;
                 }
             } catch (e2) {
@@ -214,7 +200,7 @@
     }
 
     /**
-     * Initialise la modale produits (auto-ouverture + FAB après fermeture).
+     * Initialise la modale produits (auto-ouverture ; réouverture via bouton flottant).
      *
      * @returns {void}
      */
@@ -231,14 +217,8 @@
                     localStorage.setItem(STORAGE_NEVER, '1');
                 }
             } catch (e4) {}
-            revealProductsFloatShortcut();
+            markProductsModalDismissed();
         });
-
-        try {
-            if (sessionStorage.getItem(STORAGE_DISMISSED) === '1' || localStorage.getItem(STORAGE_NEVER) === '1') {
-                revealProductsFloatShortcut();
-            }
-        } catch (e5) {}
 
         maybeAutoOpenProductsWelcomeModal(el);
     }
