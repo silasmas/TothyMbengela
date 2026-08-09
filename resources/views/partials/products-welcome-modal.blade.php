@@ -1,4 +1,4 @@
-﻿@if(isset($featuredProducts) && $featuredProducts->isNotEmpty())
+﻿@if(!empty($productsWelcomeModalEnabled) && isset($featuredProducts) && $featuredProducts->isNotEmpty())
 {{-- Modale d’accueil : présentation des produits de la Pasteure --}}
 <div
     class="modal fade alliance-products-welcome-modal"
@@ -6,6 +6,7 @@
     tabindex="-1"
     aria-labelledby="allianceProductsWelcomeModalLabel"
     aria-hidden="true"
+    data-alliance-products-modal="1"
 >
     <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
         <div class="modal-content border-0 shadow-lg overflow-hidden">
@@ -67,7 +68,7 @@
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="1" id="allianceProductsWelcomeNever">
                     <label class="form-check-label" for="allianceProductsWelcomeNever">
-                        Ne plus afficher cette fenêtre lors de mes prochaines visites
+                        Ne plus afficher automatiquement cette fenêtre (vous pourrez toujours la rouvrir via le bouton flottant)
                     </label>
                 </div>
                 <div class="d-flex flex-wrap gap-2 justify-content-between">
@@ -159,9 +160,31 @@
 (function () {
     var STORAGE_NEVER = 'alliance_products_welcome_never';
     var STORAGE_SESSION = 'alliance_products_welcome_shown_session';
+    var STORAGE_DISMISSED = 'alliance_products_welcome_dismissed';
 
     /**
-     * Ouvre la modale produits à la première visite (session), sauf si l’utilisateur a coché « ne plus afficher ».
+     * Affiche le raccourci « Produits » dans le menu flottant.
+     *
+     * @returns {void}
+     */
+    function revealProductsFloatShortcut() {
+        try {
+            sessionStorage.setItem(STORAGE_DISMISSED, '1');
+        } catch (e) {}
+        document.dispatchEvent(new CustomEvent('alliance:products-modal-dismissed'));
+        var btn = document.getElementById('allianceFloatProductsBtn');
+        if (btn) {
+            btn.hidden = false;
+            btn.classList.remove('d-none');
+        }
+        var root = document.getElementById('allianceFloatActions');
+        if (root) {
+            root.classList.add('has-products');
+        }
+    }
+
+    /**
+     * Ouvre la modale produits (auto, une fois par session sauf « ne plus afficher »).
      *
      * @param {HTMLElement} el Élément modale Bootstrap
      * @returns {void}
@@ -170,7 +193,14 @@
         var delayMs = 700;
         setTimeout(function () {
             try {
-                if (localStorage.getItem(STORAGE_NEVER) === '1' || sessionStorage.getItem(STORAGE_SESSION) === '1') {
+                if (localStorage.getItem(STORAGE_NEVER) === '1') {
+                    revealProductsFloatShortcut();
+                    return;
+                }
+                if (sessionStorage.getItem(STORAGE_SESSION) === '1') {
+                    if (sessionStorage.getItem(STORAGE_DISMISSED) === '1') {
+                        revealProductsFloatShortcut();
+                    }
                     return;
                 }
             } catch (e2) {
@@ -184,7 +214,7 @@
     }
 
     /**
-     * Initialise la modale produits (auto-ouverture + case « ne plus afficher »).
+     * Initialise la modale produits (auto-ouverture + FAB après fermeture).
      *
      * @returns {void}
      */
@@ -201,7 +231,14 @@
                     localStorage.setItem(STORAGE_NEVER, '1');
                 }
             } catch (e4) {}
+            revealProductsFloatShortcut();
         });
+
+        try {
+            if (sessionStorage.getItem(STORAGE_DISMISSED) === '1' || localStorage.getItem(STORAGE_NEVER) === '1') {
+                revealProductsFloatShortcut();
+            }
+        } catch (e5) {}
 
         maybeAutoOpenProductsWelcomeModal(el);
     }

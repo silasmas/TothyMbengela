@@ -74,6 +74,12 @@ class BookForm
                         Toggle::make('is_featured')
                             ->label('Mis en avant (modale d’accueil)')
                             ->default(false),
+                        TextInput::make('sort_order')
+                            ->label('Position d’affichage')
+                            ->numeric()
+                            ->minValue(0)
+                            ->default(0)
+                            ->helperText('Plus le nombre est petit, plus le produit apparaît en premier (boutique, accueil, modale). Vous pouvez aussi réordonner par glisser-déposer dans la liste.'),
                     ]),
                 Section::make('Images')
                     ->components([

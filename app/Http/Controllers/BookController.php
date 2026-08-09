@@ -12,7 +12,7 @@ class BookController extends Controller
     {
         $books = Book::query()
             ->where('is_active', true)
-            ->orderBy('title')
+            ->orderedForDisplay()
             ->get();
 
         return view('pages.books.index', compact('books'));
@@ -27,7 +27,7 @@ class BookController extends Controller
         $relatedBooks = Book::query()
             ->where('is_active', true)
             ->where('id', '!=', $book->id)
-            ->orderBy('title')
+            ->orderedForDisplay()
             ->limit(4)
             ->get();
 

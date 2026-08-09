@@ -43,11 +43,24 @@ class AppServiceProvider extends ServiceProvider
                 PastorActivity::forWelcomeModal(),
             );
 
+            $siteSetting = Schema::hasTable('site_settings')
+                ? SiteSetting::instance()
+                : null;
+            $view->with('siteSetting', $siteSetting);
+
+            $productsWelcomeModalEnabled = $siteSetting
+                ? $siteSetting->isProductsWelcomeModalEnabled()
+                : true;
+
             $featuredProducts = collect();
-            if (Schema::hasColumn('books', 'is_featured')) {
+            if (
+                $productsWelcomeModalEnabled
+                && Schema::hasColumn('books', 'is_featured')
+            ) {
                 $featuredProducts = Book::query()->featuredForPromo()->take(8)->get();
             }
             $view->with('featuredProducts', $featuredProducts);
+            $view->with('productsWelcomeModalEnabled', $productsWelcomeModalEnabled);
 
             $homeSlides = collect();
             if (Schema::hasTable('slides')) {
@@ -62,11 +75,6 @@ class AppServiceProvider extends ServiceProvider
                 ? ShopSetting::instance()
                 : null;
             $view->with('shopSetting', $shopSetting);
-
-            $siteSetting = Schema::hasTable('site_settings')
-                ? SiteSetting::instance()
-                : null;
-            $view->with('siteSetting', $siteSetting);
         });
     }
 }

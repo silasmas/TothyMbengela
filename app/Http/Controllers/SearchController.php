@@ -46,7 +46,7 @@ class SearchController extends Controller
                 $query->where('title', 'like', $like)
                     ->orWhere('description', 'like', $like);
             })
-            ->latest()
+            ->orderedForDisplay()
             ->take(6)
             ->get(['title', 'slug']);
 
@@ -122,7 +122,7 @@ class SearchController extends Controller
                     $query->where('title', 'like', $like)
                         ->orWhere('description', 'like', $like);
                 })
-                ->latest()
+                ->orderedForDisplay()
                 ->take(30)
                 ->get();
 

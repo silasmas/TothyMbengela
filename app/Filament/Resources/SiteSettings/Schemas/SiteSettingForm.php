@@ -4,6 +4,7 @@ namespace App\Filament\Resources\SiteSettings\Schemas;
 
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
@@ -66,6 +67,15 @@ class SiteSettingForm
                             ->url()
                             ->maxLength(500)
                             ->columnSpanFull(),
+                    ]),
+                Section::make('Modale produits (accueil)')
+                    ->description('Fenêtre qui présente les produits « mis en avant ». Si le visiteur la ferme, un raccourci apparaît dans le bouton flottant pour la rouvrir.')
+                    ->components([
+                        Toggle::make('products_welcome_modal_enabled')
+                            ->label('Activer la modale produits')
+                            ->helperText('Désactivez pour ne plus l’afficher automatiquement ni dans le menu flottant.')
+                            ->default(true)
+                            ->inline(false),
                     ]),
             ]);
     }

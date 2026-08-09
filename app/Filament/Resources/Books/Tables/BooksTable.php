@@ -29,7 +29,13 @@ class BooksTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->defaultSort('sort_order')
+            ->reorderable('sort_order')
             ->columns([
+                TextColumn::make('sort_order')
+                    ->label('Pos.')
+                    ->sortable()
+                    ->width('4rem'),
                 ImageColumn::make('cover_path')
                     ->label('Photo')
                     ->disk('public')

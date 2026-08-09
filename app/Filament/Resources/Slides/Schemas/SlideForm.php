@@ -109,7 +109,7 @@ class SlideForm
                             ->relationship(
                                 name: 'book',
                                 titleAttribute: 'title',
-                                modifyQueryUsing: fn ($query) => $query->where('is_active', true)->orderBy('title'),
+                                modifyQueryUsing: fn ($query) => $query->where('is_active', true)->orderedForDisplay(),
                             )
                             ->searchable()
                             ->preload()

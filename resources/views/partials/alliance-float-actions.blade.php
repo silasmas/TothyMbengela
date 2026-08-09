@@ -1,12 +1,16 @@
-{{-- Bouton flottant : Don / Partenaire (+ Agenda si programme) --}}
+{{-- Bouton flottant : Don / Partenaire (+ Agenda / Produits selon contexte) --}}
 @php
     $hasAgenda = isset($pastorWelcomeModalActivities) && $pastorWelcomeModalActivities->isNotEmpty();
     $agendaCount = $hasAgenda ? $pastorWelcomeModalActivities->count() : 0;
+    $hasProductsModal = !empty($productsWelcomeModalEnabled)
+        && isset($featuredProducts)
+        && $featuredProducts->isNotEmpty();
 @endphp
 <div
-    class="alliance-float-actions{{ $hasAgenda ? ' has-agenda' : '' }}"
+    class="alliance-float-actions{{ $hasAgenda ? ' has-agenda' : '' }}{{ $hasProductsModal ? ' has-products-ready' : '' }}"
     id="allianceFloatActions"
     data-open="0"
+    data-products-modal="{{ $hasProductsModal ? '1' : '0' }}"
 >
     <div class="alliance-float-actions__menu" id="allianceFloatActionsMenu" hidden>
         <button type="button" class="alliance-float-actions__item" data-bs-toggle="modal" data-bs-target="#donatePartnerModal">
@@ -29,6 +33,19 @@
                 @if($agendaCount > 0)
                     <em class="alliance-float-actions__badge">{{ $agendaCount }}</em>
                 @endif
+            </button>
+        @endif
+        @if($hasProductsModal)
+            <button
+                type="button"
+                class="alliance-float-actions__item alliance-float-actions__item--products"
+                id="allianceFloatProductsBtn"
+                data-bs-toggle="modal"
+                data-bs-target="#allianceProductsWelcomeModal"
+                hidden
+            >
+                <i class="fa fa-book-open" aria-hidden="true"></i>
+                <span>Produits</span>
             </button>
         @endif
         <button type="button" class="alliance-float-actions__item alliance-float-actions__item--close" id="allianceFloatActionsClose" aria-label="Fermer le menu">
@@ -86,6 +103,35 @@
             toggle.setAttribute('aria-expanded', 'true');
             menu.hidden = false;
         }
+
+        /**
+         * Affiche le bouton Produits dans le menu flottant.
+         *
+         * @returns {void}
+         */
+        function showProductsShortcut() {
+            var btn = document.getElementById('allianceFloatProductsBtn');
+            if (!btn) {
+                return;
+            }
+            btn.hidden = false;
+            btn.classList.remove('d-none');
+            root.classList.add('has-products');
+        }
+
+        document.addEventListener('alliance:products-modal-dismissed', showProductsShortcut);
+
+        try {
+            if (
+                root.getAttribute('data-products-modal') === '1'
+                && (
+                    sessionStorage.getItem('alliance_products_welcome_dismissed') === '1'
+                    || localStorage.getItem('alliance_products_welcome_never') === '1'
+                )
+            ) {
+                showProductsShortcut();
+            }
+        } catch (e) {}
 
         toggle.addEventListener('click', function () {
             if (root.getAttribute('data-open') === '1') {

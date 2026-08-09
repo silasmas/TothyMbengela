@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -51,6 +52,7 @@ class Book extends Model
         'isbn',
         'is_active',
         'is_featured',
+        'sort_order',
         'stock_quantity',
     ];
 
@@ -65,8 +67,24 @@ class Book extends Model
             'price' => 'decimal:2',
             'is_active' => 'boolean',
             'is_featured' => 'boolean',
+            'sort_order' => 'integer',
             'gallery_paths' => 'array',
         ];
+    }
+
+    /**
+     * Tri d’affichage public (position croissante, puis titre).
+     *
+     * @param  Builder<Book>  $query
+     * @return Builder<Book>
+     */
+    public function scopeOrderedForDisplay(Builder $query): Builder
+    {
+        if (Schema::hasColumn($query->getModel()->getTable(), 'sort_order')) {
+            return $query->orderBy('sort_order')->orderBy('title');
+        }
+
+        return $query->orderBy('title');
     }
 
     /**
@@ -194,7 +212,6 @@ class Book extends Model
         return $query
             ->where('is_active', true)
             ->where('is_featured', true)
-            ->orderBy('product_type')
-            ->latest();
+            ->orderedForDisplay();
     }
 }

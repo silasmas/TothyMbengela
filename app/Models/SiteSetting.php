@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * Paramètres généraux du site (coordonnées, slogan, réseaux).
@@ -19,7 +20,20 @@ class SiteSetting extends Model
         'instagram_url',
         'tiktok_url',
         'whatsapp_url',
+        'products_welcome_modal_enabled',
     ];
+
+    /**
+     * Casts des attributs.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'products_welcome_modal_enabled' => 'boolean',
+        ];
+    }
 
     /**
      * Instance unique (créée avec des valeurs par défaut si absente).
@@ -43,6 +57,21 @@ class SiteSetting extends Model
             'instagram_url' => null,
             'tiktok_url' => null,
             'whatsapp_url' => null,
+            'products_welcome_modal_enabled' => true,
         ]);
+    }
+
+    /**
+     * Indique si la modale produits d’accueil est active.
+     *
+     * @return bool
+     */
+    public function isProductsWelcomeModalEnabled(): bool
+    {
+        if (! Schema::hasColumn($this->getTable(), 'products_welcome_modal_enabled')) {
+            return true;
+        }
+
+        return (bool) ($this->products_welcome_modal_enabled ?? true);
     }
 }

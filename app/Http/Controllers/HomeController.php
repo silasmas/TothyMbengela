@@ -40,8 +40,7 @@ class HomeController extends Controller
             ->get();
 
         $books = Book::where('is_active', true)
-            ->orderByRaw("CASE product_type WHEN 'book' THEN 0 WHEN 'usb' THEN 1 WHEN 'pack' THEN 2 ELSE 3 END")
-            ->latest()
+            ->orderedForDisplay()
             ->take(8)
             ->get();
 
